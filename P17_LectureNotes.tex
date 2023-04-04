@@ -4,7 +4,7 @@
 \documentclass[12pt]{article}
 
 \input{FlipPreamble}			%% \usepackages
-% \input{FlipAdditionalHeader} 	%% Use this define additional macros
+\input{FlipAdditionalHeader} 	%% Use this define additional macros
 % \input{FlipAdditionalHeader_listings}
 % amsthm details:
 
@@ -123,11 +123,33 @@ This three-dimensional space is called [three-dimensional] \textbf{real space} a
 
 Three-dimensional real space is an example of a \textbf{vector space}, which is just a stupidly formal way of saying that it is where vectors live. Vectors are \emph{elements} of a vector space. A vector space is the set of all possible allowed vectors of a given type. For $\mathbbm{R}^3$, the vector space is composed of all possible triplets of real numbers. 
 
+
 \begin{example} It should be no surprise that we can imagine real two-dimensional space, $\mathbbm{R}^2$. This is a vector space where each vector may be written as two real numbers. You can also imagine writing real four-dimensional space, $\mathbbm{R}^2$, or complex two dimensional space, $\mathbbm{C}^2$. 
 \end{example}
 
 From the above example, you should have some intuition for what the \textbf{dimension} of a vector space means: the dimension counts how many numbers you need to specify a vector. For real vector spaces, $\mathbbm{R}^d$, the dimension is the number $d$. We will always assume that $d$ is a positive integer.\footnote{The notion of a non-integer-dimensional space does show up occasionally. These do not even have to be particularly exotic: you can look up the dimension of a fractal.}
 
+\subsection{Mathematical properties}
+
+We now make some general statements about vector spaces. These apply to all vector spaces, not just $\mathbbm{R}^3$, but you can keep $\mathbbm{R}^3$ in mind as we go over them.
+
+First we should make clear that there are now two different kinds of objects: \emph{vectors} and \emph{numbers}. We will have all sorts of notation for vectors, but let us write them with a boldfaced Roman letter for now, e.g.~$\vec{v}$. We typically write numbers as lowercase italicized Roman letters like $a$ or sometimes Greek letters like $\alpha$. 
+
+You already know everything there is to know about numbers.\footnote{Formally, what I mean by `number' is what mathematicians call a \textbf{field}. This simply means some objects where one can add, subtract, multiply, and divide as you would expect. This term is a little tedious for us because physicists usually mean something else when they say `field.' Usually we mean something like the electric field or the field associated with the Higgs boson.} Most relevant is that you can multiply numbers with each other (including division, the inverse of multiplication) and you can add them together (including subtraction). For the first part of this course, we will focus on real numbers, $\mathbbm{R}$. Later we will also allow for complex numbers, $\mathbbm{C}$.
+
+What about vectors? Vectors have the following properties: 
+\begin{enumerate}
+    \item You can add vectors. This assumes that they are in the same vector space. The sum of two vectors is also a vector in the same vector space. 
+    \item Vector addition is associative. This means that in the sum $\vec{v}+\vec{w}+\vec{u}$, it does not matter if you add $(\vec{v}+\vec{w})$ first and then add $\vec{u}$, or if you take $\vec{v}$ and then add it to $(\vec{w}+\vec{u})$. This is the kind of `obvious' property that we tend to take for granted.
+    \item Vector addition is commutative. $\vec{v}+\vec{w} = \vec{w}+\vec{v}$. This is also kind of obvious. But recall that matrix multiplication is not commutative.
+    \item There is a zero vector, $\vec{0}$, that does leaves any other vector unchanged under addition. $\vec{v}+\vec{0} = \vec{v}$. This should be totally obvious. I bet you even know what the components of $\vec{0}$ are.
+    \item There is an additive inverse (negative vectors). If $\vec{v}$ is a vector, then $-\vec{v}$ is a vector and satisfies $\vec{v}+(-\vec{v}) = \vec{0}$.
+    \item You can multiply vectors by numbers. This is called rescaling or scalar multiplication. All the usual properties of multiplication by numbers holds: associativity, commutivity, distributive law.
+\end{enumerate}
+\begin{example}
+The first property implies that once you have identified one vector in a vector space, $\vec{v}$, then you can immediately have an infinite number of vectors. This is because $2\vec{v} = \vec{v}+\vec{v}$ must also be a vector. Then $3\vec{v} = 2\vec{v}+\vec{v}$ must also be a vector. And so forth.
+\end{example}
+Let us go over a few of these properties.
 
 \subsection{Notation: Indices}
 
@@ -383,25 +405,68 @@ The above definition of the angle between two vectors is general for any metric 
 The angle between two vectors defines the sense in which two vectors are close to one another. This is the sense in which the dot product (metric) lets you measure the ``distance'' between two vectors. Note that this is completely different from the notion of distance between two points in space, \eqref{eq:distance:in:space}. 
 \end{example}
 
+\section{Index Notation and Summation Convention}
 
-% You may recall that you can do interesting things with three-vectors. One easy thing is that you can take a \textbf{dot product}. The dot product is a machine that takes two vectors and spits out a number. Here's how it works. Suppose we have two vectors $\vec{v}$ and $\vec{w}$ with the following \textbf{components}:
-% \begin{align}
-%     \vec{v}
-%     &=
-%     \begin{pmatrix}
-%         v^1 \\ v^2 \\ v^3
-%     \end{pmatrix}
-%     &
-% \end{align}
+There's something that physicists do that tend to drive mathematicians crazy: we write a generic \emph{component of a vector} and refer to it as if it were the vector itself. It is a fairly harmless peccadillo:\footnote{There are times when you can get into trouble if you drink your own Kool Aid, so to speak. The reason is that the \emph{component} $v^i$ is simply a number, whereas $\vec{v}$ is a vector. Some manipulations are only allowed for numbers and not vectors, and you should be clear that you mean `the component $v^i$' if you are treating it like a number, and not `the \emph{vector} whose components are $v^i$.'} if I say ``the vector $v^i$,'' then it is not hard to guess that I mean ``the vector $\vec{v}$ which has components that I label $v^i$.''
+
+The reason why we have this culture is that this index notation ends up being so damn convenient. In addition to vectors, we will have other objects that have indices: dual vectors, matrices, and tensors. When we write everything in with indices, we can ``see'' properties of these objects that are not obvious without the indices. Specifically, we can see \emph{how an object transforms under symmetries}. In this course, we will focus on \emph{rotations} of vectors and their generalizations.  
 
 
-% Sometimes I will be lazy and call these vectors \emph{Euclidean} three-vectors. This assumes additional mathematical structure---namely, a dot product---that we have not y
+There's a second reason why indices are convenient: they allow us to use \textbf{Einstein summation convention}. This is a notational shortcut that introduces upper and lower indices to convey sums. Consider, for example, the ``matrix multiplication'' of a row vector $\row{w}$ on a column vector $\vec{v}$. Nevermind the formal definition of ``row vector'' as opposed to ``column vector.'' Let's just write it out in components where it is obvious for $\mathbbm{R}^3$
+\begin{align}
+    \row{w}
+    &=
+    \begin{pmatrix}
+        w_1 & w_2 & w_3
+    \end{pmatrix}
+    &
+    \vec{v}
+    &=
+    \begin{pmatrix}
+        v^1 \\ v^2 \\ v^3
+    \end{pmatrix}
+    &
+    \row{w}\vec{v}
+    &= w_1v^1 + w_2v^2+w_3v^3 \ .
+\end{align}
+The final expression is familiar, right? It follows the usual rules of matrix multiplication for a matrix that happens to be one row and three columns. We notice that we chose to write the components of $\row{w}$ with lower indices---this is the convention. Row vectors (which have many names) have indices written as subscripts while column vectors have indices written as superscripts. There is no mathematics here, just a choice of notation. The result of the multiplication is simply a number, which we can write as a sum:
+\begin{align}
+    \row{w}\vec{v}
+    &= \sum_{i=1}^3 w_iv^i
+    \equiv w_iv^i \ .
+    \label{eq:row:w:on:vec:v}
+\end{align}
+On the right-hand side we have \emph{defined} the summation convention: \emph{whenever there is exactly one upper index and exactly one lower index with the same letter, we should understand that there is a sum over that index over all of its allowed values.} We call pairs of repeated indices where one is upper and one is lower \textbf{contracted indices}.
 
 
-% It should not be hard to imagine two-dimensional Euclidean space, or even four-dimensional Euclidean space. In this course, we \emph{abstract} and \emph{generalize} this familiar definition of `vectors'.
+The value $w_iv^i$ is simply a number. It is not a vector. It does not have any ``vectorial'' (tensorial) structure. It is not an element of the vector space $\mathbbm{R}^3$. It does not transform under rotations. It is \emph{just a number}. In other words, $w_iv^i$ behaves like an object with \emph{no indices}. Contracted indices ``cancel each other out.''
 
+This is significant because we will see that indices tell us how objects transform. Evidently, column vectors and row vectors transform differently since one has an upper index and one has a lower index. Further, when we contract the two indices, we end up with something with no indices: a number that does not transform at all. This may seem like notational overkill---trust me, it is worth building this notation now. We will use it over and over.
 
-% x-product
+\begin{example}
+Matrices $M$ have the following index structure: $M\aij{i}{j}$. There is a first index and a second index---the order matters. The first index is upper, and the second index is lower. Matrix multiplication boils down to a contraction of indices:
+\begin{align}
+    (M\vec{v})^i = M\aij{i}{j}v^j \ .
+    \label{eq:matrix:mult:ith:comp}
+\end{align}
+Let us read this equation carefully. First, $M\vec{v}$ is a vector. The $i^\text{th}$ component of this vector is $(M\vec{v})^i$. How is this related to the components of $M$ and $\vec{v}$? The right-hand side tells us that we simply take the sum:
+\begin{align}
+    M\aij{i}{j}v^j = 
+    M\aij{i}{1}v^1 + M\aij{i}{2}v^2  + M\aij{i}{3}v^3 \ .
+\end{align}
+\end{example}
+\begin{example}
+From the above example, you can then excuse the glib statement: ``the \emph{vector} $M\aij{i}{j}v^j$.'' As we explained above, $M\aij{i}{j}v^j$ is not a vector, but a component of a vector. However, the point is that even though there are three indices, two of them are contracted so the object effectively only has one upper index. This is the index structure of a vector.
+\end{example}
+
+\section{Ket Notation}
+
+Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \emph{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \emph{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
+\begin{align}
+    \text{column vector:}\quad \vec{v} &= \ket{v}
+    &
+    \text{row vector:}\quad \row{w} &= \bra{w}
+\end{align}
 
 
 \section{Matrices and Linear Transformations}
@@ -448,7 +513,13 @@ Pre-image, image, kernel,
 
 A function $f$ is \textbf{linear} if it satisfies:
 \begin{align}
-    f(\alpha \vec{v}) = \alpha f(\vec{v})
+  f(\alpha x) &= \alpha f(x)\\
+  f(x+y) &= f(x) + f(y) \ .
+\end{align}
+
+\begin{align}
+  f(\alpha x + \beta y) = \alpha f(x)+\beta f(y)
+  \label{eq:def:linear}
 \end{align}
 
 

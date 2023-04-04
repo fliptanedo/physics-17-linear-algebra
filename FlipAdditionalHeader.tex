@@ -9,3 +9,14 @@
 \newcommand{\YourName}[1]{{	
 	\color{blue!50!black}\footnotesize
 	[\textbf{\textsf{YourName}}: \textsf{#1}]}}
+
+
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+% For matrices
+\newcommand{\aij}[2]{^{#1}_{\phantom{#1}#2}}
+\newcommand{\mat}[3]{#1\aij{#2}{#3}}
+\newcommand{\pp}{\phantom{+}}
+
+\newcommand{\row}[1]{\tilde{\vec{#1}}}
