@@ -2,6 +2,7 @@
 !.gitignore
 *.pdf
 !/figures/*
+!P17_LectureNotes.pdf
 OLD/
 
 # LATEX
