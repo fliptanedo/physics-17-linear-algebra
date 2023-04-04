@@ -131,27 +131,29 @@ Three-dimensional real space is an example of a \textbf{vector space}, which is 
 
 From the above example, you should have some intuition for what the \textbf{dimension} of a vector space means: the dimension counts how many numbers you need to specify a vector. For real vector spaces, $\mathbbm{R}^d$, the dimension is the number $d$. We will always assume that $d$ is a positive integer.\footnote{The notion of a non-integer-dimensional space does show up occasionally. These do not even have to be particularly exotic: you can look up the dimension of a fractal.}
 
-\subsection{Mathematical properties}
+\subsection{Vectors and Numbers}
 
 We now make some general statements about vector spaces. These apply to all vector spaces, not just $\mathbbm{R}^3$, but you can keep $\mathbbm{R}^3$ in mind as we go over them.
 
 First we should make clear that there are now two different kinds of objects: \emph{vectors} and \emph{numbers}. We will have all sorts of notation for vectors, but let us write them with a boldfaced Roman letter for now, e.g.~$\vec{v}$. We typically write numbers as lowercase italicized Roman letters like $a$ or sometimes Greek letters like $\alpha$. 
 
-You already know everything there is to know about numbers.\footnote{Formally, what I mean by `number' is what mathematicians call a \textbf{field}. This simply means some objects where one can add, subtract, multiply, and divide as you would expect. This term is a little tedious for us because physicists usually mean something else when they say `field.' Usually we mean something like the electric field or the field associated with the Higgs boson.} Most relevant is that you can multiply numbers with each other (including division, the inverse of multiplication) and you can add them together (including subtraction). For the first part of this course, we will focus on real numbers, $\mathbbm{R}$. Later we will also allow for complex numbers, $\mathbbm{C}$.
+You already know everything there is to know about numbers.\footnote{Formally, what I mean by `number' is what mathematicians call a \textbf{field}. This simply means some objects where one can add, subtract, multiply, and divide as you would expect. This term is a little tedious for us because physicists usually mean something else when they say `field.' Usually we mean something like the electric field or the field associated with the Higgs boson.} Most relevant is that you can multiply numbers with each other (including division, the inverse of multiplication) and you can add them together (including subtraction). For the first part of this course, we will focus on real numbers, $\mathbbm{R}$. Later we will also allow for complex numbers, $\mathbbm{C}$. 
 
-What about vectors? Vectors have the following properties: 
-\begin{enumerate}
-    \item You can add vectors. This assumes that they are in the same vector space. The sum of two vectors is also a vector in the same vector space. 
-    \item Vector addition is associative. This means that in the sum $\vec{v}+\vec{w}+\vec{u}$, it does not matter if you add $(\vec{v}+\vec{w})$ first and then add $\vec{u}$, or if you take $\vec{v}$ and then add it to $(\vec{w}+\vec{u})$. This is the kind of `obvious' property that we tend to take for granted.
-    \item Vector addition is commutative. $\vec{v}+\vec{w} = \vec{w}+\vec{v}$. This is also kind of obvious. But recall that matrix multiplication is not commutative.
-    \item There is a zero vector, $\vec{0}$, that does leaves any other vector unchanged under addition. $\vec{v}+\vec{0} = \vec{v}$. This should be totally obvious. I bet you even know what the components of $\vec{0}$ are.
-    \item There is an additive inverse (negative vectors). If $\vec{v}$ is a vector, then $-\vec{v}$ is a vector and satisfies $\vec{v}+(-\vec{v}) = \vec{0}$.
-    \item You can multiply vectors by numbers. This is called rescaling or scalar multiplication. All the usual properties of multiplication by numbers holds: associativity, commutivity, distributive law.
-\end{enumerate}
-\begin{example}
-The first property implies that once you have identified one vector in a vector space, $\vec{v}$, then you can immediately have an infinite number of vectors. This is because $2\vec{v} = \vec{v}+\vec{v}$ must also be a vector. Then $3\vec{v} = 2\vec{v}+\vec{v}$ must also be a vector. And so forth.
-\end{example}
-Let us go over a few of these properties.
+Like numbers, vectors can be added and subtracted. In fact, vector arithmetic turns out to be very similar to `number arithmetic.' However, unlike numbers, there is no obvious definition for vector multiplication. This leads to the idea of \emph{defining} functions for various kinds of vector multiplication. Linear algebra is the study of a particular class of these functions. The dot product, for example, which takes two vectors and returns a number, is something we have to ``make up'' and attach to a vector space.
+
+% What about vectors? Vectors have the following properties: 
+% \begin{enumerate}
+%     \item You can add vectors. This assumes that they are in the same vector space. The sum of two vectors is also a vector in the same vector space. 
+%     \item Vector addition is associative. This means that in the sum $\vec{v}+\vec{w}+\vec{u}$, it does not matter if you add $(\vec{v}+\vec{w})$ first and then add $\vec{u}$, or if you take $\vec{v}$ and then add it to $(\vec{w}+\vec{u})$. This is the kind of `obvious' property that we tend to take for granted.
+%     \item Vector addition is commutative. $\vec{v}+\vec{w} = \vec{w}+\vec{v}$. This is also kind of obvious. But recall that matrix multiplication is not commutative.
+%     \item There is a zero vector, $\vec{0}$, that does leaves any other vector unchanged under addition. $\vec{v}+\vec{0} = \vec{v}$. This should be totally obvious. I bet you even know what the components of $\vec{0}$ are.
+%     \item There is an additive inverse (negative vectors). If $\vec{v}$ is a vector, then $-\vec{v}$ is a vector and satisfies $\vec{v}+(-\vec{v}) = \vec{0}$.
+%     \item You can multiply vectors by numbers. This is called rescaling or scalar multiplication. All the usual properties of multiplication by numbers holds: associativity, commutivity, distributive law.
+% \end{enumerate}
+% \begin{example}
+% The first property implies that once you have identified one vector in a vector space, $\vec{v}$, then you can immediately have an infinite number of vectors. This is because $2\vec{v} = \vec{v}+\vec{v}$ must also be a vector. Then $3\vec{v} = 2\vec{v}+\vec{v}$ must also be a vector. And so forth.
+% \end{example}
+% Let us go over a few of these properties.
 
 \subsection{Notation: Indices}
 
@@ -178,8 +180,32 @@ If you see $\vec{s}$, this is understood to be a vector that has multiple compon
 You may worry that this notation introduces ambiguity. If we see $q^2$, is this the square of some number $q$, or is it the second component of some vector $\vec{q}$? The answer depends on context. You should avoid choosing variable names where there is ever the potential for ambiguity. If you have a vector that you call $\vec{q}$, then do not use the letter $q$ for anything else.
 
 
+% \subsection{Notation: Indices again}
 
-\subsection{Arithmetic}
+% We can express this using index notation. 
+You know from $\mathbbm{R}^3$ that you can add together any two vectors $\vec{v}$ and $\vec{w}$.
+% 
+Let us call this sum $\vec{u}$ so that $\vec{u}\equiv \vec{v}+\vec{w}$. Then we can succinctly write the components of $\vec{u}$ in one line:
+\begin{align}
+    u^i = v^i + w^i \ .
+    \label{eq:u:v:plus:w:index}
+\end{align}
+The variable $i$ is called an \textbf{index}. What values does the index take? In this example, it is 
+clear that \eqref{eq:u:v:plus:w:index} holds for $i=1,2,3$. That is, $i$ takes values from 1 to the dimension of the space. The typical convention is that we do not have to state the range of index values because it should be understood from the space itself. 
+
+With that in mind, it should be clear that if $\vec{q}$ is the difference of two vectors, then the components of $\vec{q}$ may be succinctly written:
+\begin{align}
+\vec{q} &= \vec{v}-\vec{w}    
+&
+&\Leftrightarrow
+&
+q^i &= v^i - w^i \ .
+\end{align}
+In fact, as physicists we typically use the two statements above interchangeably. If you know the components of a vector, then you know the vector.
+
+
+
+\subsection{Arithmetic and linear combinations}
 
 All vector spaces allow addition and subtraction. This is defined component-wise. The sum of $\vec{v}$ and $\vec{w}$ is
 \begin{align}
@@ -197,32 +223,21 @@ A few formal properties that generalize to all vector spaces:
     \item Vector addition is associative. This means that in the sum $\vec{v}+\vec{w}+\vec{u}$, it does not matter if you add $(\vec{v}+\vec{w})$ first and then add $\vec{u}$, or if you take $\vec{v}$ and then add it to $(\vec{w}+\vec{u})$. This is the kind of `obvious' property that we tend to take for granted.
     \item Vector addition is commutative. $\vec{v}+\vec{w} = \vec{w}+\vec{v}$. This is also kind of obvious. But recall that matrix multiplication is not commutative.
     \item There is a zero vector, $\vec{0}$, that does leaves any other vector unchanged under addition. $\vec{v}+\vec{0} = \vec{v}$. This should be totally obvious. The components of $\vec{0}$ are obviously all zero.
-    \item There is an additive inverse (negative vectors). If $\vec{v}$ is a vector, then $-\vec{v}$ is a vector and satisfies $\vec{v}+(-\vec{v}) = \vec{0}$.9
+    \item There is an additive inverse (negative vectors). If $\vec{v}$ is a vector, then $-\vec{v}$ is a vector and satisfies $\vec{v}+(-\vec{v}) = \vec{0}$.
 \end{itemize}
+\begin{example}
+The first property implies that once you have identified one vector in a vector space, $\vec{v}$, then you can immediately have an infinite number of vectors. This is because $2\vec{v} = \vec{v}+\vec{v}$ must also be a vector. Then $3\vec{v} = 2\vec{v}+\vec{v}$ must also be a vector. And so forth.
+\end{example}
+
+We get another type of operation ``for free'' with a vector space. This is called scalar multiplication or \emph{rescaling}.
+
+% You can multiply vectors by numbers. This is called rescaling or scalar multiplication. All the usual properties of multiplication by numbers holds: associativity, commutivity, distributive law.
 
 
 
 
 
-\subsection{Notation: Indices again}
 
-We can express this using index notation. Let us call this sum $\vec{u}$ so that $\vec{u}\equiv \vec{v}+\vec{w}$. Then we can succinctly write the components of $\vec{u}$ in one line:
-\begin{align}
-    u^i = v^i + w^i \ .
-    \label{eq:u:v:plus:w:index}
-\end{align}
-The variable $i$ is called an \textbf{index}. What values does the index take? In this example, it is 
-clear that \eqref{eq:u:v:plus:w:index} holds for $i=1,2,3$. That is, $i$ takes values from 1 to the dimension of the space. The typical convention is that we do not have to state the range of index values because it should be understood from the space itself. 
-
-With that in mind, it should be clear that if $\vec{q}$ is the difference of two vectors, then the components of $\vec{q}$ may be succinctly written:
-\begin{align}
-\vec{q} &= \vec{v}-\vec{w}    
-&
-&\Leftrightarrow
-&
-q^i &= v^i - w^i \ .
-\end{align}
-In fact, as physicists we typically use the two statements above interchangeably. If you know the components of a vector, then you know the vector.
 
 
 
@@ -270,6 +285,140 @@ The second component of $\vec{u}$ is $u^2 = -26 + 4.2 = -21.8$.
 \end{example}
 
 At this point it is useful to define some jargon. A \textbf{scalar} is a number. This is in contrast to vectors (and matrices and tensors) which we can think of as arrays of numbers. In fact, every time you see the word scalar, you should just think ``number.'' Another name for `rescaling a vector by a number' is \emph{scalar multiplication}.
+
+
+
+\subsection{Linear Combination and Span}
+
+Based on our rules for vector space arithmetic, we know that if $\vec{v}$ and $\vec{w}$ are two vectors in our vector space and if $\alpha$ and $\beta$ are any two numbers, then
+\begin{align}
+    \alpha\vec{v} + \beta\vec{w} 
+\end{align}
+is also a vector in our vector space. We call any such sum---for any values of $\alpha$ and $\beta$---a \textbf{linear combination} of the vectors $\vec{v}$ and $\vec{w}$. You can of course generalize to the linear combination of more than two vectors, say
+\begin{align}
+    \alpha\vec{v} + \beta\vec{w} + \gamma\vec{u} \ .
+\end{align}
+
+Given some number of vectors---$\vec{v}$ and $\vec{w}$---you can ask what are all of the possible vectors that you can form from the linear combination of those vectors? This is a vector space.\footnote{You may want to convince yourself that this satisfies the requirements of vector space arithmetic.} We say that this vector space is \textbf{spanned} by the vectors $\vec{v}$ and $\vec{w}$. We call this vector space $\text{Span}(\vec{v},\vec{w})$. You can extend this to even more vectors, $\text{Span}(\vec{v}, \vec{w}, \vec{u},\cdots)$.
+
+\begin{exercise}
+Show that the vector space spanned by $\vec{v}$ and $\alpha\vec{v}$ is the same as the vector space spanned by $\vec{v}$.
+\end{exercise}
+
+\begin{exercise}
+If $\mathbbm{R}^3$ is the space of vectors with three real components, argue that the span of any four vectors is at most $\mathbbm{R}^3$ but possibly a subset of $\mathbbm{R}^3$. Give an example where the span of four vectors is $\mathbbm{R}^2$. 
+\end{exercise}
+
+\subsection{Basis}
+
+Let us push this idea further. For simplicity, let us focus on the two-dimensional plane, $\mathbbm{R}^2$. A vector in $\mathbbm{R}^2$ looks like this:
+\begin{align}
+    \vec{v} =
+    \begin{pmatrix}
+        v^1 \\ v^2
+    \end{pmatrix} \ .
+\end{align}
+Any such vector may be written as the linear combination of the following two vectors:
+\begin{align}
+    \hat{\vec{e}}_1 &=
+    \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}
+    &
+    \hat{\vec{e}}_2 &=
+    \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix} \ .
+\end{align}
+Indeed, it should be obvious that 
+\begin{align}
+    \vec{v} &= \alpha \hat{\vec{e}}_1 + \beta \hat{\vec{e}}_2
+    & \text{with}&
+    &\alpha &= v^1
+    &\beta &= v^2 \ .
+\end{align}
+In other words, these `special' vectors $\hat{\vec{e}}_{1,2}$ satisfy:
+\begin{enumerate}
+    \item Any vector in $\mathbbm{R}^2$ may be written as a linear combinations of $\hat{\vec{e}}_{1,2}$. We showed this because $\vec{v}$ in the above discussion could be any vector in $\mathbbm{R}^2$. Thus $\text{Span}(\hat{\vec{e}}_{1},\hat{\vec{e}}_{1})=\mathbbm{R}^2$.
+    \item The coefficients in the linear combination are precisely the components of the vector $\vec{v}$. Soon we will see that this observation is actually backwards: it is the choice that $\hat{\vec{e}}_{1}$ are special that defines the components of a vector.
+\end{enumerate}
+
+It should be obvious that any pair of vectors that ``aren't pointing in the same direction'' can span the entire space $\mathbbm{R}^2$. 
+\begin{exercise}
+What does ``aren't pointing in the same direction'' mean in this context? Use $\vec{v}$ and $\alpha\vec{v}$ in your answer.
+\end{exercise}
+We could try a different pair of vectors and consider its linear combinations:
+\begin{align}
+    \vec{f}_1 &=
+    \begin{pmatrix}
+        1\\1
+    \end{pmatrix}
+    &
+    \vec{f}_2 &=
+    \begin{pmatrix}
+        0\\1
+    \end{pmatrix} \ .
+\end{align}
+Then the vector $\vec{v}$ may be written as $\vec{v} = \alpha \vec{f}_1+ \beta\vec{f}_2$. To find $\alpha$ and $\beta$, we can simply plug in the components of $\vec{v}$ and $\vec{f}_{1,2}$ so that:
+\begin{align}
+    v^1 &= \alpha -\beta
+    &
+    v^2 &= \alpha \ .
+\end{align}
+In other words,
+\begin{align}
+    \vec{v} = (v^2) \vec{f}_1 + (v^2 - v^1)\vec{f}_2 \ .
+\end{align}
+These coefficients $\alpha = v^2$ and $\beta = v^2 - v^1$ may be written  in shorthand. Let's suggestively write
+\begin{align}
+    \vec{v} = 
+    \begin{pmatrix}
+        v^2\\
+        v^2 - v^1
+    \end{pmatrix}_f \ ,
+\end{align}
+where we use the subscript $f$ to mean ``coefficients with respect to $\vec{f}_{1,2}$. This looks just like a two-component vector, doesn't it?
+
+\begin{exercise}
+Let $\vec{v} \in \mathbbm{R}^2$ be the following vector in two-dimensional real space:
+\begin{align}
+    \vec{v}=
+    \begin{pmatrix}
+        3\\2
+    \end{pmatrix} \ .
+\end{align}
+Here are two vectors that span $\mathbbm{R}^2$:
+\begin{align}
+    \vec{f}_1 &=
+    \begin{pmatrix}
+        2\\1
+    \end{pmatrix}
+    &
+    \vec{f}_2 &=
+    \begin{pmatrix}
+        -1\\0
+    \end{pmatrix} \ .
+\end{align}
+What are the coefficients $\alpha$ and $\beta$ so that $\vec{v} = \alpha \vec{g}_1 + \beta \vec{g}_2$?  \textsc{Answer}: $\alpha = 2$ and $\beta = 1$. 
+\end{exercise}
+
+
+What we're getting at is the following.  Define a set of vectors that span a space. We will call this set of vectors a \textbf{basis} of that space. Any vector in the space can be written as a linear combination of basis vectors. For example, if $\vec{b}_{1,2}$ are a basis of $\mathbbm{R}^2$, then for any vector $\vec{v}\in\mathbbm{R}^2$ we may write
+\begin{align}
+    \vec{v} = \alpha \vec{b}_{1} + \beta \vec{b}_2 \ .
+\end{align}
+Then we have encoded all of the data of vector $\vec{v}$ into the coefficients $(\alpha, \beta)$. 
+
+\flip{I am here}
+
+
+%  we can define any vector of that space by listing the coefficients of the basis vectors in the linear combination that 
+
+% For example, the vectors $\hat{\vec{e}}_{1}$ are a basis of $\mathbbm{R}^2$. In fact, the vectors $\vec{f}_{1,2}$ are also a basis for $\mathbbm{R}^2$. So are the pair $\vec{g}_{1,2}$. 
+
+
+
+
 
 \subsection{Operations that are not (yet) allowed}
 
