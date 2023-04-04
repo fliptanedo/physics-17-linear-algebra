@@ -1,0 +1,429 @@
+%% LaTeX Paper Template, Flip Tanedo (flip.tanedo@ucr.edu)
+%% GitHub: https://github.com/fliptanedo/paper-template-2022
+
+\documentclass[12pt]{article}
+
+\input{FlipPreamble}			%% \usepackages
+% \input{FlipAdditionalHeader} 	%% Use this define additional macros
+% \input{FlipAdditionalHeader_listings}
+% amsthm details:
+
+
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{example}{Example}[section]
+
+\input{FlipPreambleEnd}			%% packages that have to be at the end
+\begin{document}
+
+\newcommand{\FlipTR}{UCR-TR-2023-FLIP-00X} % (pdfsync may fail on 1st page)
+	\thispagestyle{firststyle} 	% TR#; otherwise use \thispagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  FRONTMATTER    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+    {\huge \textbf{Linear Algebra for Physicists} \par}
+    \vskip .5cm
+    \input{FlipAuthors}
+\end{center}
+
+\begin{abstract}
+\noindent 
+Lecture notes for Physics 17, a course on linear algebra in preparation for upper-division undergraduate physics coursework at \acro{UC R}iverside.
+\end{abstract}
+
+\small
+\setcounter{tocdepth}{2}
+\tableofcontents
+\normalsize
+%\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  THE CONTENT  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
+\section{Basics}
+
+\subsection{Pre-conceptions}
+
+If this were a mathematics course, then we would start by very carefully defining words like \emph{vector} and \emph{matrix}. As a physics student, you already have a working definition of these words. It is probably something like this:
+%
+\begin{quote}
+A vector has a magnitude and a direction. We write a vector as an array of three numbers arranged in a column. A matrix is an array of nine numbers arranged in a $3\times 3$ block. There is a rule for how to apply (multiply) the matrix to the vector to produce a new vector.
+\end{quote}
+
+The problem is that you already know too much to learn linear algebra as a mathematics student. You have already seen the tip of the iceberg and so have preconceptions about what vectors are and how they work. You may remember from freshman mechanics that forces are vectors. So are momenta and velocities. You may also recall the idea of a force field---like the electric field---which is actually a whole bunch of vectors: one for each point in space. Examples of matrices are a little more subtle: you may recall that you can represent rotations as matrices. Speaking of rotations, there was another thing that showed up called the moment of inertia \emph{tensor}. It looked like a matrix, but we never called it the ``moment of inertia matrix.'' What the heck is a tensor, anyway?
+
+And so, you see that starting this course like a mathematics course could cause trouble. The mathematics professor would start by defining a vector. That definition will say nothing about magnitudes or directions, and will not even say anything about arrays of numbers. That definition will clash with the hard-earned intuition that you built from your physics education thus far. It will be perplexing, and may make you feel rather unhappy. What do these mathematicians know, anyway? Or maybe its the physics that is wrong, or have we just completely misunderstood everything and we are just now noticing that we are hopelessly lost? We begin to spiral into a black hole of confusion.
+
+\begin{framed}
+Fortunately, \emph{this is not a mathematics course.}
+\end{framed}
+
+As a consequence, we will not give a rigorous definition of a vector. We start with a familiar definition of vectors and lay out which qualities are general, and which properties are specific. Then we will come to appreciate the approximation that ``\emph{everything is a vector}.'' So let us start with something comfortably familiar, even though it constitutes only the simplest example of a vector.
+
+\subsection{Real Three-Vectors}
+
+Let us write $\vec{v}$ to be a vector. This is a standard convention for writing a vector. In this course we will use a few different notations for vectors according to convenience. Notation is neither physics nor mathematics, it is simply a shorthand for a physical or mathematical idea. 
+
+% At this point, you may wonder \emph{what is a vector, anyway?} Maybe a vector is a column with three numbers that represent coordinates in three-dimensional space:
+In fact, let us focus on a particular type of vector: \textbf{real three-vectors}. These are the familiar vectors that we can write as a column of three numbers that effectively represent the coordinates in three-dimensional space:
+\begin{align}
+    \vec{v} = 
+    \begin{pmatrix}
+        x\\ y\\ z
+    \end{pmatrix} \ ,
+\end{align}
+where $x$, $y$, and $z$ are real numbers. These numbers are called the \textbf{components} of the vector $\vec{v}$.
+
+\begin{exercise}
+There is something very perverse about this ``vector.'' The variable names $x$, $y$, and $z$ imply that $\vec{v}$ is something that physicists like to call a ``position vector.'' If you say this to a mathematician they will vomit. By the end of this course, you should appreciate why the notion of a position vector makes no sense. \emph{Hint:} You may have some intuition for this already: a velocity vector tells you about the instantaneous motion of a particle relative to its present position. Try to write the analogous statement for a ``position vector.\footnote{I am not a mathematician, but you see that even I have to write ``position vector'' in condescending quotation marks. In lecture I use even more condescending air quotes.}''
+\label{ex:position:vector}
+\end{exercise}
+
+This three-dimensional space is called [three-dimensional] \textbf{real space} and we write it as $\mathbbm{R}^3$. This is because a vector is an element of three-dimensional real space specified by \emph{three} real numbers. 
+
+Three-dimensional real space is an example of a \textbf{vector space}, which is just a stupidly formal way of saying that it is where vectors live. Vectors are \emph{elements} of a vector space. A vector space is the set of all possible allowed vectors of a given type. For $\mathbbm{R}^3$, the vector space is composed of all possible triplets of real numbers. 
+
+\begin{example} It should be no surprise that we can imagine real two-dimensional space, $\mathbbm{R}^2$. This is a vector space where each vector may be written as two real numbers. You can also imagine writing real four-dimensional space, $\mathbbm{R}^2$, or complex two dimensional space, $\mathbbm{C}^2$. 
+\end{example}
+
+From the above example, you should have some intuition for what the \textbf{dimension} of a vector space means: the dimension counts how many numbers you need to specify a vector. For real vector spaces, $\mathbbm{R}^d$, the dimension is the number $d$. We will always assume that $d$ is a positive integer.\footnote{The notion of a non-integer-dimensional space does show up occasionally. These do not even have to be particularly exotic: you can look up the dimension of a fractal.}
+
+
+\subsection{Notation: Indices}
+
+One theme in this course is that we will repeatedly refine our notation to suit our needs. Let us introduce an \emph{index} notation where we write the components of vectors $\vec{v}$ and $\vec{w}$ as follows:
+\begin{align}
+    \vec{v}
+    &=
+    \begin{pmatrix}
+        v^1 \\ v^2 \\ v^3
+    \end{pmatrix}
+    &
+    \vec{w}
+    &=
+    \begin{pmatrix}
+        w^1 \\ w^2 \\ w^3
+    \end{pmatrix} \ .
+\end{align}
+We see that a boldfaced Roman letter, $u$, corresponds to a vector. The \emph{components} of the vector are $u^1$, $u^2$, $u^3$. The ``$x$-component'' of $\vec{u}$ is called $u^1$: we use the same letter as the vector, but italicized rather than boldfaced. The upper index is \emph{not} some kind of power, it simply means ``the first component.'' 
+
+\begin{example}
+If you see $\vec{s}$, this is understood to be a vector that has multiple components. If it is a three-vector, it has three components. If you see $s^2$, then this means that this is the \emph{second component} of the vector $\vec{s}$. The component of a vector is a number. 
+\end{example}
+
+You may worry that this notation introduces ambiguity. If we see $q^2$, is this the square of some number $q$, or is it the second component of some vector $\vec{q}$? The answer depends on context. You should avoid choosing variable names where there is ever the potential for ambiguity. If you have a vector that you call $\vec{q}$, then do not use the letter $q$ for anything else.
+
+
+
+\subsection{Arithmetic}
+
+All vector spaces allow addition and subtraction. This is defined component-wise. The sum of $\vec{v}$ and $\vec{w}$ is
+\begin{align}
+    \vec{v}+\vec{w} = 
+    \begin{pmatrix}
+        v^1 + w^1\\
+        v^2 + w^2\\
+        v^3 + w^3
+    \end{pmatrix} \ .
+\end{align}
+What this means is that the \emph{sum} of two vectors is also a vector. That means that if $\vec{v}$ and $\vec{w}$ are vectors in $\mathbbm{R}^3$, then $(\vec{v}+\vec{w})$ is a vector in $\mathbbm{R}^3$. The components of the vector $(\vec{v}+\vec{w})$ are simply the sum of the components of $\vec{v}$ and $\vec{w}$. 
+
+
+
+\subsection{Notation: Indices again}
+
+We can express this using index notation. Let us call this sum $\vec{u}$ so that $\vec{u}\equiv \vec{v}+\vec{w}$. Then we can succinctly write the components of $\vec{u}$ in one line:
+\begin{align}
+    u^i = v^i + w^i \ .
+    \label{eq:u:v:plus:w:index}
+\end{align}
+The variable $i$ is called an \textbf{index}. What values does the index take? In this example, it is 
+clear that \eqref{eq:u:v:plus:w:index} holds for $i=1,2,3$. That is, $i$ takes values from 1 to the dimension of the space. The typical convention is that we do not have to state the range of index values because it should be understood from the space itself. 
+
+With that in mind, it should be clear that if $\vec{q}$ is the difference of two vectors, then the components of $\vec{q}$ may be succinctly written:
+\begin{align}
+\vec{q} &= \vec{v}-\vec{w}    
+&
+&\Leftrightarrow
+&
+q^i &= v^i - w^i \ .
+\end{align}
+In fact, as physicists we typically use the two statements above interchangeably. If you know the components of a vector, then you know the vector.
+
+
+
+\subsection{Rescaling: multiplication by a number}
+
+Another operation that exists in a vector space is rescaling: we multiply a vector by a number. 
+Let $\alpha$ be a number. If you want to nitpick, let us restrict $\alpha$ to be a real number. If we have a vector $\vec{v}$ with components $v^i$, then $\alpha \vec{v}$ is also a vector.\footnote{``Also a vector'' means that it is also an element of the vector space; so $(\alpha\vec{v})$ is an element of $\mathbbm{R}^3$ is $\vec{v}$ is an element of $\mathbbm{R}^3$. } The components of $\alpha \vec{v}$ are
+\begin{align}
+    (\alpha v)^i = \alpha v^i \ ,
+\end{align}
+by which we mean
+\begin{align}
+    (\alpha\vec{v})
+    =
+    \begin{pmatrix}
+        \alpha v^1 \\
+        \alpha v^2 \\
+        \alpha v^3 
+    \end{pmatrix} \ .
+\end{align}
+The parenthesis on the left-hand side is sloppy notation to mean ``the vector that is the vector $\vec{v}$ rescaled by the number  $\alpha$.'' Another way of saying this is that there is a vector $\vec{w}\equiv \alpha\vec{v}$ whose components are $w^i = \alpha v^i$.
+
+\begin{example}
+Let us do one explicit example with numbers. Suppose the vectors $\vec{v}$ and $\vec{w}$ have components
+\begin{align}
+    \vec{v} &=
+    \begin{pmatrix}
+    \phantom{+}4.2\\
+    -2.6\\
+    \phantom{+}7.0        
+    \end{pmatrix}
+    &
+    \vec{w} &=
+    \begin{pmatrix}
+    \phantom{+}5.3\\
+    \phantom{+}2.1\\
+    -2.5        
+    \end{pmatrix} \ .
+\end{align}
+I can rescale each vector by different numbers: $\alpha = 10$, $\beta = 2$. We can consider the vector that comes from adding these rescaled vectors:
+\begin{align}
+    \vec{u} \equiv \alpha \vec{v} + \beta \vec{w} \ .
+\end{align}
+The second component of $\vec{u}$ is $u^2 = -26 + 4.2 = -21.8$.
+\end{example}
+
+At this point it is useful to define some jargon. A \textbf{scalar} is a number. This is in contrast to vectors (and matrices and tensors) which we can think of as arrays of numbers. In fact, every time you see the word scalar, you should just think ``number.'' Another name for `rescaling a vector by a number' is \emph{scalar multiplication}.
+
+\subsection{Operations that are not (yet) allowed}
+
+In these definitions, we make a big deal about how the sum of two vectors \emph{is also a vector}. Or how the rescaling of a vector by a number \emph{is also a vector}. This is in contrast to operations that are either not allowed or that do not produce vectors. An example of an operation that is not allowed is adding together vectors from two different vector spaces. The following proposed sum of a vector in $\mathbbm{R}^3$ with  a vector in $\mathbbm{R}^2$ does not make sense:
+\begin{align}
+    \begin{pmatrix}
+        v^1\\ v^2 \\v^3
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        w^1\\ w^2 
+    \end{pmatrix}
+    =
+    \; ?
+\end{align}
+If you find yourself adding vectors from two different vector spaces, then you have made a mistake.
+
+Another operation that requires care is rescaling a real vector by a complex number. If $\vec{v}$ is a vector in $\mathbbm{R}^3$ and we try to multiply it by a complex number, $\alpha = 2+3i$, then the resulting ``vector'' is not a vector in $\mathbbm{R}^3$:
+\begin{align}
+    (\alpha\vec{v})^i = (2+3i)v^i \notin \mathbbm{R} \ ,
+\end{align}
+that is: the components of $\alpha\vec{v}$ are not real numbers, and so this cannot be an element of aa vector space that is \emph{defined} to have real components. Later on we will generalize to the case of \emph{complex vector spaces}, but we will treat that with some care.\footnote{If you want to be fancy, you can replace `number' with the mathematical notion of a field. Both the real numbers and the complex numbers are examples of fields. In my mind a field is just a class of number, though mathematicians have fancier definitions.}
+
+Thus far, we have introduced the \emph{nouns} of this course: vectors. We have identified a few \emph{verbs} that let us do things with these vectors:
+\begin{enumerate}
+    \item Addition takes two vectors in a vector space and returns a vector in the same vector space. 
+    \item Rescaling takes a vector and a number and returns a vector in the same vector space.
+\end{enumerate}
+We can rewrite this in the language of \emph{mappings} (or \emph{functions}) as follows. Let $V$ be a vector space, say $V=\mathbbm{R}^3$. Let us write $\mathbbm{R}$ mean [real] numbers. Then the above statements tell us that addition and rescaling can be thought of as maps:
+\begin{enumerate}
+    \item Vector addition: $V\times V \to V$
+    \item Rescaling: $V\times \mathbbm{R} \to V$ \ .
+\end{enumerate}
+Do not be intimidated by the $\times$ symbol here. This ``mapping'' notation means nothing more and nothing less than the statements above.
+
+We now know everything there is to know about the vector space $\mathbbm{R}^3$. We want to learn more about functions (maps) that involve this vector space. How can we combine vectors and numbers to produce other vectors and numbers? What about more complicated objects like matrices and tensors? 
+
+
+\subsection{Euclidean three-space}
+
+You may object: \emph{wait! I know there are more things you can do with three-vectors!} You remember that there are two types of vector multiplication that we use in physics. The \textbf{dot product} and the \textbf{cross product}. 
+
+In $\mathbbm{R}^3$, the \textbf{dot product} is a map $V\times V \to \mathbbm{R}$. That means it takes two vectors and returns a number. The particular number that it returns is typically \emph{defined} to be
+\begin{align}
+    \vec{v} \cdot \vec{w} 
+    = \sum_i v^i w^i  
+    = v^1w^1 + v^2 w^2 + v^3w^3 \ .
+    \label{eq:euclidean:3d:metric:intro}
+\end{align}
+The dot product generalizes in linear algebra. It is often called an \textbf{inner product} or a \textbf{metric} and has a few different notations that we will meet. What is important is that this dot/inner product is an \emph{additional} mathematical function that we attach to a vector space. 
+
+Three-dimensional real space combined with the dot product/inner product/metric \eqref{eq:euclidean:3d:metric:intro} is called Euclidean three-space. In general, a vector space combined with a `dot product' is called a \textbf{metric space}. The word metric should invoke some etymological notion of measurement of distance. Indeed, the dot product is a tool that tells us how `close' two vectors are to one another---though it is not yet obvious how.
+
+\begin{example}
+Let $\mathbf{r}=(x,y,z)$ be a ``position vector'' of a point relative to the origin.\footnote{It is dangerous to use the phrase ``position vector,'' see Exercise~\ref{ex:position:vector}.} Then the distance of the point from the origin is
+\begin{align}
+    d = \sqrt{\vec{r}\cdot\vec{r}} =
+    \sqrt{x^2+y^2 +z^2} \ .
+    \label{eq:distance:in:space}
+\end{align}
+This gives a notion of how the dot product is related to measuring distances, but it turns out to be a bit of a red herring! The real sense in which the dot product measures the `closeness' of two vectors is the sense in which it defines an angle between those vectors. (See below.)
+\end{example}
+
+The \textbf{cross product} is a different story. You may remember the cross product from such hits as\footnote{\url{https://tvtropes.org/pmwiki/pmwiki.php/Main/YouMightRememberMeFrom}} angular momentum, $\vec{r}\times\vec{p}$. It looks like a map that takes two vectors and spits out another vector, $V\times V \to V$. Indeed, this is the case in Euclidean three-space. However, it had some funny properties compared to the dot product. For example, there was something weird with the order of the two vectors: $\vec{a}\times \vec{b}  = - \vec{b}\times \vec{a}$. It is also a bit funny that the direction of the output vector is completely different\footnote{The technical meaning of `completely different' is \emph{orthogonal}, which we define below with the help of the metric.} from the directions of the input vectors. It will turn out that this product does not generalize as simply as the dot product, though there is a generalization called the \textbf{wedge product} which is outside the scope of this course.\footnote{That is not to say that the wedge product is not relevant in phsyics. The wedge product features prominently in a mathematical field called \textbf{differential geometry}, which is in turn the framework for general relativity. The wedge product is related to defining volumes and integration measures.}
+
+\begin{exercise}
+Define the generalization of the Euclidean three-space metric to Euclidean space in $d$ dimensions. (Easy.)
+\end{exercise}
+
+\begin{exercise}
+Try to define a generalization of the cross product in two-dimensional Euclidean space. Reflect on why this is much less natural than the generalization of the dot product. 
+\end{exercise}
+
+\subsection{Length in Euclidean three-space}
+
+Euclidean three-space is real space combined with the Euclidean dot product, \eqref{eq:euclidean:3d:metric:intro}. The [Euclidean] \textbf{magnitude} (length) of a three vector $\vec{v}$ as $|\vec{v}|$ in Euclidean three-space. The magnitude is defined to be
+\begin{align}
+    |\vec{v}| = \sqrt{\vec{v}\cdot\vec{v}} \ .
+\end{align}
+This definition generalizes to Euclidean $d$-dimensional space with the appropriate generalization of the dot product.
+
+\begin{example}
+Consider the vector
+\begin{align}
+    \vec{v} = 
+    \begin{pmatrix}
+    \phantom{+}3\\-4\\\phantom{+}0    
+    \end{pmatrix}
+\end{align}
+in Euclidean three-space. The magnitude of $\vec{v}$ is $|\vec{v}| = 5$.
+\end{example}
+
+
+Some references prefer to use the double bar notation, $||\vec{v}||$ for the length of a vector. This is to distinguish it from the absolute value of a number, $|-3| = 3$. We will be even more perverse: sometimes we will write $v$ to mean the magnitude of $\vec{v}$ when there is no ambiguity.
+
+\begin{example}
+Consider the vector
+\begin{align}
+    \vec{v} = 
+    \begin{pmatrix}
+    -1\\ \phantom{+}3\\ \phantom{+}2
+    \end{pmatrix} \ .
+\end{align}
+Then the \emph{magnitude} of $\vec{v}$ is $|\vec{v}|=\sqrt{14}$. We could also write this as $v = \sqrt{14}$, but we should be careful when we write things like $v^2$ which could either mean the second component of $\vec{v}$---which is $3$---or the square of the magnitude---which is 14. 
+\end{example}
+
+
+We see that the dot product (metric) allows us to define length. Because the length of a vector is a number, we can divide the vector $\vec{v}$ by its its length $|\vec{v}|$ to obtain a \textbf{unit vector}, $\hat{\vec{v}}$:
+\begin{align}
+    \hat{\vec{v}} = \frac{1}{|\vec{v}|}\vec{v} \ .
+    \label{eq:eg:v:340}
+\end{align}
+The right-hand side is simply scalar multiplication by $|\vec{v}|^{-1}$. Unit vectors are useful for identifying directions.
+
+\begin{example}
+In grade school one may have learned that a vector is an arrow that has a magnitude and a direction. Unit vectors encode the `direction' of a vector.
+\end{example}
+
+\begin{example}
+Let $\vec{v}$ be defined as in \eqref{eq:eg:v:340}. The unit vector associated with $\vec{v}$ is
+\begin{align}
+    \hat{v} = 
+    \begin{pmatrix}
+        \phantom{+}3/5 \\
+        -4/5\\
+        0
+    \end{pmatrix} \ .
+\end{align}
+
+\end{example}
+
+
+\subsection{Angles in Euclidean three-space}
+
+Let $\vec{v}$ and $\vec{w}$ be two vectors in Euclidean three-space. The [Euclidean] angle between these two vectors, $\theta$, is 
+\begin{align}
+    \cos\theta \equiv \hat{\vec{v}}\cdot\hat{\vec{w}} = \frac{\vec{v}\cdot\vec{w}}{|\vec{v}||\vec{w}|} \ .
+\end{align}
+\begin{exercise}
+Confirm that this matches the definition of the angle between two vectors that you learned in your youth.
+\end{exercise}
+The above definition of the angle between two vectors is general for any metric space---that is, a vector space equipped with a dot product. 
+
+\begin{example}
+The angle between two vectors defines the sense in which two vectors are close to one another. This is the sense in which the dot product (metric) lets you measure the ``distance'' between two vectors. Note that this is completely different from the notion of distance between two points in space, \eqref{eq:distance:in:space}. 
+\end{example}
+
+
+% You may recall that you can do interesting things with three-vectors. One easy thing is that you can take a \textbf{dot product}. The dot product is a machine that takes two vectors and spits out a number. Here's how it works. Suppose we have two vectors $\vec{v}$ and $\vec{w}$ with the following \textbf{components}:
+% \begin{align}
+%     \vec{v}
+%     &=
+%     \begin{pmatrix}
+%         v^1 \\ v^2 \\ v^3
+%     \end{pmatrix}
+%     &
+% \end{align}
+
+
+% Sometimes I will be lazy and call these vectors \emph{Euclidean} three-vectors. This assumes additional mathematical structure---namely, a dot product---that we have not y
+
+
+% It should not be hard to imagine two-dimensional Euclidean space, or even four-dimensional Euclidean space. In this course, we \emph{abstract} and \emph{generalize} this familiar definition of `vectors'.
+
+
+% x-product
+
+
+\section{Matrices and Linear Transformations}
+
+Vectors are the `nouns' in linear algebra. The word `linear' refers to the the \emph{verbs}. That is: we would like to act on vectors. 
+
+
+\subsection{Jargon}
+Let us introduce some jargon here. Rather than formal definitions, we give practical ``physicist's'' definitions.\footnote{If we do something less formally, we say that we are physicists, not mathematicians. If we choose to be more highbrow, then we say that we are physicists, not engineers.} You can look up proper definitions in your favorite mathematics textbook.  The following words are closely related: function, map, transformation. I often use them interchangeably, though this is rather sloppy.  
+
+A \textbf{function} is a mathematical machine that takes some inputs and produces some output. The inputs can be numbers, vectors, or more sophisticated objects. The outputs may also be numbers, vectors, or more sophisticated objects. The outputs do not have to be the same type of object as the inputs---in general they are not.
+\begin{example}
+The dot product is a function that takes in two vectors and outputs a number.
+\end{example}
+
+A function that takes one input and returns one output is called a \textbf{map}. 
+\begin{example}
+The magnitude is a map that takes a vector and returns a number.
+\end{example}
+
+A map that takes one type of object and returns the same type of object is called a \textbf{transformation}. 
+\begin{example}
+The map that takes a vector and returns its unit vector is a transformation: it is a function that takes a vector and returns a vector.
+\end{example}
+
+\subsection{More Jargon}
+
+\flip{Insert ``map'' picture}
+
+Pre-image, image, kernel, 
+
+\subsection{Linear transformations}
+
+
+% both addition and resscaling are linear
+
+A function $f$ is \textbf{linear} if it satisfies:
+\begin{align}
+    f(\alpha \vec{v}) = \alpha f(\vec{v})
+\end{align}
+
+
+
+ \section*{Acknowledgments}
+
+\acro{PT}\ thanks the students of Physics 17 (Spring 2022, Spring 2023) for their feedback and patience.
+%
+% \acro{PT} is supported by the \acro{DOE} grant \acro{DE-SC}/0008541.
+\acro{PT} is supported by a \acro{NSF CAREER} award (\#2045333).
+
+%% Appendices
+% \appendix
+
+
+%% Bibliography
+%\bibliographystyle{utcaps} 	% arXiv hyperlinks, preserves caps in title
+%\bibliographystyle{utphys} 	% arXiv hyperlinks
+% \bibliography{bib title without .bib}
+
+\end{document}
