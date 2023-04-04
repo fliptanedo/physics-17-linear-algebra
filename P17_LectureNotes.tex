@@ -413,23 +413,31 @@ Vectors are the `nouns' in linear algebra. The word `linear' refers to the the \
 Let us introduce some jargon here. Rather than formal definitions, we give practical ``physicist's'' definitions.\footnote{If we do something less formally, we say that we are physicists, not mathematicians. If we choose to be more highbrow, then we say that we are physicists, not engineers.} You can look up proper definitions in your favorite mathematics textbook.  The following words are closely related: function, map, transformation. I often use them interchangeably, though this is rather sloppy.  
 
 A \textbf{function} is a mathematical machine that takes some inputs and produces some output. The inputs can be numbers, vectors, or more sophisticated objects. The outputs may also be numbers, vectors, or more sophisticated objects. The outputs do not have to be the same type of object as the inputs---in general they are not.
-\begin{example}
-The dot product is a function that takes in two vectors and outputs a number.
-\end{example}
-
+% 
 A function that takes one input and returns one output is called a \textbf{map}. 
+% 
+A map that takes one type of object and returns the same type of object is called a \textbf{transformation}. Mathy-folks like to draw diagrams like Fig.~\ref{fig:Linear Transformation}.
+
 \begin{example}
-The magnitude is a map that takes a vector and returns a number.
+The dot product is a \textbf{function} that takes in two vectors and outputs a number.
+\end{example}
+\begin{example}
+The magnitude is a \textbf{map} that takes a vector and returns a number.
+\end{example}
+\begin{example}
+The map that takes a vector and returns its unit vector is a \textbf{transformation}: it is a function that takes a vector and returns a vector.
 \end{example}
 
-A map that takes one type of object and returns the same type of object is called a \textbf{transformation}. 
-\begin{example}
-The map that takes a vector and returns its unit vector is a transformation: it is a function that takes a vector and returns a vector.
-\end{example}
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/lineartransformation.pdf}
+    \caption{Example of a linear transformation. The transformation $M$ (for matrix) takes a vector $\vec{v}$ and turns it into a different vector that we call $\vec{v}'$. This new vector is related to $\vec{v}$ by the matrix $\vec{v'}=M\vec{v}$. \emph{Every} vector is transformed under the map $M$. This is an \emph{active transformation} where all vectors transform, but the basis ($\hat{\vec{e}}_i$) stays fixed.}
+    \label{fig:Linear Transformation}
+\end{figure}
 
 \subsection{More Jargon}
 
-\flip{Insert ``map'' picture}
+
 
 Pre-image, image, kernel, 
 
