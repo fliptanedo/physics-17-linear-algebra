@@ -309,14 +309,15 @@ Show that the vector space spanned by $\vec{v}$ and $\alpha\vec{v}$ is the same 
 If $\mathbbm{R}^3$ is the space of vectors with three real components, argue that the span of any four vectors is at most $\mathbbm{R}^3$ but possibly a subset of $\mathbbm{R}^3$. Give an example where the span of four vectors is $\mathbbm{R}^2$. 
 \end{exercise}
 
-\subsection{Basis}
+\subsection{Basis vectors: an illustrative example}
 
-Let us push this idea further. For simplicity, let us focus on the two-dimensional plane, $\mathbbm{R}^2$. A vector in $\mathbbm{R}^2$ looks like this:
+Let us push this idea further. It is useful to start with an example. For simplicity, let us focus on the two-dimensional plane, $\mathbbm{R}^2$. A vector in $\mathbbm{R}^2$ looks like this:
 \begin{align}
     \vec{v} =
     \begin{pmatrix}
         v^1 \\ v^2
     \end{pmatrix} \ .
+    \label{eq:v:v1:v2}
 \end{align}
 Any such vector may be written as the linear combination of the following two vectors:
 \begin{align}
@@ -336,6 +337,7 @@ Indeed, it should be obvious that
     & \text{with}&
     &\alpha &= v^1
     &\beta &= v^2 \ .
+    \label{eq:natural:cartesian:basis}
 \end{align}
 In other words, these `special' vectors $\hat{\vec{e}}_{1,2}$ satisfy:
 \begin{enumerate}
@@ -375,9 +377,9 @@ These coefficients $\alpha = v^2$ and $\beta = v^2 - v^1$ may be written  in sho
     \begin{pmatrix}
         v^2\\
         v^2 - v^1
-    \end{pmatrix}_f \ ,
+    \end{pmatrix}_{\vec{f}} \ ,
 \end{align}
-where we use the subscript $f$ to mean ``coefficients with respect to $\vec{f}_{1,2}$. This looks just like a two-component vector, doesn't it?
+where we use the subscript $\vec{f}$ to mean ``coefficients with respect to $\vec{f}_{1,2}$. This looks just like a two-component vector, doesn't it?
 
 \begin{exercise}
 Let $\vec{v} \in \mathbbm{R}^2$ be the following vector in two-dimensional real space:
@@ -389,29 +391,158 @@ Let $\vec{v} \in \mathbbm{R}^2$ be the following vector in two-dimensional real 
 \end{align}
 Here are two vectors that span $\mathbbm{R}^2$:
 \begin{align}
-    \vec{f}_1 &=
+    \vec{g}_1 &=
     \begin{pmatrix}
         2\\1
     \end{pmatrix}
     &
-    \vec{f}_2 &=
+    \vec{g}_2 &=
     \begin{pmatrix}
-        -1\\0
+        -1\\ \pp 0
     \end{pmatrix} \ .
 \end{align}
-What are the coefficients $\alpha$ and $\beta$ so that $\vec{v} = \alpha \vec{g}_1 + \beta \vec{g}_2$?  \textsc{Answer}: $\alpha = 2$ and $\beta = 1$. 
+What are the coefficients $\alpha$ and $\beta$ so that $\vec{v} = \alpha \vec{g}_1 + \beta \vec{g}_2$?  \emph{Answer}: $\alpha = 2$ and $\beta = 1$. 
 \end{exercise}
 
 
-What we're getting at is the following.  Define a set of vectors that span a space. We will call this set of vectors a \textbf{basis} of that space. Any vector in the space can be written as a linear combination of basis vectors. For example, if $\vec{b}_{1,2}$ are a basis of $\mathbbm{R}^2$, then for any vector $\vec{v}\in\mathbbm{R}^2$ we may write
+What we're getting at is the following.  Define a set of vectors that span a space. We will call this set of vectors a \textbf{basis} of that space---we'll give a slightly more formal definition below. Any vector in the space can be written as a linear combination of basis vectors. For example, if $\vec{b}_{1,2}$ are a basis of $\mathbbm{R}^2$, then for any vector $\vec{v}\in\mathbbm{R}^2$ we may write
 \begin{align}
     \vec{v} = \alpha \vec{b}_{1} + \beta \vec{b}_2 \ .
 \end{align}
-Then we have encoded all of the data of vector $\vec{v}$ into the coefficients $(\alpha, \beta)$. 
+Then we have encoded all of the data of vector $\vec{v}$ into the coefficients $(\alpha, \beta)$. In fact, let me be more economical with my symbols and change notation a bit and write $(\alpha^1, \alpha^2) \equiv (\alpha,\beta)$ so that
+\begin{align}
+    \vec{v} = \alpha^1 \vec{b}_{1} + \alpha^2 \vec{b}_2 \ .
+    \label{eq:R2:vec:v:in:b:components:lincomb}
+\end{align}
+Then I can write the information encoded in $\vec{v}$ as a column, which I will write with a subscript $b$ to distinguish it from the ``actual'' vector components, \eqref{eq:v:v1:v2}:\footnote{We will soon see that the there is nothing holy about \eqref{eq:v:v1:v2}.}
+\begin{align}
+    \vec{v} = 
+    \begin{pmatrix}
+        \alpha^1\\
+        \alpha^2
+    \end{pmatrix}_{\vec{b}} \ .
+    \label{eq:R2:vec:v:in:b:components}
+\end{align}
+The last two equations mean exactly the same thing. Now here's something cute: we can treat the two-component array\footnote{I'm trying not to call it a vector.} on the right-hand side of \eqref{eq:R2:vec:v:in:b:components} as if it were a vector. We can do vector arithmetic on it. If we have two vectors with ``$\vec{b}$ basis components''
+\begin{align}
+    \vec{v}&=
+    \begin{pmatrix}
+        \alpha^1\\
+        \alpha^2
+    \end{pmatrix}_{\vec{b}} 
+    &
+    \vec{w}&=
+    \begin{pmatrix}
+        \beta^1\\
+        \beta^2
+    \end{pmatrix}_{\vec{b}}  \ ,
+\end{align}
+Then we could take linear combinations of the two with respect to two numbers $a$ and $b$:
+\begin{align}
+    a\vec{v} + b\vec{w} =
+    (\alpha^1+\beta^1) \vec{b}_{1} + (\alpha^2+\beta^2) \vec{b}_2
+    =
+    \begin{pmatrix}
+        \alpha^1 + \beta^1 \\
+        \alpha^2 + \beta^2
+    \end{pmatrix}_{\vec{b}} \ .
+    \label{eq:linear:combination:in:b:basis}
+\end{align}
 
-\flip{I am here}
+If $\vec{v}$ and $\vec{w}$ span $\mathbbm{R}^2$, then any vector in the vector space may be written as a linear combination of the form \eqref{eq:linear:combination:in:b:basis}. This means we may use the ``$\vec{b}$ basis components'' as equivalent ways of encoding a vector as the natural description \eqref{eq:v:v1:v2}. But wait a moment: what is so ``natural'' about \eqref{eq:v:v1:v2}? 
+
+If we reverse the argument for the $\vec{b}$ basis, then we see that the ``natural'' components of the vector $\vec{v}$ in \eqref{eq:v:v1:v2} are simply the coefficients of the linear combinations of the basis vectors $\hat{\vec{e}}_{1,2}$ in \eqref{eq:natural:cartesian:basis}. What made the basi vectors $\hat{\vec{e}}_{1,2}$ so special, anyway? Nothing at all. 
+
+What we've come to is that we the \emph{components} of a vector depend on the basis that we choose. In $\mathbb{R}^3$ we usually use the basis $\hat{\vec{e}}_{1,2,3}$ where the vectors point respectively along the $\hat{x}$, $\hat{y}$, and $\hat{z}$ directions. It is kind of an ``obvious'' basis, though it completely depends on the $\hat{x}$, $\hat{y}$, and $\hat{z}$ directions having some intrinsic meaning. They often do not: we could set up our coordinate system however we wanted. In fact, \emph{nowhere} in our definition of a vector space did we even assume that a coordinate system exists!
+
+Indeed, it's the other way around: a choice of basis vectors \emph{defines} a `coordinate system' rather than the other way around.\footnote{Though it really is dangerous to think about a vector space as having coordinates. We will see why when we talk about vector bundles and manifolds.} All of this begs for a re-definition.
 
 
+\subsection{Basis vectors, formally}
+
+A \textbf{basis} is a \emph{minimal set} of vectors that span a space. Here `minimal' means that if you remove any vector from the basis, then there are vectors in the space that cannot be written as a linear combination of the remaining vectors.
+
+\begin{example}\label{eg:over:specified:basis}
+Consider the following three vectors:
+\begin{align}
+    \vec{v} &=
+    \begin{pmatrix}
+        1\\0\\0
+    \end{pmatrix}
+    &
+    \vec{w} &=
+    \begin{pmatrix}
+        0\\1\\0
+    \end{pmatrix}
+    &
+    \vec{u} &=
+    \begin{pmatrix}
+        1\\-1\\0
+    \end{pmatrix} \ .
+    \label{eq:tvu:example:basis}
+\end{align}
+These three vectors are \emph{not} a basis for a subspace because there are vectors that are linear combinations of $\vec{v}$, $\vec{w}$, and $\vec{u}$ that can be equivalently written as a linear combination of just $\vec{v}$ and $\vec{u}$, for example.
+% 
+To see this, consider the vector
+\begin{align}
+    \vec{t} = 4\vec{v} + 2\vec{w} + 3\vec{u} 
+    =
+    \begin{pmatrix}
+        \pp 7 \\ -1 \\ \pp 0
+    \end{pmatrix} \ .
+\end{align}
+This may equivalently be written as
+\begin{align}
+    \vec{t} = 7\vec{v} - \vec{w} \ .
+\end{align}
+Indeed, there are an infinite number of ways to write $\vec{t}$. Because $\vec{v} + \vec{w} + \vec{u} = 0$, you can add any multiple of this linear combination to $\vec{t}$ to leave $\vec{t}$ unchanged.
+\end{example}
+
+The \textbf{dimension} of a vector space is the number of vectors in the basis. In the example above, the vector space spanned by linear combinations of $\vec{v}$, $\vec{w}$, and $\vec{u}$ has dimension two. This is because you only need two vectors write any vector in the space as a linear combination. If you drew all of the vectors in this subspace as arrows with their base at the origin, then the arrow heads with all live on the $xy$-plane.
+
+Here are some \emph{obvious} statements\footnote{This means: if they are not immediately apparent, stop and think about it to make sure you understand.}:
+\begin{enumerate}
+    \item The zero vector cannot be part of any basis.
+    \item The dimension of a vector space does not depend on the choice of basis.
+    \item If you have a proposed set of basis vectors but there is a \emph{non-trivial} linear combination of those vectors that sums to zero, then the set of vectors is not a basis. Here non-trivial means ``the coefficients are not all equal to zero.'' This should be evident from Example~\ref{eg:over:specified:basis}.
+    \item If any two vectors in a proposed basis are proportional to one another, then this set of vectors is not a basis.
+    \item The number of components $v^i$ to describe a vector is the dimension of the vector space.
+    \item In the expansion of a vector as a linear combination of basis vectors, the coefficients are unique to the vector. That is: if $\vec{v} = \sum_i \alpha^i\vec{b}_i$ for a basis $\vec{b}_{1,2,3}$, then the set of numbers $(\alpha^1, \alpha^2, \alpha^3)$ uniquely defines $\vec{v}$. There is no other combination of coefficients in a linear combination that sum to $\vec{v}$. 
+    \item When describing a vector, the \emph{coefficients} of the linear combination of basis vectors and the \emph{components} of a column vector with respect to that basis are identical. This is by definition. 
+\end{enumerate}
+The last point is poignant. You may have believed that a vector \emph{is} the column of numbers. We want to move away from this so that we may generalize our definition. A vector is a linear combination of basis vectors, where we are remaining agnostic about what the basis vectors are. Let me say this again: \emph{the column of numbers is not the vector, it is simply a representation of a linear combination of basis vectors. All the ``vector-ness'' is encoded in the basis vectors.}
+
+\begin{example}
+Color space is a vector space that highlights this idea of a more abstract basis vector. In color theory, all colors are linear combinations of red, green, and blue. This should sound really weird because in physics these colors are simply wavelengths of light: what is special about them? Nothing in nature. What is special is that our eyes have three types of color receptor cells. Each type is sensitive to a certain window of the visible spectrum. We call these human eye responses the colors red, green, and blue. When we add colors, what we really mean is we're adding ``responses'' to a particular spectrum of light. When we add colors, we are not adding electromagnetic waves: we are adding neurological responses. For each type of color-sensitive cell, one `blip' of neural response is a basis vector for our color response. The sensation of a particular color is a linear combination of this basis. An actual human being is not sensitive to the whole vector space: for example, we cannot add negative colors to our sensory response. This is a fascinating subject and a surprising application of linear algebra.\footnote{There are some great YouTube videos on this. Here are a few: \url{https://www.youtube.com/watch?v=xAoljeRJ3lU}, \url{https://www.youtube.com/watch?v=AS1OHMW873s}, \url{https://www.youtube.com/watch?v=99v96TL-tuY}.}
+\end{example}
+
+
+What is less obvious is that at this point there is \emph{no preferred basis}. Any minimal set of vectors that span a vector space is a perfectly good vector. Suppose $\vec{b}_{1,2,3}$ is one such set for $\mathbbm{R}^3$. We can write the vector with respect to the coefficients of the linear combination of  $\vec{b}_{1,2,3}$ basis vectors that reproduces it. If we had another basis, $\vec{b}'_{1,2,3}$, we could write the same vector with respect to a different linear combination of the $\vec{b}'_{1,2,3}$ basis. The components of these linear combinations, say $\alpha^i$ and $\alpha'^i$, will be different because the basis elements are different. However, they represent the same vector.
+
+In your heart, you should feel anxious. You \emph{like} the ``obvious'' basis 
+\begin{align}
+    \hat{\vec{e}}_1 &=
+    \begin{pmatrix}
+        1 \\ 0 \\ 0
+    \end{pmatrix}
+    &
+    \hat{\vec{e}}_2 &=
+    \begin{pmatrix}
+        0 \\ 1 \\ 0
+    \end{pmatrix}
+    &
+    \hat{\vec{e}}_2 &=
+    \begin{pmatrix}
+        0 \\ 0 \\ 1
+    \end{pmatrix} \ .
+\end{align}
+We can even call this the Cartesian basis.
+It seems so natural, we even gave these basis vectors little hats to remind us how much we like them! Stop and think about what you like about this basis. I guarantee you that all of those nice features invoke mathematical machinery that are \emph{not} included in a vector space. You may like that the Cartesian basis is orthogonal and each basis vector has unit length. To this I reply: \emph{how do you measure angle or length? These are not concepts that our vector space is equipped with.} You are, of course, correct that there \emph{is} a way to \emph{define} angle and length---but that is something additional that we have to impose on the space. We will get to this shortly.
+
+% \flip{I am here}
+% formal definition: Basis is a minimal set. The number of vectors is the dimension. 
+
+% defiens what a column vector is. it is not a vector. it's the coefficients.
 %  we can define any vector of that space by listing the coefficients of the basis vectors in the linear combination that 
 
 % For example, the vectors $\hat{\vec{e}}_{1}$ are a basis of $\mathbbm{R}^2$. In fact, the vectors $\vec{f}_{1,2}$ are also a basis for $\mathbbm{R}^2$. So are the pair $\vec{g}_{1,2}$. 
