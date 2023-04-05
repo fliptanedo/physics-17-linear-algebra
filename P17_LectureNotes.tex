@@ -133,9 +133,36 @@ From the above example, you should have some intuition for what the \textbf{dime
 
 \subsection{Vectors and Numbers}
 
-We now make some general statements about vector spaces. These apply to all vector spaces, not just $\mathbbm{R}^3$, but you can keep $\mathbbm{R}^3$ in mind as we go over them.
+% We now make some general statements about vector spaces. These apply to all vector spaces, not just $\mathbbm{R}^3$, but you can keep $\mathbbm{R}^3$ in mind as we go over them. 
 
-First we should make clear that there are now two different kinds of objects: \emph{vectors} and \emph{numbers}. We will have all sorts of notation for vectors, but let us write them with a boldfaced Roman letter for now, e.g.~$\vec{v}$. We typically write numbers as lowercase italicized Roman letters like $a$ or sometimes Greek letters like $\alpha$. 
+We should be clear that there are now two different kinds of objects: \emph{vectors} and \emph{numbers}. We will have all sorts of notation for vectors, but let us write them with a boldfaced Roman letter for now, e.g.~$\vec{v}$. We typically write numbers as lowercase italicized Roman letters like $a$ or sometimes Greek letters like $\alpha$. These two types of objects are similar, except vectors do not have a built-in definition for multiplication, see Table~\ref{table:vectors:numbers}.
+
+\begin{table}
+    \renewcommand{\arraystretch}{1.3} % spacing between rows
+    \centering
+    \begin{tabular}{ @{} lll @{} } \toprule % @{} removes space
+         & Vectors & Numbers 
+        \\ \hline
+        Addition (commutative, associative) & \cmark & \cmark 
+        \\
+        Additive null element & $\vec{0}$ & 0
+        \\
+        Additive inverse element & $\vec{v} + (-\vec{v}) = 0$ & $a + (-a) = 0$
+        \\
+        Multiplication of two of these objects & \textcolor{red}{\xmark} & \cmark 
+        \\
+        Multiplication by a number (distributive) & \cmark & \cmark \,(same as above)
+        \\
+        Collection of all allowed objects (space) & vector space & field (``numbers'') 
+        \\
+        Example of a space & $\mathbbm{R}^3$ & $\mathbbm{R}$
+        \\ \bottomrule
+    \end{tabular}
+    \caption{
+        What you can do with vectors compared to numbers. The glaring difference is that we cannot multiply two vectors. We will need to invent additional mathematical structure to define vector multiplication.
+        \label{table:vectors:numbers}
+  }
+\end{table}
 
 You already know everything there is to know about numbers.\footnote{Formally, what I mean by `number' is what mathematicians call a \textbf{field}. This simply means some objects where one can add, subtract, multiply, and divide as you would expect. This term is a little tedious for us because physicists usually mean something else when they say `field.' Usually we mean something like the electric field or the field associated with the Higgs boson.} Most relevant is that you can multiply numbers with each other (including division, the inverse of multiplication) and you can add them together (including subtraction). For the first part of this course, we will focus on real numbers, $\mathbbm{R}$. Later we will also allow for complex numbers, $\mathbbm{C}$. 
 
@@ -539,15 +566,45 @@ In your heart, you should feel anxious. You \emph{like} the ``obvious'' basis
 We can even call this the Cartesian basis.
 It seems so natural, we even gave these basis vectors little hats to remind us how much we like them! Stop and think about what you like about this basis. I guarantee you that all of those nice features invoke mathematical machinery that are \emph{not} included in a vector space. You may like that the Cartesian basis is orthogonal and each basis vector has unit length. To this I reply: \emph{how do you measure angle or length? These are not concepts that our vector space is equipped with.} You are, of course, correct that there \emph{is} a way to \emph{define} angle and length---but that is something additional that we have to impose on the space. We will get to this shortly.
 
-% \flip{I am here}
-% formal definition: Basis is a minimal set. The number of vectors is the dimension. 
 
-% defiens what a column vector is. it is not a vector. it's the coefficients.
-%  we can define any vector of that space by listing the coefficients of the basis vectors in the linear combination that 
+\begin{example}\label{eg:polynomial:space}
+Another surprising example of a vector space is the space of polynomials of finite degree. This means functions of the form
+\begin{align}
+    f(x) &= a^0 + a^1 x + a^2x^2 + \cdots a^N x^N \ .
+\end{align}
+Finite degree means that $N$ is some integer that is not infinity.\footnote{This may seem like a silly point, but one of the key `aha' ideas in this course will be that we can do linear algebra on the space of general functions where we allow $N\to \infty$.}
+To be clear, our notation has become a bit ambiguous: here $x$ is a variable and $x^n$ means $x$ to the $n^\text{th}$ power. The coefficients $a^i$, on the other hand, are numbers and $i$ is an index. We can pick the following basis:
+\begin{align}
+    \hat{\vec{e}}_0 &= x^0 = 1 &
+    \hat{\vec{e}}_1 &= x^1 = x &
+    \hat{\vec{e}}_2 &= x^2 &
+    \cdots&&
+    \hat{\vec{e}}_N &= x^N &
+\end{align}
+These `basis vectors' are actually functions that are simple monomial powers of $x$. It should be obvious (there's that phrase again) that linear combinations of these basis vectors/functions can give any function $f(x)$ of degree up to $N$. It should also be obvious that the dimension of this space is $(N+1)$; don't forget to count the $\hat{\vec{e}}_0$ vector.
 
-% For example, the vectors $\hat{\vec{e}}_{1}$ are a basis of $\mathbbm{R}^2$. In fact, the vectors $\vec{f}_{1,2}$ are also a basis for $\mathbbm{R}^2$. So are the pair $\vec{g}_{1,2}$. 
+For example, consider the polynomial $f(x) = 3+x^2$. The linear combination of basis vectors that gives this has $a^0 = 3$, $a^2 = 1$, and all other coefficients zero:
+\begin{align}
+    f(x) = 3\hat{\vec{e}}_0 + \hat{\vec{e}}_2 \ .
+\end{align}
+We could represent this vector/function as a column:
+\begin{align}
+    f(x) = \vec{f} = 
+    \begin{pmatrix}
+        3 \\
+        0 \\
+        1 \\
+        0 \\
+        \vdots  \\
+        0
+    \end{pmatrix}
+\end{align}
+where $\vec{f}$ is an $(N+1)$-component column of the numbers $a^i$.
+\end{example}
 
-
+\begin{exercise}
+Consider a vector/function $\vec{f}$ with components $f^i$ in the polynomial space in Example~\ref{eg:polynomial:space}. Now consider the vector/function $\vec{f}' \equiv df/dx$. Write out an expression for the $i^\text{th}$ component of $\vec{f}'$. \emph{Hint}: for example, the $i=1$ component is $2f^2$.
+\end{exercise}
 
 
 
