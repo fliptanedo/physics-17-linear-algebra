@@ -522,7 +522,7 @@ This may equivalently be written as
 \begin{align}
     \vec{t} = 7\vec{v} - \vec{w} \ .
 \end{align}
-Indeed, there are an infinite number of ways to write $\vec{t}$. Because $\vec{v} + \vec{w} + \vec{u} = 0$, you can add any multiple of this linear combination to $\vec{t}$ to leave $\vec{t}$ unchanged.
+Indeed, there are an infinite number of ways to write $\vec{t}$. Because $\vec{v} - \vec{w} + \vec{u} = 0$, you can add any multiple of this linear combination to $\vec{t}$ to leave $\vec{t}$ unchanged.
 \end{example}
 
 The \textbf{dimension} of a vector space is the number of vectors in the basis. In the example above, the vector space spanned by linear combinations of $\vec{v}$, $\vec{w}$, and $\vec{u}$ has dimension two. This is because you only need two vectors write any vector in the space as a linear combination. If you drew all of the vectors in this subspace as arrows with their base at the origin, then the arrow heads with all live on the $xy$-plane.
@@ -606,6 +606,28 @@ where $\vec{f}$ is an $(N+1)$-component column of the numbers $a^i$.
 Consider a vector/function $\vec{f}$ with components $f^i$ in the polynomial space in Example~\ref{eg:polynomial:space}. Now consider the vector/function $\vec{f}' \equiv df/dx$. Write out an expression for the $i^\text{th}$ component of $\vec{f}'$. \emph{Hint}: for example, the $i=1$ component is $2f^2$.
 \end{exercise}
 
+\subsection{The meaning of column vectors}
+
+The previous subsection on bases\footnote{The plural of `basis' is `bases,' pronounced \emph{bay-sees}, just like the plural of `axis' is `axes' pronounced \emph{axe-sees}.} is so important that we should really emphasize the mathematical edifice that we have reverse-engineered\footnote{Do you appreciate why I say `reverse engineered' here? In mathematics classes, one woud start with some postulates for what an abstract vector is and then your usual 3-component column vectors pop out as one silly example. We have started those 3-component column vectors and used their properties to motivate a general definition of what vectors are.}
+\begin{enumerate}
+    \item A vector is technically \emph{not} the column of numbers that we usually say it is. That column of numbers is simply a way of writing the \emph{components} of a vector.
+    \item The components of a vector are simply the coefficients of the basis vectors in the linear combination of basis vectors that sum to the vector. That is: $v^i$ is defined by $\vec{v} = v^i \hat{\vec{e}}_i$ where the $\hat{\vec{e}}_i$ are a set of basis vectors that we all agree upon.
+    \item I never had to say what the basis vectors \emph{are}. They can be anything where linear combinations of those things are still the same type of thing. In this way, we can treat the basis vectors abstractly.
+\end{enumerate}
+You may be used to vectors being forces, momenta, velocities, electric fields, and so forth. We want to be able to use the same machinery of linear algebra on more general objects: particles with quantum spin, functions, the perception of colors by the human eye, and so forth.
+
+
+\begin{exercise}
+What happens when we do not agree on a basis? Suppose you set up a basis. Stand up. Suppose you are facing north. Your feet are at the origin. If you spread your arms out, your right hand points in the direction of your first basis element ($x$-axis, pointing east), $\hat{\vec{e}}_1$. Your nose points in the direction of your second basis element ($y$-axis, north), $\hat{\vec{e}}_2$. Your head points in the direction of your third basis element ($z$-axis, skyward), $\hat{\vec{e}}_3$.
+
+However, your friend Riley approaches you from the northeast so Riley is facing southwest. Riley decides to set up their own basis, analogous to you. Their first basis element $\hat{\vec{r}}_1$ points in the northwest direction, their second basis element $\hat{\vec{e}}_2$ points in the southwest direction, and their third basis element $\hat{\vec{e}}_3$ also points skyward. 
+
+For simplicity, assume that the length of your basis vectors are all the same---even though we haven't defined what length means. Suppose you `measure' a vector with components $v^1 = 2$, $v^2=-1$, and $v^3=1.5$. This is a vector pointing southeast and upward. What components does Riley measure with respect to their basis?
+\end{exercise}
+
+\begin{exercise}
+One of my favorite examples of a vector space is the space of Fibonacci sequences. Fibonacci sequences are infinite lists of numbers $a_i$ that satisfy $a_{i+2} = a_i+a_{i+1}$. Once you specify the first two numbers $a_0$ and $a_1$, you can iteratively generate every other number in the sequence. Each sequence is a vector in the space of possible Fibonacci sequences. Show that this is true by confirming that a linear combination of Fibonacci sequences with each $i^\text{th}$ term added, e.g.\ $(a+b)^i = a_i+b_i$ is also a Fibonacci sequence. Give an example of a basis for the Fibonacci sequences. What is the dimension of the Fibonacci sequence space? \emph{Answer}: the dimension is two, even though each element is an infinitely long list of numbers.
+\end{exercise}
 
 
 \subsection{Operations that are not (yet) allowed}
@@ -915,7 +937,16 @@ The dot product is a \textbf{function} that takes in two vectors and outputs a n
 The magnitude is a \textbf{map} that takes a vector and returns a number.
 \end{example}
 \begin{example}
+A function $f(x,y)=z$ is not a map because it takes two inputs.
+\end{example}
+\begin{example}
+The national weather service website can tell you the temperature in your location as a function of the time of day. In this sense, it is a map from time to temperature.
+\end{example}
+\begin{example}
 The map that takes a vector and returns its unit vector is a \textbf{transformation}: it is a function that takes a vector and returns a vector.
+\end{example}
+\begin{example}
+The function that takes the a time in Pacific standard and converts it to East Coast standard is a transformation. It transforms one time (2:00pm) to another time (5:00pm).
 \end{example}
 
 \begin{figure}[tb]
@@ -925,31 +956,40 @@ The map that takes a vector and returns its unit vector is a \textbf{transformat
     \label{fig:Linear Transformation}
 \end{figure}
 
-\subsection{More Jargon}
 
-
-
-Pre-image, image, kernel, 
 
 \subsection{Linear transformations}
 
 
-% both addition and resscaling are linear
-
 A function $f$ is \textbf{linear} if it satisfies:
 \begin{align}
-  f(\alpha x) &= \alpha f(x)\\
+  f(\alpha x) &= \alpha f(x)
+  &
   f(x+y) &= f(x) + f(y) \ .
+  \label{eq:def:pre:linear}
 \end{align}
-
+Here $\alpha$ is a number, and $x$ and $y$ are some objects (perhaps vectors) on which the function has been defined to act. We may combine these two properties to write the condition of linearity in equation:
 \begin{align}
   f(\alpha x + \beta y) = \alpha f(x)+\beta f(y)
   \label{eq:def:linear}
 \end{align}
-
+\begin{exercise}
+Show that equations \eqref{eq:def:pre:linear} and \eqref{eq:def:linear} imply one another. Going from \eqref{eq:def:pre:linear} to \eqref{eq:def:linear} is slightly more tricky than the other way around.
+\end{exercise}
 
 
 \subsection{Linear Transformations in One Dimension}
+
+The definition of `linear' has \emph{nothing to do with lines}. It is true that $y=mx+b$ is the equation for a line in the $(x,y)$ plane. This is not the same as $f(x)=mx+b$ being linear. In fact, $f(x)=mx+b$ is \emph{not} linear as a transformation of numbers, $\mathbbm{R}\to\mathbbm{R}$
+\begin{exercise}
+Show that $f(x) = mx+b$ does \emph{not} satisfy the definition of linearity, \eqref{eq:def:linear}. It is sufficient, for example, to consider $f(2x) \stackrel{?}{=}f(x)+f(x)$. Another cute way to see this is to consider linear combinations with zero, say $f(x+0)$.
+\end{exercise}
+
+\begin{exercise}
+Show that $f(x) = mx$ is linear.
+\end{exercise}
+
+The problem in $f(x)=mx+b$ is the shift by a constant, $b$. I will comment that we can make up mathematics where `shift by a constant' is allowed. This, however, is no longer \emph{linear algebra}. You can look up affine spaces\footnote{\url{https://en.wikipedia.org/wiki/Affine_space}} if are curious. I only mention it here because the word `affine' may show up later in your mathematical physics studies---I want you to remember that it has something to do with constant shifts. 
 
 \subsection{Linear Transformations in Two and Three Dimensions}
 
@@ -960,6 +1000,13 @@ A function $f$ is \textbf{linear} if it satisfies:
 \section{Linear Maps to Numbers: Row Vectors}
 
 \section{Metric Spaces: Dot Products}
+
+\subsection{More Jargon}
+
+
+
+Pre-image, image, kernel, 
+
 
 \subsection{In contrast to Row Vectors}
 \subsection{Machine to create row vectors}
