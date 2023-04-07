@@ -778,6 +778,7 @@ The angle between two vectors defines the sense in which two vectors are close t
 
 
 \section{Index Notation and Summation Convention}
+\label{sec:index:notation}
 
 There's something that physicists do that tend to drive mathematicians crazy: we write a generic \emph{component of a vector} and refer to it as if it were the vector itself. It is a fairly harmless peccadillo:\footnote{There are times when you can get into trouble if you drink your own Kool Aid, so to speak. The reason is that the \emph{component} $v^i$ is simply a number, whereas $\vec{v}$ is a vector. Some manipulations are only allowed for numbers and not vectors, and you should be clear that you mean `the component $v^i$' if you are treating it like a number, and not `the \emph{vector} whose components are $v^i$.' See Example~\ref{eg:moving:coefficients:around}.} if I say ``the vector $v^i$,'' then it is not hard to guess that I mean ``the vector $\vec{v}$ which has components that I label $v^i$.''
 
@@ -891,6 +892,25 @@ The first multiplication gives a row vector, as you expect since $(wM)_j$ has on
 
 Since the language is now becoming cumbersome, let us define the word \textbf{tensorial} to mean an object with indices. This will replace the phrase ``vectory'' in our notes.
 
+
+
+
+One neat thing about this is that our convention for contracting indices makes it clear that $(Mv)^i$ is a component of a vector: it has one upper index. Similarly, you may recall that the multiplication of matrices $M$ and $N$ proceeds as follows:
+\begin{align}
+ (MN)\aij{i}{j} = M\aij{i}{k}N\aij{k}{j} \ .
+ \label{eq:matrix:matrix:multiplication}    
+\end{align}
+\begin{exercise}
+Confirm that \eqref{eq:matrix:matrix:multiplication} holds for $2\times 2$ matrices.
+\end{exercise}
+On the right-hand side of \eqref{eq:matrix:matrix:multiplication}, we have one pair of contracted indices ($k$), one upper index $i$, and one lower index $j$. We thus deduce that this object is a matrix: it has one upper and one lower index. Indeed, the product of two matrices is also a matrix. Our indices and contraction rules tell us what kinds of objects we can produce by contracting indices between them. 
+
+\begin{example}
+You may also contract indices within an object. For example, because a matrix has one upper and one lower index, you may contract them together. This is called the trace, $\text{Tr}\,M = M\aij{i}{i}$.
+\end{example}
+
+
+
 \section{Ket Notation}
 
 Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \emph{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \emph{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
@@ -993,19 +1013,137 @@ The problem in $f(x)=mx+b$ is the shift by a constant, $b$. I will comment that 
 
 \subsection{Linear Transformations in Two and Three Dimensions}
 
+In Section~\ref{sec:index:notation} we introduced the idea that a matrix, $M$ has a peculiar index notation $M\aij{i}{j}$. This turned out to be convenient because we could use Einstein summation convention to conveniently write out what happens when we apply a matrix $M$ to a vector $\vec{v}$. You end up with a vector $M\vec{v}$ with components
+\begin{align}
+    (Mv)^i = M\aij{i}{j}v^j \ .
+\end{align}
+We recognized that the $j$ indices are \emph{contracted}. From an index point of view, these contracted indices ``cancel out'' so the resulting expression  only has one free index.\footnote{I say \emph{free} index to contrast it from a contracted (repeated) index that is summed over. We can put any allowed value into a free index and the equation is true.} This is good, the left-hand side of the above equation has one free index, so the right-hand side should also have exactly one free index.\footnote{This should remind you of dimensional analysis. If you have different dimensions on two sides of an equation, you have done something wrong.}
+
+
+\subsection{The trivial transformation: identity matrix}
+
+The identity matrix, $\mathbbm{1}$ leaves vectors unchanged: $\mathbbm{1}\vec{v} = \vec{v}$. You already know its components in $\mathbbm{R}^3$:
+\begin{align}
+    \mathbbm{1} = 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix} \ .
+\end{align}
+Sometimes we will indicate the dimension of the space by writing $\mathbbm{1}_3$ or $\mathbbm{1}_{3\times 3}$ when we want to be extra clear. There is a useful way of writing the components of the identity matrix. Define the \textbf{Kronecker}~$\delta$: 
+\begin{align}
+    \delta^i_j &= 
+    \begin{cases}
+    1 & \text{ if }\, i=j\\
+    0 & \text{ if }\, i\neq j
+    \end{cases} \ .
+\end{align}
+Then we say that the components of $\mathbbm{1}$ are $\delta^i_j$, no matter what dimension of space we are in.
+
+\emph{But wait}, you object, \emph{the indices are all messed up!} You are right. The indices on $\delta^{i}_j$ look wrong because we made a big deal that matrices have a first index and a second index that we must distinguish between. The first index is written upper, and the second index is lower. So should we not have written $\delta\aij{i}{j}$, with the $j$ clearly to the right of the $i$? 
+
+Yes, this is technically correct. The reason why we made a big deal about this and wrote $M\aij{i}{j}$ instead of $M^i_j$ is that we will eventually want to consider alternative configurations of indices. For example, $T_{ij}$ or $S_i^{\phantom{i}j}$ or even weirder things like $R^\mu_{\phantom{\mu}\nu\rho\sigma}$.  It turns out that for the identity matrix, there is no ambiguity because
+\begin{align}
+    \delta^i_j = \delta\aij{i}{j} = \delta_i^{\phantom{i}j} .
+\end{align}
+So for convenience, we will just write $\delta^i_j$. Observe, however, that we \emph{never} write $\delta_{ij}$. There is no problem defining $\delta_{ij}$ in the same way, but it turns out that this combination rarely shows up.\footnote{Instead, there is a different mathematical structure called the metric, $g_{ij}$ that has two lower indices. Sometimes the metric components may be equal to the Kronecker $\delta$, so we may say $g_{ij}$ = $\delta_{ij}$. But in those cases we need to be clear that we are using the metric that happens to be the identity, not that we are multiplying by the identity. Why the big deal? One example is that the metric is where gravity lives---so it would be a rather big omission if we mistook it for ``multiplying by one.''}
+
+It is useful to think about the Kronecker~$\delta$ as a machine that converts indices. Consider what it does to a vector:
+\begin{align}
+    (\mathbbm{1}\vec{v})^i = \delta^i_j v^j = 
+    \delta^i_1v^1 + \delta^i_2v^2 + \delta^i_3v^3 \ .
+\end{align}
+On the right-hand side, there is exactly one non-zero term because $\delta^i_j$ is zero for all terms except when $j=i$. That means 
+\begin{align}
+    \delta^i_j v^j = v^i \ .
+\end{align}
+The right-hand side is, of course, what we expected since $\mathbbm{1}\vec{v} = \vec{v}$. So we can train ourselves to ``mechanically'' interpret the $\delta^i_j$ object as one that replaces indices. 
+\begin{exercise}
+Show that this works for lower indices as well. Consider the multiplication of two matrices, $M\mathbbm{1}$. Show that
+\begin{align}
+    M\aij{i}{j}\delta^j_k = M\aij{i}{k} \ ,
+\end{align}
+so that the $\delta^j_k$ simply replaces the $j$ index on $M\aij{i}{j}$ and turns it into a $k$.
+\end{exercise}
+\begin{exercise}
+Even though we have not introduced any objects with more complicated index structure, suppose you have the following object: 
+\begin{align}
+    R^\mu_{\phantom{\mu}\nu\rho\sigma} \ .
+\end{align}
+The Greek letters are indices (like $i$ and $j$), we have switched notation because this is the convention for spacetime. An object with this index structure shows up in general relativity, it is called the Riemann tensor. Without knowing any general relativity, write out the value of
+\begin{align}
+    \delta^\mu_\alpha\,
+    \delta^\nu_\beta\,
+    \delta^\rho_\gamma\,
+    \delta^\sigma_\tau\,
+    R^\mu_{\phantom{\mu}\nu\rho\sigma} \ .
+\end{align}
+This is some kind of `matrix multiplication' by `identity matrices' hitting a $N\times N\times N\times N$ array of numbers, where $N=4$ is the dimension of spacetime. 
+\end{exercise}
+
+
+
+
+
+
+\subsection{Inverse transformations}
+
+% Pre-image, image, kernel, 
+% Non-invertible
+
+Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M^{-1}$ with components $(M^{-1})\aij{i}{j}$. The defining property of the matrix inverse is $M^{-1}M = \mathbbm{1}$. That means that $M^{-1}(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. 
+
+\flip{in progress}
+% not always defined.
+
 \subsection{Trace}
 
 \subsection{Determinants}
+
+\subsection{Matrices that aren't square: maps between vector spaces}
+
+You may be wondering why all of our linear transformations are square. After all, you have probably seen rectangular matrices where the number of rows does not equal the number of columns. For example
+\begin{align}
+    W = 
+    \begin{pmatrix}
+        1 & \pp 2 &-6 & 7 \\
+        6 & -3 & \pp 3 & 0
+    \end{pmatrix} \ .
+\end{align}
+Just by looking at this, you can tell that $W$ acts on some kind of vector with four components and outputs a vector with two components. Assuming these vectors are part of $\mathbbm{R}^4$ and $\mathbbm{R}^2$ respectively, this means that $W$ is a map from $\mathbbm{R}^4$ to $\mathbbm{R}^2$, or
+\begin{align}
+    W:\; \mathbbm{R}^4 \;\to \; \mathbbm{R}^2 \ .
+\end{align}
+Non-square matrices are maps between different vector spaces. In this course we will have very little to say about non-square matrices. The type of linear algebra that comes up over and over again in physics are transformations from some vector space $V$ to itself.\footnote{To be more technically precise: the maps tend to be between vector spaces $V$ and $V'$ that are isomorphic to one another, $V\cong V'$. This means that the vector spaces may be different, but there is a unambiguous translation between the two.} 
+
+The one thing we have observed about non-square matrices is that the number of columns is the maximum dimensionality of the input space, and the number of rows is the maximum dimensionality of the output space.\footnote{Why do we specify `maxmimum'? You could imagine a vector space that is two dimensional but happens to be written in a silly way as three-component vectors. For example, we could consider the space of vectors spanned by the $x$- and $y$-basis vectors but written as three component vectors in $\mathbbm{R}^3$. That space is two dimensional, but the vectors have three components---one of which is always zero.} The dimensionality tells us about how much information is in a vector. A three-dimensional vector space has ``three numbers worth'' of information, the three components relative to a basis. This means that:
+\begin{enumerate}
+    \item If the number of columns is larger than the number of rows, then the output of the transformation may have less information than the input. For example, two different input vectors may map to the same output vector.
+    \item If the number of rows is larger than the number of columns, then input of the transformation may not be able to encode enough information to populate every possible vector in the output space. For example, there may be vectors $\vec{v}_\text{out}$ in the output space that cannot be written as $W\vec{u}_\text{in}$. 
+\end{enumerate}
+There are some fancy words that are associated with these ideas. The \textbf{kernel}\footnote{The word kernel is really annoying here because it shows up in another place in the theory of distributions. Much to my chagrin, we will argue that distributions are an ingredient in the linear algebra of infinite dimensional vector spaces. This means that there is a place later in this course where the word \emph{kernel} will come up again but will mean something completely unrelated.} of a transformation $M$ is the set of all vectors $\vec{v}$ such that $M\vec{v} = 0$. The \textbf{image} of a transformation is the set of all vectors $\vec{v}$ that can be obtained by acting with the transformation $M$, that is: there is some $\vec{u}$ such that $\vec{v} = M\vec{u}$.
+\begin{exercise}
+Using the definition of a vector space, show that the kernel of $M$ and the image of $M$ are vector spaces. 
+\end{exercise}
+
+From this, we have argued that if $W: V_1 \to V_2$ is a linear transformation between two different vector spaces of different dimension, then 
+\begin{enumerate}
+    \item If the dimension of $V_1$, $\text{dim}\,V_1$, is larger than the dimension of $V_2$, $\text{dim}\,V_2$, then the kernel of $W$ contains more than just the zero vector.
+    \item Alternatively, if $\text{dim}\,V_2 > \text{dim}\,V_1$, then the image of $W$ is a subspace of $V_2$ that does not contain all of $V_2$. 
+\end{enumerate}
+
+% \subsection{More Jargon}
+
+
 
 \section{Linear Maps to Numbers: Row Vectors}
 
 \section{Metric Spaces: Dot Products}
 
-\subsection{More Jargon}
 
 
 
-Pre-image, image, kernel, 
 
 
 \subsection{In contrast to Row Vectors}
@@ -1014,7 +1152,20 @@ Pre-image, image, kernel,
 
 \section{More General (Multi-)Linear Maps: Tensors}
 
+
 \section{Interlude: an abundance of names and notation}
+
+\section{Nice and Not-So-Nice Transformations}
+
+\subsection{Rotations}
+
+\subsection{``Nice'' Transformations}
+
+% Rescaling along axes
+% everything else is hard
+% Wouldn't it be nice if we could reduce everything to rotations and nice transformations?
+
+\subsection{Projections}
 
 \section*{Acknowledgments}
 
