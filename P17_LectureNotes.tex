@@ -767,6 +767,7 @@ Let $\vec{v}$ and $\vec{w}$ be two vectors in Euclidean three-space. The [Euclid
 \begin{align}
     \cos\theta \equiv \hat{\vec{v}}\cdot\hat{\vec{w}} = \frac{\vec{v}\cdot\vec{w}}{|\vec{v}||\vec{w}|} \ .
 \end{align}
+\label{eq:cos:theta:in:R3}
 \begin{exercise}
 Confirm that this matches the definition of the angle between two vectors that you learned in your youth.
 \end{exercise}
@@ -776,6 +777,9 @@ The above definition of the angle between two vectors is general for any metric 
 The angle between two vectors defines the sense in which two vectors are close to one another. This is the sense in which the dot product (metric) lets you measure the ``distance'' between two vectors. Note that this is completely different from the notion of distance between two points in space, \eqref{eq:distance:in:space}. 
 \end{example}
 
+\begin{example}
+When I was taking a class like this, the professor kept bringing up something called conformal transformations. At the time, I did not appreciate how significant conformal transformations are in physics. A conformal transformation is a map from a metric space to itself that \emph{preserves angles}. That means that the angle between two vectors before the transformation is the same as the angle of the two vectors that come out of the transformation, with the reminder that the metric may also transform. When conformal transformations finally came up again in my physics life, it came up in the context of theories that are unchanged under a rescaling of all the vectors. I remember thinking: \emph{what does this have to do with preserving angles}? We can see from \eqref{eq:cos:theta:in:R3} that rescaling the lengths of vectors does not change the angle between them. Conformal transformations are really very neat. In the early days of the aerospace industry, mathematics based on conformal transformations helped engineers design efficient airplane wings before there were reliable computers to simulate airflow. I encourage you to look this up, the technique is called 2D conformal mapping.
+\end{example}
 
 \section{Index Notation and Summation Convention}
 \label{sec:index:notation}
