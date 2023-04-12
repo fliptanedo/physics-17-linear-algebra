@@ -348,28 +348,28 @@ Let us push this idea further. It is useful to start with an example. For simpli
 \end{align}
 Any such vector may be written as the linear combination of the following two vectors:
 \begin{align}
-    \hat{\vec{e}}_1 &=
+    {\bas{e}}_1 &=
     \begin{pmatrix}
         1 \\ 0
     \end{pmatrix}
     &
-    \hat{\vec{e}}_2 &=
+    {\bas{e}}_2 &=
     \begin{pmatrix}
         0 \\ 1
     \end{pmatrix} \ .
 \end{align}
 Indeed, it should be obvious that 
 \begin{align}
-    \vec{v} &= \alpha \hat{\vec{e}}_1 + \beta \hat{\vec{e}}_2
+    \vec{v} &= \alpha {\bas{e}}_1 + \beta {\bas{e}}_2
     & \text{with}&
     &\alpha &= v^1
     &\beta &= v^2 \ .
     \label{eq:natural:cartesian:basis}
 \end{align}
-In other words, these `special' vectors $\hat{\vec{e}}_{1,2}$ satisfy:
+In other words, these `special' vectors ${\bas{e}}_{1,2}$ satisfy:
 \begin{enumerate}
-    \item Any vector in $\mathbbm{R}^2$ may be written as a linear combinations of $\hat{\vec{e}}_{1,2}$. We showed this because $\vec{v}$ in the above discussion could be any vector in $\mathbbm{R}^2$. Thus $\text{Span}(\hat{\vec{e}}_{1},\hat{\vec{e}}_{1})=\mathbbm{R}^2$.
-    \item The coefficients in the linear combination are precisely the components of the vector $\vec{v}$. Soon we will see that this observation is actually backwards: it is the choice that $\hat{\vec{e}}_{1}$ are special that defines the components of a vector.
+    \item Any vector in $\mathbbm{R}^2$ may be written as a linear combinations of ${\bas{e}}_{1,2}$. We showed this because $\vec{v}$ in the above discussion could be any vector in $\mathbbm{R}^2$. Thus $\text{Span}({\bas{e}}_{1},{\bas{e}}_{1})=\mathbbm{R}^2$.
+    \item The coefficients in the linear combination are precisely the components of the vector $\vec{v}$. Soon we will see that this observation is actually backwards: it is the choice that ${\bas{e}}_{1}$ are special that defines the components of a vector.
 \end{enumerate}
 
 It should be obvious that any pair of vectors that ``aren't pointing in the same direction'' can span the entire space $\mathbbm{R}^2$. 
@@ -478,9 +478,9 @@ Then we could take linear combinations of the two with respect to two numbers $a
 
 If $\vec{v}$ and $\vec{w}$ span $\mathbbm{R}^2$, then any vector in the vector space may be written as a linear combination of the form \eqref{eq:linear:combination:in:b:basis}. This means we may use the ``$\vec{b}$ basis components'' as equivalent ways of encoding a vector as the natural description \eqref{eq:v:v1:v2}. But wait a moment: what is so ``natural'' about \eqref{eq:v:v1:v2}? 
 
-If we reverse the argument for the $\vec{b}$ basis, then we see that the ``natural'' components of the vector $\vec{v}$ in \eqref{eq:v:v1:v2} are simply the coefficients of the linear combinations of the basis vectors $\hat{\vec{e}}_{1,2}$ in \eqref{eq:natural:cartesian:basis}. What made the basi vectors $\hat{\vec{e}}_{1,2}$ so special, anyway? Nothing at all. 
+If we reverse the argument for the $\vec{b}$ basis, then we see that the ``natural'' components of the vector $\vec{v}$ in \eqref{eq:v:v1:v2} are simply the coefficients of the linear combinations of the basis vectors ${\bas{e}}_{1,2}$ in \eqref{eq:natural:cartesian:basis}. What made the basi vectors ${\bas{e}}_{1,2}$ so special, anyway? Nothing at all. 
 
-What we've come to is that we the \emph{components} of a vector depend on the basis that we choose. In $\mathbb{R}^3$ we usually use the basis $\hat{\vec{e}}_{1,2,3}$ where the vectors point respectively along the $\hat{x}$, $\hat{y}$, and $\hat{z}$ directions. It is kind of an ``obvious'' basis, though it completely depends on the $\hat{x}$, $\hat{y}$, and $\hat{z}$ directions having some intrinsic meaning. They often do not: we could set up our coordinate system however we wanted. In fact, \emph{nowhere} in our definition of a vector space did we even assume that a coordinate system exists!
+What we've come to is that we the \emph{components} of a vector depend on the basis that we choose. In $\mathbb{R}^3$ we usually use the basis ${\bas{e}}_{1,2,3}$ where the vectors point respectively along the $\hat{x}$, $\hat{y}$, and $\hat{z}$ directions. It is kind of an ``obvious'' basis, though it completely depends on the $\hat{x}$, $\hat{y}$, and $\hat{z}$ directions having some intrinsic meaning. They often do not: we could set up our coordinate system however we wanted. In fact, \emph{nowhere} in our definition of a vector space did we even assume that a coordinate system exists!
 
 Indeed, it's the other way around: a choice of basis vectors \emph{defines} a `coordinate system' rather than the other way around.\footnote{Though it really is dangerous to think about a vector space as having coordinates. We will see why when we talk about vector bundles and manifolds.} All of this begs for a re-definition.
 
@@ -548,17 +548,17 @@ What is less obvious is that at this point there is \emph{no preferred basis}. A
 
 In your heart, you should feel anxious. You \emph{like} the ``obvious'' basis 
 \begin{align}
-    \hat{\vec{e}}_1 &=
+    {\bas{e}}_1 &=
     \begin{pmatrix}
         1 \\ 0 \\ 0
     \end{pmatrix}
     &
-    \hat{\vec{e}}_2 &=
+    {\bas{e}}_2 &=
     \begin{pmatrix}
         0 \\ 1 \\ 0
     \end{pmatrix}
     &
-    \hat{\vec{e}}_2 &=
+    {\bas{e}}_2 &=
     \begin{pmatrix}
         0 \\ 0 \\ 1
     \end{pmatrix} \ .
@@ -575,17 +575,17 @@ Another surprising example of a vector space is the space of polynomials of fini
 Finite degree means that $N$ is some integer that is not infinity.\footnote{This may seem like a silly point, but one of the key `aha' ideas in this course will be that we can do linear algebra on the space of general functions where we allow $N\to \infty$.}
 To be clear, our notation has become a bit ambiguous: here $x$ is a variable and $x^n$ means $x$ to the $n^\text{th}$ power. The coefficients $a^i$, on the other hand, are numbers and $i$ is an index. We can pick the following basis:
 \begin{align}
-    \hat{\vec{e}}_0 &= x^0 = 1 &
-    \hat{\vec{e}}_1 &= x^1 = x &
-    \hat{\vec{e}}_2 &= x^2 &
+    {\bas{e}}_0 &= x^0 = 1 &
+    {\bas{e}}_1 &= x^1 = x &
+    {\bas{e}}_2 &= x^2 &
     \cdots&&
-    \hat{\vec{e}}_N &= x^N &
+    {\bas{e}}_N &= x^N &
 \end{align}
-These `basis vectors' are actually functions that are simple monomial powers of $x$. It should be obvious (there's that phrase again) that linear combinations of these basis vectors/functions can give any function $f(x)$ of degree up to $N$. It should also be obvious that the dimension of this space is $(N+1)$; don't forget to count the $\hat{\vec{e}}_0$ vector.
+These `basis vectors' are actually functions that are simple monomial powers of $x$. It should be obvious (there's that phrase again) that linear combinations of these basis vectors/functions can give any function $f(x)$ of degree up to $N$. It should also be obvious that the dimension of this space is $(N+1)$; don't forget to count the ${\bas{e}}_0$ vector.
 
 For example, consider the polynomial $f(x) = 3+x^2$. The linear combination of basis vectors that gives this has $a^0 = 3$, $a^2 = 1$, and all other coefficients zero:
 \begin{align}
-    f(x) = 3\hat{\vec{e}}_0 + \hat{\vec{e}}_2 \ .
+    f(x) = 3{\bas{e}}_0 + {\bas{e}}_2 \ .
 \end{align}
 We could represent this vector/function as a column:
 \begin{align}
@@ -611,16 +611,16 @@ Consider a vector/function $\vec{f}$ with components $f^i$ in the polynomial spa
 The previous subsection on bases\footnote{The plural of `basis' is `bases,' pronounced \emph{bay-sees}, just like the plural of `axis' is `axes' pronounced \emph{axe-sees}.} is so important that we should really emphasize the mathematical edifice that we have reverse-engineered\footnote{Do you appreciate why I say `reverse engineered' here? In mathematics classes, one woud start with some postulates for what an abstract vector is and then your usual 3-component column vectors pop out as one silly example. We have started those 3-component column vectors and used their properties to motivate a general definition of what vectors are.}
 \begin{enumerate}
     \item A vector is technically \emph{not} the column of numbers that we usually say it is. That column of numbers is simply a way of writing the \emph{components} of a vector.
-    \item The components of a vector are simply the coefficients of the basis vectors in the linear combination of basis vectors that sum to the vector. That is: $v^i$ is defined by $\vec{v} = v^i \hat{\vec{e}}_i$ where the $\hat{\vec{e}}_i$ are a set of basis vectors that we all agree upon.
+    \item The components of a vector are simply the coefficients of the basis vectors in the linear combination of basis vectors that sum to the vector. That is: $v^i$ is defined by $\vec{v} = v^i {\bas{e}}_i$ where the ${\bas{e}}_i$ are a set of basis vectors that we all agree upon.
     \item I never had to say what the basis vectors \emph{are}. They can be anything where linear combinations of those things are still the same type of thing. In this way, we can treat the basis vectors abstractly.
 \end{enumerate}
 You may be used to vectors being forces, momenta, velocities, electric fields, and so forth. We want to be able to use the same machinery of linear algebra on more general objects: particles with quantum spin, functions, the perception of colors by the human eye, and so forth.
 
 
 \begin{exercise}
-What happens when we do not agree on a basis? Suppose you set up a basis. Stand up. Suppose you are facing north. Your feet are at the origin. If you spread your arms out, your right hand points in the direction of your first basis element ($x$-axis, pointing east), $\hat{\vec{e}}_1$. Your nose points in the direction of your second basis element ($y$-axis, north), $\hat{\vec{e}}_2$. Your head points in the direction of your third basis element ($z$-axis, skyward), $\hat{\vec{e}}_3$.
+What happens when we do not agree on a basis? Suppose you set up a basis. Stand up. Suppose you are facing north. Your feet are at the origin. If you spread your arms out, your right hand points in the direction of your first basis element ($x$-axis, pointing east), ${\bas{e}}_1$. Your nose points in the direction of your second basis element ($y$-axis, north), ${\bas{e}}_2$. Your head points in the direction of your third basis element ($z$-axis, skyward), ${\bas{e}}_3$.
 
-However, your friend Riley approaches you from the northeast so Riley is facing southwest. Riley decides to set up their own basis, analogous to you. Their first basis element $\hat{\vec{r}}_1$ points in the northwest direction, their second basis element $\hat{\vec{e}}_2$ points in the southwest direction, and their third basis element $\hat{\vec{e}}_3$ also points skyward. 
+However, your friend Riley approaches you from the northeast so Riley is facing southwest. Riley decides to set up their own basis, analogous to you. Their first basis element ${\bas{r}}_1$ points in the northwest direction, their second basis element ${\bas{e}}_2$ points in the southwest direction, and their third basis element ${\bas{e}}_3$ also points skyward. 
 
 For simplicity, assume that the length of your basis vectors are all the same---even though we haven't defined what length means. Suppose you `measure' a vector with components $v^1 = 2$, $v^2=-1$, and $v^3=1.5$. This is a vector pointing southeast and upward. What components does Riley measure with respect to their basis?
 \end{exercise}
@@ -736,9 +736,9 @@ Then the \emph{magnitude} of $\vec{v}$ is $|\vec{v}|=\sqrt{14}$. We could also w
 \end{example}
 
 
-We see that the dot product (metric) allows us to define length. Because the length of a vector is a number, we can divide the vector $\vec{v}$ by its its length $|\vec{v}|$ to obtain a \textbf{unit vector}, $\hat{\vec{v}}$:
+We see that the dot product (metric) allows us to define length. Because the length of a vector is a number, we can divide the vector $\vec{v}$ by its its length $|\vec{v}|$ to obtain a \textbf{unit vector}, ${\bas{v}}$:
 \begin{align}
-    \hat{\vec{v}} = \frac{1}{|\vec{v}|}\vec{v} \ .
+    {\bas{v}} = \frac{1}{|\vec{v}|}\vec{v} \ .
     \label{eq:eg:v:340}
 \end{align}
 The right-hand side is simply scalar multiplication by $|\vec{v}|^{-1}$. Unit vectors are useful for identifying directions.
@@ -765,7 +765,7 @@ Let $\vec{v}$ be defined as in \eqref{eq:eg:v:340}. The unit vector associated w
 
 Let $\vec{v}$ and $\vec{w}$ be two vectors in Euclidean three-space. The [Euclidean] angle between these two vectors, $\theta$, is 
 \begin{align}
-    \cos\theta \equiv \hat{\vec{v}}\cdot\hat{\vec{w}} = \frac{\vec{v}\cdot\vec{w}}{|\vec{v}||\vec{w}|} \ .
+    \cos\theta \equiv {\bas{v}}\cdot{\bas{w}} = \frac{\vec{v}\cdot\vec{w}}{|\vec{v}||\vec{w}|} \ .
 \end{align}
 \label{eq:cos:theta:in:R3}
 \begin{exercise}
@@ -976,7 +976,7 @@ The function that takes the a time in Pacific standard and converts it to East C
 \begin{figure}[tb]
     \centering
     \includegraphics[width=\textwidth]{figures/lineartransformation.pdf}
-    \caption{Example of a linear transformation. The transformation $M$ (for matrix) takes a vector $\vec{v}$ and turns it into a different vector that we call $\vec{v}'$. This new vector is related to $\vec{v}$ by the matrix $\vec{v'}=M\vec{v}$. \emph{Every} vector is transformed under the map $M$. This is an \emph{active transformation} where all vectors transform, but the basis ($\hat{\vec{e}}_i$) stays fixed.}
+    \caption{Example of a linear transformation. The transformation $M$ (for matrix) takes a vector $\vec{v}$ and turns it into a different vector that we call $\vec{v}'$. This new vector is related to $\vec{v}$ by the matrix $\vec{v'}=M\vec{v}$. \emph{Every} vector is transformed under the map $M$. This is an \emph{active transformation} where all vectors transform, but the basis (${\bas{e}}_i$) stays fixed.}
     \label{fig:Linear Transformation}
 \end{figure}
 
@@ -1022,6 +1022,8 @@ In Section~\ref{sec:index:notation} we introduced the idea that a matrix, $M$ ha
     (Mv)^i = M\aij{i}{j}v^j \ .
 \end{align}
 We recognized that the $j$ indices are \emph{contracted}. From an index point of view, these contracted indices ``cancel out'' so the resulting expression  only has one free index.\footnote{I say \emph{free} index to contrast it from a contracted (repeated) index that is summed over. We can put any allowed value into a free index and the equation is true.} This is good, the left-hand side of the above equation has one free index, so the right-hand side should also have exactly one free index.\footnote{This should remind you of dimensional analysis. If you have different dimensions on two sides of an equation, you have done something wrong.}
+
+
 
 
 \subsection{The trivial transformation: identity matrix}
@@ -1086,7 +1088,271 @@ The Greek letters are indices (like $i$ and $j$), we have switched notation beca
 This is some kind of `matrix multiplication' by `identity matrices' hitting a $N\times N\times N\times N$ array of numbers, where $N=4$ is the dimension of spacetime. 
 \end{exercise}
 
+\subsection{Composition of linear transformations}
 
+Suppose you have two linear transformations from $V\to V$, call them $f(\vec{x})$ and $g(x)$. These are represented by matrices $M$ and $N$, repectively. Then the \textbf{composition} of these two linear transformations is
+\begin{align}
+    f\circ g(\vec{x}) &\equiv f\left(g(\vec{x})\right)
+    &
+    \Leftrightarrow
+    &
+    f\circ g(\vec{x})&=
+    MN\vec{x}
+\end{align}
+On the right-hand side we have written the matrix that represents $f\circ g$ as the product of the matrices for $f$ and $g$: $MN$. Matrix multiplication follows the usual rules. We can write this using summation convention very nicely. The matrices have components and index structure $M\aij{i}{j}$ and $N\aij{i}{j}$ respectively. Each has an upper index and a lower index. The product $MN$ has components
+\begin{align}
+    (MN)\aij{i}{j} = M\aij{i}{k}N\aij{k}{j} \ .
+    \label{eq:matrix:multiplication}
+\end{align}
+
+\begin{example}
+One thing that we notice from \eqref{eq:matrix:multiplication} is that the index structure makes it clear that the order of matrix multiplication matters.
+\begin{align}
+    (MN)\aij{i}{j} = M\aij{i}{k}N\aij{k}{j} 
+    \neq 
+    N\aij{i}{k}M\aij{k}{j} 
+    =
+    (NM)\aij{i}{j} \ .
+\end{align}
+Thus the order in which two linear transformations are composed matters. On the other hand, the order in which components (which are just numbers) are multiplied does not matter. For example:
+\begin{align}
+    (MN)\aij{i}{j} 
+    = M\aij{i}{k} N\aij{k}{j}  
+    = N\aij{k}{j} M\aij{i}{k} \ .
+\end{align}
+The sums on the right-hand side both represent the same series of terms. Neither of those sums are the same as 
+\begin{align}
+    (NM)\aij{i}{j}
+    =
+    N\aij{i}{k}M\aij{k}{j}
+    =
+    M\aij{k}{j} N\aij{i}{k} \ .
+\end{align}
+This is the kind of manipulation that is pretty obvious at its core, but the first time you see this manipulation done in textbook it can be pretty disorienting. 
+\end{example}
+The above example makes the following point clear: The order in which components are multiplied is \emph{not} the same as the order in which the linear transformations are applied. That is, the order of the components are multiplied not the same as the order in which the matrices are multiplied.
+\begin{example}
+If you want to recover the ``matrix multiplication'' $MN$ from the ``component contraction'' $M\aij{i}{k} N\aij{k}{j}  
+    = N\aij{k}{j} M\aij{i}{k}$, you should start by writing out the terms so that neighboring indices are contracted. The expression $M\aij{i}{k} N\aij{k}{j}$ has neighboring $k$ indices contracted, while the equivalent expression $N\aij{k}{j} M\aij{i}{k}$ does not. Thus we take $M\aij{i}{k} N\aij{k}{j}$ and then we can ``promote'' this back to a matrix multiplication, $MN$. A caveat: physicists often prefer to work with component contractions instead of matrix multiplications. In fact, with more complicated tensor contractions, it is not always meaningful or possible to recover a ``matrix multiplication'' form.
+\end{example}
+
+
+\begin{exercise}\label{ex:product:of:diagonal:matrices}
+A \textbf{diagonal matrix} is one where the only non-zero components are along the diagonal. We will sometimes write diagonal matrices with a hat, $\hat M$, to indicate that they are diagonal. Sometimes we abbreviate the definition of a diagonal matrix by only specifying its diagonal components:
+\begin{align}
+    \hat M = 
+    \begin{pmatrix}
+        2 & 0 & 0 \\
+        0 & 7 & 0 \\
+        0 & 0 & 4  
+    \end{pmatrix}
+    =
+    \text{diag}(2,7,4) \ .
+\end{align}
+Show that the product of diagonal matrices is also diagonal whose components are the products of the diagonal components. You can use \eqref{eq:matrix:multiplication} armed with the knowledge that $(\hat M)\aij{i}{j} = 0$ if $i\neq j$. Then you must show that $(\hat M \hat N)\aij{i}{j} = 0$ for $i\neq j$. Finally, check the values of the diagonal elements to show that
+\begin{align}
+    \hat M \hat N = \text{diag}\left(M\aij11 N\aij11 \;,\;\, M\aij22 N\aij 22 \;,\;\, M\aij33 N\aij 33\right) \ .
+\end{align}
+
+\end{exercise}
+
+
+\subsection{Linearity and Basis Vectors}
+
+\paragraph{A couple of useful exercises}
+Here's a pair of exercises that are worth trying out:
+\begin{exercise}
+Calculate the following linear transformations by a matrix $M$ on two different vectors, $\vec{v}$ and $\vec{w}$:
+\begin{align}
+    M\vec{v} &= 
+    \begin{pmatrix}
+        \pp 3 & 2 & \pp 1 \\
+        - 1 & 4 & -2 \\
+        \pp 0 & 1 & \pp 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        2 \\ 1 \\ 1
+    \end{pmatrix}
+    = \quad ?
+    &
+    M\vec{w} &= 
+    \begin{pmatrix}
+        \pp 3 & 2 & \pp 1 \\
+        - 1 & 4 & -2 \\
+        \pp 0 & 1 & \pp 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        -1 \\ \pp 0 \\ 3
+    \end{pmatrix}
+    = \quad ?
+\end{align}
+\end{exercise}
+\begin{exercise}
+That was tedious, wasn't it? What if I asked you to calculate three more...
+\begin{align}
+    M
+    \begin{pmatrix}
+        1 \\ 1 \\ 4
+    \end{pmatrix}
+    &= \quad ?
+    &
+    M
+    \begin{pmatrix}
+        0 \\ 1 \\ 7
+    \end{pmatrix}
+    &= \quad ?
+    &
+    M
+    \begin{pmatrix}
+        \pp 3 \\ \pp 1 \\ -2
+    \end{pmatrix}
+    &= \quad ?
+    \label{eq:eg:more:multiplications}
+\end{align}
+\end{exercise}
+Did you do it? Go ahead, do these calculations. Use \emph{Mathematica} if you must. Did you do it the hard way, or did you notice that there's an easy way? 
+
+\paragraph{General two-dimensional discussion}
+The easy observation is that each of the vectors being acted on in \eqref{eq:eg:more:multiplications} are \textbf{linear combinations} of $\vec{v}$ and $\vec{w}$. What you should notice is that
+\begin{align}
+    \begin{pmatrix}
+        1 \\ 1 \\ 4
+    \end{pmatrix}
+    = \vec{v} + \vec{w}
+    &
+    & 
+    M
+    \begin{pmatrix}
+        1 \\ 1 \\ 4
+    \end{pmatrix}
+    &=
+    M(\vec{v} + \vec{w})
+    = M\vec{v} + M\vec{w} \ .
+\end{align}
+In other words: if $\vec{u} = \vec{v} + \vec{w}$ and we already know the action of a matrix $M$ on $\vec{v}$ and $\vec{w}$---that is, we know $M\vec{v}$ and $M\vec{w}$---then we're basically done. No further matrix multiplication is needed! We can simply use the linearity of $M$ to take a linear combination of $M\vec{v}$ and $M\vec{w}$. You should check that this is true for the other matrix multiplications in \eqref{eq:eg:more:multiplications}.
+
+
+This is a big deal. We know that $\vec{v}$ and $\vec{w}$ are the \textbf{basis vectors} for a subspace $V_2 = \text{Span}(\vec{v},\vec{w})$. We have established that if we know the action of $M$ on the basis vectors of $V_2$, then we know the action of $M$ on any vector in $V_2$. This is because any vector in $V_2$ has the form
+\begin{align}
+    \vec{u} = a\vec{v} + b \vec{w}
+\end{align}
+for two numbers $a$ and $b$. Then the action of $M$ on any such vector is
+\begin{align}
+    M\vec{u} = a(M\vec{v}) + b(M\vec{w}) \ .
+    \label{eq:Mu:aMv:bMw}
+\end{align}
+
+We can pose this in the following way. Suppose we have a two-dimensional vector space $V_2$
+ with some basis $\vec{b}_1$ and $\vec{b}_2$. Now suppose we have a linear transformation $M$ that goes from $V_2\to V_2$. This is a matrix. 
+\begin{enumerate}
+    \item We know that the matrix is encoded by $2\times 2= 4$ numbers, each of the four elements, $M\aij{i}{j}$. If you know these four elements, then you can matrix multiply any vector in $V_2$ by simply using the matrix multiplication rules. All you need to specify is the vector $\vec{u}$, which is encoded by its two components $u^i$. Then you get two numbers as output, $(Mu)^i = M\aij{i}{j}u^j$.
+    \item Alternatively, we suppose that we do not know (or we deliberately forget) the four elements $M\aij{i}{j}$. Instead, suppose we know the components of $M\vec{v}$ and $M\vec{w}$. These are each two component vectors, so this is a total of four numbers. Then we may specify $\vec{u}$ not by its components $u^i$, by its coefficients $a$ and $b$. Then we may use \eqref{eq:Mu:aMv:bMw} to specify the two components of $M\vec{u}$.
+\end{enumerate}
+In each picture, you specify the four numbers that encode the transformation and then use them to calculate the action of $M$ on a generic vector $\vec{u}$. 
+
+\begin{example}
+The two approaches above are equivalent when the basis vectors are
+\begin{align}
+    \vec{b}_1 = {\bas{e}}_1 &= \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}
+    &
+    \vec{b}_2 = {\bas{e}}_2 &= \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}\ .
+\end{align}
+This should be clear since
+\begin{align}
+    M {\bas{e}}_1 &= 
+    \begin{pmatrix}
+        M\aij{1}{1} \\ M\aij{2}{1}
+    \end{pmatrix}
+    &
+    M {\bas{e}}_2 &= 
+    \begin{pmatrix}
+        M\aij{1}{2} \\ M\aij{2}{2}
+    \end{pmatrix} \ .
+    \label{vec:Mhate:2}
+\end{align}
+\end{example}
+The example above tells us that the `components of a matrix' have a specific meaning: they encode the action of $M$ on a particularly nice basis, ${\bas{e}}_{1,2}$. This is significant for the following reason: while a matrix may encode a linear transformation, we should not be settle into thinking that the $2\times 2$ of numbers somehow \emph{is} the matrix.
+\begin{example}
+$M\aij 11$ is simply the coefficient of ${\bas{e}}_1$ in the expansion of $M{\bas{e}}_1$. $M\aij 12$ is simply the coefficient of ${\bas{e}}_2$ in the expansion of $M{\bas{e}}_1$. 
+\end{example}
+
+
+
+ 
+
+\paragraph{General discussion}
+The general version of this discussion is as follows. We write $\mathbbm{R}^N$ to be $N$-dimensional real space. A linear transformation from $\mathbbm{R}^N \to \mathbbm{R}^N$ is a matrix. Suppose we have a nice basis. In fact, the `obvious' basis is
+\begin{align}
+    {\bas{e}}_1 &= 
+    \begin{pmatrix}
+        1 \\ 0 \\ 0 \\ \vdots
+    \end{pmatrix}
+    &
+    {\bas{e}}_2 &= 
+    \begin{pmatrix}
+        0 \\ 1 \\ 0 \\ \vdots
+    \end{pmatrix}
+    &
+    \cdots &
+    &
+    {\bas{e}}_N &= 
+    \begin{pmatrix}
+        0 \\ \vdots \\ 0 \\ 1
+    \end{pmatrix} \ .
+\end{align}
+Then we know that any vector in $\mathbbm{R}^N$ may be written as a linear combination of these basis vectors. In fact, this is \emph{precisely} what we mean by the components of a vector: it is the coefficient of each ${\bas{e}}_i$ basis vector in the linear combination that represents the vector:
+\begin{align}
+    \vec{v} &= v^i{\bas{e}}_i 
+    &
+    \vec{v} &\;\text{``=''}\;
+         \begin{pmatrix}
+        v^1 \\ v^2 \\ \vdots \\ v^N
+    \end{pmatrix} \ .
+\end{align}
+The first equality is \emph{true}. It defines the meaning of $v^i$ no matter what the ${\bas{e}}_i$ are, whether they are columns or more abstract objects. The equation on the right has air quotes because it is not really an equation. What it means is $\vec{v}$ \emph{is represented by the following column of numbers}. The column of numbers simply mean the coefficients of the basis vectors---no matter what the basis vectors are.
+
+
+In physics, we treat lots of different things as vectors. Momenta, electric fields, wavefunctions, and so forth. When we say that the electric field at a point is a vector, we do not mean that there is actually an invisible arrow with some length and direction there. Nor do we mean that the electric field at that point is a column of three numbers. What we mean is that these three numbers represent the components of the electric field with respect to a basis. The basis are usually the electric field in the $x$, $y$, and $z$ directions. 
+
+
+If we know the action of $M$ on the basis vectors, what that really means is that we know the components of $M{\bas{e}}_i$ for each $i$. That is to say, 
+\begin{align}
+    M{\bas{e}}_i &= (M{\bas{e}}_i)^k {\bas{e}}_k 
+    &
+    M\aij{k}{i} &\equiv (M{\bas{e}}_i)^k
+    \ .
+\end{align}
+Be very careful with this. What we mean is the $N$-dimensional generalization of \eqref{vec:Mhate:2}, so refer back to that if the notation is cumbersome. What is important here is that we now have a definition of the components $M\aij{i}{j}$ that is fully general. 
+
+
+
+\subsection{Linear transformations as maps acting on basis vectors}
+
+The relation between the components of linear transformations and basis vectors is elucidated in Fig.~\ref{fig:map:M}. A vector is a linear combination of the basis vectors, so the action of a linear transformation $M$ on a vector $\vec{v}$ reduces to taking linear combinations of the action of $M$ on the basis vectors $\bas{e}_i$:
+\begin{align}
+    \vec{v} &= v^i\bas{e}_i 
+    M\vec{v} &= v^i\, M\bas{e}_i 
+    \ .
+    \label{eq:v:Mv:basis:action}
+\end{align}
+There are several observations:
+\begin{itemize}
+    \item We could define a basis $\vec{f}_i \equiv M\bas{e}_i$. Then the components of $\vec{v}$ in the $\bas{e}_i$ basis are the same as the components of $M\vec{v}$ in the $\vec{f}_i$ basis. 
+    \item The components of $M\vec{v}$ in the $\bas{e}_i$ basis are \emph{not} the $v^i$, but rather the linear combinations $M\aij{i}{j}v^j$. We know this from our matrix multiplication rules, but we can also see it from the linear combination $v^i\, M\bas{e}_i$ and the observation that the matrix components $M\aij{i}{j}$ are simply the components of $M\bas{e}_i$, as we saw in \eqref{vec:Mhate:2}.
+    \item What is nice about \eqref{eq:v:Mv:basis:action} is that we have separated the \emph{components} of a vector $v^i$ from the ``vector-y'' part, $M\bas{e}_i$. What we mean by this is that the \emph{components} are just numbers. They are coefficients of a linear combination and are what we write as the components of a column of numbers. However, vectors are not always ``columns of numbers.'' We want to abstract what a vector is and thus we need to also abstract what a linear transformation is. All of that abstraction is encoded in the basis vectors and the definition of the transformation acting on the basis vectors. 
+\end{itemize}
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/maps_M.pdf}
+    \caption{$M$ is a linear transformation from $\mathbbm{R}^2\to\mathbbm{R}^2$. If we know the action of $M$ on the basis vectors $\bas{e}_i$ of $\mathbbm{R}^2$, then we know the action of $M$ on any vector $\vec{v}$.}
+    \label{fig:map:M}
+\end{figure}
 
 
 
@@ -1096,10 +1362,100 @@ This is some kind of `matrix multiplication' by `identity matrices' hitting a $N
 % Pre-image, image, kernel, 
 % Non-invertible
 
-Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M^{-1}$ with components $(M^{-1})\aij{i}{j}$. The defining property of the matrix inverse is $M^{-1}M = \mathbbm{1}$. That means that $M^{-1}(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. 
+Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M^{-1}$ with components $(M^{-1})\aij{i}{j}$. The defining property of the matrix inverse is $M^{-1}M = \mathbbm{1}$. That means that $M^{-1}(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. This is shown in Fig.~\ref{fig:map:M:inv}. 
 
-\flip{in progress}
+% \flip{in progress}
 % not always defined.
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/maps_Minv.pdf}
+    \caption{Let $M$ is a linear transformation from $\mathbbm{R}^2 \to \mathbbm{R}^2$, as we drew in Fig.~\ref{fig:map:M}. Now assume that you have a vector $\vec{w}$ that is the linear combination of some basis vectors $\vec{f}_i$, see the right-hand side of the sketch. If the $\vec{f}_i$ can be obtained as the transformation by $M$ of some other vectors---the basis vectors we called $\bas{e}_i$ in Fig.~\ref{fig:map:M}---then the inverse transformation $M^{-1}$ acts as a map ``back'' to the original basis. }
+    \label{fig:map:M:inv}
+\end{figure}
+
+Given a basis, matrices are described by their components, $M\aij{i}{j}$. How do you find the components of the inverse matrix, $(M^{-1})\aij{i}{j}$? The most straightforward way is the hard way. Let us consider the $2\times 2$ case. We know that the defining relationship is
+\begin{align}
+    M(M^{-1})=(M^{-1})M &= \mathbbm{1}
+    &
+    M\aij{i}{k}(M^{-1})\aij{k}{j}
+    =
+    (M^{-1})\aij{i}{k}M\aij{k}{j} 
+    = \delta^i_j \ .
+    \label{eq:inverse:matrix:definition}
+\end{align}
+On the right we have four equations for each combination of $i,j \in\{1,2\}$. We also have four unknown components, $(M^{-1})\aij{i}{j}$. This is a system of linear equations that one can usually solve. Sometimes the system will not be solvable---in that case the matrix $M$ is not invertible.
+
+\begin{exercise}
+Convince yourself that \eqref{eq:inverse:matrix:definition} holds for \emph{any} vector space of any dimension, $N$. You end up with $N^2$ equations for $N^2$ unknown components $M\aij{i}{j}$. Does this change if all of the components are allowed to be complex numbers?
+\end{exercise}
+
+\begin{example}
+The inverse of a diagonal matrix is easy:
+\begin{align}
+    M &=
+    \begin{pmatrix}
+     3 & \pp  0 \\
+     0 & -2
+    \end{pmatrix}
+    &
+    M^{-1} &=
+    \begin{pmatrix}
+    \frac{1}{3} & \pp 0 \\
+    0 & -\frac{1}{2}
+    \end{pmatrix} \ .
+\end{align}
+We have used the earlier observation in Exercise~\ref{ex:product:of:diagonal:matrices} that the product of diagonal matrices $\hat M$ and $\hat N$ is also a diagonal matrix whose elements are the products of the corresponding elements in $\hat M$ and $\hat N$.
+\end{example}
+
+Physical states are often described by vectors. The dynamics of a theory of physics are then described by linear transformations of vectors. Usually this is some description of the change in the vector over some infinitesimal time. This change is a response to some source of the dynamics. You end up with formulas that always look like
+\begin{align}
+    M \vec{v} &= \vec{s} 
+    &
+    \Leftrightarrow
+    &
+    (\text{dynamics})(\text{state}) = (\text{source}) \ .
+\end{align}
+The source is something like a pebble falling into a pond. The dynamics are a matrix that describes how ripples propagate. The state is the configuration of the water in the pond.
+%
+The problem that you have to solve in physics is usually framed as follows: If you are given some source $\vec{s}$, what is the value of the state $\vec{v}$? This requires taking the inverse of the dynamics $M$. 
+
+Thus far we have seen two things: first, finding the components of an inverse matrix is generally very annoying. Secondly, there is at least one case---when the matrix is diagonal---where the annoying task is significantly simplified. It turns out that there are more clever ways to invert a matrix that often apply for the types of matrices that show up in physics. These tricks boil down to converting matrices into their diagonal form.
+
+
+
+\subsection{Matrices that aren't invertible: Projections}
+
+Solving for the components of a matrix inverse boils down to $N^2$ equations for $N^2$ unknowns. This does not mean that those equations have a solution. A simple example is the case of a diagonal matrix with one component zero. We illustrate this in Fig.~\ref{fig:map:M:no:inv}
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/maps_noninv.pdf}
+    \caption{$M$ is a non-invertible matrix. We notice that there's no problem applying $M$ to vectors. The odd thing is that there are multiple vectors---$\vec{v}$, $\vec{w}$, and $\vec{u}$ in the picture---that all turn into the same vector, $M\vec{v} = M\vec{w}=M\vec{u}\equiv \vec{z}$. The problem shows up when we try to ``undo'' the transformation $M$ by applying $M^{-1}$ to $\vec{z}$. $M^{-1}\vec{z}$ should be a vector. Instead, we have at least three different valid options: $\vec{v}$, $\vec{w}$, and $\vec{u}$. This means that $M^{-1}$ is not a well defined linear map: it can send one vector $\vec{z}$ into many possible vectors. }
+    \label{fig:map:M:no:inv}
+\end{figure}
+% 
+Thinking of the matrix $M$ as a map, we see the the problem is one of uniqueness. A linear map should take each vector $\vec{v}$ into a single, well-defined vector $M\vec{v}$. $M$ is suspicious because it sends multiple different vectors to the \emph{same} vector, say $M\vec{v} = M\vec{w}$. That's fine. Each of $\vec{v}$ and $\vec{w}$ are sent to \emph{a} vector. The problem shows up when we try to take the inverse. If we write $\vec{z} = M\vec{v} = M\vec{w}$, we know that
+\begin{align}
+    (M^{-1})\vec{z} = (M^{-1})M\vec{v} &= \vec{v}
+    &
+    (M^{-1})\vec{z} = (M^{-1})M\vec{w} &= \vec{w} \ .
+\end{align}
+However, we assumed that $\vec{v} \neq \vec{w}$. This means makes the above line inconsistent. The inverse transformation is not defined. Bummer.
+
+Fortunately, most of the \emph{dynamics} in physics \emph{is} invertible. That does not mean that we can ignore non-invertible matrices, though. Non-invertible matrices can be understood as \textbf{projections} onto a subspace. You can see this in the example in Fig.~\ref{fig:map:M:no:inv}. The map $M$ is essentially only using the information about the second component of its input vector and mapping it to just the second component of the output vector. That means that $M$ is really just a map to a one-dimensional subspace. In this way, the two dimensional vector space $\mathbbm{R}^2$ is \textbf{projected} onto a one-dimensional subspace of $\mathbbm{R}^2$. In that example, the one dimensional space is defined by vectors of the form
+\begin{align}
+    \vec{v} = 
+    \begin{pmatrix}
+    0\\ v^2    
+    \end{pmatrix} \ .
+\end{align}
+
+Projections are really useful in physics. Sometimes you want to take a big vector space and only focus on a subspace that satisfy certain conditions. For example, it turns out that in nature you can have two types of massless matter particles: left-handed and right-handed according to their quantum spin in the direction of their motion. One may want to project onto only the space of left-handed particles because that is easier to deal with than the entire space. Because projections necessarily ``throw out'' information, they are non-invertible.\footnote{I think this was more intuitive to past generations of physicists. When you throw out a piece of paper, it ends up in a recycling plant and it gets torn up and is lost forever. Since the advent of computers, when you ``throw out'' a file, you can usually control/command-z and undo to bring it back.}
+
+\begin{example}
+One of the most curious puzzles in fundamental physics over the last half century is the black hole information paradox.\footnote{\url{https://www.quantamagazine.org/the-most-famous-paradox-in-physics-nears-its-end-20201029/}} One way of stating the paradox is the question of whether or not ``falling into a black hole'' is a \emph{projection} that throws out information. 
+\end{example}
 
 \subsection{Trace}
 
@@ -1140,13 +1496,19 @@ From this, we have argued that if $W: V_1 \to V_2$ is a linear transformation be
 % \subsection{More Jargon}
 
 
+\section{Central Dogma I: vectors are not columns}
+
+
+\section{The incredibly un-mathematical idea of niceness}
+
+
+\section{Central Dogma II: the eigensystem}
+
+
 
 \section{Linear Maps to Numbers: Row Vectors}
 
 \section{Metric Spaces: Dot Products}
-
-
-
 
 
 

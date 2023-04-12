@@ -13,14 +13,31 @@
 
 \renewcommand{\tilde}{\widetilde}   % tilde over characters
 \renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+\newcommand{\bas}[1]{\hat{\mathbf{#1}}} 	% basis vectors have hat
+\newcommand{\row}[1]{\tilde{\mathbf{#1}}} 	% row vectors have tilde
 
 % For matrices
 \newcommand{\aij}[2]{^{#1}_{\phantom{#1}#2}}
 \newcommand{\mat}[3]{#1\aij{#2}{#3}}
 \newcommand{\pp}{\phantom{+}}
 
-\newcommand{\row}[1]{\tilde{\vec{#1}}}
 
 \usepackage{pifont}
 	\newcommand{\cmark}{\ding{51}}%
 	\newcommand{\xmark}{\ding{55}}%
+
+
+%% COMMANDS FOR TEMPORARY COMMENTS
+%% -------------------------------
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{
+	\color{green!50!black}
+  \footnotesize
+  [\textbf{\textsf{Flip}}: \textsf{#1}]
+	}}
+
+\newcommand{\correction}[2]{{
+	\color{green!50!black}
+  \footnotesize
+  [\textbf{\textsf{Correction,~#1}}: \textsf{#2}]
+	}}
