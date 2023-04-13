@@ -1463,9 +1463,24 @@ The \textbf{trace} of a matrix $M$ is simply the sum of its diagonal components:
 \begin{align}
     \text{Tr}\,M = M\aij{i}{i} = M\aij{1}{1} + M\aij{2}{2} + \cdots \ .
 \end{align}
-It is not obviously meaningful from the perspective of $M$ being a linear transformation. However, it ends up being useful as as a mechanical procedure that one can do to matrices. The reason for this is that 
+It is not obviously meaningful from the perspective of $M$ being a linear transformation. However, it ends up being useful as as a mechanical procedure that one can do to matrices. The reason for this is something we will see soon: the trace of a matrix is unchanged under rotations. 
 
 \subsection{Determinants}
+
+Here's another seemingly strange operation that you can do on a matrix. The determinant of a $2\times 2$ matrix is defined to be
+\begin{align}
+    \det M \equiv M\aij11 M\aij12 - M\aij12 M\aij21 \ .
+\end{align}
+Weird, right? Determinants for higher-dimensional square matrices can be defined recursively by taking specific linear combinations of sub-matrices. There are silly rules for this. There are fancy words for the sub-matrices (minors) and the appropriate sign for summing together those determinants (cofactors). Look, it's a mess. You should be able to calculate the determinant of a general $2\times 2$ matrix because it's easy. In case of national crisis, you should be able to calculate the determinant of a general $3\times 3$ matrix after consulting a reference to double check the signs. However, at this stage we will not make a big deal about determinants. I think engineering classes make a big deal about determinants because they can help with solving systems of linear equations using matrices---but \emph{that's not the kind of linear algebra we're doing in physics}.
+
+\begin{example}
+The determinant of a diagonal matrix is simply the product of each of its diagonal elements. 
+\end{example}
+
+Determinants of a matrix are at least as curious as its trace because the determinant of a matrix turns out to also be unchanged under rotations. Furthermore, in multivariable calculus, the determinant shows up in the volume element. In fact, there is a formal definition of the determinant that comes from differential geometry where we use the determinant to rigorously define volumes of curved spaces. This sort of thing shows up in general relativity.
+
+
+
 
 \subsection{Matrices that aren't square: maps between vector spaces}
 
@@ -1523,6 +1538,25 @@ From this, we have argued that if $W: V_1 \to V_2$ is a linear transformation be
 
 \subsection{Symmetry and Indices}
 
+\subsection{Active versus Passive}
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/passivetransform_dosomething.pdf}
+    \caption{
+        Nothing actually happens during a passive transformation. The basis vectors transform, but the components of the vector transform in such a way that $v'^i\bas{e}'_i = v^i\bas{e}_i$. Such a `transformation' may come off as uninspiring, but this is the basis of symmetries in physics. 
+        From \url{https://knowyourmeme.com/memes/cmon-do-something}.
+    }
+    \label{fig:map:M}
+\end{figure}
+
+
+
+Passive is a symmetry. Active is an actual ``do something''
+
+% Passive: rotations act on basis vectors. 
+% v Rin (R e) ... then v Rin = R v (e')
+% Active: rotations act on coordinate
+% R v
 
 \section{Central Dogma I: vectors are not columns}
 
