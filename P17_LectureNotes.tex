@@ -915,24 +915,6 @@ You may also contract indices within an object. For example, because a matrix ha
 
 
 
-\section{Ket Notation}
-
-Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \emph{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \emph{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
-\begin{align}
-    \text{column vector:}\quad \vec{v} &= \ket{v}
-    &
-    \text{row vector:}\quad \row{w} &= \bra{w}
-\end{align}
-There is no special notation for matrices, $M$. If you really want to be fancy, though, you can give matrices a hat and write them $\hat M$. This is really only important if you need to distinguish between a matrix and a number that happens to have a similar variable name. 
-
-\begin{example}
-As an example where the `hat' notation comes in handy, recall the Schr\"odinger equation in \eqref{eq:three:equations}:
-\begin{align}
-    \hat H \ket{\Psi} = E \ket{\Psi} \ .
-\end{align}
-The $\hat H$ has a hat because it is a matrix. The $E$ does not have a hat because it is a number. Does this information give the equation more significance? Obviously $\hat H \neq E$ since these are two completely different classes of objects. The equation is an equality between two vectors, $\ket{\Psi}$. Evidently, when the matrix $\hat H$ hits $\ket{\Psi}$, you end up with a new vector that is simply a rescaling of $\ket{\Psi}$. We say that $\ket{\Psi}$ is an \emph{eigenvector} of $\hat H$. 
-\end{example}
-
 
 
 \section{Matrices and Linear Transformations}
@@ -1655,6 +1637,28 @@ Passive is a symmetry. Active is an actual ``do something''
 \section{Central Dogma II: the eigensystem}
 
 
+
+
+\section{Ket Notation}
+
+Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \emph{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \emph{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
+\begin{align}
+    \text{column vector:}\quad \vec{v} &= \ket{v}
+    &
+    \text{row vector:}\quad \row{w} &= \bra{w}
+\end{align}
+There is no special notation for matrices, $M$. If you really want to be fancy, though, you can give matrices a hat and write them $\hat M$. This is really only important if you need to distinguish between a matrix and a number that happens to have a similar variable name. 
+
+\begin{example}
+As an example where the `hat' notation comes in handy, recall the Schr\"odinger equation in \eqref{eq:three:equations}:
+\begin{align}
+    \hat H \ket{\Psi} = E \ket{\Psi} \ .
+\end{align}
+The $\hat H$ has a hat because it is a matrix. The $E$ does not have a hat because it is a number. Does this information give the equation more significance? Obviously $\hat H \neq E$ since these are two completely different classes of objects. The equation is an equality between two vectors, $\ket{\Psi}$. Evidently, when the matrix $\hat H$ hits $\ket{\Psi}$, you end up with a new vector that is simply a rescaling of $\ket{\Psi}$. We say that $\ket{\Psi}$ is an \emph{eigenvector} of $\hat H$. 
+\end{example}
+
+
+Test: $\ket{^i}$ $\bra{_j}$
 
 \section{Linear Maps to Numbers: Row Vectors}
 
