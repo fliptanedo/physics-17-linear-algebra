@@ -1457,7 +1457,40 @@ Projections are really useful in physics. Sometimes you want to take a big vecto
 One of the most curious puzzles in fundamental physics over the last half century is the black hole information paradox.\footnote{\url{https://www.quantamagazine.org/the-most-famous-paradox-in-physics-nears-its-end-20201029/}} One way of stating the paradox is the question of whether or not ``falling into a black hole'' is a \emph{projection} that throws out information. 
 \end{example}
 
-\subsection{Trace}
+\subsection{Funny things you can do to matrices}
+
+\subsubsection*{Transpose}
+
+The \textbf{transpose} of a matrix is what happens when you `flip all the elements along the diagonal.' Given a matrix $M$, the transpose of $M$ is $M^T$ with components
+\begin{align}
+    (M^T)\aij{i}{j} &= M\aij{j}{i} \ .
+    \label{eq:transpose:components}
+\end{align}
+
+\begin{example}
+The following two matrices are transposes of each other.
+\begin{align}
+    M &= 
+    \begin{pmatrix}
+        9 & -3 & 2 \\
+        2 & \pp 5 & 7 \\
+        1 & \pp 0 & 3
+    \end{pmatrix}
+    &
+    M^T &= 
+    \begin{pmatrix}
+        \pp 9 & 2 & 1 \\
+        -3 & 5 & 0 \\
+        \pp 2 & 7 & 3
+    \end{pmatrix}
+    \ .
+\end{align}
+\end{example}
+
+This unusual operation will turn out to be rather useful for us. I leave the following cryptic statement: the transpose of a matrix is \emph{not} its inverse, but it does have a \emph{dual} relationship to the original matrix. Once we define a metric, we will be able to give a more rigorous definition for transpose. For now, let use take \eqref{eq:transpose:components} as the definition of something we can `do' to matrices. 
+
+
+\subsubsection*{Trace}
 
 The \textbf{trace} of a matrix $M$ is simply the sum of its diagonal components:
 \begin{align}
@@ -1465,7 +1498,7 @@ The \textbf{trace} of a matrix $M$ is simply the sum of its diagonal components:
 \end{align}
 It is not obviously meaningful from the perspective of $M$ being a linear transformation. However, it ends up being useful as as a mechanical procedure that one can do to matrices. The reason for this is something we will see soon: the trace of a matrix is unchanged under rotations. 
 
-\subsection{Determinants}
+\subsubsection*{Determinants}
 
 Here's another seemingly strange operation that you can do on a matrix. The determinant of a $2\times 2$ matrix is defined to be
 \begin{align}
@@ -1518,7 +1551,62 @@ From this, we have argued that if $W: V_1 \to V_2$ is a linear transformation be
 
 \section{Rotations}
 
+Rotations are a special class of transformations. We wait until Section~\ref{sec:metric:spaces} to really appreciate why rotations are special. For now, you may rely on your ordinary intuition for what it means to \emph{rotate} something. If a vector is an arrow---\emph{I know, this is the kindergarden picture of vectors}---then you rotate it by pinning its tail to the origin and then moving the arrowhead while leaving the length unchanged. 
+
+A more important notion of rotation is the idea of a change of basis between `nice' basis vectors---a notion that we formalize when we have a dot (inner) product. The physical manifestation of this is the idea of a \emph{passive} rotation. This corresponds in physics to a \emph{change in reference frame}. We illustrate this in Fig.~\ref{fig:passive:rotation}. 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.43\textwidth]{figures/rotate_1.pdf}
+    \quad\quad
+    \includegraphics[width=.43\textwidth]{figures/rotate_2.pdf}
+    \caption{Example of a passive rotation. You are looking at a vector $\vec{v}$ through your phone. The image on your phone has a natural orientation for a basis $\bas{e}_i$ and the components of $\vec{v}$ in this basis are $v^i$. You could also rotate your phone, leaving the vector $\vec{v}$ untouched. The new basis vectors are $\bas{e}_i'$; they are different from $\bas{e}_i$ because your phone has changed orientation. With respect to the new basis, the same vector $\vec{v}$ now has components $v'^i$.}
+    \label{fig:passive:rotation}
+\end{figure}
+
+
 \subsection{Rotations in Two-Dimensions}
+
+In two dimensions, there is only one class of rotation matrix. It has one parameter, $\theta$, the amount that one is rotating. We conventionally measure rotations in the counter-clockwise direction. Rotations are linear transformations, and thus are represented by matrices. The form of a rotation matrix in two dimensions is
+\begin{align}
+    R(\theta) = 
+    \begin{pmatrix}
+        \pp \cos\theta & \sin\theta \\
+        - \sin\theta & \cos \theta
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \pp c_\theta & s_\theta \\
+        - s_\theta & c_\theta
+    \end{pmatrix}\ ,
+\end{align}
+where on the right we have introduced some shorthand for the trigonometric functions. The key relation of the trigonometric functions is
+\begin{align}
+    \sin^2\theta + \cos^2\theta = c_\theta^2 + s_\theta^2 = 1 \ .
+\end{align}
+
+The inverse of a rotation is simply is simply a rotation in the opposite direction. This means that the inverse of the rotation matrix $R(\theta)$ is simply $R^{-1}(\theta) = R(-\theta)$. Because cosine is an even function and sine is an odd function, this means
+\begin{align}
+R^{-1}(\theta) = 
+\begin{pmatrix}
+        c_\theta & - s_\theta \\
+         s_\theta & \pp c_\theta
+    \end{pmatrix} 
+    = 
+    R(\theta)^T
+    \ .
+\end{align}
+The last equality may be a little surprising, but it is of utmost significance. The inverse of a rotation is the transpose. 
+
+\begin{exercise}
+Check component-by-component that $R(\theta)R^{-1}(\theta) = \mathbbm{1}$ using the expressions above. One may directly show that
+\begin{align}
+    R(\theta)\aij{i}{k} \, R^{-1}(\theta)\aij{k}{j} &= \delta^i_j 
+\end{align}
+For each of the four combinations of $i$ and $j$. 
+\end{exercise}
+
+
+
 
 \subsection{Transformation of Vectors}
 
@@ -1571,15 +1659,22 @@ Passive is a symmetry. Active is an actual ``do something''
 \section{Linear Maps to Numbers: Row Vectors}
 
 \section{Metric Spaces: Dot Products}
-
-
+\label{sec:metric:spaces}
 
 \subsection{In contrast to Row Vectors}
 \subsection{Machine to create row vectors}
 % only for finite dimensional sapces, see discussion on physics stax in my references folder
+\subsection{Length}
+\subsection{Orthogonality}
+\subsection{Rotations, once again}
+\subsection{The meaning of indices}
+
+
 
 \section{More General (Multi-)Linear Maps: Tensors}
 
+
+\section{Special Relativity: Minkowski Space}
 
 \section{Interlude: an abundance of names and notation}
 
