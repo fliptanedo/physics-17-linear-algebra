@@ -14,7 +14,51 @@
 %     \label{fig:}
 % \end{figure}
 
+%% THEOREM ENVIRONMENTS
 
+
+%% Because mdframed causes a bunch of warnings
+%% https://tex.stackexchange.com/questions/64331/disable-warning-from-mdframed 
+\usepackage{silence}
+\WarningFilter{mdframed}{You got a bad break}
+\WarningFilter{mdframed}{correct box splittet fails}
+
+
+
+\newmdtheoremenv[
+    skipabove=2em,
+    skipbelow=2em,
+    linewidth=5pt,
+    linecolor=red!50!black,
+    topline=false,
+    rightline=false,
+    bottomline=false
+    ]{exercise}{Exercise}[section]
+
+
+\newmdtheoremenv[
+    skipabove=2em,
+    skipbelow=2em,
+    linewidth=5pt,
+    linecolor=gray,
+    topline=false,
+    rightline=false,
+    bottomline=false
+    ]{example}{Example}[section]
+
+\newmdtheoremenv[
+    skipabove=2em,
+    skipbelow=2em,
+    linewidth=5pt,
+    linecolor=blue,
+    topline=false,
+    rightline=false,
+    bottomline=false
+    ]{bigidea}{Key Idea}[section]
+
+%% AMS Theorem version
+% \newtheorem{exercise}{Exercise}[section]
+% \newtheorem{example}{Example}[section]
 
 %% Example: replace YourName with your name
 \newcommand{\YourName}[1]{{	
@@ -31,6 +75,7 @@
 \newcommand{\aij}[2]{^{#1}_{\phantom{#1}#2}}
 \newcommand{\mat}[3]{#1\aij{#2}{#3}}
 \newcommand{\pp}{\phantom{+}}
+\newcommand{\inv}{^{-1}}
 
 
 \usepackage{pifont}

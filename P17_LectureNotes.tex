@@ -6,11 +6,8 @@
 \input{FlipPreamble}			%% \usepackages
 \input{FlipAdditionalHeader} 	%% Use this define additional macros
 % \input{FlipAdditionalHeader_listings}
-% amsthm details:
 
 
-\newtheorem{exercise}{Exercise}[section]
-\newtheorem{example}{Example}[section]
 
 \input{FlipPreambleEnd}			%% packages that have to be at the end
 \begin{document}
@@ -31,8 +28,11 @@
 
 \begin{abstract}
 \noindent 
-Lecture notes for Physics 17, a course on linear algebra in preparation for upper-division undergraduate physics coursework at \acro{UC R}iverside.
+Lecture notes for Physics 17, a course on linear algebra in preparation for upper-division undergraduate physics coursework at \acro{UC~R}iverside.
 \end{abstract}
+
+
+
 
 \small
 \setcounter{tocdepth}{2}
@@ -96,9 +96,9 @@ The problem is that you already know too much to learn linear algebra as a mathe
 
 And so, you see that starting this course like a mathematics course could cause trouble. The mathematics professor would start by defining a vector. That definition will say nothing about magnitudes or directions, and will not even say anything about arrays of numbers. That definition will clash with the hard-earned intuition that you built from your physics education thus far. It will be perplexing, and may make you feel rather unhappy. What do these mathematicians know, anyway? Or maybe its the physics that is wrong, or have we just completely misunderstood everything and we are just now noticing that we are hopelessly lost? We begin to spiral into a black hole of confusion.
 
-\begin{framed}
+\begin{quote}
 Fortunately, \emph{this is not a mathematics course.}
-\end{framed}
+\end{quote}
 
 As a consequence, we will not give a rigorous definition of a vector. We start with a familiar definition of vectors and lay out which qualities are general, and which properties are specific. Then we will come to appreciate the approximation that ``\emph{everything is a vector}.'' So let us start with something comfortably familiar, even though it constitutes only the simplest example of a vector.
 
@@ -736,12 +736,12 @@ Then the \emph{magnitude} of $\vec{v}$ is $|\vec{v}|=\sqrt{14}$. We could also w
 \end{example}
 
 
-We see that the dot product (metric) allows us to define length. Because the length of a vector is a number, we can divide the vector $\vec{v}$ by its its length $|\vec{v}|$ to obtain a \textbf{unit vector}, ${\bas{v}}$:
+We see that the dot product (metric) allows us to define length. Because the length of a vector is a number, we can divide the vector $\vec{v}$ by its its length $|\vec{v}|$ to obtain a \textbf{unit vector}:
 \begin{align}
     {\bas{v}} = \frac{1}{|\vec{v}|}\vec{v} \ .
     \label{eq:eg:v:340}
 \end{align}
-The right-hand side is simply scalar multiplication by $|\vec{v}|^{-1}$. Unit vectors are useful for identifying directions.
+The right-hand side is simply scalar multiplication by $|\vec{v}|\inv$. Unit vectors are useful for identifying directions.
 
 \begin{example}
 In grade school one may have learned that a vector is an arrow that has a magnitude and a direction. Unit vectors encode the `direction' of a vector.
@@ -1344,7 +1344,7 @@ There are several observations:
 % Pre-image, image, kernel, 
 % Non-invertible
 
-Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M^{-1}$ with components $(M^{-1})\aij{i}{j}$. The defining property of the matrix inverse is $M^{-1}M = \mathbbm{1}$. That means that $M^{-1}(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. This is shown in Fig.~\ref{fig:map:M:inv}. 
+Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M\inv$ with components $(M\inv)\aij{i}{j}$. The defining property of the matrix inverse is $M\inv M = \mathbbm{1}$. That means that $M\inv(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. This is shown in Fig.~\ref{fig:map:M:inv}. 
 
 % \flip{in progress}
 % not always defined.
@@ -1353,21 +1353,21 @@ Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ i
 \begin{figure}[tb]
     \centering
     \includegraphics[width=.8\textwidth]{figures/maps_Minv.pdf}
-    \caption{Let $M$ is a linear transformation from $\mathbbm{R}^2 \to \mathbbm{R}^2$, as we drew in Fig.~\ref{fig:map:M}. Now assume that you have a vector $\vec{w}$ that is the linear combination of some basis vectors $\vec{f}_i$, see the right-hand side of the sketch. If the $\vec{f}_i$ can be obtained as the transformation by $M$ of some other vectors---the basis vectors we called $\bas{e}_i$ in Fig.~\ref{fig:map:M}---then the inverse transformation $M^{-1}$ acts as a map ``back'' to the original basis. }
+    \caption{Let $M$ is a linear transformation from $\mathbbm{R}^2 \to \mathbbm{R}^2$, as we drew in Fig.~\ref{fig:map:M}. Now assume that you have a vector $\vec{w}$ that is the linear combination of some basis vectors $\vec{f}_i$, see the right-hand side of the sketch. If the $\vec{f}_i$ can be obtained as the transformation by $M$ of some other vectors---the basis vectors we called $\bas{e}_i$ in Fig.~\ref{fig:map:M}---then the inverse transformation $M\inv$ acts as a map ``back'' to the original basis. }
     \label{fig:map:M:inv}
 \end{figure}
 
-Given a basis, matrices are described by their components, $M\aij{i}{j}$. How do you find the components of the inverse matrix, $(M^{-1})\aij{i}{j}$? The most straightforward way is the hard way. Let us consider the $2\times 2$ case. We know that the defining relationship is
+Given a basis, matrices are described by their components, $M\aij{i}{j}$. How do you find the components of the inverse matrix, $(M\inv)\aij{i}{j}$? The most straightforward way is the hard way. Let us consider the $2\times 2$ case. We know that the defining relationship is
 \begin{align}
-    M(M^{-1})=(M^{-1})M &= \mathbbm{1}
+    M(M\inv)=(M\inv)M &= \mathbbm{1}
     &
-    M\aij{i}{k}(M^{-1})\aij{k}{j}
+    M\aij{i}{k}(M\inv)\aij{k}{j}
     =
-    (M^{-1})\aij{i}{k}M\aij{k}{j} 
+    (M\inv)\aij{i}{k}M\aij{k}{j} 
     = \delta^i_j \ .
     \label{eq:inverse:matrix:definition}
 \end{align}
-On the right we have four equations for each combination of $i,j \in\{1,2\}$. We also have four unknown components, $(M^{-1})\aij{i}{j}$. This is a system of linear equations that one can usually solve. Sometimes the system will not be solvable---in that case the matrix $M$ is not invertible.
+On the right we have four equations for each combination of $i,j \in\{1,2\}$. We also have four unknown components, $(M\inv)\aij{i}{j}$. This is a system of linear equations that one can usually solve. Sometimes the system will not be solvable---in that case the matrix $M$ is not invertible.
 
 \begin{exercise}
 Convince yourself that \eqref{eq:inverse:matrix:definition} holds for \emph{any} vector space of any dimension, $N$. You end up with $N^2$ equations for $N^2$ unknown components $M\aij{i}{j}$. Does this change if all of the components are allowed to be complex numbers?
@@ -1382,7 +1382,7 @@ The inverse of a diagonal matrix is easy:
      0 & -2
     \end{pmatrix}
     &
-    M^{-1} &=
+    M\inv &=
     \begin{pmatrix}
     \frac{1}{3} & \pp 0 \\
     0 & -\frac{1}{2}
@@ -1413,15 +1413,15 @@ Solving for the components of a matrix inverse boils down to $N^2$ equations for
 \begin{figure}[tb]
     \centering
     \includegraphics[width=.8\textwidth]{figures/maps_noninv.pdf}
-    \caption{$M$ is a non-invertible matrix. We notice that there's no problem applying $M$ to vectors. The odd thing is that there are multiple vectors---$\vec{v}$, $\vec{w}$, and $\vec{u}$ in the picture---that all turn into the same vector, $M\vec{v} = M\vec{w}=M\vec{u}\equiv \vec{z}$. The problem shows up when we try to ``undo'' the transformation $M$ by applying $M^{-1}$ to $\vec{z}$. $M^{-1}\vec{z}$ should be a vector. Instead, we have at least three different valid options: $\vec{v}$, $\vec{w}$, and $\vec{u}$. This means that $M^{-1}$ is not a well defined linear map: it can send one vector $\vec{z}$ into many possible vectors. }
+    \caption{$M$ is a non-invertible matrix. We notice that there's no problem applying $M$ to vectors. The odd thing is that there are multiple vectors---$\vec{v}$, $\vec{w}$, and $\vec{u}$ in the picture---that all turn into the same vector, $M\vec{v} = M\vec{w}=M\vec{u}\equiv \vec{z}$. The problem shows up when we try to ``undo'' the transformation $M$ by applying $M\inv$ to $\vec{z}$. $M\inv\vec{z}$ should be a vector. Instead, we have at least three different valid options: $\vec{v}$, $\vec{w}$, and $\vec{u}$. This means that $M\inv$ is not a well defined linear map: it can send one vector $\vec{z}$ into many possible vectors. }
     \label{fig:map:M:no:inv}
 \end{figure}
 % 
 Thinking of the matrix $M$ as a map, we see the the problem is one of uniqueness. A linear map should take each vector $\vec{v}$ into a single, well-defined vector $M\vec{v}$. $M$ is suspicious because it sends multiple different vectors to the \emph{same} vector, say $M\vec{v} = M\vec{w}$. That's fine. Each of $\vec{v}$ and $\vec{w}$ are sent to \emph{a} vector. The problem shows up when we try to take the inverse. If we write $\vec{z} = M\vec{v} = M\vec{w}$, we know that
 \begin{align}
-    (M^{-1})\vec{z} = (M^{-1})M\vec{v} &= \vec{v}
+    (M\inv)\vec{z} = (M\inv)M\vec{v} &= \vec{v}
     &
-    (M^{-1})\vec{z} = (M^{-1})M\vec{w} &= \vec{w} \ .
+    (M\inv)\vec{z} = (M\inv)M\vec{w} &= \vec{w} \ .
 \end{align}
 However, we assumed that $\vec{v} \neq \vec{w}$. This means makes the above line inconsistent. The inverse transformation is not defined. Bummer.
 
@@ -1548,49 +1548,82 @@ A more important notion of rotation is the idea of a change of basis between `ni
 
 \subsection{Rotations in Two-Dimensions}
 
-In two dimensions, there is only one class of rotation matrix. It has one parameter, $\theta$, the amount that one is rotating. We conventionally measure rotations in the counter-clockwise direction. Rotations are linear transformations, and thus are represented by matrices. The form of a rotation matrix in two dimensions is
+In two dimensions, there is only one class of rotation matrix. It has one parameter, $\theta$, the amount that one is rotating. We conventionally measure rotations in the counter-clockwise direction. Rotations are linear transformations, and thus are represented by matrices. The form of a rotation matrix in two dimensions is\footnote{By convention we define a rotation by $\theta$ to be in the counter-clockwise direction.}
 \begin{align}
     R(\theta) = 
     \begin{pmatrix}
-        \pp \cos\theta & \sin\theta \\
-        - \sin\theta & \cos \theta
+        \cos\theta & - \sin\theta \\
+        \sin\theta & \pp \cos \theta
     \end{pmatrix}
     =
     \begin{pmatrix}
-        \pp c_\theta & s_\theta \\
-        - s_\theta & c_\theta
+        c_\theta & - s_\theta \\
+        s_\theta & \pp c_\theta
     \end{pmatrix}\ ,
+    \label{eq:rotation:matrix:2D}
 \end{align}
 where on the right we have introduced some shorthand for the trigonometric functions. The key relation of the trigonometric functions is
 \begin{align}
     \sin^2\theta + \cos^2\theta = c_\theta^2 + s_\theta^2 = 1 \ .
 \end{align}
 
-The inverse of a rotation is simply is simply a rotation in the opposite direction. This means that the inverse of the rotation matrix $R(\theta)$ is simply $R^{-1}(\theta) = R(-\theta)$. Because cosine is an even function and sine is an odd function, this means
+The inverse of a rotation is simply is simply a rotation in the opposite direction. This means that the inverse of the rotation matrix $R(\theta)$ is simply $R\inv(\theta) = R(-\theta)$. Because cosine is an even function and sine is an odd function, this means
 \begin{align}
-R^{-1}(\theta) = 
+R\inv(\theta) = 
 \begin{pmatrix}
-        c_\theta & - s_\theta \\
-         s_\theta & \pp c_\theta
+        \pp c_\theta &  s_\theta \\
+        - s_\theta &  c_\theta
     \end{pmatrix} 
     = 
     R(\theta)^T
     \ .
 \end{align}
-The last equality may be a little surprising, but it is of utmost significance. The inverse of a rotation is the transpose. 
+The last equality may be a little surprising, but it is of utmost significance. The inverse of a rotation is the transpose of the original rotation. 
 
 \begin{exercise}
-Check component-by-component that $R(\theta)R^{-1}(\theta) = \mathbbm{1}$ using the expressions above. One may directly show that
+Check component-by-component that $R(\theta)R\inv(\theta) = \mathbbm{1}$ using the expressions above. One may directly show that for each of the four combinations of $i$ and $j$,
 \begin{align}
-    R(\theta)\aij{i}{k} \, R^{-1}(\theta)\aij{k}{j} &= \delta^i_j 
+    R(\theta)\aij{i}{k} \, R\inv(\theta)\aij{k}{j} &= \delta^i_j  \ .
 \end{align}
-For each of the four combinations of $i$ and $j$. 
+% For each of the four combinations of $i$ and $j$. 
+\end{exercise}
+
+\begin{example}
+A physically motivated (and much simpler) way of writing the inverse rotation is to recall that to undo a counterclockwise rotation by angle $\theta$, one does a clockwise rotation by $\theta$. This is simply a counterclockwise rotation by angle $-\theta$. Thus
+\begin{align}
+    R\inv(\theta) = R(-\theta)
+    =
+    \begin{pmatrix}
+        \cos(-\theta) & \sin(-\theta) \\
+        \sin(-\theta) & \pp \cos(-\theta)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \pp c_\theta &  s_\theta \\
+        - s_\theta &  c_\theta
+    \end{pmatrix}  
+    =
+    R(\theta)^T
+    \ .
+\end{align}
+We used the fact that sine is odd, $\sin(-\theta) = -\sin\theta$ and cosine is even, $\cos(-\theta) = -\cos\theta$.
+\end{example}
+
+\begin{exercise}
+Consider a point on the Cartesian plane $(x,y)$. Derive the rotation matrix \eqref{eq:rotation:matrix:2D} by determining the rotated coordinates $(x',y')$ as a function of $x$, $y$, and the rotation angle $\theta$. I suggest writing $x=r\cos\phi$ and $y=r\sin\phi$. Then use the fact that under a rotation, radius stays the same and angles add. Thus
+\begin{align}
+     x' &= r\cos(\phi+\theta)
+     &
+     y' &= r\sin(\phi+\theta) \ .
+ \end{align}
+Then invoke the angle addition formulae for trigonometric functions. 
 \end{exercise}
 
 
 
-
 \subsection{Transformation of Vectors}
+
+What can we do with a rotation matrix? Why, rotate vectors, of course! In this respect, $R(\theta)$ is just like any other linear transformation.
 
 \subsection{Transformation of Row Vectors}
 
@@ -1616,7 +1649,7 @@ For each of the four combinations of $i$ and $j$.
         Nothing actually happens during a passive transformation. The basis vectors transform, but the components of the vector transform in such a way that $v'^i\bas{e}'_i = v^i\bas{e}_i$. Such a `transformation' may come off as uninspiring, but this is the basis of symmetries in physics. 
         From \url{https://knowyourmeme.com/memes/cmon-do-something}.
     }
-    \label{fig:map:M}
+    \label{fig:do:something}
 \end{figure}
 
 
