@@ -1045,6 +1045,7 @@ It is useful to think about the Kronecker~$\delta$ as a machine that converts in
 On the right-hand side, there is exactly one non-zero term because $\delta^i_j$ is zero for all terms except when $j=i$. That means 
 \begin{align}
     \delta^i_j v^j = v^i \ .
+    \label{eq:kronecker:delta:action}
 \end{align}
 The right-hand side is, of course, what we expected since $\mathbbm{1}\vec{v} = \vec{v}$. So we can train ourselves to ``mechanically'' interpret the $\delta^i_j$ object as one that replaces indices. 
 \begin{exercise}
@@ -1373,6 +1374,19 @@ On the right we have four equations for each combination of $i,j \in\{1,2\}$. We
 Convince yourself that \eqref{eq:inverse:matrix:definition} holds for \emph{any} vector space of any dimension, $N$. You end up with $N^2$ equations for $N^2$ unknown components $M\aij{i}{j}$. Does this change if all of the components are allowed to be complex numbers?
 \end{exercise}
 
+
+The product of two matrices $M$ and $N$ is a matrix, $MN$. The inverse of the product of matrices is the product of their inverses \emph{in the reverse order}
+\begin{align}
+    (MN)\inv = N\inv M\inv \ .
+\end{align}
+You can that this is because you have to undo the transformation that was last applied:
+\begin{align}
+    (MN)\inv MN = N\inv M\inv MN = N\inv \mathbbm{1} N = \mathbbm{1} \ .
+\end{align}
+
+
+
+
 \begin{example}
 The inverse of a diagonal matrix is easy:
 \begin{align}
@@ -1493,7 +1507,52 @@ The determinant of a diagonal matrix is simply the product of each of its diagon
 \end{example}
 
 Determinants of a matrix are at least as curious as its trace because the determinant of a matrix turns out to also be unchanged under rotations. Furthermore, in multivariable calculus, the determinant shows up in the volume element. In fact, there is a formal definition of the determinant that comes from differential geometry where we use the determinant to rigorously define volumes of curved spaces. This sort of thing shows up in general relativity.
-
+%
+One way of starting to see why this is plausible is the observation that the determinant of a matrix $M$ is equal to the area of the parallelogram whose sides are given by the transformed basis vectors, $M\bas{e}_i$. We sketch this in two dimensions in Fig.~\ref{fig:determinant:map:area}. 
+% 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/determinant_sketch.pdf}
+    \caption{The transformation by $M$ of a unit square with sides $\bas{e}_i$ is a parallelogram with sides $M\bas{e}_i$. The determinant of $M$ is the area of the parallelogram. In more than three dimensions the shape is called a parallelpiped, which is a fun word to say.}
+    \label{fig:determinant:map:area}
+\end{figure}
+% 
+To prove this claim in two dimensions, we enclose the parallelogram into a box and start figuring out the area of various sub-shapes. Let $A_\text{r}$ be the area in the two red triangles, $A_\text{b}$ be the area in the two green triangles, and $A_\text{g}$ be the area of the two blue boxes. These areas are---accounting for the factor of two because there are two of each shape:
+\begin{align}
+    A_\text{r} &= M\aij 11 M \aij 21
+    &
+    A_\text{g} &= M\aij 22 M \aij 12
+    &
+    A_\text{b} &= 2 M\aij 12 M \aij 21 \ .
+\end{align}
+The total area of the large box is
+\begin{align}
+    A_\text{tot} &= (M\aij 11 + M\aij 12)(M\aij 22 + M\aij 21) 
+    \\&= M\aij 11 M\aij 22 + 
+    M\aij 11 M\aij 21 + 
+    M\aij 12 M\aij 22 + 
+    M\aij 12 M\aij 21 
+    \\ &= 
+    M\aij 11 M\aij 22 + 
+    A_\text{r} + 
+    A_\text{g}  + 
+    \frac 12 A_\text{b} 
+    \ . 
+\end{align}
+% 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/determinant_sketch2.pdf}
+    \caption{Graphical aid for understanding the area of the parallelogram whose sides are $M\bas{e}_i$.}
+    \label{fig:determinant:map:area:proof}
+\end{figure}
+% 
+The area of the parallelogram is simply the area of the large box minus the areas of the non-parallelogram shapes, $A_\text{tot}- A_\text{r} - A_\text{g} - A_\text{b}$:
+\begin{align}
+    A_\text{parallelogram} =  M\aij 11 M\aij 22 - \frac 12 A_\text{b}  = M\aij 11 M\aij 22  - M\aij 12 M\aij 21  = \det M \ .
+    \label{eq:det:is:area:parallelogram}
+\end{align}
+And so we have shown the result in a simple case. 
 
 
 
@@ -1609,6 +1668,8 @@ A physically motivated (and much simpler) way of writing the inverse rotation is
 We used the fact that sine is odd, $\sin(-\theta) = -\sin\theta$ and cosine is even, $\cos(-\theta) = -\cos\theta$.
 \end{example}
 
+We have thus proven the existence of an inverse rotation by explicitly constructing the inverse of the rotation matrix. This makes sense: rotations are ``nice'' transformations that clearly do not lead to a loss of information. After all, the rotation of a vector is simply what you would see by looking at the vector and tilting your head a little. This remark will lead us to the idea of a \emph{passive} transformation. 
+
 \begin{exercise}
 Consider a point on the Cartesian plane $(x,y)$. Derive the rotation matrix \eqref{eq:rotation:matrix:2D} by determining the rotated coordinates $(x',y')$ as a function of $x$, $y$, and the rotation angle $\theta$. I suggest writing $x=r\cos\phi$ and $y=r\sin\phi$. Then use the fact that under a rotation, radius stays the same and angles add. Thus
 \begin{align}
@@ -1623,23 +1684,335 @@ Then invoke the angle addition formulae for trigonometric functions.
 
 \subsection{Transformation of Vectors}
 
-What can we do with a rotation matrix? Why, rotate vectors, of course! In this respect, $R(\theta)$ is just like any other linear transformation.
+What can we do with a rotation matrix? Why, rotate vectors, of course! In this respect, $R(\theta)$ is just like any other linear transformation. Here it is in matrix notation. A vector $\vec{v}$ transforms into a vector $\vec{v}' = R(\theta)\vec{v}$ with components
+\begin{align}
+    \begin{pmatrix}
+        v'^1\\ v'^2
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \cos\theta & - \sin\theta \\
+        \sin\theta & \pp \cos \theta
+    \end{pmatrix}
+    \begin{pmatrix}
+        v^1 \\ v^2
+    \end{pmatrix}
+    &= 
+    \begin{pmatrix}
+        \cos\theta\; v^1 - \sin\theta\; v^2\\
+        \sin\theta\; v^1 + \cos\theta\; v^2
+    \end{pmatrix} \ .
+\end{align}
+Here it is in component notation:
+\begin{align}
+    v'^i =
+    \left(R(\theta)v\right)^i &= 
+    R(\theta)\aij{i}{j}v^j \ .
+    \label{eq:col:vector:rotation}
+\end{align}
+We can observe something significant:
+\begin{bigidea}\label{idea:upper:index:rotates:with:R}
+A generic component of a vector has an upper index, $v^i$. The component of the rotated vector under a rotation $R(\theta)$ has generic component $R(\theta)\aij{i}{j}v^j$. That is: we take the rotation matrix and contract its second index (which is lower) with the upper index of the vector. 
+\end{bigidea}
+
+
+
+Thus far, rotations are just some linear transformation. We have not yet defined the features that make rotations special in Euclidean space. Indeed: we are not in Euclidean space yet, we are simply in $\mathbbm{R}^3$, the class of vector spaces described by three real numbers. Once we have a metric (dot product) then we can say that rotations preserve the dot product. A rotated vector does not change length under a rotation. Angles between vectors---which we saw in \eqref{eq:cos:theta:in:R3} are also defined by the dot product---are also unchanged under rotations. 
+
+\subsection{Transformation of numbers}\label{sec:rotation:of:numbers}
+
+Numbers, also known as scalars, do not transform under rotations. Here's a useful phrase: we say that numbers are \textbf{invariant} under rotations. Here's a prescient way of saying the same thing a third time:
+
+\begin{bigidea}\label{idea:no:index:rotates:without:R}
+An object with \emph{no} indices does not transform under rotations.
+\end{bigidea}
 
 \subsection{Transformation of Row Vectors}
 
+What about row vectors? Row vectors also transform under rotations. In matrix notation the transformation looks like this: $\row{w}\to \row{w}' = \row{w}R(\theta)\inv$,
+\begin{align}
+    \begin{pmatrix}
+        w'_1 & w'_2
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        w_1 & w_2
+    \end{pmatrix}
+    \begin{pmatrix}
+        \pp \cos\theta & \sin\theta \\
+        - \sin\theta & \cos \theta
+    \end{pmatrix} \ .
+\end{align}
+In component notation:
+\begin{align}
+    w'_i = (wR(\theta)\inv)_i = w_j \left(R(\theta)\inv\right)\aij{j}{i} 
+    = \left(R(\theta)\inv\right)\aij{j}{i} w_j  
+    \ .
+    \label{eq:row:vector:rotation}
+\end{align}
+One can of course write the components of $R(\theta)\inv$ in terms of those of $R(\theta)$, but it turns out to be convenient to keep track of when we have $R(\theta)$ versus $R(\theta)^{-1}$.  Observe that by the usual rules of matrix multiplication, the row vector needs to be on the left of the matrix. That is, $\row{w}R(\theta)\inv$ makes sense, while $R(\theta)\inv \row{w}$ does not. However, on the right side of \eqref{eq:row:vector:rotation} we have done something slippery: we have written the \emph{component} $\left(R(\theta)\inv\right)\aij{j}{i}$ to the \emph{left} of the \emph{component} $w_j$. This is totally allowed, since \emph{components are just numbers}. They carry no vector-y (``tensorial'') structure themselves. Indeed, this is one of the benefits of component notation. 
+
+At this point you should be very perplexed: \emph{why} does the row vector transform \emph{oppositely} to the column vector? Thus far we have simply stated that ``this is the way.\footnote{\url{https://knowyourmeme.com/memes/this-is-the-way}}'' However, consider the action of a row vector on a vector: $\row{w}\vec{v}$. This is simply a number, and as you know from Section~\ref{sec:rotation:of:numbers}, \emph{numbers do not transform under rotations}. Is this consistent with $\row{w}$ and $\vec{v}$ transforming? Let us quickly confirm. In matrix notation, we have:
+\begin{align}
+    \row{w}\vec{v}\to \row{w}'\vec{v}' = \row{w} R(\theta)\inv\, R(\theta) \vec{v} = \row{w}\vec{v} \ .
+    \label{eq:row:col:contract:transformation}
+\end{align}
+Here we have simply used $R\inv R = \mathbbm{1}$. We can write the same thing in component notation;
+\begin{align}
+    w'_i v'^i = \left(R(\theta)\inv\right)\aij{k}{i} R(\theta)\aij{i}{j} w_k v^j = \delta^k_j w_k v^j = w_kv^k \ .
+\end{align}
+We used \eqref{eq:inverse:matrix:definition} and \eqref{eq:kronecker:delta:action} to write the product of a matrix with its inverse in terms of the Kronecker $\delta$, and then to use the Kronecker $\delta$ to collapse the lower $j$ index into a lower $k$ index.  Let us be clear that we were able to `pull out' the \emph{components} of the rotation matrices because they are simply numbers. Further, let us be clear that the components of $R(\theta)$ and $R(\theta)\inv$ are contracted in specifically the right way to yield the Kronecker $\delta$:
+\begin{align}
+    \left(R(\theta)\inv\right)\aij{k}{i} R(\theta)\aij{i}{j} = \delta^k_j \ .
+\end{align}
+
+What we see is that the transformation law for row vectors, \eqref{eq:row:vector:rotation}, is precisely what it needs to be so that the number $\row{w}\vec{v}$ is invariant under a rotation. Further, we observe something significant:
+% 
+\begin{bigidea}\label{idea:lower:index:rotates:with:Rinv}
+A generic component of a row vector has a lower index, $w_i$. The component of the rotated row vector under a rotation $R(\theta)$ has generic component $(R(\theta)\inv)\aij{j}{i}w_j$. That is: we take the \emph{inverse} rotation matrix and contract its \emph{first} index (which is upper) with the lower index of the vector. 
+\end{bigidea}
+
+
 \subsection{Transformation of Matrices}
+
+Do matrices transform under a rotation? Matrices are linear maps from vectors to vectors, so we know that $M\vec{v}$ is a vector. That means that $M\vec{v}$ transforms the way any other vector transforms under a rotation $R(\theta)$:
+\begin{align}
+    M\vec{v} \to (M\vec{v})' &= R(\theta)\, M\vec{v} 
+    &
+    (M\vec{v})'^i  &= R(\theta)\aij{i}{j} M\aij{j}{k}v^k 
+    \ .
+\end{align}
+Note that $R(\theta)M \neq M R(\theta)$ because these are matrices. Similarly, on the right-hand side 
+\begin{align}
+    R(\theta)\aij{i}{j} M\aij{j}{k}v^k \neq 
+    M\aij{i}{j} R(\theta)\aij{j}{k} v^k \ ,
+\end{align}
+although it \emph{is} true that (note the difference in indices compared to above)
+\begin{align}
+    R(\theta)\aij{i}{j} M\aij{j}{k}v^k =
+    M\aij{j}{k} R(\theta)\aij{i}{j} v^k \ .
+\end{align}
+In the spirit of \eqref{eq:row:col:contract:transformation}, we would like to write the transformed vector $(M\vec{v})'$ in terms of a transformed matrix $M'$ acting on the transformed vector $\vec{v}'$. We define the transformed matrix $M'$ this way:
+\begin{align}
+    M' \vec{v}' &= R(\theta)\, M\vec{v} = R(\theta)\, M R(\theta)\inv \vec{v}'   \ .
+\end{align}
+In component notation, this is:
+\begin{align}
+    (M')\aij{i}{\ell} (v')^\ell &= 
+    R(\theta)\aij{i}{j}
+    M\aij{j}{k}
+    (R(\theta)\inv)\aij{k}{\ell}
+    (v')^\ell \ .
+    \label{eq:deriving:Mprime:rotation:cancel:vp}
+\end{align}
+We have been very clever and chose to write the dummy indices on the left-hand side to match the dummy indices of the last contraction on the right hand side. We now claim that we can ``cancel the $(v')^\ell$'' on both sides of this equation. This can be a very subtle point the first time you see it. The crux of the argument is that \eqref{eq:deriving:Mprime:rotation:cancel:vp} holds \emph{for any} vector $\vec{v}'$, and thus the equality cannot depend on the components of $\vec{v}'$. That means that the equality is really an equality between the matrices acting on $\vec{v}'$. To appreciate this subtlety, please see Example~\ref{ex:cancel:vector:in:matrix:equation} below.
+
+Having performed the slick step of canceling out $(v')^\ell$, we have the expression for the components of the transformed matrix, $M'$:
+\begin{align}
+    (M')\aij{i}{\ell}&= 
+    R(\theta)\aij{i}{j}
+    M\aij{j}{k}
+    (R(\theta)\inv)\aij{k}{\ell}
+    = 
+    R(\theta)\aij{i}{j}
+    (R(\theta)\inv)\aij{k}{\ell}
+    M\aij{j}{k}
+    &
+    M' = R(\theta) M R(\theta)\inv
+    \ .
+    \label{eq:deriving:Mprime:components}
+\end{align}
+Observe that the rotation matrices in $M'$ are precisely what they must be to ensure that the number $\row{w}M\vec{v}$ is invariant:
+\begin{align}
+    \row{w}M\vec{v} \to \row{w}'M'\vec{v}' = 
+    \row{w} R(\theta)\inv R(\theta) \; M\; R(\theta)\inv R(\theta)\vec{v}
+    =
+    \row{w}M\vec{v} \ .
+\end{align}
+We recognize two pairs of matrix--inverse matrix products. We could write out the long expression in terms of indices, but I fear we would run out of letters. What is catches our eye in \eqref{eq:deriving:Mprime:components} is the continuation of the string of ideas in \bigidearefs~\ref{idea:upper:index:rotates:with:R}, \ref{idea:no:index:rotates:without:R}, and \ref{idea:lower:index:rotates:with:Rinv}:
+% 
+\begin{bigidea}\label{idea:matrix:index:rotates:with:R:Rinv}
+A generic component of a matrix has an upper index and a lower index, $M\aij{i}{j}$. The generic component of the rotated matrix under a rotation $R(\theta)$ is $R(\theta)\aij{i}{k}\, (R(\theta)\inv)\aij{\ell}{j}\, M\aij{k}{\ell}$. We contract the upper index of $M$ with the lower index of $R(\theta)$ and we contract the lower index of $M$ with the upper index of $R(\theta)\inv$. The remaining indices of $R(\theta)$ and $R(\theta)\inv$ are the indices of $(M')\aij{i}{j}$.
+\end{bigidea}
+
+
+
+
+
+
+
+
+
+\begin{example}\label{ex:cancel:vector:in:matrix:equation}
+Consider the case $M\vec{v} = N\vec{v}$ for the case $\vec{v} = \bas{e}_1$. This sets two vectors equal:
+\begin{align}
+    \begin{pmatrix}
+        M\aij 11  & M\aij 12 \\
+        M\aij 21  &  M\aij 22
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}
+    &= 
+    \begin{pmatrix}
+        M\aij 11 \\ M\aij 21
+    \end{pmatrix} 
+    &
+    \begin{pmatrix}
+        N\aij 11  & N\aij 12 \\
+        N\aij 21  & N\aij 22
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        N\aij 11 \\ N\aij 21
+    \end{pmatrix} 
+    \ .
+    \label{eq:ex:cancel:vector:in:matrix:eq:1}
+\end{align}
+We see that the equality is satisfied if only the first columns of $M$ and $N$ match. The second columns could differ, say $M\aij 12 \neq N\aij 12$, and so we cannot conclude that $M=N$. However, if we say that $M\vec{v} = N\vec{v}$ for \emph{every} vector $\vec{v}$, then we could also check $\vec{v} = \bas{e}_2$ to find
+\begin{align}
+    \begin{pmatrix}
+        M\aij 11  & M\aij 12 \\
+        M\aij 21  &  M\aij 22
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}
+    &= 
+    \begin{pmatrix}
+        M\aij 12 \\ M\aij 22
+    \end{pmatrix} 
+    &
+    \begin{pmatrix}
+        N\aij 11  & N\aij 12 \\
+        N\aij 21  & N\aij 22
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        N\aij 12 \\ N\aij 22
+    \end{pmatrix} 
+    \ .
+    \label{eq:ex:cancel:vector:in:matrix:eq:2}
+\end{align}
+The combination of \eqref{eq:ex:cancel:vector:in:matrix:eq:1} and \eqref{eq:ex:cancel:vector:in:matrix:eq:2} means that $M=N$.
+\end{example}
+\begin{exercise}
+Explain why it is sufficient to show $M\bas{e}_i = N\bas{e}_i$ for both basis vectors in Example~\ref{ex:cancel:vector:in:matrix:equation} to prove the equality of $M$ and $N$ given the relation $M\vec{v} = N\vec{v}$ for any $\vec{v}$. How do you know that the equality holds for $\vec{v} \neq \bas{e}_i$? Your argument should invoke the notion of linear combinations and linearity.
+\end{exercise}
+
+
+
+
 
 \subsection{Transformation of Tensors}
 
+
+Why stop at two indices? A \textbf{tensor} is, in general, an object with indices associated with a vector space. The tensor can have any number of indices. Each index is either upper (column-like) or lower (row-like). A vector is a tensor with one upper index. A row vector is a tensor with one lower index. A matrix is a tensor whose first index is upper, and whose second index is lower. A number is a tensor with no indices.  A tensor with three indices can be written as a cube of components in the same way that a matrix can be written as a table of components. Tensors with more than three indices are hard to write down in ``matrix form.'' It's a good thing we've been spending all this time developing index notation, right?
+\begin{example}
+The \textbf{moment of inertia} tensor is a tensor with two indices, like a matrix. However, unlike a matrix, the moment of inertia tensor has two upper indices. This means it is rather different than a matrix. We now explain how they are different.
+\end{example}
+
+The significance of a tensor and its indices are that the indices tell us how the tensor transforms under rotations. This is the culmination of \bigidearefs~\ref{idea:upper:index:rotates:with:R}, \ref{idea:no:index:rotates:without:R}, \ref{idea:lower:index:rotates:with:Rinv}, and \ref{idea:matrix:index:rotates:with:R:Rinv}. We now \emph{define} the generalization of these ideas to a tensor, which is a pretty good working definition for what a tensor is:
+\begin{bigidea}\label{idea:tensor:rotation}
+A tensor with $p$ upper indices and $q$ lower indices is called a \textbf{rank}~$(p,q)$ tensor. For convenience of writing components using ellipses, let us write all of the upper indices first and then all of the lower indices last---this does not have to be the case, but the following result will hold. Under a rotation $R(\theta)$, the components of a tensor $T$ transform as
+\begin{align}
+    T^{i_1\cdots i_p}_{\phantom{i_1\cdots i_p}j_1\cdots j_q} \to 
+    (T')^{i_1\cdots i_p}_{\phantom{i_1\cdots i_p}j_1\cdots j_q}
+    = 
+    \left[\prod_{p}
+            % R(\theta)\aij{i_1}{k_1}\cdots 
+            R(\theta)\aij{i_p}{k_p}\right]
+    \left[\prod_{q}
+            % (R(\theta)\inv)\aij{\ell_1}{j_1}\cdots 
+            (R(\theta)\inv)\aij{\ell_q}{j_q}\right]
+    T^{i_1\cdots i_p}_{\phantom{i_1\cdots i_p}j_1\cdots j_q}  \ .
+\end{align}
+\end{bigidea}
+\begin{example}
+The matrix $T\aij{ij}{k}$ transforms as
+\begin{align}
+    T\aij{ij}{k} \to 
+    R(\theta)\aij{i}{\ell}
+    R(\theta)\aij{j}{m}
+    (R(\theta)\inv)\aij{n}{k}
+    T\aij{\ell m}{n} \ .
+\end{align}
+\end{example}
+
+\begin{exercise}
+The moment of inertia tensor has components $I^{ij}$ with $i$ and $j$ taking values from 1 to 3. How does the moment of inertia tensor transform under a three-dimensional rotation $R$? (A three dimensional rotation is described by three angles. We shall be lazy and suppress those arguments altogether.) Compare this transformation law to that of a matrix, $M\aij{i}{j}$. This difference is why we say ``moment of inertia \emph{tensor}'' and not `moment of inertia matrix.'
+\end{exercise}
+
+A large part of physics is written in tensor notation.\footnote{As a curious side note, there is a graphical way of writing tensors called birdtracks. You can learn more about it at \url{https://birdtracks.eu}, or in Roger Penrose's book \emph{Road to Reality}. The notation is quite fetching, but ultimately I have not found it to be significantly more useful than indices.} This subsection finally gives a working definition for what a tensor is and hints at why it may be significant: it is an object that transforms in a prescribed way under rotations. Because rotations are related to changes in reference frame, tensors are objects where measuring the components in one frame allows us to predict the components that are measured by other observers. 
+
 \subsection{Rotations in Three-Dimensions}
+
+In $\mathbbm{R}^3$ there are three different axes about which we can perform a rotation. These roughly correspond to three rotation matrices:
+\begin{align}
+    R_1(\theta_1)
+    &=
+    \begin{pmatrix}
+        1 & 0 & \pp 0 \\
+        0 & \text{c}_{\theta_1} & -\text{s}_{\theta_1} \\
+        0 & \text{s}_{\theta_1} & \pp \text{c}_{\theta_1}
+    \end{pmatrix}
+    &
+    R_2(\theta_2)
+    &=
+    \begin{pmatrix}
+        \pp \text{c}_{\theta_2} & 0 & \text{s}_{\theta_2} \\
+        \pp 0 & 1 & 0 \\
+        -\text{s}_{\theta_2} & 0 & \text{c}_{\theta_2}
+    \end{pmatrix}
+    &
+    R_3(\theta_3)
+    &=
+    \begin{pmatrix}
+        \text{c}_{\theta_3} & -\text{s}_{\theta_3} & 0 \\
+        \text{s}_{\theta_3} & \pp\text{c}_{\theta_3} & 0 \\
+        0 & \pp 0 & 1
+    \end{pmatrix} \ .
+    \label{eq:rotation:matrix:basic}
+\end{align}
+You can see how these break down into two-dimensional rotations along each respective axis. If that is not obvious, please do the following exercise.
+\begin{exercise}
+Write the transformation of a three-component vector $\vec{v}$ with components $v^i$ under reach of the transformations in \eqref{eq:rotation:matrix:basic}. 
+\end{exercise}
+Additional rotations are produced by taking products of $R_1$, $R_2$, and $R_3$ by appropriate amounts. The properties of these rotations are outside the scope of our course, but their study is a big part of physics and is known as the \emph{representation theory of Lie groups}. If you want to do a deeper dive into rotation matrices in three dimensions, I recommend Howie Haber's lecture notes for Physics 216 at \acro{UCSC}\footnote{\url{http://scipp.ucsc.edu/~haber/ph216/rotation_12.pdf}}. 
+
+
+All this is to say that there are more options for rotations in three dimensions. Given a particular rotation, $R$, then the tensor transformation rule in \bigidearef~\ref{idea:tensor:rotation} holds. In fact, one can start to piece together what a rotation in even higher dimensions looks like. You extend the list \eqref{eq:rotation:matrix:basic} to include rotations about every plane---where the plane is simply defined by the two components of the vector that are being mixed into each other. That gives you the list of rotations about each axis. A general rotation is a product of the rotation-about-a-given-axis. Now you know how to manipulate tensors in arbitrary dimensions. Not bad.
+
+\begin{exercise}
+One thing to notice is that the order in which you apply rotations matters. Explicitly perform the matrix multiplication on each side of the following non-equation to confirm this:
+\begin{align}
+    R_1(\theta_1) R_2(\theta_2) \neq R_2(\theta_2) R_1(\theta_1) \ .
+\end{align}
+We say that the rotation matrices along different axes do not \textbf{commute} because the order in which they are applied matters. This is demonstrated in Fig.~\ref{fig:rotate:QFT}.
+\end{exercise}
 
 % non commutivity
 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.9 \textwidth]{figures/rotation_qft.pdf}
+    \caption{Example of the non-commutativity of rotations. Consider this copy of Peskin and Schr\"oder's \emph{Introduction to Quantum Field Theory}. Orient the $\hat x$ axis in the horizontal direction along the desk and the $\hat y$ axis in the vertical direction along the desk. Performing a $\pi/2$ rotation in the $\hat x$ direction then in the $\hat y$ direction (upper path) gives a different result than performing the rotations in the opposite order (lower path).}
+    \label{fig:rotate:QFT}
+\end{figure}
+
 \subsection{Invariance of Trace and Determinant}
+
+The trace and the determinant of a matrix 
 
 \subsection{Exponentiation of Generators}
 
-\subsection{Symmetry and Indices}
+% \subsection{Symmetry and Indices}
 
 \subsection{Active versus Passive}
 \begin{figure}[tb]
@@ -1661,13 +2034,12 @@ Passive is a symmetry. Active is an actual ``do something''
 % Active: rotations act on coordinate
 % R v
 
-\section{Central Dogma I: vectors are not columns}
 
+\section{More General (Multi-)Linear Maps: Tensors}
 
-\section{The incredibly un-mathematical idea of niceness}
-
-
-\section{Central Dogma II: the eigensystem}
+\subsection{Linear Maps to Numbers: Row Vectors}
+\subsection{Matrices as Linear Maps}
+\subsection{Tensors as Multi-Linear Maps}
 
 
 
@@ -1691,9 +2063,13 @@ The $\hat H$ has a hat because it is a matrix. The $E$ does not have a hat becau
 \end{example}
 
 
-Test: $\ket{^i}$ $\bra{_j}$
+Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
 
-\section{Linear Maps to Numbers: Row Vectors}
+
+\begin{align}
+    \left\langle ^i  \middle/ w_i A\aij{k}{\ell} v^j \middle/  _j\right\rangle
+\end{align}
+
 
 \section{Metric Spaces: Dot Products}
 \label{sec:metric:spaces}
@@ -1706,26 +2082,26 @@ Test: $\ket{^i}$ $\bra{_j}$
 \subsection{Rotations, once again}
 \subsection{The meaning of indices}
 
-
-
-\section{More General (Multi-)Linear Maps: Tensors}
-
-
 \section{Special Relativity: Minkowski Space}
 
-\section{Interlude: an abundance of names and notation}
 
-\section{Nice and Not-So-Nice Transformations}
 
-\subsection{Rotations}
 
-\subsection{``Nice'' Transformations}
+\section{Central Dogmas}
 
-% Rescaling along axes
-% everything else is hard
-% Wouldn't it be nice if we could reduce everything to rotations and nice transformations?
+\subsection{Vectors are not columns}
+% also: vectors are not components, but they're convenient
+\subsection{Vector space duality}
+\subsection{Everything is a vector space, everyting is a linear map}
+\subsection{The un-mathematical idea of niceness}
+% one, diagonal, rotations, projections, worse
+\subsection{The eigensystem}
 
-\subsection{Projections}
+
+
+
+
+
 
 \section*{Acknowledgments}
 
