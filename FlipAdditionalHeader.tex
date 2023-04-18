@@ -71,7 +71,14 @@
 \renewcommand{\tilde}{\widetilde}   % tilde over characters
 \renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
 \newcommand{\bas}[1]{\hat{\mathbf{#1}}} 	% basis vectors have hat
+
+
 \newcommand{\row}[1]{\tilde{\mathbf{#1}}} 	% row vectors have tilde
+\newcommand{\rbas}[1]{\row{#1}}             % row basis
+\usepackage{undertilde}                     % have to compile from CTAN ("latex undertilde.ins")
+\renewcommand{\row}[1]{\utilde{\mathbf{#1}}}   % row vectors have tilde
+\renewcommand{\rbas}[1]{\hat{\row{#1}}}
+
 
 % For matrices
 \newcommand{\aij}[2]{^{#1}_{\phantom{#1}#2}}

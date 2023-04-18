@@ -127,19 +127,19 @@ There is something very perverse about this ``vector.'' The variable names $x$, 
 \label{ex:position:vector}
 \end{exercise}
 
-This three-dimensional space is called [three-dimensional] \textbf{real space} and we write it as $\mathbbm{R}^3$. This is because a vector is an element of three-dimensional real space specified by \emph{three} real numbers. 
+This three-dimensional space is called [three-dimensional] \textbf{real space} and we write it as $\RR ^3$. This is because a vector is an element of three-dimensional real space specified by \emph{three} real numbers. 
 
-Three-dimensional real space is an example of a \textbf{vector space}, which is just a stupidly formal way of saying that it is where vectors live. Vectors are \emph{elements} of a vector space. A vector space is the set of all possible allowed vectors of a given type. For $\mathbbm{R}^3$, the vector space is composed of all possible triplets of real numbers. 
+Three-dimensional real space is an example of a \textbf{vector space}, which is just a stupidly formal way of saying that it is where vectors live. Vectors are \emph{elements} of a vector space. A vector space is the set of all possible allowed vectors of a given type. For $\RR ^3$, the vector space is composed of all possible triplets of real numbers. 
 
 
-\begin{example} It should be no surprise that we can imagine real two-dimensional space, $\mathbbm{R}^2$. This is a vector space where each vector may be written as two real numbers. You can also imagine writing real four-dimensional space, $\mathbbm{R}^2$, or complex two dimensional space, $\mathbbm{C}^2$. 
+\begin{example} It should be no surprise that we can imagine real two-dimensional space, $\RR ^2$. This is a vector space where each vector may be written as two real numbers. You can also imagine writing real four-dimensional space, $\RR ^2$, or complex two dimensional space, $\mathbbm{C}^2$. 
 \end{example}
 
-From the above example, you should have some intuition for what the \textbf{dimension} of a vector space means: the dimension counts how many numbers you need to specify a vector. For real vector spaces, $\mathbbm{R}^d$, the dimension is the number $d$. We will always assume that $d$ is a positive integer.\footnote{The notion of a non-integer-dimensional space does show up occasionally. These do not even have to be particularly exotic: you can look up the dimension of a fractal.}
+From the above example, you should have some intuition for what the \textbf{dimension} of a vector space means: the dimension counts how many numbers you need to specify a vector. For real vector spaces, $\RR ^d$, the dimension is the number $d$. We will always assume that $d$ is a positive integer.\footnote{The notion of a non-integer-dimensional space does show up occasionally. These do not even have to be particularly exotic: you can look up the dimension of a fractal.}
 
 \subsection{Vectors and Numbers}
 
-% We now make some general statements about vector spaces. These apply to all vector spaces, not just $\mathbbm{R}^3$, but you can keep $\mathbbm{R}^3$ in mind as we go over them. 
+% We now make some general statements about vector spaces. These apply to all vector spaces, not just $\RR ^3$, but you can keep $\RR ^3$ in mind as we go over them. 
 
 We should be clear that there are now two different kinds of objects: \emph{vectors} and \emph{numbers}. We will have all sorts of notation for vectors, but let us write them with a boldfaced Roman letter for now, e.g.~$\vec{v}$. We typically write numbers as lowercase italicized Roman letters like $a$ or sometimes Greek letters like $\alpha$. These two types of objects are similar, except vectors do not have a built-in definition for multiplication, see Table~\ref{table:vectors:numbers}.
 
@@ -161,7 +161,7 @@ We should be clear that there are now two different kinds of objects: \emph{vect
         \\
         Collection of all allowed objects (space) & vector space & field (``numbers'') 
         \\
-        Example of a space & $\mathbbm{R}^3$ & $\mathbbm{R}$
+        Example of a space & $\RR ^3$ & $\RR $
         \\ \bottomrule
     \end{tabular}
     \caption{
@@ -170,7 +170,7 @@ We should be clear that there are now two different kinds of objects: \emph{vect
   }
 \end{table}
 
-You already know everything there is to know about numbers.\footnote{Formally, what I mean by `number' is what mathematicians call a \textbf{field}. This simply means some objects where one can add, subtract, multiply, and divide as you would expect. This term is a little tedious for us because physicists usually mean something else when they say `field.' Usually we mean something like the electric field or the field associated with the Higgs boson.} Most relevant is that you can multiply numbers with each other (including division, the inverse of multiplication) and you can add them together (including subtraction). For the first part of this course, we will focus on real numbers, $\mathbbm{R}$. Later we will also allow for complex numbers, $\mathbbm{C}$. 
+You already know everything there is to know about numbers.\footnote{Formally, what I mean by `number' is what mathematicians call a \textbf{field}. This simply means some objects where one can add, subtract, multiply, and divide as you would expect. This term is a little tedious for us because physicists usually mean something else when they say `field.' Usually we mean something like the electric field or the field associated with the Higgs boson.} Most relevant is that you can multiply numbers with each other (including division, the inverse of multiplication) and you can add them together (including subtraction). For the first part of this course, we will focus on real numbers, $\RR $. Later we will also allow for complex numbers, $\mathbbm{C}$. 
 
 Like numbers, vectors can be added and subtracted. In fact, vector arithmetic turns out to be very similar to `number arithmetic.' However, unlike numbers, there is no obvious definition for vector multiplication. This leads to the idea of \emph{defining} functions for various kinds of vector multiplication. Linear algebra is the study of a particular class of these functions. The dot product, for example, which takes two vectors and returns a number, is something we have to ``make up'' and attach to a vector space.
 
@@ -216,7 +216,7 @@ You may worry that this notation introduces ambiguity. If we see $q^2$, is this 
 % \subsection{Notation: Indices again}
 
 % We can express this using index notation. 
-You know from $\mathbbm{R}^3$ that you can add together any two vectors $\vec{v}$ and $\vec{w}$.
+You know from $\RR ^3$ that you can add together any two vectors $\vec{v}$ and $\vec{w}$.
 % 
 Let us call this sum $\vec{u}$ so that $\vec{u}\equiv \vec{v}+\vec{w}$. Then we can succinctly write the components of $\vec{u}$ in one line:
 \begin{align}
@@ -249,7 +249,7 @@ All vector spaces allow addition and subtraction. This is defined component-wise
         v^3 + w^3
     \end{pmatrix} \ .
 \end{align}
-What this means is that the \emph{sum} of two vectors is also a vector. That means that if $\vec{v}$ and $\vec{w}$ are vectors in $\mathbbm{R}^3$, then $(\vec{v}+\vec{w})$ is a vector in $\mathbbm{R}^3$. The components of the vector $(\vec{v}+\vec{w})$ are simply the sum of the components of $\vec{v}$ and $\vec{w}$. 
+What this means is that the \emph{sum} of two vectors is also a vector. That means that if $\vec{v}$ and $\vec{w}$ are vectors in $\RR ^3$, then $(\vec{v}+\vec{w})$ is a vector in $\RR ^3$. The components of the vector $(\vec{v}+\vec{w})$ are simply the sum of the components of $\vec{v}$ and $\vec{w}$. 
 % 
 A few formal properties that generalize to all vector spaces:
 \begin{itemize}
@@ -277,7 +277,7 @@ We get another type of operation ``for free'' with a vector space. This is calle
 \subsection{Rescaling: multiplication by a number}
 
 Another operation that exists in a vector space is rescaling: we multiply a vector by a number. 
-Let $\alpha$ be a number. If you want to nitpick, let us restrict $\alpha$ to be a real number. If we have a vector $\vec{v}$ with components $v^i$, then $\alpha \vec{v}$ is also a vector.\footnote{``Also a vector'' means that it is also an element of the vector space; so $(\alpha\vec{v})$ is an element of $\mathbbm{R}^3$ is $\vec{v}$ is an element of $\mathbbm{R}^3$. } The components of $\alpha \vec{v}$ are
+Let $\alpha$ be a number. If you want to nitpick, let us restrict $\alpha$ to be a real number. If we have a vector $\vec{v}$ with components $v^i$, then $\alpha \vec{v}$ is also a vector.\footnote{``Also a vector'' means that it is also an element of the vector space; so $(\alpha\vec{v})$ is an element of $\RR ^3$ is $\vec{v}$ is an element of $\RR ^3$. } The components of $\alpha \vec{v}$ are
 \begin{align}
     (\alpha v)^i = \alpha v^i \ ,
 \end{align}
@@ -339,12 +339,12 @@ Show that the vector space spanned by $\vec{v}$ and $\alpha\vec{v}$ is the same 
 \end{exercise}
 
 \begin{exercise}
-If $\mathbbm{R}^3$ is the space of vectors with three real components, argue that the span of any four vectors is at most $\mathbbm{R}^3$ but possibly a subset of $\mathbbm{R}^3$. Give an example where the span of four vectors is $\mathbbm{R}^2$. 
+If $\RR ^3$ is the space of vectors with three real components, argue that the span of any four vectors is at most $\RR ^3$ but possibly a subset of $\RR ^3$. Give an example where the span of four vectors is $\RR ^2$. 
 \end{exercise}
 
 \subsection{Basis vectors: an illustrative example}
 
-Let us push this idea further. It is useful to start with an example. For simplicity, let us focus on the two-dimensional plane, $\mathbbm{R}^2$. A vector in $\mathbbm{R}^2$ looks like this:
+Let us push this idea further. It is useful to start with an example. For simplicity, let us focus on the two-dimensional plane, $\RR ^2$. A vector in $\RR ^2$ looks like this:
 \begin{align}
     \vec{v} =
     \begin{pmatrix}
@@ -374,11 +374,11 @@ Indeed, it should be obvious that
 \end{align}
 In other words, these `special' vectors ${\bas{e}}_{1,2}$ satisfy:
 \begin{enumerate}
-    \item Any vector in $\mathbbm{R}^2$ may be written as a linear combinations of ${\bas{e}}_{1,2}$. We showed this because $\vec{v}$ in the above discussion could be any vector in $\mathbbm{R}^2$. Thus $\text{Span}({\bas{e}}_{1},{\bas{e}}_{1})=\mathbbm{R}^2$.
+    \item Any vector in $\RR ^2$ may be written as a linear combinations of ${\bas{e}}_{1,2}$. We showed this because $\vec{v}$ in the above discussion could be any vector in $\RR ^2$. Thus $\text{Span}({\bas{e}}_{1},{\bas{e}}_{1})=\RR ^2$.
     \item The coefficients in the linear combination are precisely the components of the vector $\vec{v}$. Soon we will see that this observation is actually backwards: it is the choice that ${\bas{e}}_{1}$ are special that defines the components of a vector.
 \end{enumerate}
 
-It should be obvious that any pair of vectors that ``aren't pointing in the same direction'' can span the entire space $\mathbbm{R}^2$. 
+It should be obvious that any pair of vectors that ``aren't pointing in the same direction'' can span the entire space $\RR ^2$. 
 \begin{exercise}
 What does ``aren't pointing in the same direction'' mean in this context? Use $\vec{v}$ and $\alpha\vec{v}$ in your answer.
 \end{exercise}
@@ -415,14 +415,14 @@ These coefficients $\alpha = v^2$ and $\beta = v^2 - v^1$ may be written  in sho
 where we use the subscript $\vec{f}$ to mean ``coefficients with respect to $\vec{f}_{1,2}$. This looks just like a two-component vector, doesn't it?
 
 \begin{exercise}
-Let $\vec{v} \in \mathbbm{R}^2$ be the following vector in two-dimensional real space:
+Let $\vec{v} \in \RR ^2$ be the following vector in two-dimensional real space:
 \begin{align}
     \vec{v}=
     \begin{pmatrix}
         3\\2
     \end{pmatrix} \ .
 \end{align}
-Here are two vectors that span $\mathbbm{R}^2$:
+Here are two vectors that span $\RR ^2$:
 \begin{align}
     \vec{g}_1 &=
     \begin{pmatrix}
@@ -438,7 +438,7 @@ What are the coefficients $\alpha$ and $\beta$ so that $\vec{v} = \alpha \vec{g}
 \end{exercise}
 
 
-What we're getting at is the following.  Define a set of vectors that span a space. We will call this set of vectors a \textbf{basis} of that space---we'll give a slightly more formal definition below. Any vector in the space can be written as a linear combination of basis vectors. For example, if $\vec{b}_{1,2}$ are a basis of $\mathbbm{R}^2$, then for any vector $\vec{v}\in\mathbbm{R}^2$ we may write
+What we're getting at is the following.  Define a set of vectors that span a space. We will call this set of vectors a \textbf{basis} of that space---we'll give a slightly more formal definition below. Any vector in the space can be written as a linear combination of basis vectors. For example, if $\vec{b}_{1,2}$ are a basis of $\RR ^2$, then for any vector $\vec{v}\in\RR ^2$ we may write
 \begin{align}
     \vec{v} = \alpha \vec{b}_{1} + \beta \vec{b}_2 \ .
 \end{align}
@@ -482,7 +482,7 @@ Then we could take linear combinations of the two with respect to two numbers $a
     \label{eq:linear:combination:in:b:basis}
 \end{align}
 
-If $\vec{v}$ and $\vec{w}$ span $\mathbbm{R}^2$, then any vector in the vector space may be written as a linear combination of the form \eqref{eq:linear:combination:in:b:basis}. This means we may use the ``$\vec{b}$ basis components'' as equivalent ways of encoding a vector as the natural description \eqref{eq:v:v1:v2}. But wait a moment: what is so ``natural'' about \eqref{eq:v:v1:v2}? 
+If $\vec{v}$ and $\vec{w}$ span $\RR ^2$, then any vector in the vector space may be written as a linear combination of the form \eqref{eq:linear:combination:in:b:basis}. This means we may use the ``$\vec{b}$ basis components'' as equivalent ways of encoding a vector as the natural description \eqref{eq:v:v1:v2}. But wait a moment: what is so ``natural'' about \eqref{eq:v:v1:v2}? 
 
 If we reverse the argument for the $\vec{b}$ basis, then we see that the ``natural'' components of the vector $\vec{v}$ in \eqref{eq:v:v1:v2} are simply the coefficients of the linear combinations of the basis vectors ${\bas{e}}_{1,2}$ in \eqref{eq:natural:cartesian:basis}. What made the basi vectors ${\bas{e}}_{1,2}$ so special, anyway? Nothing at all. 
 
@@ -550,7 +550,7 @@ Color space is a vector space that highlights this idea of a more abstract basis
 \end{example}
 
 
-What is less obvious is that at this point there is \emph{no preferred basis}. Any minimal set of vectors that span a vector space is a perfectly good vector. Suppose $\vec{b}_{1,2,3}$ is one such set for $\mathbbm{R}^3$. We can write the vector with respect to the coefficients of the linear combination of  $\vec{b}_{1,2,3}$ basis vectors that reproduces it. If we had another basis, $\vec{b}'_{1,2,3}$, we could write the same vector with respect to a different linear combination of the $\vec{b}'_{1,2,3}$ basis. The components of these linear combinations, say $\alpha^i$ and $\alpha'^i$, will be different because the basis elements are different. However, they represent the same vector.
+What is less obvious is that at this point there is \emph{no preferred basis}. Any minimal set of vectors that span a vector space is a perfectly good vector. Suppose $\vec{b}_{1,2,3}$ is one such set for $\RR ^3$. We can write the vector with respect to the coefficients of the linear combination of  $\vec{b}_{1,2,3}$ basis vectors that reproduces it. If we had another basis, $\vec{b}'_{1,2,3}$, we could write the same vector with respect to a different linear combination of the $\vec{b}'_{1,2,3}$ basis. The components of these linear combinations, say $\alpha^i$ and $\alpha'^i$, will be different because the basis elements are different. However, they represent the same vector.
 
 In your heart, you should feel anxious. You \emph{like} the ``obvious'' basis 
 \begin{align}
@@ -638,7 +638,7 @@ One of my favorite examples of a vector space is the space of Fibonacci sequence
 
 \subsection{Operations that are not (yet) allowed}
 
-In these definitions, we make a big deal about how the sum of two vectors \emph{is also a vector}. Or how the rescaling of a vector by a number \emph{is also a vector}. This is in contrast to operations that are either not allowed or that do not produce vectors. An example of an operation that is not allowed is adding together vectors from two different vector spaces. The following proposed sum of a vector in $\mathbbm{R}^3$ with  a vector in $\mathbbm{R}^2$ does not make sense:
+In these definitions, we make a big deal about how the sum of two vectors \emph{is also a vector}. Or how the rescaling of a vector by a number \emph{is also a vector}. This is in contrast to operations that are either not allowed or that do not produce vectors. An example of an operation that is not allowed is adding together vectors from two different vector spaces. The following proposed sum of a vector in $\RR ^3$ with  a vector in $\RR ^2$ does not make sense:
 \begin{align}
     \begin{pmatrix}
         v^1\\ v^2 \\v^3
@@ -652,9 +652,9 @@ In these definitions, we make a big deal about how the sum of two vectors \emph{
 \end{align}
 If you find yourself adding vectors from two different vector spaces, then you have made a mistake.
 
-Another operation that requires care is rescaling a real vector by a complex number. If $\vec{v}$ is a vector in $\mathbbm{R}^3$ and we try to multiply it by a complex number, $\alpha = 2+3i$, then the resulting ``vector'' is not a vector in $\mathbbm{R}^3$:
+Another operation that requires care is rescaling a real vector by a complex number. If $\vec{v}$ is a vector in $\RR ^3$ and we try to multiply it by a complex number, $\alpha = 2+3i$, then the resulting ``vector'' is not a vector in $\RR ^3$:
 \begin{align}
-    (\alpha\vec{v})^i = (2+3i)v^i \notin \mathbbm{R} \ ,
+    (\alpha\vec{v})^i = (2+3i)v^i \notin \RR  \ ,
 \end{align}
 that is: the components of $\alpha\vec{v}$ are not real numbers, and so this cannot be an element of aa vector space that is \emph{defined} to have real components. Later on we will generalize to the case of \emph{complex vector spaces}, but we will treat that with some care.\footnote{If you want to be fancy, you can replace `number' with the mathematical notion of a field. Both the real numbers and the complex numbers are examples of fields. In my mind a field is just a class of number, though mathematicians have fancier definitions.}
 
@@ -663,21 +663,21 @@ Thus far, we have introduced the \emph{nouns} of this course: vectors. We have i
     \item Addition takes two vectors in a vector space and returns a vector in the same vector space. 
     \item Rescaling takes a vector and a number and returns a vector in the same vector space.
 \end{enumerate}
-We can rewrite this in the language of \emph{mappings} (or \emph{functions}) as follows. Let $V$ be a vector space, say $V=\mathbbm{R}^3$. Let us write $\mathbbm{R}$ mean [real] numbers. Then the above statements tell us that addition and rescaling can be thought of as maps:
+We can rewrite this in the language of \emph{mappings} (or \emph{functions}) as follows. Let $V$ be a vector space, say $V=\RR ^3$. Let us write $\RR $ mean [real] numbers. Then the above statements tell us that addition and rescaling can be thought of as maps:
 \begin{enumerate}
     \item Vector addition: $V\times V \to V$
-    \item Rescaling: $V\times \mathbbm{R} \to V$ \ .
+    \item Rescaling: $V\times \RR  \to V$ \ .
 \end{enumerate}
 Do not be intimidated by the $\times$ symbol here. This ``mapping'' notation means nothing more and nothing less than the statements above.
 
-We now know everything there is to know about the vector space $\mathbbm{R}^3$. We want to learn more about functions (maps) that involve this vector space. How can we combine vectors and numbers to produce other vectors and numbers? What about more complicated objects like matrices and tensors? 
+We now know everything there is to know about the vector space $\RR ^3$. We want to learn more about functions (maps) that involve this vector space. How can we combine vectors and numbers to produce other vectors and numbers? What about more complicated objects like matrices and tensors? 
 
 
 \subsection{Euclidean three-space}
 
 You may object: \emph{wait! I know there are more things you can do with three-vectors!} You remember that there are two types of vector multiplication that we use in physics. The \textbf{dot product} and the \textbf{cross product}. 
 
-In $\mathbbm{R}^3$, the \textbf{dot product} is a map $V\times V \to \mathbbm{R}$. That means it takes two vectors and returns a number. The particular number that it returns is typically \emph{defined} to be
+In $\RR ^3$, the \textbf{dot product} is a map $V\times V \to \RR $. That means it takes two vectors and returns a number. The particular number that it returns is typically \emph{defined} to be
 \begin{align}
     \vec{v} \cdot \vec{w} 
     = \sum_i v^i w^i  
@@ -795,7 +795,7 @@ There's something that physicists do that tend to drive mathematicians crazy: we
 The reason why we have this culture is that this index notation ends up being so damn convenient. In addition to vectors, we will have other objects that have indices: dual vectors, matrices, and tensors. When we write everything in with indices, we can ``see'' properties of these objects that are not obvious without the indices. Specifically, we can see \emph{how an object transforms under symmetries}. In this course, we will focus on \emph{rotations} of vectors and their generalizations.  
 
 
-There's a second reason why indices are convenient: they allow us to use \textbf{Einstein summation convention}. This is a notational shortcut that introduces upper and lower indices to convey sums. Consider, for example, the ``matrix multiplication'' of a row vector $\row{w}$ on a column vector $\vec{v}$. Nevermind the formal definition of ``row vector'' as opposed to ``column vector.'' Let's just write it out in components where it is obvious for $\mathbbm{R}^3$
+There's a second reason why indices are convenient: they allow us to use \textbf{Einstein summation convention}. This is a notational shortcut that introduces upper and lower indices to convey sums. Consider, for example, the ``matrix multiplication'' of a row vector $\row{w}$ on a column vector $\vec{v}$. Nevermind the formal definition of ``row vector'' as opposed to ``column vector.'' Let's just write it out in components where it is obvious for $\RR ^3$
 \begin{align}
     \row{w}
     &=
@@ -822,7 +822,7 @@ The final expression is familiar, right? It follows the usual rules of matrix mu
 On the right-hand side we have \emph{defined} the summation convention: \emph{whenever there is exactly one upper index and exactly one lower index with the same letter, we should understand that there is a sum over that index over all of its allowed values.} We call pairs of repeated indices where one is upper and one is lower \textbf{contracted indices}.
 
 
-The value $w_iv^i$ is simply a number. It is not a vector. It does not have any ``vectorial'' (tensorial) structure. It is not an element of the vector space $\mathbbm{R}^3$. It does not transform under rotations. It is \emph{just a number}. In other words, $w_iv^i$ behaves like an object with \emph{no indices}. Contracted indices ``cancel each other out.''
+The value $w_iv^i$ is simply a number. It is not a vector. It does not have any ``vectorial'' (tensorial) structure. It is not an element of the vector space $\RR ^3$. It does not transform under rotations. It is \emph{just a number}. In other words, $w_iv^i$ behaves like an object with \emph{no indices}. Contracted indices ``cancel each other out.''
 
 This is significant because we will see that indices tell us how objects transform. Evidently, column vectors and row vectors transform differently since one has an upper index and one has a lower index. Further, when we contract the two indices, we end up with something with no indices: a number that does not transform at all. This may seem like notational overkill---trust me, it is worth building this notation now. We will use it over and over.
 
@@ -992,7 +992,7 @@ Show that equations \eqref{eq:def:pre:linear} and \eqref{eq:def:linear} imply on
 
 \subsection{Linear Transformations in One Dimension}
 
-The definition of `linear' has \emph{nothing to do with lines}. It is true that $y=mx+b$ is the equation for a line in the $(x,y)$ plane. This is not the same as $f(x)=mx+b$ being linear. In fact, $f(x)=mx+b$ is \emph{not} linear as a transformation of numbers, $\mathbbm{R}\to\mathbbm{R}$
+The definition of `linear' has \emph{nothing to do with lines}. It is true that $y=mx+b$ is the equation for a line in the $(x,y)$ plane. This is not the same as $f(x)=mx+b$ being linear. In fact, $f(x)=mx+b$ is \emph{not} linear as a transformation of numbers, $\RR \to\RR $
 \begin{exercise}
 Show that $f(x) = mx+b$ does \emph{not} satisfy the definition of linearity, \eqref{eq:def:linear}. It is sufficient, for example, to consider $f(2x) \stackrel{?}{=}f(x)+f(x)$. Another cute way to see this is to consider linear combinations with zero, say $f(x+0)$.
 \end{exercise}
@@ -1016,7 +1016,7 @@ We recognized that the $j$ indices are \emph{contracted}. From an index point of
 
 \subsection{The trivial transformation: identity matrix}
 
-The identity matrix, $\one $ leaves vectors unchanged: $\one \vec{v} = \vec{v}$. You already know its components in $\mathbbm{R}^3$:
+The identity matrix, $\one $ leaves vectors unchanged: $\one \vec{v} = \vec{v}$. You already know its components in $\RR ^3$:
 \begin{align}
     \one  = 
     \begin{pmatrix}
@@ -1278,7 +1278,7 @@ The $i^\text{th}$ column of a matrix are the components of $M\bas{e}_i$. This as
  
 
 \paragraph{General discussion}
-The general version of this discussion is as follows. We write $\mathbbm{R}^N$ to be $N$-dimensional real space. A linear transformation from $\mathbbm{R}^N \to \mathbbm{R}^N$ is a matrix. Suppose we have a nice basis. In fact, the `obvious' basis is
+The general version of this discussion is as follows. We write $\RR ^N$ to be $N$-dimensional real space. A linear transformation from $\RR ^N \to \RR ^N$ is a matrix. Suppose we have a nice basis. In fact, the `obvious' basis is
 \begin{align}
     {\bas{e}}_1 &= 
     \begin{pmatrix}
@@ -1297,7 +1297,7 @@ The general version of this discussion is as follows. We write $\mathbbm{R}^N$ t
         0 \\ \vdots \\ 0 \\ 1
     \end{pmatrix} \ .
 \end{align}
-Then we know that any vector in $\mathbbm{R}^N$ may be written as a linear combination of these basis vectors. In fact, this is \emph{precisely} what we mean by the components of a vector: it is the coefficient of each ${\bas{e}}_i$ basis vector in the linear combination that represents the vector:
+Then we know that any vector in $\RR ^N$ may be written as a linear combination of these basis vectors. In fact, this is \emph{precisely} what we mean by the components of a vector: it is the coefficient of each ${\bas{e}}_i$ basis vector in the linear combination that represents the vector:
 \begin{align}
     \vec{v} &= v^i{\bas{e}}_i 
     &
@@ -1343,7 +1343,7 @@ There are several observations:
 \begin{figure}[tb]
     \centering
     \includegraphics[width=.8\textwidth]{figures/maps_M.pdf}
-    \caption{$M$ is a linear transformation from $\mathbbm{R}^2\to\mathbbm{R}^2$. If we know the action of $M$ on the basis vectors $\bas{e}_i$ of $\mathbbm{R}^2$, then we know the action of $M$ on any vector $\vec{v}$.}
+    \caption{$M$ is a linear transformation from $\RR ^2\to\RR ^2$. If we know the action of $M$ on the basis vectors $\bas{e}_i$ of $\RR ^2$, then we know the action of $M$ on any vector $\vec{v}$.}
     \label{fig:map:M}
 \end{figure}
 
@@ -1364,7 +1364,7 @@ Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ i
 \begin{figure}[tb]
     \centering
     \includegraphics[width=.8\textwidth]{figures/maps_Minv.pdf}
-    \caption{Let $M$ is a linear transformation from $\mathbbm{R}^2 \to \mathbbm{R}^2$, as we drew in Fig.~\ref{fig:map:M}. Now assume that you have a vector $\vec{w}$ that is the linear combination of some basis vectors $\vec{f}_i$, see the right-hand side of the sketch. If the $\vec{f}_i$ can be obtained as the transformation by $M$ of some other vectors---the basis vectors we called $\bas{e}_i$ in Fig.~\ref{fig:map:M}---then the inverse transformation $M\inv$ acts as a map ``back'' to the original basis. }
+    \caption{Let $M$ is a linear transformation from $\RR ^2 \to \RR ^2$, as we drew in Fig.~\ref{fig:map:M}. Now assume that you have a vector $\vec{w}$ that is the linear combination of some basis vectors $\vec{f}_i$, see the right-hand side of the sketch. If the $\vec{f}_i$ can be obtained as the transformation by $M$ of some other vectors---the basis vectors we called $\bas{e}_i$ in Fig.~\ref{fig:map:M}---then the inverse transformation $M\inv$ acts as a map ``back'' to the original basis. }
     \label{fig:map:M:inv}
 \end{figure}
 
@@ -1449,7 +1449,7 @@ Thinking of the matrix $M$ as a map, we see the the problem is one of uniqueness
 \end{align}
 However, we assumed that $\vec{v} \neq \vec{w}$. This means makes the above line inconsistent. The inverse transformation is not defined. Bummer.
 
-Fortunately, most of the \emph{dynamics} in physics \emph{is} invertible. That does not mean that we can ignore non-invertible matrices, though. Non-invertible matrices can be understood as \textbf{projections} onto a subspace. You can see this in the example in Fig.~\ref{fig:map:M:no:inv}. The map $M$ is essentially only using the information about the second component of its input vector and mapping it to just the second component of the output vector. That means that $M$ is really just a map to a one-dimensional subspace. In this way, the two dimensional vector space $\mathbbm{R}^2$ is \textbf{projected} onto a one-dimensional subspace of $\mathbbm{R}^2$. In that example, the one dimensional space is defined by vectors of the form
+Fortunately, most of the \emph{dynamics} in physics \emph{is} invertible. That does not mean that we can ignore non-invertible matrices, though. Non-invertible matrices can be understood as \textbf{projections} onto a subspace. You can see this in the example in Fig.~\ref{fig:map:M:no:inv}. The map $M$ is essentially only using the information about the second component of its input vector and mapping it to just the second component of the output vector. That means that $M$ is really just a map to a one-dimensional subspace. In this way, the two dimensional vector space $\RR ^2$ is \textbf{projected} onto a one-dimensional subspace of $\RR ^2$. In that example, the one dimensional space is defined by vectors of the form
 \begin{align}
     \vec{v} = 
     \begin{pmatrix}
@@ -1590,13 +1590,13 @@ You may be wondering why all of our linear transformations are square. After all
         6 & -3 & \pp 3 & 0
     \end{pmatrix} \ .
 \end{align}
-Just by looking at this, you can tell that $W$ acts on some kind of vector with four components and outputs a vector with two components. Assuming these vectors are part of $\mathbbm{R}^4$ and $\mathbbm{R}^2$ respectively, this means that $W$ is a map from $\mathbbm{R}^4$ to $\mathbbm{R}^2$, or
+Just by looking at this, you can tell that $W$ acts on some kind of vector with four components and outputs a vector with two components. Assuming these vectors are part of $\RR ^4$ and $\RR ^2$ respectively, this means that $W$ is a map from $\RR ^4$ to $\RR ^2$, or
 \begin{align}
-    W:\; \mathbbm{R}^4 \;\to \; \mathbbm{R}^2 \ .
+    W:\; \RR ^4 \;\to \; \RR ^2 \ .
 \end{align}
 Non-square matrices are maps between different vector spaces. In this course we will have very little to say about non-square matrices. The type of linear algebra that comes up over and over again in physics are transformations from some vector space $V$ to itself.\footnote{To be more technically precise: the maps tend to be between vector spaces $V$ and $V'$ that are isomorphic to one another, $V\cong V'$. This means that the vector spaces may be different, but there is a unambiguous translation between the two.} 
 
-The one thing we have observed about non-square matrices is that the number of columns is the maximum dimensionality of the input space, and the number of rows is the maximum dimensionality of the output space.\footnote{Why do we specify `maxmimum'? You could imagine a vector space that is two dimensional but happens to be written in a silly way as three-component vectors. For example, we could consider the space of vectors spanned by the $x$- and $y$-basis vectors but written as three component vectors in $\mathbbm{R}^3$. That space is two dimensional, but the vectors have three components---one of which is always zero.} The dimensionality tells us about how much information is in a vector. A three-dimensional vector space has ``three numbers worth'' of information, the three components relative to a basis. This means that:
+The one thing we have observed about non-square matrices is that the number of columns is the maximum dimensionality of the input space, and the number of rows is the maximum dimensionality of the output space.\footnote{Why do we specify `maxmimum'? You could imagine a vector space that is two dimensional but happens to be written in a silly way as three-component vectors. For example, we could consider the space of vectors spanned by the $x$- and $y$-basis vectors but written as three component vectors in $\RR ^3$. That space is two dimensional, but the vectors have three components---one of which is always zero.} The dimensionality tells us about how much information is in a vector. A three-dimensional vector space has ``three numbers worth'' of information, the three components relative to a basis. This means that:
 \begin{enumerate}
     \item If the number of columns is larger than the number of rows, then the output of the transformation may have less information than the input. For example, two different input vectors may map to the same output vector.
     \item If the number of rows is larger than the number of columns, then input of the transformation may not be able to encode enough information to populate every possible vector in the output space. For example, there may be vectors $\vec{v}_\text{out}$ in the output space that cannot be written as $W\vec{u}_\text{in}$. 
@@ -1744,7 +1744,7 @@ A generic component of a vector has an upper index, $v^i$. The component of the 
 
 
 
-Thus far, rotations are just some linear transformation. We have not yet defined the features that make rotations special in Euclidean space. Indeed: we are not in Euclidean space yet, we are simply in $\mathbbm{R}^3$, the class of vector spaces described by three real numbers. Once we have a metric (dot product) then we can say that rotations preserve the dot product. A rotated vector does not change length under a rotation. Angles between vectors---which we saw in \eqref{eq:cos:theta:in:R3} are also defined by the dot product---are also unchanged under rotations. 
+Thus far, rotations are just some linear transformation. We have not yet defined the features that make rotations special in Euclidean space. Indeed: we are not in Euclidean space yet, we are simply in $\RR ^3$, the class of vector spaces described by three real numbers. Once we have a metric (dot product) then we can say that rotations preserve the dot product. A rotated vector does not change length under a rotation. Angles between vectors---which we saw in \eqref{eq:cos:theta:in:R3} are also defined by the dot product---are also unchanged under rotations. 
 
 \subsection{Transformation of numbers}\label{sec:rotation:of:numbers}
 
@@ -1981,7 +1981,7 @@ A large part of physics is written in tensor notation.\footnote{As a curious sid
 
 \subsection{Rotations in Three-Dimensions}
 
-In $\mathbbm{R}^3$ there are three different axes about which we can perform a rotation. These roughly correspond to three rotation matrices:
+In $\RR ^3$ there are three different axes about which we can perform a rotation. These roughly correspond to three rotation matrices:
 \begin{align}
     R_1(\theta_1)
     &=
@@ -2143,7 +2143,7 @@ Passive transformations are useful when we consider symmetries of systems. Each 
 
 \section{Tensors as (Multi-)Linear Maps: Tensors}
 
-We have informally introduced the idea that a tensor is an object with well defined transformation properties under rotations. A second perspective of tensors is that they are linear maps. This gives a slightly more rigorous definition for what all these indexed objects do. The general theme is that as linear maps, tensors are born for index contraction.
+We have informally introduced the idea that a tensor is an object with well defined transformation properties under rotations. A second perspective of tensors is that they are linear maps. This gives a slightly more rigorous definition for what all these indexed objects do. The general theme is that as linear maps, \emph{tensors are born for index contraction}.
 
 \subsection{Products of Vector Spaces}
 
@@ -2173,16 +2173,199 @@ The moral of this sub-section is that you should not be intimidated by the \text
 
 \subsection{Linear Maps to Numbers: Row Vectors}
 
-Our humble row
+Our humble row vectors are also linear transformations. The components of a row vector have lower indices, $w_i$. These lower indices are just looking for an upper index for contraction. Once we provide a row vector $\row{w}$ with an object with an upper index, $\vec{v}=v^i\bas{e}_i$, then we can form the number $\row{w}\vec{v} = w_i v^i$. This tells us that a row vector $\vec{w}$ defined by its components $w_i$ is a linear map that takes in a vector and returns a number:
+\begin{align}
+    \row{w}: V \to \RR \ .
+\end{align}
+From the rule of index contraction, we observe that this is a \emph{linear map}:
+\begin{align}
+    \row{w}\left(\alpha\vec{v}+\beta\vec{u}\right)
+    =
+    w_i\left(\alpha v^i + \beta u^i\right) 
+    =
+    \alpha w_iv^i + \beta w_i u^i
+    = 
+    \alpha\row{w}\vec{v} + \beta\row{w}\vec{u} \ .
+\end{align}
+We deduce that lower indices are ``born to contract'' with the upper index of a vector. Lower indices say: \emph{feed me an upper index and I will contract it; I will return a number that is linearly dependent on the upper indexed components}. 
+
+We say that these row vectors belong to a \textbf{dual vector space}, $V^*$. This $V^*$ is the space of all row vectors. An element of $V^*$, say $\row{w}$, is a linear map from $V\to \RR$. 
+\begin{exercise}
+Argue that $V^*$ is also a vector space. If $\row{w}$ and $\row{q}$ are row-vectors, then $\alpha\row{w} + \beta\row{q}$ is also a row vector with components 
+\begin{align}
+    (\alpha\row{w} + \beta\row{q})_i=\alpha w_i + \beta q_i \ .
+\end{align}
+\end{exercise}
+
 
 \subsection{Tensors as Multi-Linear Maps}
 
+What about objects with multiple lower indices? If your tensor has $q$ lower indices, then it can take as inputs $q$ vectors and the output will be multi-linearly dependent on those inputs. Consider a tensor with two lower indices, $g_{ij}$. This is a linear map from $V\times V \to \RR$. Once you tell me the coefficients $g_{ij}$, then I can arrange them into a machine that takes in two vectors $\vec{v}$ and $\vec{u}$ and spits out a number:
+\begin{align}
+    g: &V\times V \to \RR
+    &
+    g(\vec{v},\vec{u}) &= g_{ij}v^i u^i \ .
+\end{align}
+This is obviously multi-linear in its arguments.
+
+What about an object with both lower and upper indices? We already have one example: matrices have one upper and one lower index. The lower index tells us that the matrix `eats' a vector by contracting the matrix's lower index with the vector's upper index. Once you have done that contraction, you are left with an upper index. This means that the resulting object, $M(\vec{v}) = M\vec{v}$ with components $(M\vec{v})^i = M\aij{i}{j}v^j$ is a vector. We thus repeat our earlier statement that matrices are linear maps from the vector space to itself,
+\begin{align}
+    M: V\to V \ .
+\end{align}
+
+
+What if we have a tensor with two upper indices and one lower index, say $T\aij{ij}{k}$. Like a matrix, this object has a lower index and so it is a linear function on $V$. $T$ has two upper indices, which means the output is in $V\times V$. We thus say that $T: V\to V\times V$. The components of $T\vec{v}$ are $(T\vec{v})^{ij} = T\aij{ij}{k}v^k$.
+
+Do you see how this game works? If a tensor $T$ has $p$ upper indices and $q$ lower indices, then it is a map
+\begin{align}
+    T: V^q \to V^p \ ,
+\end{align}
+where each of the $q$ lower indices a linear vector argument for the tensor, and each of the $p$ upper indices is a vector-like output. We should be a little careful about the meaning of `vector-like' here. This is not to say that you return $p$ different vectors. Instead, you have an object that transforms under rotation with $p$ factors of the rotation matrix $R$, one for each upper index. Similarly, the each of the tensor's lower indices transforms with a factor of the inverse rotation $R^{-1}$. 
+
+What if a tensor has only upper indices? One glib way of interpreting this is that you go from nothing to an object with upper indices. For example, let $S^{ij}$ be a generic component of a tensor with two upper indices. Then I can say that
+\begin{align}
+    S: \varnothing \to V\times V \ . \label{eq:S:two:upper:O:to:VV}
+\end{align}
+Here $\varnothing$ just means there are no inputs. The number 3, for example, is a map from nothing to the real numbers, $3: \varnothing \to \RR$. The map is a silly one, it just returns $3$ every single time. In other words, when a function has no input, it is simply a constant. 
+
+
+\emph{Wait a second}, you think. If $S^{ij}$ only has upper indices, I know how it can still be a linear function that outputs numbers. Instead of feeding it two vectors that each have one upper index, then why not feed it two row vectors that each have one lower index? After all, $w_i q_j S^{ij}$ is a number. We thus say that there is an equivalent way of thinking about $S$:
+\begin{align}
+    S: V^*\times V^* \to \RR \ . \label{eq:S:two:upper:VsVs:to:R}
+\end{align}
+It appears that we simply took \eqref{eq:S:two:upper:O:to:VV} and pulled the $V$'s to the left-hand side, at the cost of each of them picking up a star. The rule now appears to be that for each of a tensor's indices:
+\begin{enumerate}
+    \item An upper index means that the tensor either has a vector-like index as an output, or it takes in a row vector as a linear input.
+    \item A lower index means that the tensor either has a row-vector-like index as an output, or it takes in a column vector as a linear input. 
+\end{enumerate}
+\begin{example}
+Consider the tensor $T\aij{ij}{k}$. This is equivalently:
+\begin{align}
+    T: V\to V\times V \; ,\quad 
+    \varnothing \to V\times V\times V^* \;,\quad 
+    V^* \times V \to V \; ,\quad 
+    % V^* \times V^* \to V^* \; ,\quad 
+    V^* \to V^*\times V^* \ .
+\end{align}
+What other ways can we interpret $T$ as a multilinear map between products of $V$ and $V^*$?
+\end{example}
+
+\begin{example}
+Consider the tensor $T\aij{ij}{k}$. If we interpret this as a map from $V^* \times V^* \to V^*$, then we can feed $T$ two row vectors and it outputs a row vector,
+\begin{align}
+    T(\row{w},\row{q})_{k} = T\aij{ij}{k}w_i q_j \ .
+\end{align}
+Be careful that it is implicit that $T(\row{w},\row{q})$ means $T\aij{ij}{k}w_iq_j$ and not $T\aij{ij}{k}w_jq_i$. If there is ever ambiguity, it is up to you to explain to your audience exactly what you mean by a contraction. Either of the above interpretations is a valid linear map, but in general when your inputs include two or more of the same type of object, the order matters. 
+\end{example}
+
+\begin{exercise}
+In the previous example we showed that the order of arguments can be somewhat ambiguous when the arguments are of the same type. Show that the order does not matter when a tensor has \textbf{symmetric} indices, say $g_{ij} = g_{ji}$. Show that the order does matter when a tensor has \textbf{antisymmetric} indices, $h_{ij} = -h_{ji}$, but that the difference is an overall minus sign. Show that a tensor with a pair of indices of the same height may be written as the sum of a piece that is symmetric and a piece that is antisymmetric in those indices. That is, for any $A_{ij}$ show that there exist symmetric $g$ and anti-symmetric $h$ such that:
+\begin{align}
+    A_{ij} &= g_{ij} + h_{ij}
+    &
+    g_{ij} &= g_{ji} 
+    &
+    h_{ij} &= -h_{ji} ] .
+\end{align}
+Argue that it does not matter if the two indices are both upper or both lower. Nor does it matter if there are other indices around.
+\end{exercise}
+
+\begin{exercise}
+Show that a tensor that is symmetric with respect to two indices of the same height, say $g_{ij} = g_{ji}$, remains symmetric under a rotation. Do the same for antisymmetric pairs of indices of the same height.
+\end{exercise}
+
+The above digression of symmetric and antisymmetric indices may seem like an odd tangent. However, we will soon see that the ``additional mathematical ingredient'' that allows us to define an inner product (dot product) is an object with two symmetric lower indices that we call a metric. And while it is outside the scope of this course, antisymmetric indices are the foundation of what is called an \textbf{alternating linear map}. These, in turn, show up in differential geometry (general relativity) as something called differential $k$-forms that play the role of of infinitesimal volume elements.
+
+\begin{exercise}
+Let $T$ be a tensor with $p$ upper indices and $q$ lower indices. If I feed this tensor $p$ vectors and $q$ row vectors by contracting the indices, the result is a number. How does this number transform under rotations?
+\end{exercise}
 
 
 \subsection{Duality}
 
-\subsection{The dual vector space}
-% basis
+The above discussion should lead you to realize that there is a Yin--Yang-like duality between upper and lower indices. Initially, we started this whole course by making a big deal about \emph{vectors} and not row vectors. We had presented the \emph{nouns} of linear algebra are described by components that have one upper index. Then we presented row vectors as linear maps from $V\to \RR$, that is, row vectors are \emph{verbs} that describe an action on the \emph{nouns}. Then we realized that inasmuch as the lower index in $w_i$ is an invitation to contract with the upper index of $v^i$, we could have said it in the other way. There is a vector space $V^*$ whose components have a lower index. In this picture, the row vectors are the \emph{nouns} and the column vectors are the \emph{verbs} that represent linear maps $V^*\to \RR$. The upper index in $v^i$ is an invitation to contract with the lower index of $w_i$.
+
+The point, of course, is that one upper index and one lower index can contract. It doesn't matter which one you call the noun and which one you call the verb (linear map). They are each the noun of their own vector space, and relative to their vector space the other vector space is a `dual space' of linear functions to $\RR$.
+
+Generalizing this, tensors $T$ with $p$ upper indices and $q$ lower indices are multi-linear maps \emph{and} objects in themselves. If you want a tensor with $(p-1)$ upper indices and $(q-1)$ lower indices,  you could feed $T$ one row vector and one column vector. Or you could feed it a matrix, which conveniently already has an upper and a lower index. Or you could just have one of the $p$ upper indices contract with one of the $q$ lower indices, taking a multi-linear version of the trace. Or, perhaps more perversely, you could feed it a tensor with $p' < p$ upper indices and $q' < q$ lower indices in such a way that \emph{several} indices between the two tensors contract but you are left with a tensor with $(p-1)$ upper indices and $(q-1)$ lower indices. 
+
+\subsection{A basis for the dual vector space}
+
+The above semi-philosophical sub-section was all to motivate the following. If $V^*$ is a legitimate vector space in its own right, \emph{what are its basis vectors}? Like $V=\RR^3$, there are an infinite number of choices. But there is one ``obvious'' choice:
+\begin{align}
+    \rbas{e}^1 &= 
+    \begin{pmatrix}
+         1 & 0 & 0
+     \end{pmatrix}
+     &
+    \rbas{e}^2 &= 
+    \begin{pmatrix}
+         0 & 1 & 0
+     \end{pmatrix}
+     &
+     \rbas{e}^3 &= 
+    \begin{pmatrix}
+         0 & 0 & 1
+     \end{pmatrix} \ .
+\end{align}
+The generalization to arbitrary dimensions is also obvious. Note that the basis row vectors have upper indices unlike the basis column vectors that have lower indices. This is so that a row vector is the contraction:
+\begin{align}
+    \row{w} = w_i \rbas{e}^i \ .
+\end{align}
+\begin{exercise}
+How do the components $w_i$ transform under a \emph{passive transformation} where the basis row vectors are rotated by a rotation matrix $R$?
+\end{exercise}
+
+
+These basis row vectors are each linear maps from $V\to \RR$. For example, $\rbas{e}^2$ takes in a vector with components $v^i$ and outputs $v^2$. These basis row vectors are linear functions as far as vectors in $V$ are concerned, but they are \emph{simultaneously} a vector space in their own right. To these vectors in $V^*$, the elements of $V$ are the linear functions. 
+
+As we have echoed several times now, the basis vectors carry the ``vector-ness'' of the objects. Thus the linear-function-ness of the $V^*$ basis can be seen in its action on the $V$ basis vectors:
+\begin{align}
+    \rbas{e}^i\left(\bas{e}_j\right) &\equiv \delta^i_j
+    &
+    \bas{e}_j\left(\rbas{e}^i\right) &\equiv\delta^i_j \ .
+\end{align}
+On the right-hand side we have also shown that the basis vectors in $V$ are linear maps on the basis row vectors in $V^*$. When we're lazy and there is no danger of ambiguity, we drop the parenthesis and just write $\row{e}^i\vec{e}_j=\vec{e}_j\row{e}^i$.
+
+In this way, we can ``derive'' the rule for how a row vector acts on a column vector (or equivalently vice versa):
+\begin{align}
+    \row{w}\vec{v} = w_i\rbas{e}^i \, v^j\bas{e}_j = w_i v^j \rbas{e}^i\bas{e}_j 
+    = w_i v^j \delta^i_j
+    = w_i v^i  \ .
+\end{align}
+
+
+\subsection{A basis for multi-linear maps}
+
+What is the basis of tensors? Let us start with matrices. Matrix components have one upper and one lower index. They are kind of like a column vector attached to a row vector, but \emph{not acting on one another}.\footnote{Reminiscent of \url{https://en.wikipedia.org/wiki/PPAP_(Pen-Pineapple-Apple-Pen)}.} To indicate that the two basis vectors are not acting on one another, we separate them with a \textbf{tensor product} symbol, $\otimes$. Thus we expand a matrix in the basis of tensor products:
+\begin{align}
+    M = M\aij{i}{j} \, (\bas{e}_i\otimes \row{e}^j) \ .
+\end{align}
+Let us see how this acts on a vector in order to ``derive'' the matrix-acting-on-a-vector rule that earlier we had simply stated as fact:
+\begin{align}
+    M\vec{v} =  M\aij{i}{j} \, (\bas{e}_i\otimes \rbas{e}^j) \; v^k \bas{e}_k
+    = M\aij{i}{j}v^k \; (\bas{e}_i\otimes \rbas{e}^j) \bas{e}_k \ .
+\end{align}
+In the last line, we understand that $\rbas{e}^j$ acts on $\bas{e}_k$ (or equivalently, $\bas{e}_k$ acts on $\rbas{e}^j$). We recall that $\rbas{e}^j\bas{e}_k=\delta^j_k$. Thus:
+\begin{align}
+    M\vec{v} &= M\aij{i}{j}v^k \delta^j_k \, \bas{e}_i = M\aij{i}{j} v^j \bas{e}_i \ .
+\end{align}
+We can read the right hand side as a vector---since it is a linear combination of basis vectors $\bas{e}_i$---with components $M\aij{i}{j}v^j$, which is of course the rule that we had simply posted earlier.
+
+From this we generalize to say that a multilinear map with $p$ upper indices and $q$ lower indices has a basis:
+\begin{align}
+    \bas{e}_{i_1}\otimes \bas{e}_{i_2} \otimes \cdots \otimes \bas{e}_{i_p}
+    \otimes 
+    \rbas{e}^{j_1}\otimes \rbas{e}^{j_2} \otimes \cdots \otimes \rbas{e}^{j_q} \ .
+\end{align}
+When acting on another tensor, we simply have to specify which of the $\bas{e}_i$ and $\rbas{e}^j$ are acting on their corresponding (row-)vector components in the basis of the other tensor. 
+\begin{example}
+Taking a trace amounts to selecting one of the $\bas{e}_i$ and one of the $\rbas{e}^j$ in the basis to contract with each other. 
+\end{example}
+
+
+
+
 
 
 
