@@ -47,6 +47,8 @@ Lecture notes for Physics 17, a course on linear algebra in preparation for uppe
 
 \section{Logistics}
 
+
+\subsection{Two powerful questions}
 At any time in this course, you should feel comfortable asking either of the following questions:
 \begin{enumerate}
     \item Is it obvious that...?
@@ -54,7 +56,11 @@ At any time in this course, you should feel comfortable asking either of the fol
 \end{enumerate}
 The first question is the way to ask for on-the-spot clarification---I will either appreciate that I did not properly explain a subtle point, \emph{or} I will explain the intuition\footnote{Your sense of mathematical and physical intuition is incredibly valuable. This is one of the key traits that makes a physics training unique.} for why something should be obvious. The second question is a way to remind me that I may have \emph{lost sight of the forest for the trees}: I want this course to \emph{mathematically connect big ideas in physics}. Asking this question is a reminder that making those connections justifies the hard mathematical work we will put into the course.
 
+\subsection{Exercises and Examples}
+I have tried to insert exercises and examples in these notes. There are still far too few for sound pedagogy. If you really, really want to learn something, you \emph{have} to do exercises. Think of the examples as exercises with solutions---though they are not always written this way. Mull over the exercises: ask yourself why the problems are posed the way they are, challenge the statements to find the domain of validity, think of how one may extend those exercises to other applications. The exercises are a far better gauge of you learning than whether or not you have read a section of the notes. If you are confused reading the text in section 10, it is often the case that you should have been doing the exercises since section 5.
 
+
+\subsection{Obvious-ness}
 Finally, I want to comment on the word \emph{obvious}. I write this often. It is somewhat dangerous because it can come off as being arrogant: \emph{this is so obvious to me, if you do not understand you must be deficient}. This is never the reason why I use that word. Instead, the word \emph{obvious} serves a very practical purpose. The goal of this class is not just to be able to ``do stuff'' (e.g.~diagonalize a symmetric matrix), but to also build that intuition that comes from a deeper understanding how the mathematics works. In this sense, every time I write the word \emph{obvious} it is a flag: I am saying something that---with the proper perspective---should be self-evident. If it is not self-evident, then you should stop to interrogate why it is not self-evident. Most likely there is something where a change in perspective may (1) make it obvious, and (2) in so doing deepen your understanding of the subject. So when you see the word `obvious,' I want you to do a quick check to confirm whether or not the statement is indeed obvious. If it is not, then welcome the opportunity to learn.\footnote{There is, of course, the possibility that what I have written is \emph{not} obvious. For example, if I have made a typo... in which case, please let me know.}
 
 \section{Motivation}
@@ -910,7 +916,7 @@ Confirm that \eqref{eq:matrix:matrix:multiplication} holds for $2\times 2$ matri
 On the right-hand side of \eqref{eq:matrix:matrix:multiplication}, we have one pair of contracted indices ($k$), one upper index $i$, and one lower index $j$. We thus deduce that this object is a matrix: it has one upper and one lower index. Indeed, the product of two matrices is also a matrix. Our indices and contraction rules tell us what kinds of objects we can produce by contracting indices between them. 
 
 \begin{example}
-You may also contract indices within an object. For example, because a matrix has one upper and one lower index, you may contract them together. This is called the trace, $\text{Tr}\,M = M\aij{i}{i}$.
+You may also contract indices within an object. For example, because a matrix has one upper and one lower index, you may contract them together. This is called the trace, $\Tr M = M\aij{i}{i}$.
 \end{example}
 
 
@@ -927,7 +933,7 @@ Vectors are the `nouns' in linear algebra. The word `linear' refers to the the \
 
 
 
-\subsection{Jargon}
+\subsection{Jargon}\label{sec:jargon:linear:map}
 Let us introduce some jargon here. Rather than formal definitions, we give practical ``physicist's'' definitions.\footnote{If we do something less formally, we say that we are physicists, not mathematicians. If we choose to be more highbrow, then we say that we are physicists, not engineers.} You can look up proper definitions in your favorite mathematics textbook.  The following words are closely related: function, map, transformation. I often use them interchangeably, though this is rather sloppy.  
 
 A \textbf{function} is a mathematical machine that takes some inputs and produces some output. The inputs can be numbers, vectors, or more sophisticated objects. The outputs may also be numbers, vectors, or more sophisticated objects. The outputs do not have to be the same type of object as the inputs---in general they are not.
@@ -1010,16 +1016,16 @@ We recognized that the $j$ indices are \emph{contracted}. From an index point of
 
 \subsection{The trivial transformation: identity matrix}
 
-The identity matrix, $\mathbbm{1}$ leaves vectors unchanged: $\mathbbm{1}\vec{v} = \vec{v}$. You already know its components in $\mathbbm{R}^3$:
+The identity matrix, $\one $ leaves vectors unchanged: $\one \vec{v} = \vec{v}$. You already know its components in $\mathbbm{R}^3$:
 \begin{align}
-    \mathbbm{1} = 
+    \one  = 
     \begin{pmatrix}
         1 & 0 & 0 \\
         0 & 1 & 0 \\
         0 & 0 & 1
     \end{pmatrix} \ .
 \end{align}
-Sometimes we will indicate the dimension of the space by writing $\mathbbm{1}_3$ or $\mathbbm{1}_{3\times 3}$ when we want to be extra clear. There is a useful way of writing the components of the identity matrix. Define the \textbf{Kronecker}~$\delta$: 
+Sometimes we will indicate the dimension of the space by writing $\one _3$ or $\one _{3\times 3}$ when we want to be extra clear. There is a useful way of writing the components of the identity matrix. Define the \textbf{Kronecker}~$\delta$: 
 \begin{align}
     \delta^i_j &= 
     \begin{cases}
@@ -1027,7 +1033,7 @@ Sometimes we will indicate the dimension of the space by writing $\mathbbm{1}_3$
     0 & \text{ if }\, i\neq j
     \end{cases} \ .
 \end{align}
-Then we say that the components of $\mathbbm{1}$ are $\delta^i_j$, no matter what dimension of space we are in.
+Then we say that the components of $\one $ are $\delta^i_j$, no matter what dimension of space we are in.
 
 \emph{But wait}, you object, \emph{the indices are all messed up!} You are right. The indices on $\delta^{i}_j$ look wrong because we made a big deal that matrices have a first index and a second index that we must distinguish between. The first index is written upper, and the second index is lower. So should we not have written $\delta\aij{i}{j}$, with the $j$ clearly to the right of the $i$? 
 
@@ -1039,7 +1045,7 @@ So for convenience, we will just write $\delta^i_j$. Observe, however, that we \
 
 It is useful to think about the Kronecker~$\delta$ as a machine that converts indices. Consider what it does to a vector:
 \begin{align}
-    (\mathbbm{1}\vec{v})^i = \delta^i_j v^j = 
+    (\one \vec{v})^i = \delta^i_j v^j = 
     \delta^i_1v^1 + \delta^i_2v^2 + \delta^i_3v^3 \ .
 \end{align}
 On the right-hand side, there is exactly one non-zero term because $\delta^i_j$ is zero for all terms except when $j=i$. That means 
@@ -1047,9 +1053,9 @@ On the right-hand side, there is exactly one non-zero term because $\delta^i_j$ 
     \delta^i_j v^j = v^i \ .
     \label{eq:kronecker:delta:action}
 \end{align}
-The right-hand side is, of course, what we expected since $\mathbbm{1}\vec{v} = \vec{v}$. So we can train ourselves to ``mechanically'' interpret the $\delta^i_j$ object as one that replaces indices. 
+The right-hand side is, of course, what we expected since $\one \vec{v} = \vec{v}$. So we can train ourselves to ``mechanically'' interpret the $\delta^i_j$ object as one that replaces indices. 
 \begin{exercise}
-Show that this works for lower indices as well. Consider the multiplication of two matrices, $M\mathbbm{1}$. Show that
+Show that this works for lower indices as well. Consider the multiplication of two matrices, $M\one $. Show that
 \begin{align}
     M\aij{i}{j}\delta^j_k = M\aij{i}{k} \ ,
 \end{align}
@@ -1262,6 +1268,10 @@ The example above tells us that the `components of a matrix' have a specific mea
 \begin{example}
 $M\aij 11$ is simply the coefficient of ${\bas{e}}_1$ in the expansion of $M{\bas{e}}_1$. $M\aij 12$ is simply the coefficient of ${\bas{e}}_2$ in the expansion of $M{\bas{e}}_1$. 
 \end{example}
+Another way of saying this is the following:
+\begin{bigidea}
+The $i^\text{th}$ column of a matrix are the components of $M\bas{e}_i$. This assumes that $\bas{e}_i$ is ``canonical'' basis which has the $i^\text{th}$ element set to one and the rest of the elements are zero.
+\end{bigidea}
 
 
 
@@ -1345,7 +1355,7 @@ There are several observations:
 % Pre-image, image, kernel, 
 % Non-invertible
 
-Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M\inv$ with components $(M\inv)\aij{i}{j}$. The defining property of the matrix inverse is $M\inv M = \mathbbm{1}$. That means that $M\inv(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. This is shown in Fig.~\ref{fig:map:M:inv}. 
+Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ is a matrix that acts on vectors in $V$. For ``nice'' matrices, $M$, there is a unique \textbf{inverse} matrix (inverse transformation) $M\inv$ with components $(M\inv)\aij{i}{j}$. The defining property of the matrix inverse is $M\inv M = \one $. That means that $M\inv(M\vec{v})=\vec{v}$ for any vector $\vec{v}$. The matrix inverse simply undoes the transformation $M$. This is shown in Fig.~\ref{fig:map:M:inv}. 
 
 % \flip{in progress}
 % not always defined.
@@ -1360,7 +1370,7 @@ Let $M$ be a linear transformation from $V\to V$. This is just to say that $M$ i
 
 Given a basis, matrices are described by their components, $M\aij{i}{j}$. How do you find the components of the inverse matrix, $(M\inv)\aij{i}{j}$? The most straightforward way is the hard way. Let us consider the $2\times 2$ case. We know that the defining relationship is
 \begin{align}
-    M(M\inv)=(M\inv)M &= \mathbbm{1}
+    M(M\inv)=(M\inv)M &= \one 
     &
     M\aij{i}{k}(M\inv)\aij{k}{j}
     =
@@ -1381,7 +1391,7 @@ The product of two matrices $M$ and $N$ is a matrix, $MN$. The inverse of the pr
 \end{align}
 You can that this is because you have to undo the transformation that was last applied:
 \begin{align}
-    (MN)\inv MN = N\inv M\inv MN = N\inv \mathbbm{1} N = \mathbbm{1} \ .
+    (MN)\inv MN = N\inv M\inv MN = N\inv \one  N = \one  \ .
 \end{align}
 
 
@@ -1454,6 +1464,7 @@ One of the most curious puzzles in fundamental physics over the last half centur
 \end{example}
 
 \subsection{Funny things you can do to matrices}
+\label{sec:transpose:trace:det}
 
 \subsubsection*{Transpose}
 
@@ -1490,7 +1501,7 @@ This unusual operation will turn out to be rather useful for us. I leave the fol
 
 The \textbf{trace} of a matrix $M$ is simply the sum of its diagonal components:
 \begin{align}
-    \text{Tr}\,M = M\aij{i}{i} = M\aij{1}{1} + M\aij{2}{2} + \cdots \ .
+    \Tr M = M\aij{i}{i} = M\aij{1}{1} + M\aij{2}{2} + \cdots \ .
 \end{align}
 It is not obviously meaningful from the perspective of $M$ being a linear transformation. However, it ends up being useful as as a mechanical procedure that one can do to matrices. The reason for this is something we will see soon: the trace of a matrix is unchanged under rotations. 
 
@@ -1552,7 +1563,20 @@ The area of the parallelogram is simply the area of the large box minus the area
     A_\text{parallelogram} =  M\aij 11 M\aij 22 - \frac 12 A_\text{b}  = M\aij 11 M\aij 22  - M\aij 12 M\aij 21  = \det M \ .
     \label{eq:det:is:area:parallelogram}
 \end{align}
-And so we have shown the result in a simple case. 
+And so we have shown the result in a simple case: determinants are related to areas. Specifically, we see that the determinants are related to the areas (volumes) of parallelograms (parallelpipeds) with sides $M\bas{e}_i$. 
+
+This interpretation of determinants as volumes\footnote{I now say `volumes' instead of `area' because what follows is general to any dimension of space.} also motivates some further expressions for the determinant of the product of matrices and the determinant of the inverse of a matrix. If we perform subsequent transformations with two matrices, $N$ and $M$, then the unit parallelpiped is first mapped to a parallelpiped of volume $\det N$. When we apply the second matrix $M$, this intermediate parallelpiped is mapped to a third parallelpiped whose volume is rescaled by $\det M$. The resulting volume is $(\det N)(\det M)$. We thus deduce that the determinant of a product of matrices is the product of the determinants of each matrix:
+\begin{align}
+    \det NM = (\det N)(\det M) \ . 
+\end{align}
+Going further, because $M M\inv = \one$, we have
+\begin{align}
+    \det M M\inv &= (\det M)(\det M\inv ) = \det\one = 1 
+    & \Rightarrow&
+    &
+     \det M\inv &= \frac{1}{\det M} \ .
+\end{align}
+We have been deliberately hand-wavy to motivate thesse relations for determinants. If we were to be more rigorous, the are rather tricky to prove, though you can do them by brute force by calculating components. 
 
 
 
@@ -1640,7 +1664,7 @@ R\inv(\theta) =
 The last equality may be a little surprising, but it is of utmost significance. The inverse of a rotation is the transpose of the original rotation. 
 
 \begin{exercise}
-Check component-by-component that $R(\theta)R\inv(\theta) = \mathbbm{1}$ using the expressions above. One may directly show that for each of the four combinations of $i$ and $j$,
+Check component-by-component that $R(\theta)R\inv(\theta) = \one $ using the expressions above. One may directly show that for each of the four combinations of $i$ and $j$,
 \begin{align}
     R(\theta)\aij{i}{k} \, R\inv(\theta)\aij{k}{j} &= \delta^i_j  \ .
 \end{align}
@@ -1680,6 +1704,9 @@ Consider a point on the Cartesian plane $(x,y)$. Derive the rotation matrix \eqr
 Then invoke the angle addition formulae for trigonometric functions. 
 \end{exercise}
 
+\begin{exercise}
+Show that the determinant of the $2\times 2$ rotation matrix is one.
+\end{exercise}
 
 
 \subsection{Transformation of Vectors}
@@ -1757,7 +1784,7 @@ At this point you should be very perplexed: \emph{why} does the row vector trans
     \row{w}\vec{v}\to \row{w}'\vec{v}' = \row{w} R(\theta)\inv\, R(\theta) \vec{v} = \row{w}\vec{v} \ .
     \label{eq:row:col:contract:transformation}
 \end{align}
-Here we have simply used $R\inv R = \mathbbm{1}$. We can write the same thing in component notation;
+Here we have simply used $R\inv R = \one $. We can write the same thing in component notation;
 \begin{align}
     w'_i v'^i = \left(R(\theta)\inv\right)\aij{k}{i} R(\theta)\aij{i}{j} w_k v^j = \delta^k_j w_k v^j = w_kv^k \ .
 \end{align}
@@ -1774,6 +1801,7 @@ A generic component of a row vector has a lower index, $w_i$. The component of t
 
 
 \subsection{Transformation of Matrices}
+\label{sec:transformation:of:matrices}
 
 Do matrices transform under a rotation? Matrices are linear maps from vectors to vectors, so we know that $M\vec{v}$ is a vector. That means that $M\vec{v}$ transforms the way any other vector transforms under a rotation $R(\theta)$:
 \begin{align}
@@ -2006,15 +2034,63 @@ We say that the rotation matrices along different axes do not \textbf{commute} b
     \label{fig:rotate:QFT}
 \end{figure}
 
+\begin{exercise}
+Show that the determinant of each of the rotations in \eqref{eq:rotation:matrix:basic} is one. Argue that a general rotation in three dimensions, which is a product of these rotations, also has determinant equal to one. Argue further that the determinant of a rotation in any number of dimensions is equal to one.
+\end{exercise}
+
 \subsection{Invariance of Trace and Determinant}
 
-The trace and the determinant of a matrix 
+The trace and the determinant of a matrix are invariant under rotations. This may sound trivial\footnote{``Trivial'' is the mathematical translation of when I say `obvious.'}: they are numbers with no indices, and numbers with no indices do not transform under rotations. The relevance of the invariance of the trace and determinant are that they are numbers that are formed out of the components of a matrix that do not transform, even though the components of a matrix, $M\aij{i}{j}$, \emph{do} transform under a rotation. 
+
+Let us see that this is the case. Under a rotation, the trace of a matrix, $M\aij{i}{j}$ transforms as:
+\begin{align}
+    M\aij{i}{j} \to (M')\aij{i}{i} = R\aij{i}{k} M\aij{k}{\ell} (R\inv)\aij{\ell}{i} \ .
+\end{align}
+We have started writing $R$ instead of $R(\theta)$ since we generalize to the case of higher-dimensional rotations with more than one parameters. Now we're going to do something sneaky. Let us move the $(R\inv)\aij{\ell}{i}$ factor around on the right-hand side. We made a big deal in Section~\ref{sec:transformation:of:matrices} that we are allowed to do this \emph{as long as we keep the indices the same}:
+\begin{align}
+    (M')\aij{i}{i}
+    =
+    (R\inv)\aij{\ell}{i} R\aij{i}{k} M\aij{k}{\ell} 
+    = (R\inv\, R)\aij{\ell}{k} M\aij{k}{\ell} 
+    = \delta^\ell_k M\aij{k}{\ell} 
+    = M\aij{k}{k} \ . 
+\end{align}
+Did you see what we did? We noticed that because the last index of $(R\inv)\aij{\ell}{i}$ matches the first index of $R\aij{i}{k}$, these two matrices are actually being multiplied in the expression for the trace. In other words, we have derived the following matrix-level expression:
+\begin{align}
+    \Tr R M R\inv = \Tr R\inv R M = \Tr M \ .
+\end{align}
+\begin{exercise}
+Check that the above argument holds for the trace of any product of matrices, not necessarily rotations:
+\begin{align}
+    \Tr ABC = \Tr CAB = \Tr BCA \ .
+\end{align}
+We call this a \emph{cyclic permutation} of the product $ABC$.
+\end{exercise}
+I hope you are starting to appreciate the utility of the index notation.
+
+Moving on to the determinant, we appeal a couple of rules that we motivated in Section~\ref{sec:transpose:trace:det}: 
+\begin{align}
+    \det(MN) &= (\det M)(\det N)
+    &
+    \det(M\inv ) &= (\det M)\inv  \ .
+\end{align}
+Then it is straightforward to read off that
+\begin{align}
+    \det M \to \det M' = \det(RMR\inv ) = \det M\ \frac{\det R}{\det R} = \det M \ .
+\end{align}
+Appealing to our pictorial interpretation that the determinant is a volume, we remark that rotations do not change the volume of the parallelpiped formed by basis vectors. Rotating a mug does not change the capacity of the mug, though it may cause its contents to spill out. 
+
+
 
 \subsection{Exponentiation of Generators}
+
+\flip{Fill this in another time. See hand-written notes on the exponentiation of generators. Give an introduction to the representation of continuous groups. Maybe place this in an appendix.}
 
 % \subsection{Symmetry and Indices}
 
 \subsection{Active versus Passive}
+
+There is a concept that pops up here and there in physics: the idea of an \textbf{active} versus a \textbf{passive transformation}. An active transformation \emph{is} a transformation. You have one vector, you apply a map to it, and then you have a totally different vector. By contrast, a {passive} transformation is one that is analogous to a \emph{change in reference frame}. In a passive transformation, the vectors do not change---the observers change. For passive transformations, we almost exclusively consider rotations. In case you need a visual aid, we first brought up this idea of a passive rotation in \eqref{fig:passive:rotation}. If you need a mnemonic to remember which is which, Fig.~\ref{fig:do:something} may be a helpful meme.
 \begin{figure}[tb]
     \centering
     \includegraphics[width=.5\textwidth]{figures/passivetransform_dosomething.pdf}
@@ -2025,26 +2101,95 @@ The trace and the determinant of a matrix
     \label{fig:do:something}
 \end{figure}
 
+In a passive transformation, the vector is the same but its \emph{components} are changed because the rotated observer has different basis vectors. That is, to perform a passive transformation we \emph{rotate on the basis vectors} $\bas{e}_i \to \bas{e}'_i$ and determine what the new components $(v')^i$ must be so that
+\begin{align}
+    \vec{v} = v^i\bas{e}_i = (v')^i\bas{e}'_i \ .
+\end{align}
+One way to determine this is to act on the basis vector with the identity matrix written as $\one = R R\inv$. We choose to do this in a way that acts on the basis vector:
+\begin{align}
+    \vec{v} = v^{i} \bas{e}_j R\aij{j}{k}(R\inv)\aij{k}{i}  = \left[(R\inv)\aij{k}{i}v^i \right]\left[\bas{e}_j R\aij{j}{k}\right] \ .
+    \label{eq:passive:rotation:1}
+\end{align}
+On the right hand side we recognize that the second bracketed term is simply the rotation of an object with a lower index---remember \bigidearef~\ref{idea:lower:index:rotates:with:Rinv}? Yes, all this time we had brought it up, but the basis vector $\bas{e}_i$ has a lower index, and so it transforms like a lower-indexed object (row vector-like).\footnote{To be clear, the basis vector is \emph{not} a row vector. That's why $\bas{e}_i$ is boldfaced: it carries all the abstract identity of the vector space. The basis vector just \emph{happens} to have an index that tells you how it should transform under a rotation. That index happens to be lower.} We thus define the rotated basis vectors:
+\begin{align}
+    \bas{e}_k' = \bas{e}_j R\aij{j}{k} \ .
+\end{align}
+Then \eqref{eq:passive:rotation:1} tells us that we have a linear combination of these rotated basis vectors:
+\begin{align}
+    \vec{v} &= 
+    (v')^k
+    \bas{e}_k'
+    =
+     (R\inv)\aij{k}{i}v^i \, \bas{e}'_k
+     &
+     (v')^k
+     &=
+     (R\inv)\aij{k}{i}v^i \ .
+\end{align}
+We recognize that we have rotated the basis vectors by a `forward' rotation $R$, and so the \emph{components} of a vector rotate in the opposite direction by the `backward' rotation, $R\inv$.  This is in contrast to an \emph{active} rotation of $\vec{v}$ where the basis stays the same, but we rotate the components of the vector by the forward rotation:
+\begin{align}
+    v^i \to (v')^i = 
+    \begin{cases}
+    R\aij{i}{j} v^j & \text{for an active transformation} \\
+    (R\inv)\aij{i}{j} v^j & \text{for a passive transformation}
+    \end{cases} \ .
+\end{align}
+Passive transformations are useful when we consider symmetries of systems. Each (continuous) symmetry has some analog of a `rotation' matrix, even if the rotation is not necessarily in ordinary space, but in some more abstract space. 
 
 
-Passive is a symmetry. Active is an actual ``do something''
-
-% Passive: rotations act on basis vectors. 
-% v Rin (R e) ... then v Rin = R v (e')
-% Active: rotations act on coordinate
-% R v
 
 
-\section{More General (Multi-)Linear Maps: Tensors}
+
+
+\section{Tensors as (Multi-)Linear Maps: Tensors}
+
+We have informally introduced the idea that a tensor is an object with well defined transformation properties under rotations. A second perspective of tensors is that they are linear maps. This gives a slightly more rigorous definition for what all these indexed objects do. The general theme is that as linear maps, tensors are born for index contraction.
+
+\subsection{Products of Vector Spaces}
+
+First, a bit of review and notation. Recall that a \textbf{vector space}, $V$, is the maximal set of vectors formed by taking linear combinations of vectors. Given a basis, $V$ is the collection of all linear combinations of those basis vectors. Now recall our jargon from Section~\ref{sec:jargon:linear:map}: linear maps are functions that take as input any element of a space and returns as output a single element of another space. A map is linear if
+\begin{align}
+    f(\alpha\vec{x} + \beta\vec{y}) = \alpha f(\vec{x}) + \beta f(\vec{y}) \ .
+\end{align}
+We can also consider functions that take more than one input. For example, a function could take two numbers and return their sum. We say that the input of this map is part of a \emph{product space} $\RR \times \RR$. What we mean here is that $\RR$ is a vector space, and $\RR\times \RR$ is a vector space where each vector in the vector space is made up of two elements of $\RR$. Does that sound familiar? This is simply what we've been calling $\RR^2$, which we now recognize is shorthand for $\RR \times \RR$. We can then imagine functions from $\RR\times \RR$ to numbers. We indicate this with the following type of notation:
+\begin{align}
+f:\, \RR \times \RR \to \RR    
+\end{align}
+For example, $f(x,y) = \sqrt{x^2 + y^2}$ gives the distance of $(x,y)$ from the origin. This kind of function is called \textbf{multi-linear} if it is linear in each of its arguments:
+\begin{align}
+    f(\alpha \vec{x} + \beta \vec{z}, \vec{y}) &= \alpha f(\vec{x},\vec{y}) + \beta f(\vec{z},\vec{y})
+    \\
+    f(\vec{x}, \gamma \vec{y} + \delta \vec{w}) &= \gamma f(\vec{x},\vec{y}) + \delta f(\vec{x},\vec{w}) \ .
+\end{align}
+\begin{example}
+The function $f(x,y) = \sqrt{x^2 + y^2}$ is \emph{not} multi-linear. The function $g(x,y) = x+3y$ \emph{is} multi-linear.
+\end{example}
+\begin{example}
+Is the function $f(x,y) = 2x + 5y + 2$ multi-linear?
+\end{example}
+
+The moral of this sub-section is that you should not be intimidated by the \textbf{tensor product} notation for multiple copies of a vector space, $V\times V\times \cdots \times V = V^n$. 
+
 
 \subsection{Linear Maps to Numbers: Row Vectors}
-\subsection{Matrices as Linear Maps}
+
+Our humble row
+
 \subsection{Tensors as Multi-Linear Maps}
+
+
+
+\subsection{Duality}
+
+\subsection{The dual vector space}
+% basis
 
 
 
 
 \section{Ket Notation}
+
+% Basis of vectors, row vectors, etc. 
 
 Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \emph{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \emph{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
 \begin{align}
@@ -2071,6 +2216,13 @@ Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
 \end{align}
 
 
+
+
+
+
+
+
+
 \section{Metric Spaces: Dot Products}
 \label{sec:metric:spaces}
 
@@ -2080,9 +2232,12 @@ Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
 \subsection{Length}
 \subsection{Orthogonality}
 \subsection{Rotations, once again}
+% as symmetries
 \subsection{The meaning of indices}
 
+
 \section{Special Relativity: Minkowski Space}
+
 
 
 
