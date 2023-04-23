@@ -812,7 +812,15 @@ There's a second reason why indices are convenient: they allow us to use \textbf
     \row{w}\vec{v}
     &= w_1v^1 + w_2v^2+w_3v^3 \ .
 \end{align}
-The final expression is familiar, right? It follows the usual rules of matrix multiplication for a matrix that happens to be one row and three columns. We notice that we chose to write the components of $\row{w}$ with lower indices---this is the convention. Row vectors (which have many names) have indices written as subscripts while column vectors have indices written as superscripts. There is no mathematics here, just a choice of notation. The result of the multiplication is simply a number, which we can write as a sum:
+The final expression is familiar, right? It follows the usual rules of matrix multiplication for a ``matrix'' that happens to be one row and three columns; we review this rule in Fig.~\ref{fig:row:col:mult}.
+%% FIGURE SNIPPIT
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.4\textwidth]{figures/rowcolmult.pdf}
+    \caption{The `matrix multiplication rule' for acting with a row vector on a column vector.}
+    \label{fig:row:col:mult}
+\end{figure}
+We notice that we chose to write the components of $\row{w}$ with lower indices---this is the convention. Row vectors (which have many names) have indices written as subscripts while column vectors have indices written as superscripts. There is no mathematics here, just a choice of notation. The result of the multiplication is simply a number, which we can write as a sum:
 \begin{align}
     \row{w}\vec{v}
     &= \sum_{i=1}^3 w_iv^i
@@ -825,6 +833,13 @@ On the right-hand side we have \emph{defined} the summation convention: \emph{wh
 The value $w_iv^i$ is simply a number. It is not a vector. It does not have any ``vectorial'' (tensorial) structure. It is not an element of the vector space $\RR ^3$. It does not transform under rotations. It is \emph{just a number}. In other words, $w_iv^i$ behaves like an object with \emph{no indices}. Contracted indices ``cancel each other out.''
 
 This is significant because we will see that indices tell us how objects transform. Evidently, column vectors and row vectors transform differently since one has an upper index and one has a lower index. Further, when we contract the two indices, we end up with something with no indices: a number that does not transform at all. This may seem like notational overkill---trust me, it is worth building this notation now. We will use it over and over.
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/matrixmultiplication.pdf}
+    \caption{The `matrix multiplication' rule for $A\vec{v} = \vec{v}'$. We show that the second element of $\vec{v}'$ is a sum of terms, where each term is a multiplication of the $j^\text{th}$ column of the $2^\text{nd}$ row of $A$ by the $j^\text{th}$ row of $\vec{v}$.}
+    \label{fig:matrix:col:mult}
+\end{figure}
 
 \begin{example}
 Matrices $M$ have the following index structure: $M\aij{i}{j}$. There is a first index and a second index---the order matters. The first index is upper, and the second index is lower. Matrix multiplication boils down to a contraction of indices:
@@ -839,7 +854,7 @@ Let us read this equation carefully. First, $M\vec{v}$ is a vector. The $i^\text
 \end{align}
 \end{example}
 \begin{example}
-From the above example, you can then excuse the glib statement: ``the \emph{vector} $M\aij{i}{j}v^j$.'' As we explained above, $M\aij{i}{j}v^j$ is not a vector, but a component of a vector. However, the point is that even though there are three indices, two of them are contracted so the object effectively only has one upper index. This is the index structure of a vector.
+From the above example, you can then excuse the glib statement: ``the \emph{vector} $M\aij{i}{j}v^j$.'' As we explained above, $M\aij{i}{j}v^j$ is not a vector, but a component of a vector. However, the point is that even though there are three indices, two of them are contracted so the object effectively only has one upper index. This is the index structure of a vector. This matches the usual matrix multiplication rule shown in Fig.~\ref{fig:matrix:col:mult}.
 \end{example}
 
 \begin{exercise}
@@ -2224,9 +2239,9 @@ where each of the $q$ lower indices a linear vector argument for the tensor, and
 
 What if a tensor has only upper indices? One glib way of interpreting this is that you go from nothing to an object with upper indices. For example, let $S^{ij}$ be a generic component of a tensor with two upper indices. Then I can say that
 \begin{align}
-    S: \varnothing \to V\times V \ . \label{eq:S:two:upper:O:to:VV}
+    S: \RR \to V\times V \ . \label{eq:S:two:upper:O:to:VV}
 \end{align}
-Here $\varnothing$ just means there are no inputs. The number 3, for example, is a map from nothing to the real numbers, $3: \varnothing \to \RR$. The map is a silly one, it just returns $3$ every single time. In other words, when a function has no input, it is simply a constant. 
+Here $\RR$ on the left hand side just means you can input an overall coefficient. In this sense, you input a number, say $3$, and $S$ gives you $3S^{ij}$, an object with two upper indices.
 
 
 \emph{Wait a second}, you think. If $S^{ij}$ only has upper indices, I know how it can still be a linear function that outputs numbers. Instead of feeding it two vectors that each have one upper index, then why not feed it two row vectors that each have one lower index? After all, $w_i q_j S^{ij}$ is a number. We thus say that there is an equivalent way of thinking about $S$:
@@ -2242,7 +2257,7 @@ It appears that we simply took \eqref{eq:S:two:upper:O:to:VV} and pulled the $V$
 Consider the tensor $T\aij{ij}{k}$. This is equivalently:
 \begin{align}
     T: V\to V\times V \; ,\quad 
-    \varnothing \to V\times V\times V^* \;,\quad 
+    \RR \to V\times V\times V^* \;,\quad 
     V^* \times V \to V \; ,\quad 
     % V^* \times V^* \to V^* \; ,\quad 
     V^* \to V^*\times V^* \ .
@@ -2324,6 +2339,7 @@ As we have echoed several times now, the basis vectors carry the ``vector-ness''
     \rbas{e}^i\left(\bas{e}_j\right) &\equiv \delta^i_j
     &
     \bas{e}_j\left(\rbas{e}^i\right) &\equiv\delta^i_j \ .
+    \label{eq:basis:vec:row:eating}
 \end{align}
 On the right-hand side we have also shown that the basis vectors in $V$ are linear maps on the basis row vectors in $V^*$. When we're lazy and there is no danger of ambiguity, we drop the parenthesis and just write $\row{e}^i\vec{e}_j=\vec{e}_j\row{e}^i$.
 
@@ -2340,6 +2356,7 @@ In this way, we can ``derive'' the rule for how a row vector acts on a column ve
 What is the basis of tensors? Let us start with matrices. Matrix components have one upper and one lower index. They are kind of like a column vector attached to a row vector, but \emph{not acting on one another}.\footnote{Reminiscent of \url{https://en.wikipedia.org/wiki/PPAP_(Pen-Pineapple-Apple-Pen)}.} To indicate that the two basis vectors are not acting on one another, we separate them with a \textbf{tensor product} symbol, $\otimes$. Thus we expand a matrix in the basis of tensor products:
 \begin{align}
     M = M\aij{i}{j} \, (\bas{e}_i\otimes \row{e}^j) \ .
+    \label{eq:matrix:basis}
 \end{align}
 Let us see how this acts on a vector in order to ``derive'' the matrix-acting-on-a-vector rule that earlier we had simply stated as fact:
 \begin{align}
@@ -2357,6 +2374,7 @@ From this we generalize to say that a multilinear map with $p$ upper indices and
     \bas{e}_{i_1}\otimes \bas{e}_{i_2} \otimes \cdots \otimes \bas{e}_{i_p}
     \otimes 
     \rbas{e}^{j_1}\otimes \rbas{e}^{j_2} \otimes \cdots \otimes \rbas{e}^{j_q} \ .
+    \label{eq:bunch:of:basis:vectors}
 \end{align}
 When acting on another tensor, we simply have to specify which of the $\bas{e}_i$ and $\rbas{e}^j$ are acting on their corresponding (row-)vector components in the basis of the other tensor. 
 \begin{example}
@@ -2374,7 +2392,8 @@ Taking a trace amounts to selecting one of the $\bas{e}_i$ and one of the $\rbas
 
 % Basis of vectors, row vectors, etc. 
 
-Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \emph{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \emph{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
+Does looking at basis elements like \eqref{eq:bunch:of:basis:vectors} give you a headache? The notation is partially to blame. s
+Quantum mechanics has a completely different notation for vectors. Rather than $\vec{v}$, we write $\ket{v}$. This is called a \textbf{ket}. The reason for this is that we write row vectors as $\row{w} = \bra{w}$. We call this object a \textbf{bra}. Then the ``matrix multiplication'' $\row{w}\vec{v}$ from \eqref{eq:row:w:on:vec:v} is succinctly written $\langle w|v\rangle$. The pun is that this is a `bra--ket' or a \emph{bracket}. At the moment we do not have much use for bra and ket notation, but it is useful to establish this notation early on. It will soon be \emph{very} convenient. To summarize:
 \begin{align}
     \text{column vector:}\quad \vec{v} &= \ket{v}
     &
@@ -2391,14 +2410,127 @@ The $\hat H$ has a hat because it is a matrix. The $E$ does not have a hat becau
 \end{example}
 
 
-Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
 
+\begin{table}
+    \renewcommand{\arraystretch}{1.3} % spacing between rows
+    \centering
+    \begin{tabular}{ @{} llllll @{} } \toprule % @{} removes space
+        Notation
+        & $V$ element
+        & $V^*$ element
+        & Contraction
+        & Matrix
+        & Identity
+        \\ \hline
+        Classic
+            & vector
+            & row-vector
+            & 
+            &       
+        \\
+            & $\vec{v} = v^i \bas{e}_i$
+            & $\row{w} = w_i \rbas{e}^i$
+            & $\rbas{e}^i\bas{e}_j = \delta^i_j$
+            & $M=M\aij{i}{j} \bas{e}_i\otimes \rbas{e}^j$
+            & $\one$
+        \\ \hline
+        Quantum 
+            & ket
+            & bra
+            &       
+            &
+        \\
+            & $\ket{v} = v^i\ket{i}$
+            & $\bra{w} = w_i \bra{i}$
+            & $\langle i | j\rangle = \delta^i_j$
+            & $M=M\aij{i}{j} \ket{i}\bra{j}$
+            & $\ket{i}\bra{i}$
+        \\ \bottomrule
+    \end{tabular}
+    \caption{
+        Dictionary between `classic' notation and `quantum' (bra--ket) notation.
+        \label{tab:classic:bra:ket:dictionary}
+    }
+\end{table}
 
+Table~\ref{tab:classic:bra:ket:dictionary} provides a brief dictionary between the quantum bra--ket notation and the `classical' notation that we had been using until this point. New notation can be intimidating\footnote{More than once in my young scientific life I had discarded a textbook because it used notation that I found unintuitive. One of my mentors gently scolded me that good science and good scientists are notation-independent.}, but sometimes different notation can simplify our expressions and, in so doing, clarify ideas.\footnote{Feynman diagrams, one of the most recognizable visualizations in physics, are essentially new notation for otherwise cumbersome mathematical expressions.} 
+
+\begin{bigidea}
+Bra--ket notation is nothing more than dressing up the \emph{same} ideas above in different symbols and words. Every time you see the word \emph{ket}, your brain should immediately connect it to \emph{vector}. Every time you see a $\bra{w}$, your brain should activate the same neurons as when you see $\row{w}$. Do not let the novelty of the notation fool you into thinking there is something new going on. You already \emph{know} everything in this section, you are just learning new ways to write it.
+\end{bigidea}
+
+\subsection{Basis Bras and Kets}
+
+Kets are vectors. The basis kets are written like so:
 \begin{align}
-    \left\langle ^i  \middle/ w_i A\aij{k}{\ell} v^j \middle/  _j\right\rangle
+    \bas{e}_i \equiv \ket{i} \ .
+\end{align}
+Just like that. The index is the name of the ket. This is potentially confusing. You lose any sense that the index is a lower index. You just have to know in your heart that a basis ket has a \emph{lower} index so that it can contract with the \emph{upper index} of the components of the ket:
+\begin{align}
+    \ket{v} = v^i \ket{i} \ .
+\end{align}
+Similarly, the basis bras have their index as their name. You have to know that the index of the basis bra is implicitly upper:
+\begin{align}
+    \rbas{e}^j & \equiv \bra{j}
+    &
+    \bra{w} &= w_j \bra{j} \ .
 \end{align}
 
+\subsection{Action of bras on kets}
 
+The action of a bra on a ket is---by definition---the same as the action of a row vector on a column vector:
+\begin{align}
+    \langle w | v\rangle \equiv \row{w}\vec{v} = w_i v^i \ .
+\end{align}
+On the left hand side a bra and a ket combine to form a \emph{bracket}. That's peak physics humor in 1939.\footnote{Dirac, ``A New Notation for Quantum Mechanics,'' \emph{Mathematical Proceedings of the Cambridge Philosophical Society} \textbf{35} issue 3, pages 416–418.} What is implicit here is that the basis bra and basis kets combine into a Kronecker~$\delta$:
+\begin{align}
+    \langle {j}| i \rangle &= \delta^j_i \ . \label{eq:bra:ket:basis}
+\end{align}
+This is the analog of \eqref{eq:basis:vec:row:eating}, where we said that this operations connects the \emph{abstract} row and column vectors to an object, $\delta^j_i$, that tells us how the \emph{components} of the row and column vectors combine in a contraction. In a loose sense, this definition \emph{derives} the contraction rule for tensors.
+
+
+\subsection{Matrices and Tensors}
+
+Matrix components have one upper index and one lower index. This is a hint that their basis is some combination of a bra and a ket, as we already know from \eqref{eq:matrix:basis}. We thus write:
+\begin{align}
+    M = M\aij{i}{j} \ket{i}\otimes\bra{j}  = M\aij{i}{j} \ket{i}\bra{j}  \ .
+    \label{eq:matrix:in:ket}
+\end{align}
+In the last step we realize that because of the shape of the bra and ket, there is \emph{no ambiguity} that the ``ket--bra'' $\ket{i}\bra{j}$ might be intepreted as a contraction. The contractions are only when the vertical parts of the bra and ket overlap, as in \eqref{eq:bra:ket:basis}. We can extend our notation to general tensors as long as we take the convention where the upper indices all come first and the lower indices are last:
+\begin{align}
+   T= T\aij{i_1\cdots i_p}{j_1\cdots j_q} \ket{i_1}\cdots\ket{i_p}\bra{j_1}\cdots\bra{j_q} \ .
+\end{align}
+If your tensor does not have all of the upper indices first, you can always define a new tensor which has identical components but reshuffled so that the components that are all upper index come first. When you act with one tensor onto another tensor you typically need to specify which bras and kets you intend to contract. Finally, if you are ever in doubt, you can always explicitly write the tensor product symbol $\otimes$.\footnote{Every time I do this I quietly hum the theme to the 90's \emph{X-Men} animated series.} 
+
+
+\subsection{Ket Tricks}
+
+
+% Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
+
+% Identity
+
+% \begin{align}
+%     \left\langle ^i  \middle/ w_i A\aij{k}{\ell} v^j \middle/  _j\right\rangle
+% \end{align}
+
+The identity matrix is blindingly obvious and will turn out to be rather significant for us soon:
+\begin{align}
+    \one = \ket{i}\bra{i}  = \ket{1}\bra{1} + \ket{2}\bra{2} + \ket{3}\bra{3} + \cdots
+\end{align}
+\begin{exercise}
+Remember that the ket is implicitly a lower indexed object and the bra is implicitly an upper indexed object, thus their repeated $i$ index is contracted. It is worth taking time to understand this expression in as many ways as you are able to. Instead of ket--bras, please use row vectors and column vectors in $\RR^3$. Confirm that this $\ket{i}\bra{i}$ acting on a three-vector gives the same three vector. What would happen if you dropped the last term and instead only wrote $\ket{1}\bra{1} + \ket{2}\bra{2}$? What is the effect of this not-quite identity matrix on a three-vector $\vec{v}=\ket{v}$ with components $v^i$?
+\end{exercise}
+
+Another surprisingly useful expression is the trace of a matrix:
+\begin{align}
+    \Tr M = \langle i | M | i \rangle \ .
+    \label{eq:trace:in:ket}
+\end{align}
+Here we recognize again that the upper index of the bra is contracting with the lower index of the ket. 
+\begin{exercise}
+Confirm \eqref{eq:trace:in:ket} by inserting \eqref{eq:matrix:in:ket} for $M$. 
+\end{exercise}
 
 
 
@@ -2409,13 +2541,273 @@ Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
 \section{Metric Spaces: Dot Products}
 \label{sec:metric:spaces}
 
+A vector space $V$ is a collection of abstract objects (vectors, kets) and their linear combinations. We defined related spaces based on the linear transformations on the vector space. This includes row vectors (bras) which live in a dual vector space $V^*$, and all tensor products of these spaces. We saw that matrices---and tensors in general---can be understood as linear transformations between these spaces. 
+
+Now we turn the idea of a \textbf{dot product}, which we introduced for Euclidean three-space in \eqref{eq:euclidean:3d:metric:intro}.  The dot product took in two vectors and returned a number. This means that it is a multi-linear map from $V\times V \to \RR$. The generalization of the dot product is called the \textbf{inner product} and the tensor associated with it is called the \textbf{metric}. We write the inner product with a bracket notation that looks (intentionally) similar to a ket acting on a bra:
+\begin{align}
+    \langle \, \cdot \, , \, \cdot \, \rangle  = g_{ij} \; : V\times V \to \RR \ .
+\end{align}
+The nomenclature of using $g_{ij}$ for the metric is inherited from relativity. The nomenclature with the bracket notation is inherited from quantum mechanics. There is one other defining characteristic of the metric: it is \emph{symmetric} in its indices:
+\begin{align}
+    g_{ij} = g_{ji} \ .
+\end{align}
+The metric is a special tensor that we have to specify. A vector space with a metric is called a \textbf{metric space} or and \textbf{inner product space}. $\RR^3$ is a vector space. $\RR^3$ with a metric---say, the Euclidean metric in \eqref{eq:euclidean:3d:metric:intro}---is a metric space. 
+\begin{bigidea}
+The difference between a vector space and a metric space is that in a metric space, you can raise/lower indices (transpose or \emph{Hermitian conjugate} for spaces with complex numbers) and measure length and angles between vectors. There can be choices of metrics on the same vector space.
+\end{bigidea}
+
+The most common example is $N$-dimensional \textbf{Euclidean space}, a metric space where the components of the metric $g_{ij}$ are simply that of the $N\times N$ identity matrix:
+\begin{align}
+    g_{ij} &= \text{diag}(1,\cdots 1) = 
+    \begin{pmatrix}
+        1 & & \\
+        & \ddots & \\
+        & & 1
+    \end{pmatrix} \ .
+\end{align}
+% 
+\begin{bigidea} \label{idea:treating:two:index:as:matrix}
+Let me be clear: $g_{ij}$ is not a ``matrix'' in the sense that acting with it on a vector does not produce a vector. $g_{ij}$ are the \emph{components} of a tensor that is a symmetric\footnote{Meaning $g_{ij}=g_{ji}$ or equivalently $g(\vec{v},\vec{w}) = g(\vec{w},\vec{v})$.} map from $V\times V\to \RR$.
+% 
+However, because $g_{ij}$ has two indices, we may visually arrange the components in a $N\times N$ table, where $N$ is the dimension of the vector space. If you want you can call this table a matrix, though in these notes we have taken a more strict definition. In general---but specifically in Section~\ref{sec:rotations:isometries} where this comes up---when we write something of the form
+\begin{align}
+    A_{ij} = 
+    \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix} \ ,
+\end{align}
+all we mean is that $A_{11} = a$, $A_{12} = b$, and so forth. We can then talk about index contraction as ``matrix multiplication'' as long as consecutive indices are contracted:
+\begin{align}
+    A_{ij}B\aij{j}{k} = (AB)_{ik} = 
+    \begin{pmatrix}
+        A_{11} & A_{12} \\
+        A_{12} & A_{22}
+    \end{pmatrix}
+    \begin{pmatrix}
+        B\aij{1}{1} & B\aij{1}{2} \\
+        B\aij{2}{1} & B\aij{2}{2}
+    \end{pmatrix} \ .
+\end{align}
+If consecutive indices are not contracted, then you need to arrange things a bit more carefully. Specifically:
+\begin{align}
+    A\aij{k}{i} B_{k\ell} C\aij{\ell}{j} \neq 
+     \begin{pmatrix}
+        A\aij{1}{1} & A\aij{1}{2} \\
+        A\aij{2}{1} & A\aij{2}{2}
+    \end{pmatrix} 
+    \begin{pmatrix}
+        B_{11} & B_{12} \\
+        B_{12} & B_{22}
+    \end{pmatrix}
+    \begin{pmatrix}
+        B\aij{1}{1} & B\aij{1}{2} \\
+        B\aij{2}{1} & B\aij{2}{2}
+    \end{pmatrix} \ .
+\end{align}
+But if we define $(A^T)_i^{\phantom{i}k} = A\aij{k}{i}$, then we may write
+\begin{align}
+    A\aij{k}{i} B_{k\ell} C\aij{\ell}{j} =
+    (A^T)_i^{\phantom{i}k} B_{k\ell} C\aij{\ell}{j}&=
+     \begin{pmatrix}
+        A\aij{1}{1} &  A\aij{2}{1} \\
+        A\aij{1}{2} & A\aij{2}{2}
+    \end{pmatrix} 
+    \begin{pmatrix}
+        B_{11} & B_{12} \\
+        B_{12} & B_{22}
+    \end{pmatrix}
+    \begin{pmatrix}
+        B\aij{1}{1} & B\aij{1}{2} \\
+        B\aij{2}{1} & B\aij{2}{2}
+    \end{pmatrix} 
+    \\ &=
+    \begin{pmatrix}
+        (ABC)^{11} & (ABC)^{12} \\
+        (ABC)^{12} & (ABC)^{22}
+    \end{pmatrix}
+    \ .
+\end{align}
+% 
+This is a modest point that can cause some confusion later on. 
+\end{bigidea}
+
+
+
+\subsection{Example Polar Coordinates}
+
+The Euclidean space metric is too boring. It is essentially the identity element and it seems like there's much ado about nothing. Let me motivate the idea of a metric by reviewing polar coordinates. This is the simplest form of what are called \textbf{curvilinear coordinates}. These are simply coordinates grids that are not straight lines, the way that the Cartesian $x$--$y$ plane is a grid. Polar coordinates replace $(x,y)$ with $(r,\theta)$. Here $r$ is the distance from the origin and $\theta$ is the angle from the positive $x$-axis. 
+% 
+This example is surprisingly subtle. The take-away is that the metric in polar coordinates is
+\begin{align}
+    g_{ij} = 
+    \begin{pmatrix}
+        g_{rr} & g_{r\theta} \\
+        g_{\theta r} & g_{\theta\theta}    
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1 & \\
+        & r^2
+    \end{pmatrix} \ .
+    \label{eq:polar:metric}
+\end{align}
+The bottom right component is not one, but rather the radial coordinate. If this is your first time seeing this, please feel free to \emph{skim} this section. We will present the example, then dig a bit deeper to discuss the significance. You may want to postpone reading those details until after reviewing these notes once through.
+
+\subsubsection{What does this mean}
+
+The surprising piece in \eqref{eq:polar:metric} is that $g_{\theta\theta} = r^2$. This means that the metric changes as you move further away from the origin of the coordinate space. This is in contrast to the Euclidean metric whose components are proportional to the identity no matter where you happen to be.
+
+This should not surprise us. We know that the same \emph{angular displacement} $\Delta \theta$ corresponds to a different traversed circumference depending on the radius. If you are close to the origin, then a displacement of $\Delta\theta$ is not particularly far. If you are far from the origin, then a displacement of $\Delta\Theta$ can be huge, see Fig.~\ref{fig:polar:displacement}.\footnote{This sometimes shows up in the ``paradox'' (it is not a paradox) that ``shadows travel faster than the speed of light.''} From a physics perspective, you could have guessed this from pure dimensional analysis: $\Delta \theta$ is dimensionless. If you want your metric to output a squared distance, then you need something with dimensions of length---the only plausible candidate is $r^2$. This is illustrated nicely in the \emph{Calvin and Hobbes} comic in Fig.~\ref{fig:CH:record:player}.
+
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.4\textwidth]{figures/polar_longer_distance_dtheta.pdf}
+    \caption{The meaning of the $g_{\theta\theta} = r^2$ is related to the idea that the distance traversed along a circle for a displacement $\Delta\theta$ depends on the radius of the circle.}
+    \label{fig:polar:displacement}
+\end{figure}
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\textwidth]{figures/calvin_and_hobbes_record.jpg}
+    \caption{\emph{Calvin and Hobbes}, ``Record Player,'' by Bill Watterson, 5 June 1990. Image from \url{https://www.gocomics.com/calvinandhobbes/1990/06/05}. If you have never heard of a record player than look it up.}
+    \label{fig:CH:record:player}
+\end{figure}
+% Also: mechanical integrator: https://www.youtube.com/watch?v=s-y_lnzWQjk
+% Also: differential steering: https://www.youtube.com/watch?v=yYAw79386WI
+
+\begin{example}
+While this is not really relevant for linear algebra, there are a few neat ways in which the difference between angular and linear velocity show up. One is the mechanical integrator\footnote{\url{https://www.youtube.com/watch?v=s-y_lnzWQjk}}, and another is differential steering\footnote{\url{https://www.youtube.com/watch?v=yYAw79386WI}}. 
+\end{example}
+
+
+\begin{exercise}\label{ex:polar:location:dependence}
+Consider the vector $\vec{v} = 3\bas{e}_r - (\pi/4)\bas{e}_\theta$ located at the point $(r,\theta)=(2, \pi/6)$. Find the length of this vector, $|\vec{v}|$ using the polar coordinate metric \eqref{eq:polar:metric}. Observe that for this problem we have to specify the location of the vector; this corresponds to defining where the `zero' of the vector space is relative to the coordinate space. This suggests that there's more structure here than simply a metric space---we discuss this in Section~\ref{sec:polar:tangent:space}.
+\end{exercise}
+
+\subsubsection{What else do we notice?}
+
+The metric depends on the location of the vector---please make sure to do Exercise~\ref{ex:polar:location:dependence}. This is in contrast to the ordinary Euclidean metric, which is the same no matter where you are in coordinate space. Another difference is that the orientation of the polar basis vectors is different compared to the Cartesian basis vectors that always point in the $x$- and $y$-directions, see Fig.~\ref{fig:polar:coordinate:vs:vector:space}. In fact, the orientation of the polar basis vectors is different depending on where in the coordinate space you happen to be looking, see Fig.~\ref{fig:polar:coordinate:vs:vector:space:two:points}. Note that the length and orthogonality of the polar coordinate basis vectors do not change, just their relative orientation. 
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/PolarBasis.pdf}
+    \caption{Consider a point in $\RR^2$ and some vector $\vec{v}$ that represents the velocity of a particle at that point. We can write $\vec{v}$ in the usual Cartesian basis (left), or in the polar basis (right). Both bases are orthonormal, but they are oriented differently.}
+    \label{fig:polar:coordinate:vs:vector:space}
+\end{figure}
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/polar_different_orientation.pdf}
+    \caption{The basis vectors are a basis for potential velocities of a particle at that point. The orientation of the polar coordinate basis vectors depends on the point at which we are using them. }
+    \label{fig:polar:coordinate:vs:vector:space:two:points}
+\end{figure}
+
+
+When a metric that differs from the identity\footnote{By which we mean a metric whose components are different from the components of the identity matrix. See \bigidearef~\ref{idea:treating:two:index:as:matrix}.} we should suspect that we may be in a \emph{curved space}. For example, the surface of the Earth is a curved space whose metric in spherical coordinates is
+\begin{align}
+    g_{ij} = 
+    \begin{pmatrix}
+        g_{\theta\theta} & g_{\theta\phi}\\
+        g_{\phi\theta} & g_{\phi\phi}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        r^2 & \\
+        & r^2 \sin^2\theta
+    \end{pmatrix} \ ,
+    \label{eq:metric:surface:of:sphere}
+\end{align}
+where $r$ is the radius of the Earth. However, it is not true that all `funny looking metrics' imply that the underlying space is curved. In the polar coordinate example of this subsection, the space itself is the same two-dimensional Euclidean space that we are used to. All we have done is changed coordinates. We see that a funny looking metric may mean that the space is curved, or it may mean that our coordinate system is curved (that is, \emph{curvilinear}). 
+
+\begin{exercise}
+Prove \eqref{eq:metric:surface:of:sphere}. You may need to review your trigonometry and draw the sphere carefully. Observe that this is a two-dimensional metric space for the surface of the sphere. There is no radial vector. Feel free to derive the three-dimensional spherical coordinate metric that includes the radial direction. 
+\end{exercise}
+
+
+
+\subsubsection{The tangent space}
+\label{sec:polar:tangent:space}
+
+This example of polar coordinates is helpful because it is a simple case of a funny-looking metric that should feel familiar to us. However, it is also a very dangerous example because it can lead to some misconceptions. In fact, you should have noticed that something funny was going on here. The metric \eqref{eq:polar:metric} depends on the `position' of the vector---where `base' of the vector located. 
+
+This notion of `position' should make you feel uncomfortable. Positions depend on a coordinate system. We remarked before that there is no such thing as a ``position vector'' and that ``position space'' is not a vector space---see Exercise~\ref{ex:position:vector}. Positions depend on a choice of origin, whereas in a vector space there is no `origin,' only the zero vector. The zero vector is independent of the choice of basis vectors. There is no such thing as `translating' a vector in a vector space.\footnote{You can add vectors, but one should not think about this as translation because there is a more subtle idea of how to translate a vector across a curved surface. The word `translate' is being used differently, but to avoid potential confusion there is no need to talk about vector addition within a vector space as `translation.'} What is happening here is that there is a separate space called the \textbf{base space} or \textbf{manifold}.\footnote{This comes with some mathematical assumptions about topology, but for our present purposes just assume that the manifold is something like a sheet of graph paper whose grid lines gives us a coordinate system.} We call the base space $M$, in our present example $M \simeq \RR^2$.
+
+The base space is not a vector space. It has an origin. You can choose different coordinates that have a different origin---for example, you could shift your Cartesian coordinates to the right by one unit. You can choose curvilinear coordinates like polar coordinates. All this is to say that a given \emph{point} on the base space, $p$, has many different representations depending on your coordinate system. Let's just call it $p$, but to some people $p$ corresponds to a specific value of $(x,y)$, to others its a value of $(r,\theta)$. 
+
+Now imagine a particle at position $p$. Maybe that particle is moving. It has a velocity. The space of possible velocity vectors \emph{is a vector space}. The vector space is called the tangent space at $p$, which math-y folks call $T_pM$. This is a special two-dimensional vector space that \emph{looks a lot like} the base space, but it is not. The velocity vectors obey the rules for a vector space: you can take linear combinations, there is a well defined zero vector, and so forth. In particular, the vectors are independent of any particular coordinate system of the base space. They have their own basis, which we can draw as a set of vectors whose base is ``at'' $p$. This is illustrated in Fig.~\ref{fig:tangent:space:polar}.  We can determine a basis for each tangent space by using the coordinates. The polar basis comes from considering the directions that infinitesimal changes in $r$ and $\theta$ correspond to at the point $p$.\footnote{Do you see how this now interfaces with multivariable calculus? The marriage of calculus and geometry is called differential geometry.}
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.7\textwidth]{figures/base_space_tangent_space.pdf}
+    \caption{The base space is ``coordinate space.'' These are positions. Positions are not vectors and the base space is not a vector space. Positions depend on the coordinate system. At each position $(x,y)$, there is a vector space called the tangent space at $(x,y)$. This \emph{is} a vector space and the vectors can be thought of as possible velocities of a particle at $(x,y)$. In the picture on the right hand side we have `peeled' the base space away from the tangent space to make it clear that they are different, even though they both look like sheets of paper. There is no assumed curvature in the base space. There is a different tangent space for each position. The combination of the infinite number of tangent spaces over the base space is known as a tangent space bundle.}
+    \label{fig:tangent:space:polar}
+\end{figure}
+
+The metric is defined for \emph{each} tangent space. There are an infinite number of tangent spaces, one for each point $p$ in the manifold. The polar coordinate metric~\eqref{eq:polar:metric} tells us the following. Suppose you have a point $p$ with a tangent space $T_pM$. What is the appropriate metric for this space if you are using the polar basis vectors? Take \eqref{eq:polar:metric} and plug in the value of $(r,\theta)$ corresponding to $p$. In this case the metric is independent of $\theta$. Suppose you are at a point 2 units from the origin and $\pi/6$ from the $x$-axis, $(r,\theta)=(2,\pi/6)$. Then the metric for the tangent space at this point is
+\begin{align}
+    \left.g_{ij}\right|_p=
+    \left.
+    \begin{pmatrix}
+        1 &\\
+        & r^2
+    \end{pmatrix}
+    \right|_{r=2}
+    =
+    \begin{pmatrix}
+        1 &\\
+        & 4
+    \end{pmatrix} \ .
+\end{align}
+If you are at a different point $p'$ with $r=3$, then the metric for $T_{p'}M$ is instead
+\begin{align}
+    \left.g_{ij}\right|_{p'}=
+    \left.
+    \begin{pmatrix}
+        1 &\\
+        & r^2
+    \end{pmatrix}
+    \right|_{r=3}
+    =
+    \begin{pmatrix}
+        1 &\\
+        & 9
+    \end{pmatrix} \ .
+\end{align}
+In this way, once you specify the point $p$, you have an unambiguous metric for $T_pM$ 
+
+
+\begin{example}
+The distinction between the tangent space at a point and the base space is especially significant when the base space is curved. Let us return again to the example of a sphere, say the Earth. If you have a particle constrained to move on the surface of the Earth, then its velocity vector points in a plane that is \emph{tangent} to its position---hence the name `tangent space' for the associated vector space. Suppose you are on the equator and want to move towards the north pole. Then your velocity vector is formally in the $z$-direction, which coincides with the $-\theta$-direction, where $\theta$ is the polar angle. However, we note that this vector is \emph{tangent} to the equator and does not `follow' the curvature of the Earth. 
+\end{example}
+
+\begin{example}
+A trajectory in a base space $M$ is a curve $\gamma(t)$: this maps each value of a `time' parameter $t$ to a position on the space. This could be, for example, the trajectory of a particle in a curved space. How do vectors at some tangent space $T_{\gamma(t)}M$ relate to the nearby tangent space $T_{\gamma(t+\varepsilon)}M$? In other words, how do we \emph{transport} vectors from one tangent space to a nearby tangent space? This is called \textbf{parallel transport} and is one of central mathematical questions en route to the formalism of general relativity.
+\end{example}
+% \begin{exercise}
+% Repeat this sub-section for spherical coordinates. 
+% \end{exercise}
+
 \subsection{In contrast to Row Vectors}
-\subsection{Machine to create row vectors}
+
 % only for finite dimensional sapces, see discussion on physics stax in my references folder
 \subsection{Length}
 \subsection{Orthogonality}
-\subsection{Rotations, once again}
-% as symmetries
+\subsection{Orthonormal Basis}
+% Vectors are a magnitude and a direction.
+% ONLY when you have a metric
+
+\subsection{Machine to create row vectors}
+\subsection{Inverse Metric}
+\subsection{Rotations, once again}\label{sec:rotations:isometries}
+% as symmetries Isometries
+% notation of change of variables
+
+% talk about matrix notation. THis is not literally matrix notation. It's a table whose multiplicaiton means something.
+
 \subsection{The meaning of indices}
 
 
@@ -2437,6 +2829,16 @@ Test: $\ket{^i}$ $\bra{_j}$ $\left/ ^i \right\rangle \left\langle _j \right/$
 
 
 
+
+\appendix
+
+\section{Things we did not get to}
+\begin{itemize}
+\item Tensor densities
+\item Symmetries and Lie Groups
+\item Other types of integral transforms
+\item Hamiltonian Mechanics and the co-tangent space
+\end{itemize}
 
 
 
