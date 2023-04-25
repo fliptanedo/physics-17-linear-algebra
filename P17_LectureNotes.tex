@@ -1630,6 +1630,7 @@ From this, we have argued that if $W: V_1 \to V_2$ is a linear transformation be
 % \subsection{More Jargon}
 
 \section{Rotations}
+\label{sec:rotations}
 
 Rotations are a special class of transformations. We wait until Section~\ref{sec:metric:spaces} to really appreciate why rotations are special. For now, you may rely on your ordinary intuition for what it means to \emph{rotate} something. If a vector is an arrow---\emph{I know, this is the kindergarden picture of vectors}---then you rotate it by pinning its tail to the origin and then moving the arrowhead while leaving the length unchanged. 
 
@@ -2162,7 +2163,7 @@ We have informally introduced the idea that a tensor is an object with well defi
 
 \subsection{Products of Vector Spaces}
 
-First, a bit of review and notation. Recall that a \textbf{vector space}, $V$, is the maximal set of vectors formed by taking linear combinations of vectors. Given a basis, $V$ is the collection of all linear combinations of those basis vectors. Now recall our jargon from Section~\ref{sec:jargon:linear:map}: linear maps are functions that take as input any element of a space and returns as output a single element of another space. A map is linear if
+First, a bit of review and notation. Recall that a \textbf{vector space}, $V$, is the maximal set of vectors formed by taking linear combinations of vectors. Given a basis, $V$ is the collection of all linear combinations of those basis vectors. Now recall our jargon from Section~\ref{sec:jargon:linear:map}: linear maps are functions that take as input any element of a space and returns as output a single element of another space.\footnote{This always reminds me of rock octoroks in \emph{The Legend of Zelda: Breath of the Wild}. If you feed little baddies rusty weapons, they will inhale them and spit out a clean weapon.} A map is linear if
 \begin{align}
     f(\alpha\vec{x} + \beta\vec{y}) = \alpha f(\vec{x}) + \beta f(\vec{y}) \ .
 \end{align}
@@ -2187,6 +2188,7 @@ The moral of this sub-section is that you should not be intimidated by the \text
 
 
 \subsection{Linear Maps to Numbers: Row Vectors}
+\label{eq:linear:maps:row:vectors}
 
 Our humble row vectors are also linear transformations. The components of a row vector have lower indices, $w_i$. These lower indices are just looking for an upper index for contraction. Once we provide a row vector $\row{w}$ with an object with an upper index, $\vec{v}=v^i\bas{e}_i$, then we can form the number $\row{w}\vec{v} = w_i v^i$. This tells us that a row vector $\vec{w}$ defined by its components $w_i$ is a linear map that takes in a vector and returns a number:
 \begin{align}
@@ -2202,7 +2204,7 @@ From the rule of index contraction, we observe that this is a \emph{linear map}:
     = 
     \alpha\row{w}\vec{v} + \beta\row{w}\vec{u} \ .
 \end{align}
-We deduce that lower indices are ``born to contract'' with the upper index of a vector. Lower indices say: \emph{feed me an upper index and I will contract it; I will return a number that is linearly dependent on the upper indexed components}. 
+We deduce that lower indices are ``born to contract'' with the upper index of a vector. Lower indices say: \emph{feed me an upper index and I will contract it; I will return a number that is linearly dependent on the upper indexed components}.
 
 We say that these row vectors belong to a \textbf{dual vector space}, $V^*$. This $V^*$ is the space of all row vectors. An element of $V^*$, say $\row{w}$, is a linear map from $V\to \RR$. 
 \begin{exercise}
@@ -2605,7 +2607,7 @@ If consecutive indices are not contracted, then you need to arrange things a bit
         B\aij{2}{1} & B\aij{2}{2}
     \end{pmatrix} \ .
 \end{align}
-But if we define $(A^T)_i^{\phantom{i}k} = A\aij{k}{i}$, then we may write
+But if we define\footnote{The transpose swaps the order of the indices of a matrix. What about the height of the indices? For now let us maintain the height so that an the first, upper index of $A$ becomes the second, upper index of $A^T$. We give a more formal definition of transpose in Section~\ref{eq:transpose:adjoint}.} $(A^T)_i^{\phantom{i}k} = A\aij{k}{i}$, then we may write
 \begin{align}
     A\aij{k}{i} B_{k\ell} C\aij{\ell}{j} =
     (A^T)_i^{\phantom{i}k} B_{k\ell} C\aij{\ell}{j}&=
@@ -2626,12 +2628,21 @@ But if we define $(A^T)_i^{\phantom{i}k} = A\aij{k}{i}$, then we may write
         (ABC)^{11} & (ABC)^{12} \\
         (ABC)^{12} & (ABC)^{22}
     \end{pmatrix}
+    \label{eq:ABC:matrix:multiplication:tensor:note}
     \ .
 \end{align}
 % 
 This is a modest point that can cause some confusion later on. 
-\end{bigidea}
+\end{bigidea} %% \label{idea:treating:two:index:as:matrix}
 
+
+
+Metrics do two things for us:
+\begin{enumerate}
+    \item They allow us to define the length of a vector, $|\vec{v}|$. In so doing, they allow us to define a unit length (\emph{normalized}) vector, $\hat{\vec{v}}$.
+    \item They allow us to define the angle between two vectors, $\cos\theta = \langle v,w\rangle$.
+\end{enumerate}
+Together, they allow us to define \emph{nice} basis vectors that are unit length and orthogonal to one another. We say that such a basis is \textbf{orthonormal}.
 
 
 \subsection{Example Polar Coordinates}
@@ -2727,6 +2738,23 @@ where $r$ is the radius of the Earth. However, it is not true that all `funny lo
 Prove \eqref{eq:metric:surface:of:sphere}. You may need to review your trigonometry and draw the sphere carefully. Observe that this is a two-dimensional metric space for the surface of the sphere. There is no radial vector. Feel free to derive the three-dimensional spherical coordinate metric that includes the radial direction. 
 \end{exercise}
 
+\subsubsection{The polar basis}
+
+Let us check the orthonormality of the polar basis at some point, $(r,\theta) = (3,\pi/4)$. The fact that $\bas{e}_r$ and $\bas{e}_\theta$ are orthogonal should be obvious: one points in the radial direction and one points in the polar direction---these are orthogonal directions by definition. Another way of seeing this is that the metric is diagonal. 
+\begin{exercise}
+Confirm that if a metric is diagonal, then the basis vectors are obviously orthogonal. 
+\end{exercise}
+The length of the $\bas{e}_r$ vector is also normalized since $\langle \bas{e}_r, \bas{e}_r\rangle = g_{rr} = 1$. What about the length of $\vec{e}_\theta$? This is a vector corresponding to a shift of one unit in the $\theta$ direction. We have
+\begin{align}
+    \langle \vec{e}_\theta, \vec{e}_\theta \rangle = g_{\theta\theta} = r^2 \ .
+\end{align}
+Well that's unusual. If we are at $r=3$, then $\langle \vec{e}_\theta, \vec{e}_\theta \rangle = 9$. This means that the normalized basis vector is
+\begin{align}
+    \bas{e}_\theta = \frac{\vec{e}_\theta}{r} \ .
+\end{align}
+This makes sense because a `shift of one unit in the $\theta$ direction' is a much larger step the further away you are from the coordinate origin, as we saw in Fig.~\ref{fig:polar:displacement}.
+
+
 
 
 \subsubsection{The tangent space}
@@ -2791,18 +2819,507 @@ A trajectory in a base space $M$ is a curve $\gamma(t)$: this maps each value of
 % Repeat this sub-section for spherical coordinates. 
 % \end{exercise}
 
-\subsection{In contrast to Row Vectors}
 
-% only for finite dimensional sapces, see discussion on physics stax in my references folder
+
 \subsection{Length}
+
+The length of a vector $\vec{v} = \ket{v}$ is $|\vec{v}|$ and is given by the inner product of the vector with itself:
+\begin{align}
+    |\vec{v}|^2 = \langle v, v \rangle  = g_{ij}v^iv^j \ .
+\end{align}
+\begin{exercise}
+The length-squared of a vector is also called its \textbf{norm}.
+Confirm that with the Euclidean metric in $\RR^3$ this simply corresponds to the distance from the origin.
+\end{exercise}
+Sometimes we get lazy and will write $v = |\vec{v}|$ when there is no danger of ambiguity. 
+
+\begin{bigidea}
+Usually physical \emph{spaces} have a metric where the length of every vector is positive, with the exception of the zero vector that has length zero. We call say that the metric is \textbf{positive-definite}. When the metric over a manifold\footnote{Manifold? See Section~\ref{sec:polar:tangent:space}.}  is positive definite, we say that the manifold is Riemannian.\footnote{There are a few other reasonable assumptions along the lines of differentiability.} In relativity, there is a relative sign between the spatial and temporal components of the metric. This means that there are vectors that have \emph{negative norm}. We then say that the manifold is pseudo-Riemannian. 
+\end{bigidea}
+
+\begin{example}
+In special relativity and using the sign conventions that I like as a particle physicist, the metric is
+\begin{align}
+    g_{\mu\nu} = 
+    \begin{pmatrix}
+        1 & & & \\
+        & -1 & & \\
+        & & -1 & \\
+        & & & -1 
+    \end{pmatrix} \ .
+\end{align}
+Using these signs, any purely space-like vector $v^\mu = (0,v^1, v^2, v^3)$ has a negative norm: 
+\begin{align}
+    v^2 = v^\mu v_\mu = g_{\mu\nu}v^\mu v^\nu = - (v^1)^2 - (v^2)^2 - (v^3)^2 \ .
+\end{align}
+\end{example}
+
+\begin{exercise}
+In special relativity there is a class of vectors with \emph{zero norm} even though the vectors themselves are non-zero. 
+\end{exercise}
+
+
+We can define \textbf{normalized} vectors by dividing them by their norm. I choose to decorate these vectors with a hat, say $\hat{\vec{v}}$ or $\ket{\hat v}$. These \emph{unit} vectors have norm one:
+\begin{align}
+    \hat{\vec{v}} = \ket{\hat v} = \frac{\vec{v}}{|\vec{v}|} 
+    = \frac{\ket{v}}{|v|} 
+    = \frac{\vec{v}}{\sqrt{\langle\vec{v},\vec{v}\rangle}} 
+    =
+    \frac{\ket{v}}{\sqrt{\langle\vec{v},\vec{v}\rangle}}  \ .
+\end{align}
+
+
+
 \subsection{Orthogonality}
+
+The metric allows us to define the cosine of the angle between two normalized vectors as follows:
+\begin{align}
+    \cos \theta \equiv 
+    {\la \hat v, \hat w \ra} \ .
+\end{align}
+This means that the angle between two not-necessarily normalized vectors follows from the bi-linearity of the inner product:
+\begin{align}
+    \cos \theta \equiv 
+    {\left\la  \frac{\vec{v}}{|v|}, \frac{\vec{w}}{|w|} \right\ra} 
+    =
+    \frac{\left\la  \vec{v} ,  \vec{w}\right\ra }
+    {|v||w|}
+    \ .
+\end{align}
+The metric only tells us the cosine of the angle, thus we do not define a sense of whether this angle is positive or negative. In other words, there is not a sense of \emph{orientation} in the metric. 
+
+\begin{example}
+What is the angle between the following kets:
+\begin{align}
+    \ket{v} &= \ket{1} + \ket{2} 
+    &
+    \ket{w} &= 3 \ket{1} \; ?
+\end{align}
+We can start by writing the normalized kets:
+\begin{align}
+    \ket{\hat v} &= \frac{1}{\sqrt{2}}\left(\ket{1} + \ket{2} \right)
+    &
+    \ket{\hat w} &= \ket{1} \; .
+\end{align}
+Plugging these into the expression for the cosine of the angle between these kets
+\begin{align}
+   \cos\theta = \la \hat v, \hat w \ra &= \frac{1}{\sqrt{2}}\, \la 1, 1\ra + \frac{1}{\sqrt{2}}\, \la 2, 1 \ra = \frac{1}{\sqrt{2}}\; \ .
+\end{align}
+Taking the positive value of inverse cosine gives $\theta = \pi/4$. Draw this in $\RR^2$ if the result is not immediately obvious.
+\end{example}
+
+\begin{example}\label{eg:component:along:an:axis}
+Consider a point in polar coordinates, $(r,\theta)$. The component along the $x$-axis is simply $r\cos\theta$. One way to think about this is that it is the projection of the point onto the $x$-axis. In the same way, the inner product of a vector $\ket{v}$ with a unit vector $\ket{\hat w}$ gives the component of $\ket{v}$ along the axis defined by $\ket{\hat{w}}$:
+\begin{align}
+    \la v , \hat{w} \ra = |v| \cos\theta \ .
+\end{align}
+\end{example}
+
+
+
+
 \subsection{Orthonormal Basis}
-% Vectors are a magnitude and a direction.
-% ONLY when you have a metric
+\label{sec:metric:orthonormal}
+
+When I ask freshmen what a vector is, they often reply that it is a quantity that has a \emph{magnitude} and a \emph{direction}. This boils down to the statement:
+\begin{align}
+    \ket{v} = |v| \ket{\hat{v}} \ .
+\end{align}
+The length $|v|$ is the magnitude, and the unit vector $\ket{\hat{v}}$ only encodes a direction since its length has been normalized. What is significant about this is that we can only define a vector as a ``a \emph{magnitude} and a \emph{direction}'' if you are not only in a vector space, but a \emph{metric space} where you have defined the metric.
+
+Armed with a metric, we can be more picky about the sets of vectors that are sensible basis vectors. In addition to the requirement that a basis is a \emph{minimal set} of vectors that \emph{span} the vector space, we can use our metric to require that the basis is \textbf{orthonormal}. This mean that each basis vector is
+\begin{enumerate}
+\item Normalized, so that $\langle \bas{e_i},\bas{e_i}\rangle = 1$, and
+\item Orthogonal, so that $\langle \bas{e_i},\bas{e_{i\neq j}}\rangle = 0$ \ .
+\end{enumerate}
+In other words, 
+\begin{align}
+    \la \bas{e_i}, \bas{e_j} \ra 
+    = 
+    \la i , j \ra
+    = 
+    \begin{cases}
+    1 & \text{if } i=j \\
+    0 & \text{if } i\neq j
+    \end{cases} \ .
+\end{align}
+
+When our basis is orthonormal, then we notice that the inner product is similar to the action of a row vector on a column vector:
+\begin{align}
+    \la i , j \ra = \la i | j \ra 
+    = 
+    \begin{cases}
+    1 & \text{if } i=j \\
+    0 & \text{if } i\neq j
+    \end{cases} 
+    \ .
+    \label{eq:basis:metric:row}
+\end{align}
+This relation looks silly: what's a comma versus a vertical bar between friends? But there's something deeper going on here. The expression $\la i , j \ra $ contains two basis column vectors (kets), whereas the expression $\la i | j \ra $ contains a basis row vector (bra) and a basis column vector (ket). Evidently when we use our metric to define an orthonormal basis, this whole bra-ket notation starts to hint at its mathematical underpinnings. 
+
+From this point on we assume that all of our bases for metric spaces are orthonormal. Having come this far, it would simply be uncouth to do otherwise.
+
+
+\subsection{The tensor structure of the metric}
+
+The metric has two lower indices, so we may write it in full tensor notation as
+\begin{align}
+    g = g_{ij} \bra{i}\bra{j} \ .
+\end{align}
+When acting on a pair of vectors, we have
+\begin{align}
+    g(\vec{v},\vec{w}) = 
+    g_{ij} \bra{i}\bra{j}
+    \; v^k\ket{k}
+    \; w^\ell \ket{\ell}
+    = 
+    g_{ij}v^k w^\ell \la{i},{k}\ra\la j , \ell \ra
+    =
+    g_{ij}v^k w^\ell \delta^i_k \delta^j_\ell
+    =
+    g_{ij}v^i w^j \ .
+    \label{eq:metric:acting:kets}
+\end{align}
+In the above contraction we assumed that the first basis bra $\bra{i}$ in $g$ hits the basis ket $\ket{k}$ in $\ket{v}$, and the second basis bra $\bra{j}$ in $g$ hits the basks ket $\ket\ell$ in $\ket{w}$. By the symmetry of $g_{ij}$, it does not matter if we had chosen instead to contract the $\bra{i}$ with $\ket{\ell}$. 
+\begin{exercise}
+Show that $g(\vec{v},\vec{w})  = g(\vec{w},\vec{v})$ when $g_{ij} = g_{ji}$.
+\end{exercise}
+
+
+
 
 \subsection{Machine to create row vectors}
+\label{sec:machine:to:make:row:vectors}
+
+What we started to see in Section~\ref{sec:metric:orthonormal} is that the metric is related to the transmogrification of column vectors (kets) into row vectors (bras). Equivalently, it takes components that have an upper index and turn them into components that have a lower index. 
+
+One way to see this is that the metric is a map $g:\;V\times V \to \RR$. We read this as: feed $g$ two vectors, and it will spit out a number. As a function, the metric has two slots:
+\begin{align}
+    g(\smallslot, \smallslot) = \la \smallslot, \smallslot \ra \ .
+\end{align}
+What if we \emph{pre-load} one of those slots with a vector, $\vec{v}=\ket{v}$? Just go ahead and drop a vector into one of the slots---it doesn't matter which, since $g$ is symmetric:
+\begin{align}
+    g(\vec{v},\smallslot) = \la v, \smallslot \ra \ .
+\end{align}
+What is this metric-with-a-pre-loaded-vector? Well, there is still one open slot. That open slot takes in a vector. Once you provide that vector, $g(\vec{v},\smallslot)$ outputs a number. In fact, $g(\vec{v},\smallslot)$ is a linear function of that last slot. Thus $g(\vec{v},\smallslot)$ is a \emph{linear} machine that takes a vector and returns a number. This is \emph{precisely} what we defined to be a \emph{row vector} (bra) in Section~\ref{eq:linear:maps:row:vectors}. Evidently a metric takes a vector and outputs a machine-that-eats-vectors, i.e.~a row vector: $g:\;V\to V^*$. Of course, this is completely equivalent to our earlier identification:
+\begin{align}
+    g:&\;V\times V \to \RR
+    &
+    \Longleftrightarrow
+    &&
+    g:&\;V \to V^* \ .
+\end{align}
+
+What are the components of this new bra that we have created out of a ket, $\ket{v}$? Let's work it out using the machinery in \eqref{eq:metric:acting:kets}:
+\begin{align}
+    g(\vec{v},\smallslot) = \la v, \smallslot \ra = 
+    g_{ij}\bra{i}\bra{j}\; v^k\ket{k} = 
+    g_{ij}v^j \bra{i}
+    \equiv v_i \bra{i} 
+    \equiv \bra{v}\ .
+\end{align}
+Do you see what we have done? We have \emph{defined} a new component that has a lower index, $v_i \equiv g_{ij}v^j$. Of course, this is precisely what is prescribed by the index contraction rules we dictated at the beginning of this class. Here we see \emph{why} that rule makes sense: in the third equality we see that the basis tensor is a bra, $\bra{i}$. This means that the object must be a bra (row vector). The components of a bra have lower indices. 
+\begin{bigidea}
+The $\bra{v}$ is \emph{defined} with respect to metric pre-loaded with $\ket{v}$. If we were sticklers, we would have called this $\bra{g(v,\smallslot)}$ so that nobody gets confused that somewhere out in the world there is a row vector that had nothing to do with $\ket{v}$ but that we had irresponsibly labelled with the same name. Because the metric shows up so often, it is a convention that we do not explicitly write it when there is no ambiguity. Thus we \emph{understand} that there only ever was a ket $\ket{v}$, and the thing that we are now calling $\bra{v}$ comes from the metric ``lowering the index'' of $v^i$. We call this lowered index $v_i$, which we understand to actually mean the sum $g_{ij}v^j$. That contraction with one index of the metric is what we mean by ``lowering an index.''
+\end{bigidea}
+
+You can use the metric to lower \emph{any} upper index. For example, if you have a tensor with $p$ upper indices and $q$ lower indices, then the metric can convert one of those upper indices into a lower index:
+\begin{align}
+    g_{i_pj_{q+1}} T\aij{i_1\cdots i_p}{j_1\cdots j_q} \equiv T\aij{i_1\cdots i_{p-1}}{j_1\cdots j_{q+1}} \ .
+\end{align}
+We had to \emph{choose} one of the indices to contract. We have left this choice implicit in the above expression. We have also opted to simply write the components of the tensor rather than writing out all the basis kets and bras.\footnote{If this is not obvious, then please write the full tensors with their tensor product basis.} On the right-hand side the index structure of the component $T\aij{i_1\cdots i_{p-1}}{j_1\cdots j_{q+1}}$ is `new' in the sense that no such object existed until we decided to hit $T\aij{i_1\cdots i_p}{j_1\cdots j_q}$ with the metric. Rather than calling this `new' tensor $T'$ or $gT$, we simply let the indices do the talking. If you see a tensor with a familiar name, but some of the indices have fallen compared to where you were expecting them, then you should \emph{understand} that they have been lowered by contraction with the metric. 
+
+\begin{exercise}
+Suppose you have a metric on a two dimensional vector spce,
+\begin{align}
+    g_{ij}=
+    \begin{pmatrix}
+        1 & \pp 0\\
+        0 & -1
+    \end{pmatrix} \ .
+\end{align}
+What are the components of the row vector $v_i$ in terms of the components the column vector $v^i$? What are the components of the two-lower-index tensor $M_{ij}$ in terms of the components of the matrix $M\aij{i}{j}$?
+\end{exercise}
+
+Recalling the relation \eqref{eq:basis:metric:row}, we now understand the \emph{tautology}\footnote{This is how mathematicians say ``more obvious than obvious,'' which itself is a phrase that I picked up from Tony Zee.}
+\begin{align}
+    \la v, w \ra = \la v | w \ra \ 
+    \label{eq:inner:product:row:vector}
+\end{align}
+
+
+
+
+
+
+% \subsection{In contrast to Row Vectors}
+% only for finite dimensional sapces, see discussion on physics stax in my references folder
+
+\subsection{Example: Projection Matrices}
+Suppose you have a vector $\ket{v} =  4\ket{1}+2.5\ket{2}$. What is the component along the $x$-axis, the one given by the basis vector $\ket{1}$? \emph{Simple!} That's $v^1 = 4$. That's what the linear combination of basis vectors means.
+% 
+Now suppose you have a different vector $\ket{w}$. What is the component of $\ket{w}$ along the axis of $\ket{v}$? See Fig.~\ref{fig:gram:projection}. Furthermore, what is the linear transformation that \emph{projects} any vector $\ket{x}$ onto a vector $\ket{x_\paral}$ that is parallel to $\ket{v}$?  
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/gram-projection.jpg}
+    \caption{Projection of a vector $\ket{w}$ onto the axis of another vector, $\ket{v}$.}
+    \label{fig:gram:projection}
+\end{figure}
+
+Our strategy is to separate the ket $\ket{w}$ into a piece that is parallel to $\ket{v}$ and a piece that is perpendicular to $\ket{v}$. We will call these pieces:
+\begin{align}
+    \ket{w}= \ket{w_\paral} + \ket{w_\perp} \ .
+\end{align}
+The defining characteristic of $\ket{w_\paral}$ is that $\la \hat{w}_\paral, \hat{v}\ra = 1$. That is: the angle between the unit vectors is zero---they are parallel. This means that 
+\begin{align}
+    \ket{w_\paral} \propto \ket{\hat{v}} \ .
+\end{align}
+What is the proportionality? This is simply the length of $\ket{w}$ along the $\ket{\hat{v}}$ axis, which we know from Example~\ref{eg:component:along:an:axis} is the inner product:
+\begin{align}
+    \ket{w_\paral} = \la w, \hat{v} \ra \ket{\hat{v}} =  \ket{\hat{v}}\la \hat{v}, w \ra  \ .
+\end{align}
+In the last line we decided to be silly: since the inner product of two kets is simply a number, we can place it to the right of the ket $\ket{\hat{v}}$. Let us say that this is for aesthetic reasons for now. Then let us recall \eqref{eq:inner:product:row:vector} which related an inner product with $\ket{v}$ to a contraction with $\bra{v}$. We thus write:
+\begin{align}
+    \ket{w_\paral} = \ket{\hat{v}} \la{\hat{v}} | w \ra  =
+    \left(\ket{\hat{v}} \bra{\hat{v}} \right)  \, \ket{w} \ .
+     \ .
+\end{align}
+Here we recognize that the terms in parenthesis are simply the form of a \emph{matrix}, a linear transformation that eats a ket and returns a ket, see \eqref{eq:matrix:in:ket}. Evidently $\ket{\hat{v}} \bra{\hat{v}}$ is the matrix that takes $\ket{w}$ and returns $\ket{w_\paral}$, the component of $\ket{w}$ along $\ket{\hat{v}}$. In this language, it is somewhat \emph{obvious} that this is what $\ket{\hat{v}} \bra{\hat{v}}$ does. However, we have not written the components of $\ket{\hat{v}} \bra{\hat{v}}$ in terms of our standard basis. To do that, one simply expands each  of $\ket{\hat{v}}$ and $\bra{\hat{v}}$ in the standard basis. One may invoke linearity to read off the components of the projection matrix, $P = P\aij{i}{j}\ket{i}\bra{j}$, as seen in the following examples. 
+
+\begin{example}
+First a simple warm up. Consider the vectors
+\begin{align}
+    \ket{v} &= 2.5 \ket{1}
+    &
+    \ket{w} &= 3\ket{1} + 4\ket{2} \ .
+\end{align}
+We want to find $\ket{w_\paral}$. First we identify the unit vector in the $\ket{v}$ direction, which is simply $\ket{\hat{v}} = \ket{1}$. As a matrix, the projection operator $P = \ket{\hat{v}} \bra{\hat{v}}$ is
+\begin{align}
+    \ket{\hat{v}} \bra{\hat{v}} = \ket{1}\bra{1} 
+    &=
+    \begin{pmatrix}
+        1 & \\
+        & 0
+    \end{pmatrix}
+    \ .
+\end{align}
+Int he last step we have matched the components to  $P = P\aij{i}{j}\ket{i}\bra{j}$.
+Applying this to $\ket{w}$ gives
+\begin{align}
+    \ket{\hat{v}} \bra{\hat{v}}w\ra = \ket{1}\bra{1}\left(3\ket{1}+ 4\ket{2}\right)
+    = 3 \ket{1} \ .
+\end{align}
+\end{example}
+
+\begin{example}
+Here is a less-simple example. Consider the vectors
+\begin{align}
+    \ket{v} &= \sqrt{3} \ket{1} + \ket{2}
+    &
+    \ket{w} &= 3\ket{1} + 4\ket{2} \ .
+\end{align}
+We want to find $\ket{w_\paral}$. As a hint, the coeffients of $\ket{v}$ were chosen to be reminiscent of a 30-60-90 degree triangle. The unit vector in the $\ket{v}$ direction is
+\begin{align}
+    \ket{\hat{v}} 
+    &= 
+    \frac{\sqrt{3}}{2} \ket{1} + \frac{1}{2} \ket{2} \ .
+\end{align}
+As a matrix, the projection operator $P = \ket{\hat{v}} \bra{\hat{v}}$ is
+\begin{align}
+    \ket{\hat{v}} \bra{\hat{v}}
+    &=
+    \left(\frac{\sqrt{3}}{2}\bra{1} + \frac{1}{2} \bra{2}\right)
+    \left(\frac{\sqrt{3}}{2}\ket{1} + \frac{1}{2} \ket{2}\right)
+    \\
+    &=
+    \frac{3}{4}\ket{1}\bra{1}
+    \frac{\sqrt{3}}{4}\ket{2}\bra{1}
+    \frac{\sqrt{3}}{4}\ket{1}\bra{2}
+    \frac{1}{4}\ket{2}\bra{2}
+    \\
+    &=
+    \frac{1}{4}
+    \begin{pmatrix}
+        3 & \sqrt{3} \\
+        \sqrt{3} & 1
+    \end{pmatrix}
+    \ .
+\end{align}
+Observe that the determinant of $\ket{\hat{v}} \bra{\hat{v}}$ is zero. We will see that this is a feature of projection matrices that ``throw out'' information. In this case, $\ket{\hat{v}} \bra{\hat{v}}$ has thrown out information about the perpendicular direction, $\ket{w_\perp}$.
+\end{example}
+
+\begin{exercise}
+Draw the vectors $\ket{v}$ and $\ket{w}$. You should recognize that $\ket{w}$ is $\pi/6$ (30~degrees) counterclockwise of $\ket{v}$. This means that if we rotated the system by this amount in the clockwise direction, the above example should reduce to projection onto the $\ket{1}$ axis, which was our ``easy'' example above. The appropriate rotation matrix is
+\begin{align}
+    R = 
+    \begin{pmatrix}
+        \cos(-\pi/6) & -\sin(-\pi/6)
+        \\
+        \sin(-\pi/6) & \pp\cos(-\pi/6)
+    \end{pmatrix}
+    = 
+    \frac{1}{2}
+    \begin{pmatrix}
+        \sqrt{3} & 1 \\
+        -1 & \sqrt{3}
+    \end{pmatrix} \ .
+\end{align}
+Further, recall how a matrix transforms under a rotation. If you do not remember, please go back and review Section~\ref{sec:transformation:of:matrices}. Go ahead and do it. I'll wait here. Yes, it is \emph{that} important. We see that the components of $P = \ket{\hat{v}} \bra{\hat{v}}$ transform as
+\begin{align}
+    P\aij{i}{j}\to (P')\aij{i}{j} = R\aij{i}{k} P\aij{k}{\ell} (R^{-1})\aij{\ell}{j}\ .
+\end{align}
+Do not forget that the inverse of a rotation is simply its transpose. Show that the only non-zero component of $P'$ is $(P')\aij{1}{1} = 1$. Thus $P'$ is indeed a projection onto the $x$-axis.
+\end{exercise}
+
 \subsection{Inverse Metric}
-\subsection{Rotations, once again}\label{sec:rotations:isometries}
+
+The metric has an inverse, $g^{-1}$.  If we think of the metric as a machine that lowers indices, the inverse metric raises indices. This should already tell you that the index structure of the inverse metric is $(g\inv)^{ij}$. By virtue of being an inverse, we expect that acting with the metric and then its inverse---or the reverse order---returns you to the original tensor:
+\begin{align}
+    g_{ik}(g\inv)^{kj} = (g\inv)^{jk}g_{ki} = \delta^j_i \ .
+\end{align}
+Note that $(g\inv)^{ij}$ is symmetric because it inherits this symmetry from $g$. Because we are \sout{lazy} \emph{practical}, we recognize that there is never any ambiguity about whether we are using $g$ or $g\inv$. If you know a tensor $T$ and then you see some component that looks like the components of $T$ except one of the indices is upper rather than lower, then you know that that index was raised by contracting $g\inv$. Similarly, if an index that you expected to be upper turns up lowered, then you know that the index was lowered by contracting with $g$. Thus we usually do not bother writing $g\inv$, leaving it implicit unless there is some ambiguity.
+
+In fact, we can go further. In the rare cases when we \emph{do} explicitly write out the inverse metric, we go ahead and drop the $\inv$. This is because we can tell from the index structure whether we are using $g$ or $g\inv$. So we now set the convention:
+\begin{align}
+    g^{ij} \equiv (g\inv)^{ij} \ .
+\end{align}
+
+\begin{example}
+The following is a metric and inverse-metric pair:
+\begin{align}
+    g_{ij} &= 
+    \begin{pmatrix}
+        1 & \\ & 3
+    \end{pmatrix}
+    &
+    g_{ij} &= 
+    \begin{pmatrix}
+        1 & \\ & 1/3
+    \end{pmatrix}\ .
+\end{align}
+As always, we are writing the \emph{components} of these tensors. Do not confuse these as ``matrices,'' see \bigidearef~\ref{idea:treating:two:index:as:matrix}.
+\end{example}
+
+
+
+\subsection{Isometries: A Fancy Name For Rotations}\label{sec:rotations:isometries}
+
+Section~\ref{sec:rotations} highlighted the significance of rotations in $\RR^2$ and $\RR^3$. What was not evident was \emph{why} rotations are so important and where they came from mathematically. Now that we have defined the metric, we can define rotations in Euclidean space and their generalization to any metric space.
+
+Let $R$ be an invertible transformation---not necessarily a rotation. The inner product of two vectors is $g(\vec{v},\vec{w})$. Under the transformation the vectors each transform as $\vec{v}\to \vec{v}'= R\vec{v}$ and $\vec{w} \to\vec{w}'= R\vec{w}$. The metric---a two component tensor with lower indices---also transforms, $g_{ij} \to g'_{ij}$. How does it transform? Recalling how we derived the transformation of matrices in Section~\ref{sec:transformation:of:matrices}, let us require that $g(\vec{v},\vec{r}) = g'(\vec{v}', \vec{w}')$:
+\begin{align}
+    % g(\vec{v}, \vec{w}) = g_{ij}v^i w^j \to 
+    % g'(\vec{v}', \vec{w}') = 
+    g'_{ij} (v')^i (w')^j 
+    %\quad = \quad
+    &=
+    g_{k \ell} v^k w^\ell
+    = g_{k\ell} (R\inv)\aij{k}{i}(v')^i (R\inv)\aij{\ell}{j}(v')^j \ .  
+\end{align}
+Peeling off the $(v')^i$ and $(w')^j$ on both sides\footnote{Recall that ``peeling off'' is not a valid mathematical operation. What we really mean is that because the equality holds for any $v'$ and $w'$, the prefactors must match. Note that we labelled our dummy indices in a convenient way to do this ``peeling off.''} gives
+\begin{align}
+    g'_{ij} = g_{k\ell} (R\inv)\aij{k}{i} (R\inv)\aij{\ell}{j}
+    = 
+    (R\inv)\aij{k}{i} g_{k\ell}  (R\inv)\aij{\ell}{j} \ .
+    \label{eq:gp:RgR}
+\end{align}
+For simplicity, define $\bar R = R\inv$. We shall now define the properties that will make $\bar R$ a rotation---if $\bar{R}$ is a rotation then its inverse $R$ is also a rotation. Let us write \eqref{eq:gp:RgR} as ``matrix multiplication,'' by which we mean that consecutive indices are contracted. As we exhorted in \bigidearef~\ref{idea:treating:two:index:as:matrix}, this does not mean that $g$ has the tensorial structure of a matrix (it does not), only that we are writing the components as a $2\times 2$ array such that the index contractions aligns with the grade-school notion of matrix multiplication:
+\begin{align}
+    g'_{ij} &= (\bar R^T)_i^{\phantom{i}k} g_{k\ell} \bar R\aij{\ell}{j} 
+    \label{eq:gp:RT:g:R}
+\\ &=
+    \begin{pmatrix}
+        \bar R\aij 11 & \bar R\aij 21 \\
+        \bar R\aij 12 & \bar R\aij 22 
+    \end{pmatrix}
+    \begin{pmatrix}
+        g_{11} & g_{12}\\
+        g_{22} & g_{22}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bar R\aij 11 & \bar R\aij 12 \\
+        \bar R\aij 21 & \bar R\aij 22 
+    \end{pmatrix}
+    \ .
+\end{align}
+In the first rotation matrix we used $(\bar R^T)_1^{\phantom{1}2} = \bar{R}\aij{2}{1}$. We say that the transformation $R$ is an \textbf{isometry} if $g'_{ij} = g_{ij}$. 
+
+Let us consider the case when $g_{ij}$ is the Euclidean metric. This means that the components $g_{ij}$ are the components of the identity matrix, $\one$. Then then plugging in $g'_{ij} = g_{ij}$ into \eqref{eq:gp:RT:g:R} gives a matrix equation for the components of $\bar R$:
+\begin{align}
+    \one &= \bar R^T \one \bar R = \bar R^T 
+    &\Rightarrow
+    &&
+    {\bar R}\inv = {\bar R}^T
+    \ .
+    \label{eq:rotation:definition:one}
+\end{align}
+This is the \emph{definition} of a rotation: it is an isometry of Euclidean space. Even though we have shown that $\bar R = R\inv$ is a rotation, we know that this imposes that the transformation on vectors, $R = \bar R\inv$, is also a rotation since it is simply a transformation in the opposite direction as $\bar R$.
+\begin{exercise}
+Show that for $\RR^2$ with the Euclidean metric, the condition \eqref{eq:rotation:definition:one} imposes a generic form
+\begin{align}
+    \bar R = 
+    \begin{pmatrix}
+        \pp \cos\theta & \sin\theta\\
+        - \sin\theta & \cos\theta  
+    \end{pmatrix}
+    \ .
+\end{align}
+It may help to remember that $\cos^2\theta + \sin^2\theta = 1$.
+\end{exercise}
+
+
+\textbf{Isometries} are special transformations. Because they leave the metric unchanged, they also preserve the orthonormality of a basis. Under an isometry, an orthonormal basis is transformed into another orthonormal basis. We will make ample use of this: there is often a ``most convenient basis'' in which the action of a given matrix simplifies tremendously. Physically, these isometries correspond to a shift in observer. It just goes to show: sometimes the easiest way to solve a problem is to change your perspective.
+\begin{exercise}
+Show that if  $\bas{e}_i$ is an orthonormal basis, then its transformation under an isometry $R$ is still an orthonormal basis.
+\end{exercise}
+
+
+
+\begin{exercise}
+Considering the Minkowski metric for (1+1)-dimensional spacetime:
+\begin{align}
+    g_{\mu\nu} &= 
+    \begin{pmatrix}
+        1 & \pp 0\\
+        0 & -1
+    \end{pmatrix} \ .
+\end{align}
+We have used $\mu$ and $\nu$ indices as is conventional for relativity. Following this convention of $R$, we write $\Lambda$ for the isometries of Minkowski space. Show that the following forms of $\Lambda$ satisfy the isometry condition, $\Lambda^T \Lambda = \one$:
+\begin{align}
+    \Lambda = 
+    \begin{pmatrix}
+        \cosh\eta & \sinh\eta \\
+        \sinh\eta & \cosh\eta\\
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        \gamma & \gamma\beta\\
+        \gamma\beta & \gamma
+    \end{pmatrix} \ ,
+\end{align}
+where $2\cosh\eta = e^{\eta}+e^{-\eta}$, $2\sinh\eta = e^{\eta}-e^{-\eta}$, and $\gamma^2 = (1-\beta^2)^{-1/2}$. It may help to know that $\cosh^2\eta-\sinh^2\eta = 1$. The isometry $\Lambda$ is called a Lorentz transformation.
+\end{exercise}
+
+
+\begin{bigidea}\label{eq:rotations:generalized}
+Isometries are the generalization of rotations. These are defined by transformations that leave the metric unchanged. In what follows, we will use the word `isometry' and `rotation' interchangeably. These generalized rotations form a set of transformations that let us go from one orthonormal basis to another. 
+\end{bigidea}
+
+Here's a nice little aside. The isometries that we have met so far all have some continuous transformation parameter. Rotations in $\RR^2$ are defined by  a rotation angle $\theta$. In more Euclidean dimensions there are more rotation angles. These rotation angles can take any real value. Even the boosts have a continuous parameter: this is either the rapidity, $\eta$, or the velocity in units of the speed of light, $\beta = v/c$. Compositions of isometries are simply another isometry: a rotation by $\theta_1$ and then $\theta_2$ is a rotation by $(\theta_1+\theta_2)$. A few ``beyond the scope of this class'' comments are worth highlighting since they will show up in your physics life:
+\begin{enumerate}
+    \item Other than the simplest cases, the order in which one composes isometries matters. For an explicit example, see Fig.~\ref{fig:rotate:QFT}.
+    \item The \emph{way} in which the order of isometries matters reflects an underlying mathematical structure of the isometries. 
+    \item Isometries are \emph{symmetries} of a physical system. 
+    \item The theory of symmetries with continuous parameters and its application to physical systems is called the representation theory of Lie groups. 
+\end{enumerate}
+
+
+% Isometries form a group: 
+% g_{ij}R\aij{i}{k}R\aij{j}{\ell}v^k w^\ell
+
+% An \textbf{isometry} is a linear transformation from $V\to V$ that leaves the metric unchanged. Recalling how tensors with two lower indices transform, under a transformation $S$ the metric transforms
+
 % as symmetries Isometries
 % notation of change of variables
 
@@ -2810,10 +3327,278 @@ A trajectory in a base space $M$ is a curve $\gamma(t)$: this maps each value of
 
 \subsection{The meaning of indices}
 
+Having rigorously defined isometries as ``generalized rotations'' for a given metric, we can now reflect on the significance of our index notation. We proposed that the index pattern of a tensor's components indicates how the components transform under rotations. This is generalized to the statement that the indices of an object indicate how it transforms under isometries. Because isometries preserve the metric, they naturally map between different orthonormal bases. These orthonormal basis represent different `reference frames' in which a physical system is described. By rotating (isometry-ing) to a convenient basis, one can often convert a challenging problem into a much simpler problem.  
+
+\subsection{Transpose, Adjoint}
+\label{eq:transpose:adjoint}
+
+In our discussion so far, we have made use of a `colloquial' definition of the transpose of a matrix: $(M^T)\aij{i}{j} = M_j^{\phantom{j}i}$. What dictated the index height? Thus far we have been glib about this because we have not had to use a careful definition of the transpose. Now that we have a metric, we can be more rigorous. The \textbf{adjoint} of a linear transformation $A$ is defined to be $A^\dag$ such that
+\begin{align}
+    \la A^\dag \vec{v}, \vec{w} \ra \equiv
+    \la \vec{v} , A \vec{w} \ra \ .
+\end{align}
+\begin{example}
+By the symmetry of the metric we could have equivalently written
+\begin{align}
+    \la A^\dag \vec{v}, \vec{w} \ra =
+    \la \vec{v} , A \vec{w} \ra =
+    \la \vec{w}, A^\dag \vec{v} \ra =
+    \la A \vec{w}, \vec{v} \ra 
+    \ .
+\end{align}
+The point of the metric is \emph{not} that you're moving the matrix $A$ from one slot to the other, it is that you are changing from a transformation $A$ that acts on $\vec{v}$ to a transformation $A^\dag$ that acts on the \emph{other} input vector $\vec{w}$ defined such that the inner product is the same.
+\end{example}
+When $A$ is a real matrix, $A^\dag \equiv A^T$. What does this mean? Write out the components of each side:
+\begin{align}
+    \la A^\dag \vec{v}, \vec{w} \ra
+    &=
+   w^k \, g_{ki}  (A^\dag)\aij{i}{\ell} v^\ell  \,  
+    &
+    \la  \vec{v},A \vec{w} \ra
+    &=
+   v^\ell\, g_{\ell j}  A\aij{j}{k} w^k  
+   \ .
+\end{align}
+Now set these two inner products equal to each other gives
+\begin{align}
+    g_{ki}(A^\dag)\aij{i}{\ell}
+    &=
+    g_{\ell j} A\aij{j}{k}
+\end{align}
+Contracting both sides with the inverse metric $g^{km}$ gives
+\begin{align}
+    (A^\dag)\aij{m}{\ell} &= g_{\ell j} A\aij{j}{k} g^{km} \ .
+    \label{eq:adjoint:def}
+\end{align}
+This relation \emph{defines} the adjoint. Observe that when the metric is diagonal (say for the Euclidean metric), the first index of $A^\dag$ is a contraction of the {second} index of $A$ and the second index of $A^\dag$ is a contraction of the first index of $A$. In this sense, the order of the indices have swapped. 
+
+Ah! But we already have a familiar operation that swaps the order of indices: the transpose, which we defined for [Euclidean] $\RR^N$ in \eqref{eq:transpose:components} to be $(M^T)\aij{i}{j} = M\aij{j}{i}$. Let us give a formal definition: When the vector space is real, the adjoint is the \textbf{transpose} of a matrix.  
+%
+We can read this off of \eqref{eq:adjoint:def} when we use\footnote{Please understand what the following statement means. Normally it is dangerous to write equations where the indices on the left-side do not match the indices on the right-side. What we're saying here is that the \emph{components} of $g$ and $g^{-1}$---but not necessarily the tensor structure (upper or lower)---match the components of the identity. Again, we refer back to the subtle point in \eqref{idea:treating:two:index:as:matrix}.} $g_{ij} = g^{ij} = \mathbbm{1}$. 
+
+What about the height of the indices? In the non-rigorous definition of the transpose, there is a potential ambiguity on the height of the indices. If $M=M\aij{i}{j}\ket{i}\bra{j}$:
+\begin{align}
+    M^T \stackrel{?}{=} 
+    \begin{cases}
+    (M^T)\aij{j}{i}\ket{j}\bra{i}    & \text{ or }\\
+    (M^T)_{j}^{\phantom{j}i}\ket{i}\bra{j}
+    \end{cases}
+    \quad\text{.}
+\end{align}
+This ambiguity came up in \eqref{eq:ABC:matrix:multiplication:tensor:note}, where we glibly wrote $(A^T)_i^{\phantom{k}i} = A\aij{k}{i}$ and apologized that  this was not quite formally correct---especially since the fact that the ``first upper then second lower'' index pattern appears to be violated.  We now see that the index structure of the transpose of a matrix is preserved: the transpose of a matrix is a matrix. That is to say: a matrix has its first index upper and the second index lower. The transpose has the same pattern. 
+
+We see how this happens: the first (upper) index of $A$ becomes the second index of $A^T$. However, we want the second index of $A^T$ to be \emph{lower}. How do we manage this? The metric gives us precisely the tool to lower indices. We see that this is exactly what happens in \eqref{eq:adjoint:def}: we use the metric and its inverse to ensure that the heights of the $A^T$ indices match that of an ordinary matrix. This had to be since our definition \eqref{eq:adjoint:def} has $A^T$ acting on a vector, so we expect $A^T$ to be an ``ordinary'' linear transformation.
+
+\begin{exercise}
+In your own words, articulate the difference between a matrix $A$, its inverse $A\inv$, and its transpose $A^T$. What if $A$ is a rotation?
+\end{exercise}
+
+\begin{exercise}
+Show that taking the adjoint twice returns you to the original matrix, $(A^\dag)^\dag = A$.
+\end{exercise}
+
+\begin{example}
+The transpose/adjoint also gives us a way to understand why isometries act differently on column vectors (ket) versus row vectors (bra). The metric lets us convert a column vectors into row vectors, as we saw in Section~\ref{sec:machine:to:make:row:vectors}. Start with a vector $\ket{v}$ with components $v^i$. Under a rotation, these components become $(v')^i = R\aij{i}{j}v^j$. From the transformed ket $\ket{v'} = (v')^i \ket{i}$ we invoke the metric to convert this into a bra:
+\begin{align}
+\bra{v'} = \la v', \smallslot \ra = \la \smallslot, v' \ra \equiv v'_i \bra{i} \ .    
+\end{align}
+In the last line we have implicitly used the metric: we have a definition for $(v')^i$, so the meaning of $(v')_i$
+is understood to be
+\begin{align}
+    (v')_i = g_{ij} R\aij{j}{k}v^k \ .
+\end{align}
+What are the components of $(v')_i$ relative to $v_i$? To do that we can insert $\one$ in a clever way:
+\begin{align}
+    g^{mn}g_{n\ell} = \delta^m_\ell
+\end{align}
+so that 
+\begin{align}
+    (v')_i = g_{ij} R\aij{j}{k} g^{k\ell}g_{\ell m} v^m
+    = 
+    \left(g_{ij} R\aij{j}{k} g^{k\ell}\right)
+    v_\ell
+    = 
+    v_\ell(R^\dag)\aij{\ell}{i} 
+    \ ,
+\end{align}
+where again we have implicitly \emph{defined} $v_\ell = g_{\ell m}v^m$. That's just what metrics do. That's what they \emph{do}.\footnote{\url{https://www.youtube.com/watch?v=Akq0xeu-RHE}} In the last equality we recognize the definition of the adjoint, \eqref{eq:adjoint:def}. In our case of a real metric space, of course, this is simply $R^\dag = R^T$. This confirms for us that the objects with lower indices transform by contracting with $R^\dag$, which we identified in \eqref{eq:rotation:definition:one} to be the inverse of the rotation $R$. So there you have it: objects with lower indices transform with $R\inv = R^\dag$. 
+
+We can do a sanity check for this. The inner product is a number and should not transform under rotations. We can see what happens:
+\begin{align}
+    \la v , w \ra \to \la Rv, Rw \ra = \la v, R^\dag R w \ra = \la v, w \ra \ .
+\end{align}
+where we used $R^\dag R = \one$. 
+
+
+
+
+% Starting with a ket $\ket{v}$, we define the bra
+% \begin{align}
+% \bra{v} = \la v, \smallslot \ra = \la \smallslot, v \ra \ .    
+% \end{align}
+% Now act $\bra{v}$ on a ket $\ket{w}$. By linearity, I can also transform the ket by a matrix $A$ and then feed $\ket{Aw}=A\ket{w}$ to $\bra{v}$:
+% \begin{align}
+%     \la{v} | {Aw} \ra = \bra{v}A \ket{w} = \la v, Aw \ra \equiv \la A^\dag v, w\ra = \bra{A^\dag v} w\ra \ .
+% \end{align}
+% Now suppose $A$ is an isometry. Assuming that the space is real\footnote{That is: every time we say `number' we mean a \emph{real} number, $\RR$.} and that we have the Euclidean metric, this is simply the assumption that $A=R$, a rotation. 
+\end{example}
+
+
+\subsection{Complex metric spaces}
+
+\paragraph{Complex vector spaces}
+It is time to embrace complex numbers. A complex vector space is one where all of the numbers that we previously assumed were real can now be complex: $\RR \to \CC$. This means that a linear combination of vectors $\alpha\vec{v}+ \beta\vec{w}$ may have complex coefficients, $\alpha,\beta\in\CC$. 
+
+\paragraph{Quick refresher of complex numbers}
+Recall that complex numbers may be written either in Cartesian form, $z = x+iy$ or in polar form $z= re^{i\theta}$. The defining features is that $i^2 = -1$. The complex conjugate of a complex number is the complex number you get from changing $i\to -i$:
+\begin{align}
+    (x+iy)^* &= x-iy
+    &
+    re^{i\theta} &= re^{-i\theta} \ .
+\end{align}
+
+\paragraph{Metrics on complex spaces}
+Things become a bit more interesting when we complexify a metric space. We have to update our rules a bit. Previously we assumed that the metric is symmetric, $\langle v, w\rangle = \langle w, v\rangle$. This turns out to only be true for real spaces. When we have a complex vector space, the metric must satisfy symmetry with a complex conjugation:
+\begin{align}
+    \la v, w \ra = \la w, v \ra^* \ .
+\end{align}
+That is a little unusual. At least means that the norm (length squared) of a complex vector is real:
+\begin{align}
+    |v|^2 = \la v, v \ra = \la v, v \ra^* \ .
+\end{align}
+This helps justify the notation $|v|$ for the magnitude of a vector. 
+
+What about the adjoint of a transformation? For a real vector space, the adjoint is simply the transpose. For a complex vector space, the adjoint is the transpose \emph{and} a complex conjugation on each component:
+\begin{align}
+    (A^\dag)\aij{i}{j} = g^{ik}(A\aij{\ell}{k})^*g_{\ell j} \ .
+\end{align}
+In terms of components:
+\begin{align}
+    \begin{pmatrix}
+        A\aij 11 & A\aij 12 \\
+        A\aij 21 & A\aij 22 
+    \end{pmatrix}^\dag &= 
+    \begin{pmatrix}
+        (A\aij 11)^* & (A\aij 21)^* \\
+        (A\aij 12)^* & (A\aij 12 )^*
+    \end{pmatrix} \ .
+\end{align}
+\begin{example}
+Here's the adjoint of an explicit matrix:
+\begin{align}
+\begin{pmatrix}
+        3.5 +2i & 2.3+7i \\
+        8.3 + 5i & 5-2i
+    \end{pmatrix}^\dag &= 
+    \begin{pmatrix}
+        3.5 -2i &  8.3 - 5i\\
+        2.3 -7i & 5 +2i
+    \end{pmatrix} \ .
+\end{align}
+\end{example}
+
+\begin{example} What do isometries look like in a complex vector space? Let us suppose that we have the Euclidean metric (even though the space is now complex):
+\begin{align}
+    g_{ij} = \text{diag}(1,1,\cdots, 1) = \mathbbm{1} \ .
+\end{align}
+Let $U$ be an isometry in this space; this is a conventional name whose meaning will be clear soon. The condition for an isometry in this space is that a transformation $\ket v \to U\ket{v}$ preserves the metric. Observe that because the metric is not symmetric, but rather symmetric-up-to-a-conjugate, it is useful to write the inner product using brackets rather than simply index contraction. We have:
+\begin{align}
+    \la U\vec{v}, U\vec{w} \ra = \la \vec{v}, U^\dag U \vec{w} \ra \stackrel{?}{=} \la \vec{v}, \vec{w} \ra \ .
+\end{align}
+This tells us that the condition for $U$ to be an isometry is that $U^\dag U = \mathbbm{1}$. Matrices that satisfy this are called \textbf{unitary} matrices, thus justifying the name $U$. 
+\end{example}
+
+\begin{example}
+The usual rotation matrices (obviously!) satisfy the unitary condition. Thus rotations are a simple example of a unitary matrix. There are more complicated unitary matrices, for example in two complex dimensions:
+\begin{align}
+    U(\theta) = 
+    \begin{pmatrix}
+        e^{i\theta} & 0\\
+        0 & e^{-i\theta}
+    \end{pmatrix}
+    \label{eg:unitary:matrix:diagonal}
+\end{align}
+is a transformation that rephases the first $v^1 \to e^{i\theta}v^1$  and second $v^2 \to e^{-i\theta}v^2$ components of a vector by opposite phases. It should be obvious that $U^\dag U = \one$. 
+\end{example}
+
+
+\begin{exercise}
+A bonus observation: show that \eqref{eg:unitary:matrix:diagonal} can be understood as a Taylor expansion with respect to a matrix $T$:
+\begin{align}
+    U(\theta) &= \sum_{n=0}^\infty \frac{\theta^n}{n!} T^n
+    &
+    T=
+    \begin{pmatrix}
+        i & 0\\
+        0 & -i
+    \end{pmatrix} \ .
+\end{align}
+The matrix $T$ is called the \textbf{generator} of the isometry $U$. 
+\end{exercise}
+
+
+\begin{exercise}
+Show that the generator of rotations is
+\begin{align}
+    R(\theta) &= \sum_{n=0}^\infty \frac{\theta^n}{n!} T^n
+    &
+    T=
+    \begin{pmatrix}
+        0 & -1\\
+        1 & \pp 0
+    \end{pmatrix} \ .
+\end{align}
+\end{exercise}
+
+
+% \begin{table}
+%     \renewcommand{\arraystretch}{1.3} % spacing between rows
+%     \centering
+%     \begin{tabular}{ @{} llllll @{} } \toprule % @{} removes space
+%         Space
+%         & Numbers
+%         & Inner Product
+%         & Contraction
+%         & Matrix
+%         & Identity
+%         \\ \hline
+%         Classic
+%             & vector
+%             & row-vector
+%             & 
+%             &       
+%         \\
+%             & $\vec{v} = v^i \bas{e}_i$
+%             & $\row{w} = w_i \rbas{e}^i$
+%             & $\rbas{e}^i\bas{e}_j = \delta^i_j$
+%             & $M=M\aij{i}{j} \bas{e}_i\otimes \rbas{e}^j$
+%             & $\one$
+%         \\ \hline
+%         Quantum 
+%             & ket
+%             & bra
+%             &       
+%             &
+%         \\
+%             & $\ket{v} = v^i\ket{i}$
+%             & $\bra{w} = w_i \bra{i}$
+%             & $\langle i | j\rangle = \delta^i_j$
+%             & $M=M\aij{i}{j} \ket{i}\bra{j}$
+%             & $\ket{i}\bra{i}$
+%         \\ \bottomrule
+%     \end{tabular}
+%     \caption{
+%         Dictionary between `classic' notation and `quantum' (bra--ket) notation.
+%         \label{tab:classic:bra:ket:dictionary}
+%     }
+% \end{table}
+
+\subsection{Gram--Schmidt}
+
 
 \section{Special Relativity: Minkowski Space}
 
-
+% Ex: show that the norm of a vector is preserved under lorentz
 
 
 
@@ -2838,6 +3623,7 @@ A trajectory in a base space $M$ is a curve $\gamma(t)$: this maps each value of
 \item Symmetries and Lie Groups
 \item Other types of integral transforms
 \item Hamiltonian Mechanics and the co-tangent space
+\item Rotations in the $\partial x'/\partial x$ notation.
 \end{itemize}
 
 
