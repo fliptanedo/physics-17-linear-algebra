@@ -3056,6 +3056,7 @@ Recalling the relation \eqref{eq:basis:metric:row}, we now understand the \emph{
 % only for finite dimensional sapces, see discussion on physics stax in my references folder
 
 \subsection{Example: Projection Matrices}
+\label{sec:projections}
 Suppose you have a vector $\ket{v} =  4\ket{1}+2.5\ket{2}$. What is the component along the $x$-axis, the one given by the basis vector $\ket{1}$? \emph{Simple!} That's $v^1 = 4$. That's what the linear combination of basis vectors means.
 % 
 Now suppose you have a different vector $\ket{w}$. What is the component of $\ket{w}$ along the axis of $\ket{v}$? See Fig.~\ref{fig:gram:projection}. Furthermore, what is the linear transformation that \emph{projects} any vector $\ket{x}$ onto a vector $\ket{x_\paral}$ that is parallel to $\ket{v}$?  
@@ -3171,6 +3172,47 @@ Further, recall how a matrix transforms under a rotation. If you do not remember
 \end{align}
 Do not forget that the inverse of a rotation is simply its transpose. Show that the only non-zero component of $P'$ is $(P')\aij{1}{1} = 1$. Thus $P'$ is indeed a projection onto the $x$-axis.
 \end{exercise}
+
+\begin{bigidea}\label{bigidea:multiply:by:one}
+The ket-bra notation for matrices gives a nice representation of the unit matrix:
+\begin{align}
+    \one = \sum_i \ket{i}\bra{i}  \ .
+\end{align}
+In quantum mechanics we say that we \emph{insert a complete set of states}. All that means is that we're multiplying by one. Keep this in mind for later. The significance of this ``multiply by one'' operation is that it is true no matter what basis $\ket{i}\bra{i}$ is written in. We will use ``multiplication by one'' judiciously to convert from one basis to another. 
+\end{bigidea}
+
+\begin{example}
+Consider the following bases:
+\begin{align}
+    \ket{1'} &= \frac{1}{\sqrt{2}}\ket{1} - \frac{1}{\sqrt{2}}\ket{2}
+    &
+    \ket{2'} &= \frac{1}{\sqrt{2}}\ket{2} + \frac{1}{\sqrt{2}}\ket{2} \ .
+\end{align}
+This is clearly a rotation by $\pi/4$. What are the components of $\ket{v} = \ket{1} + \ket{2}$ in the primed basis? The answer should be obvious either from inspection or by drawing a picture. Let us see how to calculate this by ``multiplying by one'':
+\begin{align}
+    \ket{v} = \one\ket{v} = \left(\ket{1'}\bra{1'} + \ket{2'}\bra{2'}\right)\; \left(\ket{1} + \ket{2}\right) \ .
+\end{align}
+Now we use the overlaps:
+\begin{align}
+    \la 1' | 1 \ra &= \frac{1}{\sqrt{2}}
+    &
+    \la 1' | 2 \ra &= \frac{-1}{\sqrt{2}}
+    &
+    \la 2' | 1 \ra &= \frac{1}{\sqrt{2}}
+    &
+    \la 2' | 2 \ra &= \frac{1}{\sqrt{2}} \ .
+\end{align}
+This gives  
+\begin{align}
+    \ket{v} = \frac{1}{\sqrt{2}}
+    \left(
+        \ket{1'} - \ket{2'} + \ket{1'} + \ket{2'}
+    \right)
+    = 
+    \frac{2}{\sqrt{2}}\ket{1'} \ .
+\end{align}
+As expected from their definitions, $\ket{v}$ is along the $\ket{1'}$ direction.
+\end{example}
 
 \subsection{Inverse Metric}
 
@@ -3594,6 +3636,35 @@ Show that the generator of rotations is
 % \end{table}
 
 \subsection{Gram--Schmidt}
+
+The metric allows us to determine whether a basis is orthonormal or not. We \emph{like} orthnormal bases. Sometimes life gives us garbage bases that are not orthonormal. What are we to do? The Gram--Schmidt procedure is a way to use the metric to take any basis and convert it into an orthonormal basis. We already met the key ideas in Section~\ref{sec:projections}. Here we focus on the two dimensional case. Refer back to Fig.~\ref{fig:gram:projection}: we have two vectors, $\ket{v}$ and $\ket{w}$. How do we turn these into two orthonormal basis vectors?
+%
+The general procedure is:
+\begin{enumerate}
+    \item Grab one vector from the pile of garbage basis vectors. Normalize this vector and stick it in your bag of nice basis vectors. 
+    \item Grab another vector from the pile. Do whatever you need to do to make it fit as a nice basis vector with the other nice basis vectors in your bag. This means that you have to find what new `direction' the vector identifies relative to the existing basis vectors, and then you have to normalize the component of the vector along that direction. That normalized vector is perpendicular to the other basis vectors and can now be placed in the bag of nice basis vectors.
+    \item Repeat the previous step until you have a complete basis. 
+\end{enumerate}
+
+We can start with $\ket{v}$ and simply normalize it: $\ket{\hat{v}} = \bas{e}_1$ is the first basis vector. The next step is to pull out the perpendicular part of $\ket{w}$. In Section~\ref{sec:projections} we saw how to do this: simply decompose
+\begin{align}
+    \ket{w} &= \ket{w_\paral} + \ket{w_\perp}
+    &
+    \ket{w_\paral} &=  \bra{\hat v}\la \hat v \ket{w} \ .
+\end{align}
+This gives us $\ket{w_\perp}$ in terms of two vectors $\ket{w}$ and $\ket{w_\paral}$ that we know. We can thus normalize this and that gives us the second vector: $\ket{\hat{w}_\paral} = \bas{e}_2$. If you have more vectors, then continue until you are out. When you identify the perpedicular part, $\ket{u_\perp}$, you have to make sure that $\ket{u_\perp}$ is perpendicular to \emph{all} of the earlier basis vectors:
+\begin{align}
+    \la \bas{e}_1, u_\perp \ra =
+    \la \bas{e}_2, u_\perp \ra =
+    0 \ .
+\end{align}
+
+
+
+\begin{exercise}
+Would you have the same basis vectors if you started with $\ket{w}$ and then took the perpendicular part of $\ket{v}$?
+\end{exercise}
+
 
 
 \section{Special Relativity: Minkowski Space}
