@@ -3318,7 +3318,7 @@ Show that if  $\bas{e}_i$ is an orthonormal basis, then its transformation under
 
 
 
-\begin{exercise}
+\begin{exercise}\label{ex:minkowski:2}
 Considering the Minkowski metric for (1+1)-dimensional spacetime:
 \begin{align}
     g_{\mu\nu} &= 
@@ -3671,7 +3671,127 @@ Would you have the same basis vectors if you started with $\ket{w}$ and then too
 
 % Ex: show that the norm of a vector is preserved under lorentz
 
+Minkowski spacetime is the metric space for special relativity. The Minkowski metric is similar to the Euclidean metric, except that the time-like dimensions have a negative sign relative to the space-like dimensions. We say that a spacetime is (3+1)-dimensional when there are three dimensions of space and one dimension of time.\footnote{Which dimensions are space and which dimensions are time are mathematically a matter of convention. The physically significant fact is that there is a relative sign. It is rather unusual to have more than one time dimension. There are some cases where you may use two time dimensions as a crutch---look up anti-de~Sitter space---but I have never had the occasion to consider more than two dimensions of time.} 
 
+
+\subsection{Conventions}
+
+We call vectors in (3+1)-dimensional vector space \textbf{four-vectors} to distinguish them from three-dimensional vectors. We typically label our vectors using zero as the first index\footnote{This is a historical convention. In the past, people would write $x^4 = ict$ to give the relative minus sign in the norm of a four-vector with a Euclidean metric. However, this makes it seem like we are secretly in a complex vector space.}:
+\begin{align}
+    v^\mu = 
+    \begin{pmatrix}
+    v^0 \\ v^1 \\ v^2 \\ v^3    
+    \end{pmatrix} \ .
+\end{align}
+We are faced with a conundrum: often we will need to consider both \emph{spatial} three-vectors and \emph{spacetime} four-vectors. A standard convention is to label three-vectors in the `old school' way, $\vec{v} = v^i \bas{e}_i$ and use se lower-case Roman indices for spatial indices: $i=1,2,3$ corresponding to the $x$-, $y$-, and $z$-directions. 
+
+How, then, do we label spacetime four-vectors? Physicists specializing in relativity have their own notations. However, I am just a poor particle physicist\footnote{\url{https://arxiv.org/abs/1012.4515}}, and so I stick to the convention in this field where we never write four-vectors in index-free notation.\footnote{Some folks just love indices too much.} That means we will write a four-vector $v^\mu$ with $\mu=0,1,2,3$. We may even refer to this as ``the four-vector $v^\mu$,'' even though this is not a four-vector, it is a \emph{component} of a four-vector\footnote{\url{https://en.wikipedia.org/wiki/The_Treachery_of_Images}}.
+
+There are two choices for the metric:
+\begin{align}
+    g_{\mu\nu} &= 
+    \begin{pmatrix}
+        1 & & & \\
+        & -1 & & \\
+        & & -1 & \\
+        & & & -1 
+    \end{pmatrix}
+    & \text{or}&
+    &
+    g_{\mu\nu} &= 
+    \begin{pmatrix}
+        -1 & & & \\
+        & 1 & & \\
+        & & 1 & \\
+        & & & 1 
+    \end{pmatrix} \ .
+\end{align}
+These are known as the mostly-minus (or ``west coast'') convention and the mostly-plus (or ``east coast'') convention respectively. One of the most diabolically frustrating open debates in physics is which of these equivalent metrics is more convenient. Some physicists like the mostly-minus metric because the norm of the four-momentum of a physical particle is positive. Others like the mostly-plus metric because the spatial components match the Euclidean metric. Whichever one you use, you pay the price somewhere else. As a particle physicist, I impose the mostly-minus metric.
+
+\begin{exercise}
+Does the mostly-minus metric screw things up for ordinary rotations? Argue that it does not by considering $\RR^3$ with a `minus-Euclidean' metric where $g_{ij} = -\one$. The norm of a non-zero three-vector is now always negative, $|v|^2 < 0$. However, we can simply understand that $\langle \vec{v},\vec{v}\rangle$ gives a negative number whose absolute value is identified with the norm. 
+\end{exercise}
+
+There's one more convention that is useful in this business: \textbf{natural units}. This has nothing to do with linear algebra, but it does make our lives significantly easier. For our purposes, natural units is the following:
+\begin{align}
+    c = 1 \ .
+\end{align}
+Here $c$ is the speed of light, which usually has units of length divided by time. In natural units, we use the universal constant $c$ to convert between the two. Astronomers are already used to this: they measure distances in light years: the distance that a photon travels in one year, $d = c(1~{year})$. In natural units, we would just say `year.' In particle physics we also set Planck's constant $\hbar = 1$ which lets us convert between energy and time, but for our purposes it is sufficient to leave $c$ implicit. 
+
+Natural units make our notation easier because we want the components of a four-vector to have the same units. It is silly to talk about a displacement four-vector $\Delta x^\mu$ if $\Delta x^0$ has units of seconds and $\Delta x^i$ has units of meters. This is even more perverse when we do a `rotation' between space and time (called a \emph{boost}). If we rotate in space, we know what it means when $\Delta x'^1 = \cos\theta \Delta x^1 + \sin\theta \Delta x^2$. This is because every term has the same dimensions. What does it mean to write $\Delta x'^0 = a \Delta x^0 + b \Delta x^1$ when $\Delta x^0$ is in seconds and $\Delta x^1$ is in meters? (We sort out the coefficients $a$ and $b$ below.) So one usually writes 
+\begin{align}
+    \Delta x^\mu = 
+    \begin{pmatrix}
+        c\Delta t \\ \Delta x \\ \Delta y \\ \Delta z
+    \end{pmatrix} \ .
+\end{align}
+Maybe you don't mind that factor of $c$ in there? Things get annoying again when we write down four-momenta, whose time-like component is an energy. In order for the energy of a particle to have the same units as the three-momentum, we need to divide by $c$. Thus we write
+\begin{align}
+    p^\mu = 
+    \begin{pmatrix}
+        E/c \\
+        p^1\\
+        p^2\\
+        p^3
+    \end{pmatrix} \ .
+\end{align}
+In order to avoid all of these factors of $c$---you can always replace them at the end of a calculation by requiring dimensional consistency---we simply set $c=$ so that
+\begin{align}
+    \Delta x^\mu &= 
+    \begin{pmatrix}
+        \Delta t \\ \Delta x \\ \Delta y \\ \Delta z
+    \end{pmatrix}
+    &
+    p^\mu &= 
+    \begin{pmatrix}
+        E \\
+        p^1\\
+        p^2\\
+        p^3
+    \end{pmatrix} \ .
+\end{align}
+
+
+Finally, for our purposes we can focus on (1+1)-dimensional Minkowski space where we only include one dimension of space. This amounts to considering motion only along one spatial direction. We will write the vectors of (1+1)-dimensional Minkowski space as follows:
+\begin{align}
+    v^\mu = 
+    \begin{pmatrix}
+    v^0\\
+    \vec{v}    
+    \end{pmatrix} \ ,
+\end{align}
+where $\vec{v}$ in (1+1)-dimensions is simply a number. However, the notation above also generalizes nicely if we treat $\vec{v}$ as a three-vector. 
+
+
+
+\subsection{Principles of special relativity}
+
+\begin{quote}
+The speed of light is constant.
+\end{quote}
+
+That's it. You can find lots of great expositions on special relativity that derive the implications of the above observation.\footnote{See, e.g.~\url{https://www.feynmanlectures.caltech.edu/I_15.html}} To learn this properly, you should also look up the experimental history that lead to the deduction that the speed of light is constant. You should also appreciate how the mathematical structure of Minkowski space was intuited/invented/proposed to explain the above observation. Then you should build some facility on a graphical picture of how special relativity works.\footnote{I highly recommend \emph{Very Special Relativity: An Illustrated Guide}, Sander Bais.} In this section, we very briefly highlight how special relativity is a manifestation of a metric space that is not our usual Euclidean space. 
+
+\subsection{Minkowski Space and its Isometries} 
+
+
+\begin{example}
+Rotations are a subset of the isometries of Minkowski space...
+\end{example}
+
+\subsection{Example: Muon Decay}
+
+% using rotations
+% time dilation picture
+% length contraction picture
+
+\subsection{Example: What does someone else measure?}
+% using inner products
+% contrast to boosting
+
+
+% index, bolfcaced, metric signature
+% natural units... because vectors and energies
 
 \section{Central Dogmas}
 
@@ -3695,6 +3815,7 @@ Would you have the same basis vectors if you started with $\ket{w}$ and then too
 \item Other types of integral transforms
 \item Hamiltonian Mechanics and the co-tangent space
 \item Rotations in the $\partial x'/\partial x$ notation.
+% \item \url{https://www.reddit.com/r/math/comments/12yp3z2/do_tensors_outside_of_physics_transform_like_a/}
 \end{itemize}
 
 
