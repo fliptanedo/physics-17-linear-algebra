@@ -1976,6 +1976,7 @@ A tensor with $p$ upper indices and $q$ lower indices is called a \textbf{rank}~
             % (R(\theta)\inv)\aij{\ell_1}{j_1}\cdots 
             (R(\theta)\inv)\aij{\ell_q}{j_q}\right]
     T^{i_1\cdots i_p}_{\phantom{i_1\cdots i_p}j_1\cdots j_q}  \ .
+    \label{eq:transformation:of:tensor}
 \end{align}
 \end{bigidea}
 \begin{example}
@@ -3371,6 +3372,20 @@ Here's a nice little aside. The isometries that we have met so far all have some
 
 Having rigorously defined isometries as ``generalized rotations'' for a given metric, we can now reflect on the significance of our index notation. We proposed that the index pattern of a tensor's components indicates how the components transform under rotations. This is generalized to the statement that the indices of an object indicate how it transforms under isometries. Because isometries preserve the metric, they naturally map between different orthonormal bases. These orthonormal basis represent different `reference frames' in which a physical system is described. By rotating (isometry-ing) to a convenient basis, one can often convert a challenging problem into a much simpler problem.  
 
+It is a bit of a joke in physics that there is a standard definition for what a tensor is:
+\begin{quote}
+A tensor is an object that transforms like a tensor.
+\end{quote}
+This is not an obviously useful definition, though it does highlight the significant piece for physicists: transformation laws. Mathematicians often find this definition silly. The `proper' definition of a tensor is that it is a multi-linear map between vector spaces. Further, mathematicians will scoff at our emphasis on isometries (rotations): they will say \emph{hey, you, physicists: don't you see that tensors will transform `like a tensor' for any invertible transformation? Why are you so obsessed with isometries?}
+
+\begin{exercise}
+Confirm what our mathematician friend is saying. Suppose you have a general tensor with $p$ upper indices and $q$ lower indices.\footnote{You can always start some specific index structure and see how the result generalizes.} Further, suppose that your vectors transform under an invertible transformation $M$, $\ket{v}\to M\ket{v'}$. Under this transformation, argue that row vectors transform with $M\inv$, and further that the general tensor transforms as in \eqref{eq:transformation:of:tensor} with the rotation matrix $R(\theta)$ replaced by the general invertible matrix $M$. You may want to follow the rough steps in Section~\ref{sec:transformation:of:matrices} where we motivated the transformation law for matrices.
+\end{exercise}
+
+So why are we making a big deal about isometries? Isometries physically correspond to a change in observer. As physicists, we would like to deduce the fundamental laws of nature---laws that we expect to be independent whether we are oriented along a particular direction in space or in a particular reference frame. Isometries are transformations that translate the physical quantities that one observer measures to the physical quantities that another observer measures. The physical quantities are encoded in the components of tensors and the fact that those components transform indicate what a different observer would measure.
+
+In this sense, it is true that you could do an arbitrary invertible transformation\footnote{Invertibility is important to make sense of the transformation of lower-indices.} and this all holds. However, a transformation that is not an isometry will change the metric. This means the transformation maps an orthonormal basis to a non-orthonormal basis.\footnote{Convince yourself that the condition of invertibility ensures that the orthonormal basis is at least mapped to a basis.} This means that the transformed basis is not meaningful as the basis vectors that another physical observer may measure---at least not a sensible physical observer with a sensible basis.
+
 \subsection{Transpose, Adjoint}
 \label{eq:transpose:adjoint}
 
@@ -3749,6 +3764,7 @@ In order to avoid all of these factors of $c$---you can always replace them at t
         p^2\\
         p^3
     \end{pmatrix} \ .
+    \label{eq:momentum:4vec}
 \end{align}
 
 
@@ -3772,26 +3788,246 @@ The speed of light is constant.
 
 That's it. You can find lots of great expositions on special relativity that derive the implications of the above observation.\footnote{See, e.g.~\url{https://www.feynmanlectures.caltech.edu/I_15.html}} To learn this properly, you should also look up the experimental history that lead to the deduction that the speed of light is constant. You should also appreciate how the mathematical structure of Minkowski space was intuited/invented/proposed to explain the above observation. Then you should build some facility on a graphical picture of how special relativity works.\footnote{I highly recommend \emph{Very Special Relativity: An Illustrated Guide}, Sander Bais.} In this section, we very briefly highlight how special relativity is a manifestation of a metric space that is not our usual Euclidean space. 
 
+Because we are using units where $c=1$, the maximum velocity is 1. For historical reasons, we refer to the relative velocity between frames as $\beta = v/c$. In natural units, $\beta = v$ and $|\beta| \leq 1$.  
+
 \subsection{Minkowski Space and its Isometries} 
 
+In Exercise~\ref{ex:minkowski:2} you showed\footnote{You did do this exercise, right?} that the isometries of (1+1)-dimensional Minkowski space are the Lorentz transformations $\Lambda$ satisfying $\Lambda^T \Lambda = \one$. You showed that the following two parameterizations satisfy this condition:
+\begin{align}
+    \Lambda = 
+    \begin{pmatrix}
+        \cosh\eta & \sinh\eta \\
+        \sinh\eta & \cosh\eta\\
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        \gamma & \gamma\beta\\
+        \gamma\beta & \gamma
+    \end{pmatrix} \ ,
+\end{align}
+These `rotations' between space and time are called \textbf{boosts}. In ($d+1$)-dimensional Minkowski space with $d$-dimension of space, you also have rotations in the spatial dimensions. Thus $d$-dimensional rotations are a subset of the Lorentz transformations. The parameter $\beta=v/c$ is the relative velocity between the frames of the two observers. 
 
-\begin{example}
-Rotations are a subset of the isometries of Minkowski space...
-\end{example}
+Suppose you have a nice coordinate system,\footnote{I'm getting myself into trouble again because coordinates are not vectors. In this section what we really mean is that we all agree on an origin of our coordinate systems and we measure the displacements from that origin, $\Delta t = t-0$ and $\Delta x = x-0$. These displacements are valid vector spaces.} $(t,x)$. You do not observe yourself to be moving\footnote{We assume the absence of any acceleration. Note that you do not observe yourself to be moving even if you are sitting in a car at constant velocity.}, but suppose further that you see someone else skateboarding past you with some velocity $v$. The skateboarder has their own coordinate system, $(t',x')$. They observe their coordinate system the same way you observer your coordinate system. A good question is: what does their coordinate system look like \emph{in} your coordinate system? How do the coordinates of a vector change as one boosts from the skateboarder's perspective to your perspective?
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/rel_axes.pdf}
+    \caption{Your coordinate system $(t,x)$ and the coordinate system of a skateboarder moving past you with velocity $\beta$. The skateboarder's coordinate system $(t',x')$ appears as the red lines in your coordinate system. The yellow line is the trajectory of light called the light cone.}
+    \label{fig:re:axes}
+\end{figure}
+
+To plot the skateboarder's axes on your axis, simply recall that the $t'$ axis is determined by all points with $x'=0$. Similarly, the $x'$ axis is all points with $t'=0$. We use the Lorentz transformation to determine what these points map to:
+\begin{align}
+    \begin{pmatrix}
+        t(t') \\ x(t')
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        \gamma & \gamma\beta
+        \\
+        \gamma\beta & \gamma
+    \end{pmatrix}
+    \begin{pmatrix}
+        t' \\
+        0
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma t'\\ \gamma \beta x'
+    \end{pmatrix} 
+    \\
+    \begin{pmatrix}
+        t(x') \\ x(x')
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        \gamma & \gamma\beta
+        \\
+        \gamma\beta & \gamma
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 \\
+        x'
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \gamma\beta x'\\ \gamma x'
+    \end{pmatrix}
+    \ .
+    \label{eq:axis:transform}
+\end{align}
+We plot these lines in Fig~\ref{fig:re:axes}. 
+We recognize that because $\gamma \geq 1$, the length of a unit tick in the $t'$ direction as seen in our reference frame has $t$-component $\gamma t' > t'$. This means that a unit step in the $t'$ direction---which we draw as a tick mark---is stretched out relative to a unit step in the $t$ direction! Of course, this is only `stretched out' because we are used to looking at plots using the Euclidean metric: the Minkowski norm remains the same. The same observation holds for a unit step in the $x'$ direction. 
+
+We also draw a diagonal line that we label the light cone. This is the trajectory of a particle moving at the speed of light. As you increase the relative velocity $\beta$ between the two observers, the axes of one observer relative to the other approach the light cone. 
+\begin{exercise}
+Show that the $t'$ and $x'$ axes approach the light cone as $\beta \to \infty$. 
+\end{exercise}
 
 \subsection{Example: Muon Decay}
+
+Cosmic rays can hit the upper atmosphere and produce muons about 10 kilometers above the surface of the Earth. These muons are highly relativistic, with a velocity of $\beta = 0.9999$. See Fig.~\ref{fig:muons}. We know from laboratory experiments that the lifetime of a muon \emph{at rest} is 2 microseconds. Based on the simple estimate $d=c\tau \approx 600$~meters, we would not expect any muons to reach the surface of the Earth. However, not only do large cosmic ray telescopes have dedicated muon detectors, but you can make your own citizen science muon detector\footnote{\url{https://muonpi.org}}. What gives?
+
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.48\textwidth]{figures/muon.pdf}
+    \caption{Very technical sketch of a muon produced in the upper atmosphere heading towards earth with velocity $\beta = 0.9999$. A stationary muon has a lifetime of $2\times10^{-6}$~seconds before it decays. The muon is produced $10^4$ meters above the surface of the earth. The speed of light is $c=3\times 10^{8}$ meters per second. If we estimate the distance traveled as $d = c\tau$, then the muon travels about $600$ meters before decaying. We would then conclude that no muons reach the surface of the earth. What's wrong with this argument?}
+    \label{fig:muons}
+\end{figure}
 
 % using rotations
 % time dilation picture
 % length contraction picture
 
+Here are the facts:
+\begin{itemize}
+    \item Both the observer on Earth and the muon agree that their relative velocity is $|\beta| = 0.9999$. 
+    \item The muon's lifetime is known in the muon's rest frame. 
+    \item The distance from the surface of the Earth to the upper atmosphere is known in the Earth's rest frame. 
+\end{itemize}
+With the understanding that boosts will mix up space and time, we can only determine the distance or time that the muon travels by calculating in the same reference frame. 
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.48\textwidth]{figures/rel_time_dil.pdf}
+    \quad
+    \includegraphics[width=.48\textwidth]{figures/rel_len_contractino.pdf}
+    \caption{Left: the muon's lifetime is time-dilated in the Earth's frame. Right: the distance from the surface of the Earth to the upper atmosphere is length contracted in the muon's frame. }
+    \label{fig:re:axes}
+\end{figure}
+
+First let us consider calculating everything in the Earth's reference frame. This is shown on the left of Fig.~\ref{fig:re:axes}. This means we have to take the muon's lifetime in the muon's rest frame and convert it into a lifetime in the Earth's frame. In the muon's frame the lifetime is simply 
+\begin{align}
+    \Delta x'^\mu &= 
+    \begin{pmatrix}
+    \tau \\ 0     
+    \end{pmatrix} \ 
+    &
+    \Delta x^\mu &=
+    \begin{pmatrix}
+    \gamma \tau \\ \gamma\beta \tau    
+    \end{pmatrix} \ ,
+\end{align}
+where we have noticed that the muon lifetime is a displacement along the $t'$ axis used our results in \eqref{eq:axis:transform}. We find that the lifetime in the Earth's frame is actually larger than the lifetime in the muon rest frame: $t = \gamma \tau$. There is also a spatial component, but this is no surprise: in the Earth frame the muon is moving, so when the muon decays it is in a different position. 
+
+How much is the muon's lifetime \emph{time dilated}? We plug $\beta$ into the expression for $\gamma = (1-\beta^2)^{-1/2}$. We find\footnote{There's a cute trick here: $\beta^2 = (1-\epsilon)^2 \approx 1- 2\epsilon$ by Taylor expanding in the small number $\epsilon = 10^{-4}$.} that to one significant figure, $\gamma = 100$. This means that the time for the muon decay in the Earth's frame is $2\times 10^-4$~seconds, which means that it travels approximately $d=60~$km, which is larger than the distance from the upper atmosphere to the surface. As a sanity check: this is exactly the value in the spatial component of $\Delta x^\mu$.
+
+Great: so one story is that relativistic muons have lifetimes that are much larger than their at-rest lifetime. This means that to the observer on earth, the muon simply lives longer than we would expect from measurements of muons at rest. There are, however, (at least) two sides to every good story. What does the muon see?
+
+In the muon's rest frame, the muon \emph{knows} that it goes \emph{kaput} in 2~microseconds. It sees the surface of the Earth approaching it with velocity $\beta = 0.9999$. By now you can guess that must change: the measurement in the Earth's frame---that the height of the upper atmosphere is 10~km---must be different in the muon's frame. And in fact, the muon must measure the distance of the rapidly approaching Earth to be much smaller than 10~km. How does this \emph{length contraction} work? 
+
+We show this on the right side of Fig.~\ref{fig:re:axes}. Note that now we have a measurement in the Earth frame (a vertical line denoting a fixed distance) that we want to project onto the muon frame (red axes). In the Earth frame, we denote the distance by two unit ticks in the spatial direction. In the muon frame, this line intersects the $x'$ axis with \emph{less} than two ticks.
+
+\begin{exercise}
+Using the Lorentz transformation laws, show that the distance from the muon to the surface of the Earth at the moment of the muon's creation is $L'=L/\gamma$ where $L=10$~km is the distance in the Earth frame. 
+\end{exercise}
+
+\begin{exercise}
+Rephrase everything in this example in terms of the isometries of Minkowski space. 
+\end{exercise}
+
 \subsection{Example: What does someone else measure?}
 % using inner products
 % contrast to boosting
 
+Momentum is also a four-vector in relativity. The components of the momentum four vector are in \eqref{eq:momentum:4vec}, which we write succinctly as
+\begin{align}
+    p^\mu = 
+    \begin{pmatrix}
+        E \\ \vec{p}
+    \end{pmatrix} \ .
+\end{align}
+If we measure the four-momentum of a particle in our laboratory, then we know that the energy of the particle is $p^0 = E$. That's by definition of what the first component of the four-momentum is---we did not actually do any work to do that. 
+
+In special relativity there is another object called the four-velocity. In our rest frame, our four velocity is
+\begin{align}
+    v^\mu = \begin{pmatrix}
+        1\\ 0
+    \end{pmatrix} \ .
+    \label{eq:4:velocity:in:rest:Frame}
+\end{align}
+This literally means that when we are at rest, we are moving one second per second in the time direction. Objects moving relative to us have four velocities that are Lorentz transformations of the $v^\mu$ above. 
+
+We notice that we can write the energy of a particle in a way that uses the inner product:
+\begin{align}
+    \langle v, p\rangle = p\cdot v = g_{\mu\nu} p^\mu v^\nu \ .
+\end{align}
+Of course, all this does is pick out the $p^0$ component, as we knew it had to. However, unlike writing $p^0$, the inner product $p\cdot v$ has no indices. It is a pure number and so it does not transform under Lorentz transformations. 
+
+At this point you wonder if we are simply reciting random facts that we have developed. Consider the following scenario illustrated in Fig.~\ref{fig:alien}.
+% 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/alien.pdf}
+    \caption{You measure the four-momentum of a particle. One of the components is the energy of the particle. What is the energy that an alien moving at some velocity $\beta$ relative to you measures?}
+    \label{fig:alien}
+\end{figure}
+% 
+While you have measured the energy $E$ of a particle, you notice an alien traveling relativistically with velocity $\beta$ relative to you. The alien has sophisticated equipment to measure the particle energy, and you know that the alien measures a different energy $E'$ relative to what you measure. How can you determine what that energy is?
+
+One way to do this is to calculate the full Lorentz transformation between your frame and the alien frame. It turns out, however, that we can use the four-velocity as a useful trick. All objects with mass have a four-velocity equal to \eqref{eq:4:velocity:in:rest:Frame} in their rest frame. This means that the alien measures the particle to have energy $v_\text{alien}\cdot p_\text{alien}$, where the subscript `alien' means that these are all calculated in the alien's frame.
+
+We now remember that $v_\text{alien}\cdot p_\text{alien}$ is a number. It does not matter what frame we calculate it in. Thus it is equivalent to the same dot product measured in our frame:
+\begin{align}
+E'=
+    v_\text{alien}\cdot p_\text{alien} = v\cdot p \ ,
+\end{align}
+where the right-hand side is the alien four-velocity and the particle four-momentum as measured in our frame. The alien four-velocity is simply a Lorentz transformation of \eqref{eq:4:velocity:in:rest:Frame}. More practically, it is something that you can measure in your own frame. 
+
+
+\begin{exercise}
+Rephrase everything in this example in terms of the inner product in Minkowski space. Bonus if you use the word `projection.'
+\end{exercise}
+
 
 % index, bolfcaced, metric signature
 % natural units... because vectors and energies
+
+
+\subsection{Example: the electromagnetic field stength}
+% motivate this from the unification of magnetism and electricity
+% transformation laws
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/EMcurrent.pdf}
+    \caption{Left: an electron moves near a current. The current has no net electric charge. In the absence of magnetism, we expect the electron to move in a straight line. Right: if we boost into the electron frame, the particles in the current moving in the opposite direction are length-contracted. This means that the charge density increases. The stationary electron now feels a net electric force. This implies that something is missing in the picture on the left.}
+    \label{fig:current}
+\end{figure}
+
+Another place where special relativity rears its head is in electrodynamics. Electricity and magnetism are two manifestations of the same electromagnetic phenomenon. This is illustrated in Fig.~\ref{fig:current}. If you did not know about magnetism, you would find a paradox when you consider a charged particle moving along a current. In one frame, the current is an equal number of positive and negative charges moving in opposite directions.\footnote{I suppose more realistically the negative charges move while the positive charges stay put---that does not change the conclusion.} If you boost to the external charged particle's rest frame, length contraction forces one species of the current particles to increase their charge density relative to the other species. This creates a net electric field that acts on the stationary external particle. Without magnetism, the first frame is missing this additional force. 
+
+The electric and magnetic fields are unified in the \emph{electromagnetic field strength}, which is a two-index tensor:
+\begin{align}
+    F^{\mu\nu}
+    &=
+    \begin{pmatrix}
+        0&-E^x&-E^y&-E^z\\
+        E^x&0&-B^z&B^y\\
+        E^y&B^z&0&-B_x\\
+        E^z&-B^y&B^x&0
+    \end{pmatrix} \ .
+    &
+    F_{\mu\nu}
+    &=
+    \begin{pmatrix}
+        0&E^x&E^y&E^z\\
+        -E^x&0&-B^z&B^y\\
+        -E^y&B^z&0&-B_x\\
+        -E^z&-B^y&B^x&0
+    \end{pmatrix} \ .
+\end{align}
+We see that electricity and magnetism are unified in that their components mix into one another under a Lorentz transformation. 
+\begin{exercise}
+Confirm that $F_{\mu\nu} =g_{\mu \alpha}g_{\nu\beta} F^{\alpha\beta}$ with the (3+1)-dimensional Minkowski metric $g_{\mu\nu}$. 
+\end{exercise}
+\begin{exercise}
+Find the components of $F'^{\mu\nu}$ under a boost along the $z$-direction. 
+\end{exercise}
+
 
 \section{Central Dogmas}
 
