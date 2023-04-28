@@ -3961,7 +3961,7 @@ At this point you wonder if we are simply reciting random facts that we have dev
 % 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=.8\textwidth]{figures/alien.pdf}
+    \includegraphics[width=.5\textwidth]{figures/alien.pdf}
     \caption{You measure the four-momentum of a particle. One of the components is the energy of the particle. What is the energy that an alien moving at some velocity $\beta$ relative to you measures?}
     \label{fig:alien}
 \end{figure}
@@ -4031,13 +4031,129 @@ Find the components of $F'^{\mu\nu}$ under a boost along the $z$-direction.
 
 \section{Central Dogmas}
 
+We interrupt our regularly scheduled broadcasting\footnote{This is a phrase from my childhood. Television stations would interrupt an ongoing show to present `breaking news' that they felt all of their viewers needed to see.} to take stock of the ``big picture'' that we are slowly developing. In this section, we review the salient lessons from the first part of this course and present some ``practical perspectives'' on how to think about the machinery developed. We close by introducing the idea of eigenvectors and eigenvalues.
+
 \subsection{Vectors are not columns}
 % also: vectors are not components, but they're convenient
-\subsection{Vector space duality}
-\subsection{Everything is a vector space, everyting is a linear map}
+
+Vectors are not columns of numbers. The numbers are the \emph{components} of a vector: we write these with indices. The components just tell you how to write the vector as a linear combination of basis vectors:
+\begin{align}
+    \ket{v} = v^i \ket{i} = v^i \bas{e}_i \ .
+\end{align}
+All of the `meaning' of the vector is encoded in the basis vectors.
+In fact, we have \emph{deliberately} avoid stating what a vector `means.' This meaning is abstract because we want it to be general. Maybe your basis vectors are possible velocities of a particle at a point in space. Maybe the basis vectors are units of something you are counting. Maybe the basis vectors are Fibonacci sequences, or the primary colors. The point is that each of these very different vector spaces are described by the same basic machinery.
+
+
+\subsection{Everything is a vector space, everything is a linear map}
+
+We adopt the convention where vectors have upper indices. This allowed us to introduce row vectors
+
+\subsection{A multitude of conventions}
+
+
+\begin{table}
+    \renewcommand{\arraystretch}{1.3} % spacing between rows
+    \centering
+    \begin{tabular}{ @{} llll @{} } \toprule % @{} removes space
+        Vector Space & $\RR$ & $\CC$ & $\infty$-dimensional
+        \\ \hline
+        Vector/ket 
+            & $\vec{v} = \ket{v}$ 
+            & $\vec{v} = \ket{v}$
+            & $f$
+            \\
+        Basis vector
+            & $\bas{e}_i = \ket{i}$ 
+            & $\bas{e}_i = \ket{i}$ 
+            & $\hat{e}_i(x)$
+            \\
+            & 
+            & 
+            & $\hat{e}_p(x)$
+            \\
+        Components
+            & $v^i \in \RR$
+            & $v^i \in \CC$
+            & $f^i, \tilde{f}(p) \in \CC$
+            \\
+        % Components
+            & $\vec{v} = v^i\bas{e}_i = v^i\ket{i}$
+            & $\vec{v} = v^i\bas{e}_i = v^i\ket{i}$
+            & $f(x) = f^i\, \hat{e}_i(x) $
+            \\
+            & 
+            & 
+            & $f(x) = \int \dbar p\,\tilde f(p) e_p(x)$
+        \\
+        Row vector/bra
+            & $\row{w} = w_i\rbas{e}^i = w_i\bra{i}$
+            & $\row{w} = w_i\rbas{e}^i = w_i\bra{i}$
+            & distribution, e.g.~$\delta(x)$
+        \\
+        Matrix
+            & $A = A\aij{i}{j}\ket{i}\bra{j}$
+            & $A = A\aij{i}{j}\ket{i}\bra{j}$
+            & operator, e.g.~$\frac{d^2}{dx^2}$
+        \\
+        Inner Product
+            & $\la v, w \ra = g_{ij}v^iw^j$
+            & $\la v, w \ra$
+            & $\la f, g \ra = \int dx\, f^*(x)g(x)$        
+            \\
+        % Inner Product
+            & $\la v, w \ra = \la w,v\ra$
+            & $\la v, w \ra = \la w,v\ra^*$
+            & $\la f, g \ra = \la g,f\ra^*$
+        \\
+        Adjoint
+            & Transpose
+            & Hermitian Conjugate
+            & Integration by parts
+        \\
+        % Adjoint
+            & $(A^T)\aij{i}{j} = g_{jk}A\aij{k}{\ell}g^{\ell i}$
+            & $(A^\dag)\aij{i}{j}= [(A^T)\aij{i}{j}]^*$
+            & e.g.~$(d/dx)^\dag = -(d/dx)$
+        \\
+        Self-adjoint
+            & Symmetric
+            & Hermitian
+            & Sturm--Liouville
+        \\
+        % Self-adjoint
+            & $A^T = A$
+            & $A^\dag = A$
+            & $\mathcal O^\dag = \mathcal O$
+        \\
+        % Self-adjoint
+            & $\RR$ Eigenvalues
+            & $\RR$ Eigenvalues
+            & $\RR$ Eigenvalues
+        \\
+        % Self-adjoint
+            & $\perp$ Eigenvectors
+            & $\perp$ Eigenvectors
+            & $\perp$ Eigenvectors
+        \\
+        Isometry, e.g.
+            & Rotations, Boosts
+            & Unitary Matrices
+            & Change of variable
+        \\ \bottomrule
+    \end{tabular}
+    \caption{
+        Terms and notation in real, complex, and infinite-dimensional vector spaces. 
+        \label{table:vectors:numbers}
+  }
+\end{table}
+
 \subsection{The un-mathematical idea of niceness}
 % one, diagonal, rotations, projections, worse
 \subsection{The eigensystem}
+
+\section{Quantum Mechanics}
+
+\section{Function Space}
 
 
 
