@@ -4489,6 +4489,8 @@ Find the eigenvector $\ket{\xi_-}$ of $M$ in \eqref{eq:ex:eigenvector:finding:1}
 For an $N$-dimensional vector space, the eigenvalue equation gives $N$ equations for the $N$ components of an eigenvector. It will always be the case that one of these equations will be redundant: it will not contribute any additional information about the eigenvector components. This is because the overall normalization of the eigenvector is not set by the eigenvector equation. One simply replaces this redundant equation with the normalization condition $\la \xi,\xi\ra = 1$. 
 % normalizing
 
+You may have noticed that in my examples, I try to keep all of my numbers integers. Physicists `in the field' also try to keep their numbers nice---often by picking convenient units. However, despite our best efforts, there you will find that your upper division textbooks are full of funny factors of $\sqrt{2}$ or even $(2\pi)$. These factors are usually unavoidable consequences of normalizing eigenvectors. 
+
 \subsection{Rotating to the Eigenbasis}
 
 ``Finding the eigenvectors'' really means finding the components of the eigenvectors in the standard basis. This defines the rotation between the eigenbasis and the standard basis. Let us see how this works explicitly.\footnote{This section generalizes to any change of basis. We present it here because in physics, nearly all of your change of basis will be between the basis in which your problem is posed (the standard basis) and the basis in which it is most simply solved (the eigenbasis).}
@@ -4527,6 +4529,50 @@ Note that in doing this, it was critical that the eigenvectors are normalized. O
 The components of the (normalized) eigenbasis written in the standard basis are simply the components of the rotation matrix from the eigenbasis to the standard basis. The rotation from the standard basis to the eigenbasis is simply the inverse (Hermitian conjugate or transpose) of this rotation. 
 \end{bigidea}
 
+
+\subsection{What does it do}
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/eigen_ball.pdf}
+    \caption{.}
+    \label{fig:eigenbal}
+\end{figure}
+\subsection{What does it do}
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/eigen_transform.pdf}
+    \caption{.}
+    \label{fig:eigentransform}
+\end{figure}
+
+In Fig.~\ref{fig:eigenbal} and \ref{fig:eigentransform}
+\begin{align}
+    M &= \begin{pmatrix}
+        2 & 1 \\
+        1 & 3
+    \end{pmatrix}
+    &
+    \lambda_{\text{I},\text{II}} &\approx 3.6,\; 1.4 \ .
+    &
+    \ket{\xi_{\text{I},\text{II}}}&\approx
+    \begin{pmatrix}
+        0.5 \\ 0.9
+    \end{pmatrix},
+    \;
+    \begin{pmatrix}
+        -0.9 \ \\pp 0.5
+    \end{pmatrix}
+\end{align}
+And
+\begin{align}
+    \ket{v} = 0.5\ket{\text{I}} + 2\ket{\text{II}} \approx
+    -1.4\ket{1} + 1.5 \ket{2} \ .
+\end{align}
+
+\begin{align}
+    M\ket{v} = 0.5\lambda_\text{I}\ket{\text{I}} + 2 \lambda_\text{II}\ket{\text{II}} \approx
+    -1.4\ket{1} + 3 \ket{2} \ .
+\end{align}
 
 
 
