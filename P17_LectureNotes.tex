@@ -2109,6 +2109,7 @@ Appealing to our pictorial interpretation that the determinant is a volume, we r
 % \subsection{Symmetry and Indices}
 
 \subsection{Active versus Passive}
+\label{sec:active:vs:passive}
 
 There is a concept that pops up here and there in physics: the idea of an \textbf{active} versus a \textbf{passive transformation}. An active transformation \emph{is} a transformation. You have one vector, you apply a map to it, and then you have a totally different vector. By contrast, a {passive} transformation is one that is analogous to a \emph{change in reference frame}. In a passive transformation, the vectors do not change---the observers change. For passive transformations, we almost exclusively consider rotations. In case you need a visual aid, we first brought up this idea of a passive rotation in \eqref{fig:passive:rotation}. If you need a mnemonic to remember which is which, Fig.~\ref{fig:do:something} may be a helpful meme.
 \begin{figure}[tb]
@@ -3899,10 +3900,10 @@ With the understanding that boosts will mix up space and time, we can only deter
     \quad
     \includegraphics[width=.48\textwidth]{figures/rel_len_contractino.pdf}
     \caption{Left: the muon's lifetime is time-dilated in the Earth's frame. Right: the distance from the surface of the Earth to the upper atmosphere is length contracted in the muon's frame. }
-    \label{fig:re:axes}
+    \label{fig:re:dilation}
 \end{figure}
 
-First let us consider calculating everything in the Earth's reference frame. This is shown on the left of Fig.~\ref{fig:re:axes}. This means we have to take the muon's lifetime in the muon's rest frame and convert it into a lifetime in the Earth's frame. In the muon's frame the lifetime is simply 
+First let us consider calculating everything in the Earth's reference frame. This is shown on the left of Fig.~\ref{fig:re:dilation}. This means we have to take the muon's lifetime in the muon's rest frame and convert it into a lifetime in the Earth's frame. In the muon's frame the lifetime is simply 
 \begin{align}
     \Delta x'^\mu &= 
     \begin{pmatrix}
@@ -3922,7 +3923,7 @@ Great: so one story is that relativistic muons have lifetimes that are much larg
 
 In the muon's rest frame, the muon \emph{knows} that it goes \emph{kaput} in 2~microseconds. It sees the surface of the Earth approaching it with velocity $\beta = 0.9999$. By now you can guess that must change: the measurement in the Earth's frame---that the height of the upper atmosphere is 10~km---must be different in the muon's frame. And in fact, the muon must measure the distance of the rapidly approaching Earth to be much smaller than 10~km. How does this \emph{length contraction} work? 
 
-We show this on the right side of Fig.~\ref{fig:re:axes}. Note that now we have a measurement in the Earth frame (a vertical line denoting a fixed distance) that we want to project onto the muon frame (red axes). In the Earth frame, we denote the distance by two unit ticks in the spatial direction. In the muon frame, this line intersects the $x'$ axis with \emph{less} than two ticks.
+We show this on the right side of Fig.~\ref{fig:re:dilation}. Note that now we have a measurement in the Earth frame (a vertical line denoting a fixed distance) that we want to project onto the muon frame (red axes). In the Earth frame, we denote the distance by two unit ticks in the spatial direction. In the muon frame, this line intersects the $x'$ axis with \emph{less} than two ticks.
 
 \begin{exercise}
 Using the Lorentz transformation laws, show that the distance from the muon to the surface of the Earth at the moment of the muon's creation is $L'=L/\gamma$ where $L=10$~km is the distance in the Earth frame. 
@@ -4514,10 +4515,11 @@ Here's what's going on with our notation. Our standard basis vectors are $\ket{1
 
 What can we do with \eqref{eq:eigen:to:standard:basis}? Let us suppose that we have a vector $\vec{v}$ written in the eigenbasis. We know the components $v^A$, and we would like to find the components in the standard basis. We can simply plug in \eqref{eq:eigen:to:standard:basis}:
 \begin{align}
-    \vec{v} = 
+    \ket{v} = 
     v^A\ket{A}
     = v^A \xi_A^i \ket{i} =  \xi\aij{i}{A}v^A \ket{i}
     \equiv v^i \ket{i} \ .
+    \label{eq:vA:as:vi}
 \end{align}
 Here we have chosen to write the indices of $\xi^i_A$ in a particular order, $\xi\aij{i}{A}$. This makes $\xi\aij{i}{A}v^A$ a standard ``matrix multiplication'' contraction of indices. We identify the components $v^i$ in the standard basis as a transformation of the components $v^A$ in the eigenbasis. This means that $\xi\aij{i}{A}$ is the rotation from the eigenbasis to the standard basis:
 \begin{align}
@@ -4530,22 +4532,35 @@ The components of the (normalized) eigenbasis written in the standard basis are 
 \end{bigidea}
 
 
-\subsection{What does it do}
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=.6\textwidth]{figures/eigen_ball.pdf}
-    \caption{.}
-    \label{fig:eigenbal}
-\end{figure}
-\subsection{What does it do}
+We can go further and relate this rotation to my favorite operation: multiplication by the identity. The trick is as follows:
+\begin{align}
+    \one = \ket{i}\bra{i} \ .
+\end{align}
+Suppose you have a vector $\ket{v}$ whose components you know in the eigenbasis. Another way of writing \eqref{eq:vA:as:vi} is to multiply by one:
+\begin{align}
+    \ket{v} = v^A \ket{i}\la i | A\ra = \la i | A\ra v^A \ket{i} \ .
+\end{align}
+We identify $\la i | A \ra$ as the rotation from the eigenbasis $\ket{A}$ to the standard basis $\ket{i}$, 
+\begin{align}
+    \la i | A \ra = R\aij{i}{A} = \xi\aij{i}{A} \ .
+\end{align}
+Another way that this is often written is that one can insert $\one = R^\dag R$ where $R^\dag$ acts on the basis $\ket{A}$ and $R$ acts on the components of a vector, $v^A$. This is precisely what we meant by a \emph{passive transformation} in Section~\ref{sec:active:vs:passive}---albeit with $R\Leftrightarrow R^\dag$.
+
+
+% relation to R^\dag R
+
+
+\subsection{Intuition for a linear transformation in the eigenbasis}
+
+
 \begin{figure}[tb]
     \centering
     \includegraphics[width=.8\textwidth]{figures/eigen_transform.pdf}
-    \caption{.}
+    \caption{Standard basis (black) and eigenbasis (red) vectors and the vector $\ket{v}$ (blue) in \eqref{eq:eigen:example:v}. Under a transformation $M$, the vector is mapped to $M\ket{v}$ (green) which is a rescaling of the components of $\ket{v}$ along the eigenbasis directions (shown as a green box). Right: the transformation as seen by an eigen-observer's frame.}
     \label{fig:eigentransform}
 \end{figure}
 
-In Fig.~\ref{fig:eigenbal} and \ref{fig:eigentransform}
+Passing to the eigenbasis gives a clear understanding of what a Hermitian linear transformation does. We sketch this in Figs.~\ref{fig:eigentransform} and \ref{fig:eigenbal}. For that example, we consider a matrix $M$ with eigenvectors $\ket{{\text{I},\text{II}}}$ and corresponding eigenvalues $\lambda_{\text{I},\text{II}}$:
 \begin{align}
     M &= \begin{pmatrix}
         2 & 1 \\
@@ -4554,25 +4569,41 @@ In Fig.~\ref{fig:eigenbal} and \ref{fig:eigentransform}
     &
     \lambda_{\text{I},\text{II}} &\approx 3.6,\; 1.4 \ .
     &
-    \ket{\xi_{\text{I},\text{II}}}&\approx
+    \ket{{\text{I},\text{II}}}&\approx
     \begin{pmatrix}
         0.5 \\ 0.9
     \end{pmatrix},
     \;
     \begin{pmatrix}
         -0.9 \ \\pp 0.5
-    \end{pmatrix}
+    \end{pmatrix} \ .
 \end{align}
-And
+Figure~\ref{fig:eigentransform} shows a vector 
 \begin{align}
     \ket{v} = 0.5\ket{\text{I}} + 2\ket{\text{II}} \approx
-    -1.4\ket{1} + 1.5 \ket{2} \ .
+    -1.4\ket{1} + 1.5 \ket{2} 
+    \label{eq:eigen:example:v}
 \end{align}
-
+under the transformation $M$,
 \begin{align}
     M\ket{v} = 0.5\lambda_\text{I}\ket{\text{I}} + 2 \lambda_\text{II}\ket{\text{II}} \approx
     -1.4\ket{1} + 3 \ket{2} \ .
+    \label{eq:eigen:example:Mv}
 \end{align}
+What we see is that in the eigenbasis, $M$ simply \emph{rescales} the components of $\ket{v}$ along the eigenbasis directions. 
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/eigen_ball.pdf}
+    \caption{Eigenbasis directions are shown in red. The surface of the yellow ball represents all vectors of unit length. The green ellipse represents the deformation of this surface by acting on each of those vectors by $M$. We see that the eigenbasis components of these vectors are simply rescaled by the eigenvalues of $M$. Right: Same figure, but drawn relative to the standard basis.}
+    \label{fig:eigenbal}
+\end{figure}
+
+Figure~\ref{fig:eigentransform} shows a unit ball in the eigenbasis and how it is deformed under $M$. The surface of the ball should be understood as endpoints of a set of possible vectors. Under $M$, this surface is deformed to the green ellipse. In the standard basis, this ellipse is skewed by the rotation between the two bases. 
+
+
+
 
 
 
