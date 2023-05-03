@@ -4041,17 +4041,47 @@ Vectors are not columns of numbers. The numbers are the \emph{components} of a v
     \ket{v} = v^i \ket{i} = v^i \bas{e}_i \ .
 \end{align}
 All of the `meaning' of the vector is encoded in the basis vectors.
-In fact, we have \emph{deliberately} avoid stating what a vector `means.' This meaning is abstract because we want it to be general. Maybe your basis vectors are possible velocities of a particle at a point in space. Maybe the basis vectors are units of something you are counting. Maybe the basis vectors are Fibonacci sequences, or the primary colors. The point is that each of these very different vector spaces are described by the same basic machinery.
+In fact, we have \emph{deliberately} avoid stating what a vector `means.' This meaning is abstract because we want it to be general. Maybe your basis vectors are possible velocities of a particle at a point in space. Maybe the basis vectors are units of something you are counting. Maybe the basis vectors are Fibonacci sequences, or the primary colors. The point is that each of these very different vector spaces are described by the same basic machinery. The vectors live in a vector space, $V$, which carries this abstraction. 
 
 
 \subsection{Everything is a vector space, everything is a linear map}
 
-We adopt the convention where vectors have upper indices. This allowed us to introduce row vectors. The
+We adopt the convention where vectors have upper indices. This allowed us to introduce row vectors as funny objects with lower indices. We then saw that these two objects are dual to each other: 
+\begin{enumerate}
+    \item The row vectors are linear functions of the column vectors.
+    \item The column vectors are linear functions of the row vectors.
+\end{enumerate}
+In both cases, they are linear functions that output numbers. We called the vector space of row vectors the dual space, $V^*$. The above statements are:
+\begin{enumerate}
+    \item Row vector, $\row{w}:\;V\to \RR$
+    \item Column vector, $\vec{v}:\;V^*\to \RR$
+\end{enumerate}
+
+We then realized that we could have linear functions that go from tensor products of vector spaces. That is, linear functions that take some number of row vectors and some number of column vectors and return a number. A tensor with $p$ upper indices (vector-like indices) and $q$ lower indices (row-vector like indices) is a linear map that takes in $p$ row vectors and $q$ column vectors to output a number. In this point of view, tensors are simply linear transformations. 
 
 \subsection{What the inner product brings}
 
+The inner product is a special function that takes two vectors and spits out a number. We may thus write it as a tensor with two lower indices; this tensor is called the metric. A \textbf{metric space} or equivalently \textbf{inner product space} is a vector space with a metric. The metric and its inverse allow us to raise and lower indices. This gives us a way to create row vectors from column vectors. 
+
+We identified a set of linear transformations from $V\to V$ that leave the metric invariant. These are called \textbf{isometries}. Under an isometry, $g'_{ij} = g_{ij}$. Isometries are generalizations of rotations: under an isometry, an orthonormal basis is transformed into another orthonormal basis. From a physics perspective, an isometry takes us from one reference frame to another. That is: a physical quantity may be tensorial. The components of the tensor has significance to a particular observer with a particular basis. A different observer has a different basis that are related to the first basis by an isometry. By performing this transformation, we can determine what the second observer measures.
+
+It also afforded us a notion of the \textbf{adjoint} of a matrix, $A^\dag$ which we define using the inner product:
+\begin{align}
+    \la A \vec{v}, \vec{w} \ra 
+    \equiv
+    \la \vec{v}, A^\dag\vec{w} \ra  \ .
+\end{align}
+The adjoint may seem like a curiosity, except that it defines our notion of a \emph{nice} matrix. A \emph{nice} matrix is one that is self-adjoint: $A^\dag = A$. From the above definition, we show that the adjoint is equivalent to the Hermitian conjugate: 
+\begin{align}
+    (A^\dag)\aij{i}{j} = g_{aj}(A\aij{a}{b})^*g^{bi} \ ,
+\end{align}
+that is: the transpose with a complex conjugate. We call self-adjoint matrices \textbf{Hermitian}. This is the generalization of a symmetric matrix. These matrices are nice because they can be diagonalized by an isometry, and the basis in which they are diagonal will be so convenient that we devote all of Section~\ref{sec:eigensystem} to it.
+
+
+
 \subsection{A multitude of conventions}
 
+It is potentially confusing that physicists use multiple conventions to describe what are essentially the same ideas in linear algebra. Table~\ref{table:vectors:numbers} makes some of these connections explicit.
 
 \begin{table}
     \renewcommand{\arraystretch}{1.3} % spacing between rows
@@ -4150,13 +4180,122 @@ We adopt the convention where vectors have upper indices. This allowed us to int
 \end{table}
 
 \subsection{The un-mathematical idea of niceness}
+\label{sec:nice}
+
+Mathematicians like generality. If there is a true statement for a class of matrices, they are not content with stating the truth---they want to either extend it to all matrices, or otherwise clearly articulate every necessary assumption. This is sometimes caricatured as an obsession with marginal cases. Physicists have the luxury of not having to worry about that: our matrices are all typically ``nice.'' In this section, we try to give a definition for what \emph{nice} means. 
+
+\paragraph{Gold tier} The nicest matrices are multiples of the identity matrix, $\one$. These matrices are diagonal. If you rotate them, they don't change. The inverse of these matrices is simply the inverse of the coefficient, $(\alpha \one)^{-1} = \alpha^{-1} \one$. These matrices turn out to be \emph{too} nice. The matrix is proportional to the identity no matter what basis you are in.
+
+\begin{exercise}
+Show that if $M = \alpha \one$, then the rotation of $M$ is still $M$:
+\begin{align}
+    RMR^\dag = M \ .
+\end{align}
+\end{exercise}
+
+\paragraph{Silver tier} The next-nicest matrices are diagonal matrices
+\begin{align}
+\hat M = 
+    \begin{pmatrix}
+        \lambda_1 & & & \\
+         & \lambda_2 & & \\
+         & & \ddots & \\
+         & & & \lambda_N
+    \end{pmatrix} \ .
+    \label{eq:diagonal:matrix}
+\end{align}
+Diagonal matrices are a sign that you are using the \emph{right} basis. When acting on the $i^\text{th}$ basis vector, we simply pick up $\lambda_i$:
+\begin{align}
+    \hat M \ket{i} = \lambda_i \ket{i} \ .
+\end{align}
+This pattern is so nice that we call this basis an \emph{eigenbasis}. The diagonal element $\lambda_i$ is called an \emph{eigenvalue} and the corresponding basis element $\ket{i}$ is called an \emph{eigenvector}. We will specifically be interested in the case where all of the eigenvectors $\lambda_i$ are real, even when we are in a complex vector space. Another nice feature of diagonal matrices is that their inverse is easy:
+\begin{align}
+    \hat M = 
+        \begin{pmatrix}
+        \lambda_1^{-1} & & & \\
+         & \lambda_2^{-1} & & \\
+         & & \ddots & \\
+         & & & \lambda_N^{-1}
+    \end{pmatrix} \ .
+\end{align}
+
+
+\begin{exercise}
+Show that if $\hat M$ is a diagonal matrix \eqref{eq:diagonal:matrix}, then we can make sense of the exponential of this matrix by generalizing the Taylor expansion of the exponential:
+\begin{align}
+e^{\hat M} = 
+    \begin{pmatrix}
+        e^{\lambda_1} & & & \\
+         & e^{\lambda_2} & & \\
+         & & \ddots & \\
+         & & & e^{\lambda_N}
+    \end{pmatrix} \ .
+    \label{eq:diagonal:matrix:exponential}
+\end{align}
+Argue that you can also take the logarithm of a diagonal matrix. 
+\end{exercise}
+
+
+\begin{exercise}
+Show that if $\hat M$ is a diagonal matrix then the following identity holds:
+\begin{align}
+\Tr \ln \hat M = \ln \det \hat M
+\label{eq:tr:log:M:eq:ln:det:M:diag}
+\end{align}
+This relation turns out to be true even if we replace $\hat M$ by a matrix that is not diagonal.
+\end{exercise}
+
+
+
+\paragraph{Bronze tier} Self-adjoint (Hermitian) are matrices that that can be diagonalized. This means that we can alternatively define them to be rotations of diagonal matrices\footnote{For complex matrices, replace `rotation' with the appropriate isometry. This is usually a unitary matrix, $U$, that satisfies $U^\dag U = \one$.}:
+\begin{align}
+    M = R \hat M R^\dag \ .
+\end{align}
+Self-adjoint matrices have some nice features that we will exploit in Section~\ref{sec:eigensystem}. Most of the matrices of physical significance are Hermitian. That also means that physicists spend a lot of time \emph{diagonalizing} Hermitian matrices to find the right basis where they are diagonal.
+
+
+\paragraph{Isometries} Isometries are a totally different class of matrices. Isometries are linear transformations that preserve the metric. This means that they transform orthonormal bases into other orthonormal bases. When we diagonalize a Hermitian matrix, we use the isometries of our metric space to change basis. In this sense, we should think about isometries as a transformation between basis vectors. 
+
+\paragraph{Projections} Projections are \emph{not nice} matrices, except when they are useful. Most \emph{non-invertible} matrices are projections. They are non-invertible because they throw out information. A true projection would be a matrix $\ket{\hat{v}}\bra{\hat{v}}$ that acts on a vector by singling out the component along a particular direction. 
+
+\paragraph{Trash} All of our matrices are assumed to be square. These square matrices may be infinite dimensional, but the are square. The uses of non-square matrices are few and far between. Matrices that are not Hermitian, isometries, or projections are also rare. 
+
+
+In this course and in our physics lives, we almost exclusively focus on the \emph{nice} matrices acting on \emph{nice} metric spaces. 
+
 % one, diagonal, rotations, projections, worse
 
-\subsection{The eigensystem}
+% \subsection{The eigensystem}
 
 \section{Eigensystem}
+\label{sec:eigensystem}
 
-Consider  
+The German prefix \emph{eigen-} means ``proper.'' The sense in which this is proper is analogous to our notion of niceness in Section~\ref{sec:nice}. Consider the following expression for a matrix $M$:
+\begin{align}
+    M\ket{\xi} = \lambda\ket{\xi} \ .
+\end{align}
+Here $M$ is a matrix and $\lambda$ is a number. We say that this is an eigenvalue equation because $M$ acts on a particular vector, $\ket{\xi}$, and the result is a rescaling of that vector, $\lambda\ket{\xi}$. The vector $\ket{\xi}$ is called an \textbf{eigenvector} of $M$ with \textbf{eigenvalue} $\lambda$.  The matrix $M$ acts on the eigenvector $\ket{\xi}$ the way that a diagonal matrix acts on a basis vector.
+ 
+\begin{exercise}
+Show that if $\ket{\xi}$ is an eigenvector of $M$ with eigenvalue $\lambda$, then it is also an eigenvector of $M\inv$ with eigenvalue $\lambda\inv$. 
+\end{exercise}
+
+\subsection{Self Adjoint Matrices}
+
+The eigenvalue problem for Hermitian (self-adjoint) matrices is particularly compelling. The following two facts show why:
+\begin{enumerate}
+    \item The eigenvalues of Hermitian matrices are real.
+    \item The eigenvalues of Hermitian matrices are orthogonal.
+\end{enumerate}
+
+\begin{exercise}
+Prove the above statements. 
+\end{exercise}
+
+\subsection{Finding Eigenvalues: Characteristic Equation}
+
+Suppose 
+
 
 \section{Quantum Mechanics}
 
