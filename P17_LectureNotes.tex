@@ -1528,7 +1528,7 @@ Here's another seemingly strange operation that you can do on a matrix. The dete
 \end{align}
 Weird, right? Determinants for higher-dimensional square matrices can be defined recursively by taking specific linear combinations of sub-matrices. There are silly rules for this. There are fancy words for the sub-matrices (minors) and the appropriate sign for summing together those determinants (cofactors). Look, it's a mess. You should be able to calculate the determinant of a general $2\times 2$ matrix because it's easy. In case of national crisis, you should be able to calculate the determinant of a general $3\times 3$ matrix after consulting a reference to double check the signs. However, at this stage we will not make a big deal about determinants. I think engineering classes make a big deal about determinants because they can help with solving systems of linear equations using matrices---but \emph{that's not the kind of linear algebra we're doing in physics}.
 
-\begin{example}
+\begin{example}\label{eg:determinant:of:diagonal}
 The determinant of a diagonal matrix is simply the product of each of its diagonal elements. 
 \end{example}
 
@@ -1583,6 +1583,7 @@ And so we have shown the result in a simple case: determinants are related to ar
 This interpretation of determinants as volumes\footnote{I now say `volumes' instead of `area' because what follows is general to any dimension of space.} also motivates some further expressions for the determinant of the product of matrices and the determinant of the inverse of a matrix. If we perform subsequent transformations with two matrices, $N$ and $M$, then the unit parallelpiped is first mapped to a parallelpiped of volume $\det N$. When we apply the second matrix $M$, this intermediate parallelpiped is mapped to a third parallelpiped whose volume is rescaled by $\det M$. The resulting volume is $(\det N)(\det M)$. We thus deduce that the determinant of a product of matrices is the product of the determinants of each matrix:
 \begin{align}
     \det NM = (\det N)(\det M) \ . 
+    \label{eq:det:of:product}
 \end{align}
 Going further, because $M M\inv = \one$, we have
 \begin{align}
@@ -1590,6 +1591,8 @@ Going further, because $M M\inv = \one$, we have
     & \Rightarrow&
     &
      \det M\inv &= \frac{1}{\det M} \ .
+    % {eq:det:of:product}
+    \label{eq:det:of:inverse}
 \end{align}
 We have been deliberately hand-wavy to motivate thesse relations for determinants. If we were to be more rigorous, the are rather tricky to prove, though you can do them by brute force by calculating components. 
 
@@ -3930,6 +3933,7 @@ Rephrase everything in this example in terms of the isometries of Minkowski spac
 \end{exercise}
 
 \subsection{Example: What does someone else measure?}
+\label{sec:relativity:alien}
 % using inner products
 % contrast to boosting
 
@@ -4043,6 +4047,8 @@ Vectors are not columns of numbers. The numbers are the \emph{components} of a v
 All of the `meaning' of the vector is encoded in the basis vectors.
 In fact, we have \emph{deliberately} avoid stating what a vector `means.' This meaning is abstract because we want it to be general. Maybe your basis vectors are possible velocities of a particle at a point in space. Maybe the basis vectors are units of something you are counting. Maybe the basis vectors are Fibonacci sequences, or the primary colors. The point is that each of these very different vector spaces are described by the same basic machinery. The vectors live in a vector space, $V$, which carries this abstraction. 
 
+If we generalize this a bit: if you have done a bit of programming\footnote{In this century, \emph{every} physicist should be able to program.}, then you may wonder how a tensor is different from an array. An array is a (hyper-)grid of numbers. These are what are encoded by the components of a tensor, say $T\aij{ij}{k}$. However, a tensor is more than that: it comes with a transformation law for how these components change under an isometry (rotation) that lets us say ``an observer in a different basis would measure the components of the tensor to be $(T')\aij{ij}{k}$.
+
 
 \subsection{Everything is a vector space, everything is a linear map}
 
@@ -4076,6 +4082,42 @@ The adjoint may seem like a curiosity, except that it defines our notion of a \e
     (A^\dag)\aij{i}{j} = g_{aj}(A\aij{a}{b})^*g^{bi} \ ,
 \end{align}
 that is: the transpose with a complex conjugate. We call self-adjoint matrices \textbf{Hermitian}. This is the generalization of a symmetric matrix. These matrices are nice because they can be diagonalized by an isometry, and the basis in which they are diagonal will be so convenient that we devote all of Section~\ref{sec:eigensystem} to it.
+
+\subsection{Basis Dependence}
+
+When we write the components of a tensor, we assume some basis. In the `high school' picture of vectors as columns of numbers, this basis takes the form
+\begin{align}
+    \bas{e}_1 &= 
+    \begin{pmatrix}
+        1 \\ 0 \\ \vdots \\ 0
+    \end{pmatrix}
+    &
+    \bas{e}_2 &= 
+    \begin{pmatrix}
+        0 \\ 1 \\ \vdots \\ 0
+    \end{pmatrix}
+    & \cdots &
+    &
+    \bas{e}_N &= 
+    \begin{pmatrix}
+        0 \\ 0 \\ \vdots \\ 1
+    \end{pmatrix} \ .
+\end{align}
+We colloquially call this the \textbf{standard basis}.
+However, there is nothing holy about this basis. It just happens to be the basis of one observer. The underlying physics of the system described by tensors is \emph{basis independent}. Mathematicians address this by eschewing bases whenever they can. Often this means that physicists reading a mathematics textbook will be amazed at (1) how clean their equations look and (2) how incomprehensible those equations are when you want to figure out what they look like to a specific observer. 
+
+Nature is basis-independent. Sometimes we can be sneaky about this: we can derive a result in a particular basis, then write that same result in a way that is basis-independent\footnote{For example: write the final result in a way where all indices are contracted.} so that the basis-independent result is true in any basis. We demonstrated this approach in special relativity in Section~\ref{sec:relativity:alien}. 
+
+In what follows, we will contrast the ``standard basis'' with other convenient bases that come up. In particular, we will be especially fond of the \emph{eigenbasis} where a given (Hermitian) matrix is diagonal. The general strategy we follow will be to 
+\begin{enumerate}
+    \item We have a matrix $M$ in the standard basis. 
+    \item We find a special basis (eigenbasis) where $M$ takes a convenient form. We rotate to this convenient basis.
+    \item In the convenient basis, we do whatever manipulations we need to do to solve our problem. Maybe we need to take an inverse. Maybe it is an exponential. Whatever it is, this is the step where we ``do the physically significant'' mathematical step.
+    \item The result that we get is not always easy to interpret. So we have to rotate back to the standard basis. This gives a full solution to our problem in the basis that the problem was originally posed.
+\end{enumerate}
+
+
+
 
 
 
@@ -4251,15 +4293,16 @@ This relation turns out to be true even if we replace $\hat M$ by a matrix that 
 \begin{align}
     M = R \hat M R^\dag \ .
 \end{align}
-Self-adjoint matrices have some nice features that we will exploit in Section~\ref{sec:eigensystem}. Most of the matrices of physical significance are Hermitian. That also means that physicists spend a lot of time \emph{diagonalizing} Hermitian matrices to find the right basis where they are diagonal.
+Self-adjoint matrices have some nice features that we will exploit in Section~\ref{sec:eigensystem}. Most of the matrices of physical significance are Hermitian. That also means that physicists spend a lot of time \emph{diagonalizing} Hermitian matrices to find the right basis where they are diagonal. As a caveat, we will usually assume that the eigenvalues are all non-zero.\footnote{A zero eigenvalue means that the matrix is not invertible. This is most clearly seen tn the basis where the matrix is diagonal.}
 
 
 \paragraph{Isometries} Isometries are a totally different class of matrices. Isometries are linear transformations that preserve the metric. This means that they transform orthonormal bases into other orthonormal bases. When we diagonalize a Hermitian matrix, we use the isometries of our metric space to change basis. In this sense, we should think about isometries as a transformation between basis vectors. 
 
-\paragraph{Projections} Projections are \emph{not nice} matrices, except when they are useful. Most \emph{non-invertible} matrices are projections. They are non-invertible because they throw out information. A true projection would be a matrix $\ket{\hat{v}}\bra{\hat{v}}$ that acts on a vector by singling out the component along a particular direction. 
+\paragraph{Projections} Projections are \emph{not nice} matrices, except when they are useful. Most \emph{non-invertible} matrices are projections. They are non-invertible because they throw out information. A true projection would be a matrix $\ket{\hat{v}}\bra{\hat{v}}$ that acts on a vector by singling out the component along a particular direction. We thus remove projections from our definition of a `nice' matrix. Nice matrices are invertible. Of course, projections can be useful---so we single them out here as a second special class of linear transformation.
 
-\paragraph{Trash} All of our matrices are assumed to be square. These square matrices may be infinite dimensional, but the are square. The uses of non-square matrices are few and far between. Matrices that are not Hermitian, isometries, or projections are also rare. 
+\paragraph{Trash} What about all the other kinds of matrices? All of our matrices are assumed to be square. These square matrices may be infinite dimensional, but the are square. The uses of non-square matrices are few and far between. Matrices that are not Hermitian, isometries, or projections are also rare. 
 
+\vspace{1em}
 
 In this course and in our physics lives, we almost exclusively focus on the \emph{nice} matrices acting on \emph{nice} metric spaces. 
 
@@ -4280,27 +4323,224 @@ Here $M$ is a matrix and $\lambda$ is a number. We say that this is an eigenvalu
 Show that if $\ket{\xi}$ is an eigenvector of $M$ with eigenvalue $\lambda$, then it is also an eigenvector of $M\inv$ with eigenvalue $\lambda\inv$. 
 \end{exercise}
 
-\subsection{Self Adjoint Matrices}
+\subsection{Self Adjoint (Hermitian) Matrices}
 
 The eigenvalue problem for Hermitian (self-adjoint) matrices is particularly compelling. The following two facts show why:
 \begin{enumerate}
     \item The eigenvalues of Hermitian matrices are real.
-    \item The eigenvalues of Hermitian matrices are orthogonal.
+    \item The eigenvectors of Hermitian matrices are orthogonal.
 \end{enumerate}
 
 \begin{exercise}
 Prove the above statements. 
 \end{exercise}
 
+\begin{exercise}\label{ex:orthogonal:eigenvectors:not:normal}
+We say that the eigenvectors of Hermitian matrices are \emph{orthogonal}, but not necessarily orthonormal. This is because the eigenvalue condition does not guarantee a normalization of the eigenvector. Show that if $\ket{\xi}$ is an eigenvector of $M$ with eigenvalue $\lambda$, then $\alpha\ket{\xi}$ is also an eigenvector of $M$ with eigenvalue $\lambda$. In the same vein, argue that we can always \emph{choose} eigenvectors that are normalized so that the eigenvectors of a Hermitian matrices can be chosen to be an orthonormal basis.
+\end{exercise}
+
 \subsection{Finding Eigenvalues: Characteristic Equation}
 
-Suppose 
+Suppose you have a Hermitian matrix $M$. This means that there is a nice basis where $M$ is diagonal, which we indicate with a hat: $\hat M$. In this \emph{eigenbasis}, each basis vector $\ket{\xi_i}$ has an associated eigenvalue $\lambda_i$. Suppose that none of the eigenvalues are zero so that $\hat M$ is nice and invertible. The diagonal elements of $\hat M$ are simply these eigenvalues, see \eqref{eq:diagonal:matrix}. This means that the matrix $\hat M - \lambda_i \one$ is diagonal with (at least) one zero element: the the $i^\text{th}$ element along the diagonal:
+\begin{align}
+\hat M -\lambda_i\one = 
+    \begin{pmatrix}
+        (\lambda_1 - \lambda_i) & & & && \\
+         & (\lambda_2 - \lambda_i) & & && \\
+         & & \ddots &&& \\
+         & & & 0 & & \\
+         & & && \ddots & \\
+         & & &&& (\lambda_N-\lambda_i)
+    \end{pmatrix} \ .
+    \label{eq:characteristic:1}
+\end{align} 
+We can exploit this curious fact using the observation in Example~\ref{eg:determinant:of:diagonal}: the determinant of a diagonal matrix is simply the product of its diagonal elements. This means that
+\begin{align}
+     \det(\hat M - \lambda \one) = 0
+     \label{eq:characteristic:2}
+\end{align}
+whenever $\lambda$ is an eigenvalue of $\hat M$. This would be a great way to find the eigenvalues of diagonal matrix, $\hat M$, if it weren't for the fact that this is a silly task: if $\hat M$ is diagonal, then you can simply \emph{read off} the eigenvalues from the diagonal elements. It would be \emph{much} more useful if we had an expression like \eqref{eq:characteristic:2} that we could use to find the eigenvalues of non-diagonal matrices.  
 
+It turns out that we can do this. Recall \eqref{eq:det:of:product}: the determinant of a product of matrices is the product of the determinants. We motivated this from the observation that the determinant is the area of a parallelogram in two dimensions---though the result generalizes hyper-volumes of \emph{parallelpipeds} in any number of dimensions. From this observation, we also found that the determinant of an inverse matrix is the inverse of the determinant \eqref{eq:det:of:inverse}. This means that
+\begin{align}
+    \det(R\hat M R^\dag) = 
+    \det R \; \det \hat M \; \det R^\dag
+    =
+    \det R \; \det \hat M \; \frac{1}{\det R}
+    =
+    \det \hat M \ .
+\end{align}
+Here we used the fact that the adjoint of a rotation\footnote{And again, this generalizes to complex matrices with a Euclidean metric to a unitary matrix. In full generality, this is an isometry.} is its inverse. Using the fact that $R\one R^\dag = \one$, we may thus rotate \eqref{eq:characteristic:2} to a basis where $\hat M$ is not diagonal:
+\begin{align}
+     0=\det(\hat M - \lambda \one) 
+     = \det\left[R(\hat M - \lambda \one)R^\dag\right]
+     = \det(R\hat M R^\dag - \lambda \one) 
+     = \det(M - \lambda \one) 
+     \label{eq:characteristic:equation} \ .
+\end{align}
+This is the \textbf{characteristic equation} for the eigenvalues of $M$. This is incredibly powerful: suppose you have a nice, invertible, self-adjoint matrix $M$. The matrix is not diagonal and so it is not obvious what its eigenvalues are. The characteristic equation gives you a polynomial in $\lambda$ that you can solve to determine the values of $\lambda$ that are eigenvalues of $M$. For an $N$-dimensional vector space, you will have an $N$-dimensional polynomial. Because the matrix is self-adjoint, we know that the eigenvalues are real and so there will be $N$ real roots to the characteristic equation.
+
+\begin{example}
+Solving the characteristic equation for $2\times 2$ matrices is straightforward.\footnote{The method is straightforward for $N\times N$ matrices as well, but the determinant becomes more tedious to calculate by hand.} Suppose you have a real, symmetric (i.e.\ self-adjoint in a real vector space) matrix:
+\begin{align}
+    M = 
+    \begin{pmatrix}
+        M\aij 11 & M\aij 12 \\
+        M\aij 21 & M\aij 22
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        a & c \\
+        c & b
+    \end{pmatrix} \ .
+\end{align}
+The characteristic equation \eqref{eq:characteristic:equation} is
+\begin{align}
+    \det(M - \lambda \one) 
+    =
+    \begin{pmatrix}
+        (a-\lambda) & c \\
+        c & (b-\lambda)
+    \end{pmatrix}
+    = 
+    (a-\lambda)(b-\lambda)-c^2 = 0 \ .
+\end{align}
+This is a quadratic equation with roots\footnote{There may come a time in your life where you can rattle off facts about the zeros of Bessel functions or wax poetic about the normalization of the Planck mass... only to find that you cannot for the life of you remember the correct factors of two in the quadratic equation. Faced with the choice of re-deriving it in a margin or looking it up on Google, you decide the latter is faster. Then puzzled undergraduates students come into your office and glance at your screen in bewilderment: you're teaching us this advanced stuff and \emph{this} is what is in your search history?}
+\begin{align}
+    \lambda_\pm = \frac{(a+b)}{2}\pm \frac{\sqrt{(a+b)^2 - 4(ab-c^2)}}{2} \ .
+\end{align}
+These are the eigenvalues of $M$. You can check that the argument of the square root is always non-negative in accordance with our expectation that the eigenvalues are real. To see this, we note that as $|c|$ becomes larger the argument becomes more positive. For $c=0$, the argument becomes $(a-b)^2$, whose square root is $|a-b|$. Note that in the $c=0$ case we find that the eigenvalues are precisely $a$ and $b$, since in that case $M$ is a diagonal matrix.
+\end{example}
+
+\subsection{Finding Eigenvectors}
+
+Once you have the eigenvalues of a matrix, you can find the eigenvectors using the eigenvalue equation for each eigenvalue $\lambda_i$:
+\begin{align}
+    M\ket{\xi} = \lambda \ket{\xi} \ .
+\end{align}
+This is a set of $N$ equations for the $N$ components of $\ket{\xi}$. Let us examine a simple example:
+\begin{example}
+Consider the $2\times 2$ matrix $M$ with the eigenvalues $\lambda_\pm$:
+\begin{align}
+    M &=
+    \begin{pmatrix}
+        -2 & 1\\
+        1 & -2
+    \end{pmatrix}
+    &
+    \lambda_\pm = -2 \pm 1 \ .
+\end{align}
+You should take a moment to derive those eigenvalues using the characteristic equation. Let us find the eigenvector, $\ket{\xi_+}$ corresponding to the eigenvalue $\lambda_+ = -1$. We would like to solve for the components
+\begin{align}
+    \ket{\xi_+}
+    =
+    \begin{pmatrix}
+        x\\y
+    \end{pmatrix} \ .
+\end{align}
+We are relaxing some of our notation for clarity: the above equation really means $\ket{\xi_+}=x\ket{1} + y\ket{2}$ with respect to the standard basis in which we defined $M$. Plugging this into the eigenvalue equation:
+\begin{align}
+   \begin{pmatrix}
+        -2 & 1\\
+        1 & -2
+    \end{pmatrix}
+    \begin{pmatrix}
+        x\\y
+    \end{pmatrix}
+    = 
+    \lambda_+
+    \begin{pmatrix}
+        x\\y
+    \end{pmatrix} \ .
+    \label{eq:ex:eigenvector:finding:1}
+\end{align}
+The equation for the first component is
+\begin{align}
+    -2x + y &= -x  \ ,
+\end{align}
+from which we deduce $x=y$. This tells us that
+\begin{align}
+    \ket{\xi} \propto \begin{pmatrix}
+        1\\ 1
+    \end{pmatrix} .
+\end{align}
+Great! The second equation should give us the overall normalization of the vector, right? Let us check:
+\begin{align}
+    x - 2y = -y \ .
+\end{align}
+Huh: this gives us the \emph{same} equation: $x=y$. Is this unusual? No! We already expressed that the eigenvectors are defined up to an overall normalization: if $\ket{\xi_+}$ is an eigenvector, then so is $\alpha\ket{\xi_+}$. So it is no surprise that the second equation is redundant with the first: the eigenvalue condition is simply not enough to determine the normalizaiton. 
+
+In our lives as physicists, we will always want to work with normalized eigenvectors. This normalization, $\la\xi_+,\xi_+\ra = 1$, fixes the components of $\ket{\xi_+}$:
+\begin{align}
+    \ket{\xi_+} = 
+    \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 \\ 1
+    \end{pmatrix} \ .
+\end{align}
+And there you go!
+\end{example}
+
+
+\begin{exercise}
+Find the eigenvector $\ket{\xi_-}$ of $M$ in \eqref{eq:ex:eigenvector:finding:1} with eigenvalue $\lambda_- = -3$. 
+\end{exercise}
+
+For an $N$-dimensional vector space, the eigenvalue equation gives $N$ equations for the $N$ components of an eigenvector. It will always be the case that one of these equations will be redundant: it will not contribute any additional information about the eigenvector components. This is because the overall normalization of the eigenvector is not set by the eigenvector equation. One simply replaces this redundant equation with the normalization condition $\la \xi,\xi\ra = 1$. 
+% normalizing
+
+\subsection{Rotating to the Eigenbasis}
+
+``Finding the eigenvectors'' really means finding the components of the eigenvectors in the standard basis. This defines the rotation between the eigenbasis and the standard basis. Let us see how this works explicitly.\footnote{This section generalizes to any change of basis. We present it here because in physics, nearly all of your change of basis will be between the basis in which your problem is posed (the standard basis) and the basis in which it is most simply solved (the eigenbasis).}
+
+For simplicity, we work with a two-dimensional vector space. The final result will be general. Suppose we have an eigenbasis for some nice matrix $M$. That is we know the components of two eigenvectors $\xi^i_{A}$ with respect to the two standard basis elements:
+\begin{align}
+    \ket{\xi_\text{I}} \equiv \ket{\text{I}} 
+    & = 
+    \xi^1_\text{I} \ket{1}
+    +
+    \xi^2_\text{I} \ket{2}
+    &
+    \ket{\xi_\text{II}} \equiv \ket{\text{II}} 
+    & = 
+    \xi^1_\text{II} \ket{1}
+    +
+    \xi^2_\text{II} \ket{2} \ .
+    \label{eq:eigen:to:standard:basis}
+\end{align}
+Here's what's going on with our notation. Our standard basis vectors are $\ket{1}$ and $\ket{2}$. We want to write the eigenbasis in a similar way, so instead of $\ket{\xi_\text{I}}$ we write $\ket{\text{I}}$. We use Roman numerals to index the eigenbasis to disambiguate from the standard basis. Do not confuse $\text{I}$ with a index variable: we use $A = \text{I}, \text{II}$ as a variable that indexes the eigenbasis. We write the components of the eigenbasis written in the standard basis as $\xi^i_A$, where $i=1,2$ indexes the standard basis. You notice that $\xi^i_A$ is an object with one upper index and one lower index... this smells like a matrix. The indices $i$ and $A$ index the same vector space, but with respect to different bases. So far we are agnostic about whether we write $\xi\aij{i}{A}$ or $\xi_A^{\phantom{A}i}$. Because the indices are different, there is never a danger of ambiguity. We will choose a convenient definition shortly.
+
+What can we do with \eqref{eq:eigen:to:standard:basis}? Let us suppose that we have a vector $\vec{v}$ written in the eigenbasis. We know the components $v^A$, and we would like to find the components in the standard basis. We can simply plug in \eqref{eq:eigen:to:standard:basis}:
+\begin{align}
+    \vec{v} = 
+    v^A\ket{A}
+    = v^A \xi_A^i \ket{i} =  \xi\aij{i}{A}v^A \ket{i}
+    \equiv v^i \ket{i} \ .
+\end{align}
+Here we have chosen to write the indices of $\xi^i_A$ in a particular order, $\xi\aij{i}{A}$. This makes $\xi\aij{i}{A}v^A$ a standard ``matrix multiplication'' contraction of indices. We identify the components $v^i$ in the standard basis as a transformation of the components $v^A$ in the eigenbasis. This means that $\xi\aij{i}{A}$ is the rotation from the eigenbasis to the standard basis:
+\begin{align}
+    v^i_\text{std.} = \xi\aij{i}{A}v^A_\text{eig.} \equiv R(\text{std.}\to\text{eig.})\aij{i}{A}v^A_\text{eig.} \ .
+\end{align}
+Note that in doing this, it was critical that the eigenvectors are normalized. Otherwise this transformation is not a pure rotation, but a rotation and a rescaling. 
+
+\begin{bigidea}
+The components of the (normalized) eigenbasis written in the standard basis are simply the components of the rotation matrix from the eigenbasis to the standard basis. The rotation from the standard basis to the eigenbasis is simply the inverse (Hermitian conjugate or transpose) of this rotation. 
+\end{bigidea}
+
+
+
+
+\subsection{Degenerate Eigenvalues}
+% commutators
+% start with trivial example, diagonal 
+
+Sometimes a matrix will have degenerate eigenvalues. This means that $\lambda_i = \lambda_{i+1}$ for some pair of eigenvalues. We continue to assume that the eigenvalues are all non-zero, as required for invertible (nice!) matrices.  Degenerate eigenvalues can lead to some curiosities when applying the `standard procedure' above...
 
 \section{Quantum Mechanics}
+% ``operator''
 
 \section{Function Space}
-
+% fourier
 
 
 
