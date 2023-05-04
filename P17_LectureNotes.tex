@@ -4124,7 +4124,7 @@ In what follows, we will contrast the ``standard basis'' with other convenient b
 
 \subsection{A multitude of conventions}
 
-It is potentially confusing that physicists use multiple conventions to describe what are essentially the same ideas in linear algebra. Table~\ref{table:vectors:numbers} makes some of these connections explicit.
+It is potentially confusing that physicists use multiple conventions to describe what are essentially the same ideas in linear algebra. Table~\ref{table:vectors:conventions} makes some of these connections explicit.
 
 \begin{table}
     \renewcommand{\arraystretch}{1.3} % spacing between rows
@@ -4218,7 +4218,7 @@ It is potentially confusing that physicists use multiple conventions to describe
     \end{tabular}
     \caption{
         Terms and notation in real, complex, and infinite-dimensional vector spaces. 
-        \label{table:vectors:numbers}
+        \label{table:vectors:conventions}
   }
 \end{table}
 
@@ -4247,6 +4247,11 @@ Show that if $M = \alpha \one$, then the rotation of $M$ is still $M$:
     \end{pmatrix} \ .
     \label{eq:diagonal:matrix}
 \end{align}
+We make the following additional assumptions:
+\begin{enumerate}
+\item The diagonal elements are all real. This is a physical bias: the elements of a diagonal matrix typically represent observable quantities. Anything we can measure is a real number.
+\item None of the diagonal values are zero. This is because a zero value would discard information. If $\lambda_i=0$, then $\hat M\ket{v}$ is the same no matter what the value of $v^i$ is. This further implies that $\hat M$ is not invertible since $\hat M^{-1}$ cannot ``know'' what the $i^\text{th}$ component of $\hat M^{-1}\vec{v}$ should be. 
+\end{enumerate}
 Diagonal matrices are a sign that you are using the \emph{right} basis. When acting on the $i^\text{th}$ basis vector, we simply pick up $\lambda_i$:
 \begin{align}
     \hat M \ket{i} = \lambda_i \ket{i} \ .
@@ -4301,7 +4306,11 @@ Self-adjoint matrices have some nice features that we will exploit in Section~\r
 
 \paragraph{Projections} Projections are \emph{not nice} matrices, except when they are useful. Most \emph{non-invertible} matrices are projections. They are non-invertible because they throw out information. A true projection would be a matrix $\ket{\hat{v}}\bra{\hat{v}}$ that acts on a vector by singling out the component along a particular direction. We thus remove projections from our definition of a `nice' matrix. Nice matrices are invertible. Of course, projections can be useful---so we single them out here as a second special class of linear transformation.
 
-\paragraph{Trash} What about all the other kinds of matrices? All of our matrices are assumed to be square. These square matrices may be infinite dimensional, but the are square. The uses of non-square matrices are few and far between. Matrices that are not Hermitian, isometries, or projections are also rare. 
+\paragraph{Trash} What about all the other kinds of matrices? All of our matrices are assumed to be square. These square matrices may be infinite dimensional, but the are square. The uses of non-square matrices are few and far between. Matrices that are not Hermitian, isometries, or projections are also rare. Once in a while there will be a physical matrix that is not one of the gold/silver/bronze medalists nor one of the special classes (isometry, projection). My opinion on this is that young physicists should focus on the central dogma of nice matrices and the corresponding story of eigenvalues and eigenvectors. There is plenty more to learn about linear algebra, but those are things you can learn as you need them.\footnote{\emph{Every} young physicist should understand the eigenvalue problem and how it shows up in many guises in their studies---that is the focus of these notes. The linear algebra of matrices that are not `nice' shows up more rarely, and any physics student who deeply understands the `central dogma' can self-study the gaps as needed.}
+
+\begin{example}
+An example of a not-nice matrix in particle physics are the Yukawa matrices that determine how much the Higgs boson talks to matter particles. When you find such a matrix, you can then take the time to learn the extent to which such a matrix can be diagonalized. The Yukawa matrices are a reason why particle physicists know about singular value decomposition.
+\end{example}
 
 \vspace{1em}
 
@@ -4493,7 +4502,11 @@ For an $N$-dimensional vector space, the eigenvalue equation gives $N$ equations
 You may have noticed that in my examples, I try to keep all of my numbers integers. Physicists `in the field' also try to keep their numbers nice---often by picking convenient units. However, despite our best efforts, there you will find that your upper division textbooks are full of funny factors of $\sqrt{2}$ or even $(2\pi)$. These factors are usually unavoidable consequences of normalizing eigenvectors. 
 
 \begin{exercise}
-If you have to find the eigenvalues and eigenvectors for matrices larger than $3\times 3$
+If you have to find the eigenvalues and eigenvectors for matrices larger than $3\times 3$, you may want to use a computer algebra system. Find your favorite computer algebra system (e.g.~\emph{Mathematica} or ~\emph{SciPy}) and learn how to find the eigenvectors and eigenvalues of a $3\times 3$ matrix. 
+\end{exercise}
+
+\begin{exercise}
+Suppose you had to diagonalize a $3\times 3$ matrix by hand. Go through the process of finding the eigenbasis, even if you do not ``do the math.'' How many eigenvalues are there? What does the characteristic equation look like? Is it still a polynomial? If so, what order? Are the roots of the characteristic equation all real, or could there be complex solutions? How do you solve for the eigenvectors? How many equations are there for how many components? How do you use the normalization condition? 
 \end{exercise}
 
 \begin{example}
@@ -4552,7 +4565,24 @@ We identify $\la i | A \ra$ as the rotation from the eigenbasis $\ket{A}$ to the
 \begin{align}
     \la i | A \ra = R\aij{i}{A} = \xi\aij{i}{A} \ .
 \end{align}
-Another way that this is often written is that one can insert $\one = R^\dag R$ where $R^\dag$ acts on the basis $\ket{A}$ and $R$ acts on the components of a vector, $v^A$. This is precisely what we meant by a \emph{passive transformation} in Section~\ref{sec:active:vs:passive}---albeit with $R\Leftrightarrow R^\dag$.
+We remember that $R$ takes a vector's components in the eigenbasis and returns the vector's components in the standard basis. As a mnemonic, the height of the indices tell you that $R$ can contract with an upper $A$ index (which we use to denote eigencomponents) and returns an upper $i$ index (which we use for standard basis components). Of course, the $A$ and $i$ indices both run over the dimension of the same vector space: we have simply chosen a different notation to make it more clear how this rotation matrix is meant to be used.\footnote{Nothing stops you from contracting the eigenbasis $A$ index with a vector's components in the standard basis. However, the way we have constructed $R$ is that such a contraction has no significance: it does not rotate to the eigenbasis and is effectively a random rotation. }
+
+Another way that this is often written is that one can insert $\one = R^\dag R$ where $R^\dag$ acts on the basis $\ket{A}$ and $R$ acts on the components of a vector, $v^A$. This is precisely what we meant by a \emph{passive transformation} in Section~\ref{sec:active:vs:passive}---albeit with $R\Leftrightarrow R^\dag$. Let us see this more explicitly. Rather than using $\one = \ket{i}\bra{i}$, we use the components of $\one = R^\dag R$:
+\begin{align}
+    \delta^A_B = (R^\dag R)\aij{A}{B} = 
+    (R^\dag)\aij{A}{i}R\aij{i}{B} \ .
+\end{align}
+Observe that $R^\dag$ has an upper $A$ index and lower $i$ index. This is because $R^\dag = R^{-1}$, so that it takes in a vector in the standard basis and returns a vector in the eigenbasis.\footnote{Again: we know that $R^\dag$ is meaningful as a rotation that takes components in the standard basis and returns the components in the eigenbasis. You could use $R^\dag$ to act on the components in \emph{any} basis, but in general the vector that comes out is not meaningful from the perspective of the eigenvalue problem.} Now we can insert this into the expansion of $\ket{v}$ in the eigenbasis:
+\begin{align}
+    \ket{v} = \delta^A_B v^A\ket{A} 
+    = (R^\dag)\aij{A}{i} R\aij{i}{B} v^B \ket{A}
+    = R\aij{i}B{v}^B \left[(R^\dag)\aij{A}{i}\bas{e}_i\right]
+    = R\aij{i}B{v}^B \ket{i}
+    = v^i \ket{i}  \ .
+\end{align}
+We have used the fact that the basis vector is a lower-indexed object that transforms with $R^\dag$ under a rotation that acts on the vector space as $R$. This means that $(R^\dag)\aij{A}{i}\ket{A} = \ket{i}$. We write $v^i = R\aij{i}{B} v^B$, the component of $\ket{v}$ in the standard basis. 
+
+
 
 
 % relation to R^\dag R
@@ -4577,7 +4607,7 @@ Passing to the eigenbasis gives a clear understanding of what a Hermitian linear
     &
     \lambda_{\text{I},\text{II}} &\approx 3.6,\; 1.4 \ .
     &
-    \ket{{\text{I},\text{II}}}&\approx
+    \ket{\text{I}},\ket{\text{II}}&\approx
     \begin{pmatrix}
         0.5 \\ 0.9
     \end{pmatrix},
