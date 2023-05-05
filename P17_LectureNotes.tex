@@ -3558,6 +3558,22 @@ Here's the adjoint of an explicit matrix:
 \end{align}
 \end{example}
 
+It is also useful to consider the adjoint of a product of matrices, $AB$. We can see that
+\begin{align}
+    \la AB \vec{v}, \vec{w} \ra
+    =
+    \la B \vec{v},  A^\dag \vec{w} \ra
+    =
+    \la \vec{v}, B^\dag A^\dag \vec{w} \ra \ .
+\end{align}
+This tells us that
+\begin{align}
+    (AB)^\dag = B^\dag A^\dag \ .
+    \label{eq:adjoint:of:product}
+\end{align}
+
+
+
 \begin{example} What do isometries look like in a complex vector space? Let us suppose that we have the Euclidean metric (even though the space is now complex):
 \begin{align}
     g_{ij} = \text{diag}(1,1,\cdots, 1) = \mathbbm{1} \ .
@@ -4227,7 +4243,7 @@ It is potentially confusing that physicists use multiple conventions to describe
 
 Mathematicians like generality. If there is a true statement for a class of matrices, they are not content with stating the truth---they want to either extend it to all matrices, or otherwise clearly articulate every necessary assumption. This is sometimes caricatured as an obsession with marginal cases. Physicists have the luxury of not having to worry about that: our matrices are all typically ``nice.'' In this section, we try to give a definition for what \emph{nice} means. 
 
-\paragraph{Gold tier} The nicest matrices are multiples of the identity matrix, $\one$. These matrices are diagonal. If you rotate them, they don't change. The inverse of these matrices is simply the inverse of the coefficient, $(\alpha \one)^{-1} = \alpha^{-1} \one$. These matrices turn out to be \emph{too} nice. The matrix is proportional to the identity no matter what basis you are in.
+\paragraph{Gold tier} The nicest matrices are multiples of the identity matrix, $\one$. These matrices are diagonal. If you rotate them, they don't change. The inverse of these matrices is simply the inverse of the coefficient, $(\alpha \one)^{-1} = \alpha^{-1} \one$. These matrices turn out to be \emph{too} nice. The matrix is proportional to the identity no matter what basis you are in. In fact, these matrices are effectively not even matrices: they're simply numbers. 
 
 \begin{exercise}
 Show that if $M = \alpha \one$, then the rotation of $M$ is still $M$:
@@ -4301,6 +4317,15 @@ This relation turns out to be true even if we replace $\hat M$ by a matrix that 
 \end{align}
 Self-adjoint matrices have some nice features that we will exploit in Section~\ref{sec:eigensystem}. Most of the matrices of physical significance are Hermitian. That also means that physicists spend a lot of time \emph{diagonalizing} Hermitian matrices to find the right basis where they are diagonal. As a caveat, we will usually assume that the eigenvalues are all non-zero.\footnote{A zero eigenvalue means that the matrix is not invertible. This is most clearly seen tn the basis where the matrix is diagonal.}
 
+
+\begin{exercise}
+The \textbf{commutator} of two matrices $A$ and $B$ is
+\begin{align}
+    [A,B] = AB - BA \ .
+\end{align}
+We say that two matrices commute if $[A,B]=0$.
+Which of the gold, silver, and bronze tier of matrices commute? 
+\end{exercise}
 
 \paragraph{Isometries} Isometries are a totally different class of matrices. Isometries are linear transformations that preserve the metric. This means that they transform orthonormal bases into other orthonormal bases. When we diagonalize a Hermitian matrix, we use the isometries of our metric space to change basis. In this sense, we should think about isometries as a transformation between basis vectors. 
 
@@ -4514,6 +4539,7 @@ It is curious that the Standard Model of particle physics contains matrices up t
 \end{example}
 
 \subsection{Rotating to the Eigenbasis}
+\label{sec:rotation:to:eigenbasis}
 
 ``Finding the eigenvectors'' really means finding the components of the eigenvectors in the standard basis. This defines the rotation between the eigenbasis and the standard basis. Let us see how this works explicitly.\footnote{This section generalizes to any change of basis. We present it here because in physics, nearly all of your change of basis will be between the basis in which your problem is posed (the standard basis) and the basis in which it is most simply solved (the eigenbasis).}
 
@@ -4649,7 +4675,169 @@ Figure~\ref{fig:eigentransform} shows a unit ball in the eigenbasis and how it i
 % commutators
 % start with trivial example, diagonal 
 
-Sometimes a matrix will have degenerate eigenvalues. This means that $\lambda_i = \lambda_{i+1}$ for some pair of eigenvalues. We continue to assume that the eigenvalues are all non-zero, as required for invertible (nice!) matrices.  Degenerate eigenvalues can lead to some curiosities when applying the `standard procedure' above...
+Sometimes a matrix will have degenerate eigenvalues. This means that $\lambda_i = \lambda_{i+1}$ for some pair of eigenvalues. We continue to assume that the eigenvalues are all non-zero, as required for invertible (nice!) matrices.  Degenerate eigenvalues can lead to some curiosities when applying the `standard procedure' above. 
+
+\subsubsection*{Diagonal Matrix}
+
+Let us start with the simplest case where we have a diagonal $3\times 3$ matrix, $\hat M$, with a pair of degenerate eigenvalues\footnote{That means that the eigenvalues are the same, not that they are somehow immoral.}:
+\begin{align} 
+    \hat M &= 
+    \begin{pmatrix}
+        \lambda_1 & & \\
+        & \lambda_\text{d} & \\
+        & & \lambda_\text{d} \ .
+    \end{pmatrix}
+    &
+    \lambda_\text{d}  \neq \lambda_1\ .
+    \label{eq:degenerate:eigenvalue:diagonal}
+\end{align}
+It should be obvious that the eigenvalues are $\lambda_{1,\text{d}}$ and that we can choose eigenvectors $\ket{1}$, $\ket{2}$, $\ket{3}$. That is: the standard basis is an eigenbasis. After all, that's what it means for a matrix to be diagonal in a basis. 
+
+Just for the sake of argument, let us try to `derive' the eigenvectors. The first eigenvalue equation is
+\begin{align}
+    \begin{pmatrix}
+        \lambda_1 & & \\
+        & \lambda_\text{d} & \\
+        & & \lambda_\text{d} \ .
+    \end{pmatrix}
+    \begin{pmatrix}
+        x\\y\\z
+    \end{pmatrix}
+    &= 
+    \lambda_1
+    \begin{pmatrix}
+        x\\y\\z
+    \end{pmatrix} \ .
+\end{align}
+We can solve this to find that $x$ can be anything and $y=z=0$ because $\lambda_1\neq \lambda_\text{d}$. The normalized choice is that the first eigenvector is $\ket{1}$. Curiously, second and third eigenvalue equations are the same:
+\begin{align}
+    \begin{pmatrix}
+        \lambda_1 & & \\
+        & \lambda_\text{d} & \\
+        & & \lambda_\text{d} \ .
+    \end{pmatrix}
+    \begin{pmatrix}
+        x\\y\\z
+    \end{pmatrix}
+    &= 
+    \lambda_\text{d}
+    \begin{pmatrix}
+        x\\y\\z
+    \end{pmatrix} \ .
+    \label{eq:eigenvalue:degenerate}
+\end{align}
+We can see that $x=0$, but there appears to be no constraints on $y$ or $z$ other than that they eigenvectors are normalized. How are we supposed to pick them? Let us take stock of the situation: We know that the standard basis vectors $\ket{2}$ and $\ket{3}$ work as eigenvalues. Why doesn't the eigenvalue equation \eqref{eq:eigenvalue:degenerate} just tell us that? If we stuck in \emph{any} values for $y$ and $z$, then it appears that \eqref{eq:eigenvalue:degenerate} is still satisfied! Curious!
+
+The degeneracy of the second and third eigenvalues has created a degeneracy in how we define our eigenvectors. One way of thinking about this is that the lower $2\times 2$ block of $\hat M$ is a $2\times 2$ matrix proportional to the identity. This means if we did a rotation on that block, it does not change:
+\begin{align}
+    \bar R \hat M R^\dag &= \hat M
+    &
+    \bar R&=
+    \begin{pmatrix}
+        1 & & \\
+        & \cos\theta & -\sin\theta \\
+        & \sin\theta & \pp \cos\theta
+     \end{pmatrix} \ .
+     \label{eq:rot:lower:2}
+\end{align}
+In the same way, it does not matter how we orient our $\ket{2}$ and $\ket{3}$ basis vectors in this plane as long as (1) they are orthogonal to each other and (2) they are normalized. Any rotation of these two vectors into each other is not only a legitimate basis (which is always true), it is still a legitimate eigenbasis of $\hat M$, see Fig.~\ref{fig:det:eig:rot}:
+\begin{align}
+    \ket{2'} &= \cos\theta \ket{2} -\sin\theta \ket{3}
+    &
+    \ket{3'} &= \sin\theta \ket{2} +\cos\theta \ket{3} \ .
+\end{align}
+% 
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/deg_eig_rot.pdf}
+    \caption{Example of a rotation of a subspace while leaving one direction in the full space unchanged.}
+    \label{fig:det:eig:rot}
+\end{figure}
+% 
+
+\subsubsection*{Hermitian Matrix}
+
+So far so good. What happens with general Hermitian matrices with degenerate eigenvalues? We can reduce this case to the case of a diagonal matrix and deduce that the degeneracy in the eigenbasis appears in this more general case as well. To start, we remember that any Hermitian matrix $M$ can be written as a rotation of a diagonal matrix, $\hat M$: 
+\begin{align}
+    M = R \hat M R^\dag \ .
+\end{align}
+Suppose that $M$ has eigenvalues, $\lambda_1$ and $\lambda_\text{d}$, where the latter eigenvalue has ``multiplicity two.'' This is our fancy way of saying that there are two eigenvalues that are $\lambda_\text{d}$. This just means that $\hat M$ takes the form in \eqref{eq:degenerate:eigenvalue:diagonal}. 
+
+From Section~\ref{sec:rotation:to:eigenbasis}, we know that the eigenvectors are 
+\begin{align}
+    \ket{\text{A}} &= (R^\dag)\aij{i}{A}\ket{i} \ .
+    &
+    A = \{\text{I, II, III}\} \ .
+    \label{eq:eigenvectors:from:rotation:review}
+\end{align}
+\begin{exercise}
+Verify \eqref{eq:eigenvectors:from:rotation:review}. One way is to folow the method in Section~\ref{sec:rotation:to:eigenbasis}. Another way is to use the fact that $M = R\hat{M}R^\dag$ and to notice that $\hat M$ acts on the eigenbasis. At any rate, make sure you are comfortable with this step. 
+\end{exercise}
+In the eigenbasis, we know that there is a degeneracy where we can rotate by $\bar R$ in \eqref{eq:rot:lower:2}. That means:
+\begin{align}
+    M = R \bar R\hat M \bar R^\dag R^\dag \ .
+\end{align}
+But we see that $R'= R\bar{R}$ is simply a rotation from the eigenbasis to the standard basis. Alternatively, $(R\bar R)^\dag = \bar R^\dag R^\dag$, is the rotation from the standard basis to \emph{an} eigenbasis. We have used the rule for the Hermitian conjugate of a product of matrices, \eqref{eq:adjoint:of:product}. 
+
+We have discovered that both $R^\dag$ and $R'^\dag$ are rotations from the standard basis to valid eigenbases. This means that for any lower $2\times 2$ rotation $\hat R$, we still have an eigenbasis with the same eigenvalues. 
+
+
+
+\begin{bigidea}
+When there is a degeneracy in the eigenvalues of a matrix, there is a degeneracy in the definition of the corresponding eigenvectors. A better word to use is symmetry: if two eigenvalues are the same, then there is a symmetry that allows us to rotate the corresponding eigenvectors between themselves while preserving the eigenbasis.
+\end{bigidea}
+
+\subsubsection*{Lifting the Degeneracy}
+
+It is often the case that when we have a degenerate eigenvalue, there is a small effect that distinguishes the two eigenvalues. In fact, you may already know examples of this in a different guise: the fine structure of hydrogen. To good approximation, the hydrogen atom's three lowest energy states are a lowest-energy \acro{1S} state and two excited \acro{2P} states. The energies of these states are eigenvalues of a Hamiltonian (``energy matrix''). The two \acro{2P} states correspond to electrons with opposite spins. However, the orbital angular momentum of the electrons creates a little magnetic field that causes one of these degenerate `eigenstates' to have a little more energy and the other to have a little less energy. 
+
+Let us see this in action, albeit for a simpler example. Suppose that in addition to the matrix $\hat M$, you have another matrix, $\hat N$ that \emph{also} is diagonal and \emph{also} is degenerate. (This latter features is not necessary, but helps illustrate our point nicely.) 
+\begin{align} 
+    \hat N &= 
+    \begin{pmatrix}
+        \rho_\text{d} & & \\
+        & \rho_\text{d} & \\
+        & & \rho_3 \ .
+    \end{pmatrix}
+    &
+    \rho_\text{d}  \neq \rho_3\ .
+    \label{eq:degenerate:eigenvalue:diagonal:too} 
+\end{align}
+Observe that the degeneracy in $\hat N$ is in the upper two basis vectors, while the degeneracy in $\hat M$ is in the lower two basis vectors. While the eigenbasis of \emph{either} $\hat N$ \emph{or} $\hat M$ has some freedom to be rotated, there is only \emph{one} eigenbasis that simultaneously leaves $\hat N$ and $\hat M$ diagonal.
+\begin{exercise}
+Show that the rotation \eqref{eq:rot:lower:2} that represents the degeneracy in $\hat M$ will turn $\hat N$ into a non-diagonal (but Hermitian) matrix. Argue that conversely, the rotation that represents the degeneracy in $\hat N$ sill render $\hat M$ non-diagonal (but Hermitian).
+\end{exercise}
+
+If we happen to have these two matrices, then it should be obvious that there is a \emph{best} basis in which we render both of them diagonal. This basis is unique. In fact, because $\hat M$ and $\hat N$ are diagonal in the standard basis, then it is \emph{only} in the standard basis that these two matrices are simultaneously diagonal. Let that sink in: there is no longer any degeneracy in what the eigenvectors are or what their eigenvalues are. They are the following:
+\begin{enumerate}
+    \item $\ket{1}$ that has eigenvalue $\lambda_1$ under $\hat M$ and $\rho_\text{d}$ under $\hat N$
+    \item $\ket{2}$ that has eigenvalue $\lambda_\text{d}$ under $\hat M$ and $\rho_\text{d}$ under $\hat N$
+    $\ket{3}$ that has eigenvalue $\lambda_\text{d}$ under $\hat M$ and $\rho_\text{3}$ under $\hat N$ \ .
+\end{enumerate}
+In fact, we can use the eigenvalues to \emph{label} our eigenvectors:
+\begin{align}
+    \ket{1} &\equiv \ket{\lambda_1,\rho_\text{d}}
+    &
+    \ket{2} &\equiv \ket{\lambda_\text{d},\rho_\text{d}}
+    &
+    \ket{3} &\equiv \ket{\lambda_\text{d},\rho_3} \ .
+\end{align}
+Thus, for example, $M\ket{\lambda_\text{d},\rho_\text{d}} = \lambda_\text{d}\ket{\lambda_\text{d},\rho_\text{d}}$ or $N\ket{\lambda_\text{d},\rho_3} = \rho_3\ket{\lambda_\text{d},\rho_3}$.
+In physics, you will find `kets' with lists of eigenvalues. These simply mean that you are in a system that has many matrices that are simultaneously diagonal. The eigenvectors of that system are being labelled by the simultaneous eigenvalues with respect to these matrices. 
+
+\begin{example}
+When we give the electron states in the hydrogen atom funny names, those funny names are precisely labelling the eigenvalues of simultaneously diagonalizable matrices.
+\end{example}
+
+
+\subsubsection*{Diagonalize all the matrices?}
+% commutator
+\flip{I am here}
+
+
+% can you just diagonalize both matrices?
+
+
 
 \section{Quantum Mechanics}
 % ``operator''
