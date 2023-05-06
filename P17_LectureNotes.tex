@@ -4238,7 +4238,7 @@ It is potentially confusing that physicists use multiple conventions to describe
   }
 \end{table}
 
-\subsection{The un-mathematical idea of niceness}
+\subsection{The pantheon of nice matrices}
 \label{sec:nice}
 
 Mathematicians like generality. If there is a true statement for a class of matrices, they are not content with stating the truth---they want to either extend it to all matrices, or otherwise clearly articulate every necessary assumption. This is sometimes caricatured as an obsession with marginal cases. Physicists have the luxury of not having to worry about that: our matrices are all typically ``nice.'' In this section, we try to give a definition for what \emph{nice} means. 
@@ -4315,7 +4315,7 @@ This relation turns out to be true even if we replace $\hat M$ by a matrix that 
 \begin{align}
     M = R \hat M R^\dag \ .
 \end{align}
-Self-adjoint matrices have some nice features that we will exploit in Section~\ref{sec:eigensystem}. Most of the matrices of physical significance are Hermitian. That also means that physicists spend a lot of time \emph{diagonalizing} Hermitian matrices to find the right basis where they are diagonal. As a caveat, we will usually assume that the eigenvalues are all non-zero.\footnote{A zero eigenvalue means that the matrix is not invertible. This is most clearly seen tn the basis where the matrix is diagonal.}
+Self-adjoint matrices have some nice features that we will exploit in Section~\ref{sec:eigensystem}. Most of the matrices of physical significance are Hermitian. That also means that physicists spend a lot of time \emph{diagonalizing} Hermitian matrices to find the right basis where they are diagonal. As a caveat, we will usually assume that the eigenvalues are all non-zero.\footnote{A zero eigenvalue means that the matrix is not invertible. This is most clearly seen tn the basis where the matrix is diagonal.} We will see below that matrices of this type have a clear interpretation: they rescale the vector space along a set of orthogonal axes---the rescaling factor can differ along each axis, and the axes may be different from the standard basis.
 
 
 \begin{exercise}
@@ -4609,7 +4609,9 @@ Observe that $R^\dag$ has an upper $A$ index and lower $i$ index. This is becaus
 We have used the fact that the basis vector is a lower-indexed object that transforms with $R^\dag$ under a rotation that acts on the vector space as $R$. This means that $(R^\dag)\aij{A}{i}\ket{A} = \ket{i}$. We write $v^i = R\aij{i}{B} v^B$, the component of $\ket{v}$ in the standard basis. 
 
 
-
+\begin{bigidea}
+Because finding the eigenvectors of a matrix corresponds to finding the components of the rotation matrix between the standard basis and eigenbasis, we often refer to this whole eigen-procedure as \textbf{diagonalizing} a matrix.
+\end{bigidea}
 
 % relation to R^\dag R
 
@@ -4665,6 +4667,17 @@ What we see is that in the eigenbasis, $M$ simply \emph{rescales} the components
 \end{figure}
 
 Figure~\ref{fig:eigentransform} shows a unit ball in the eigenbasis and how it is deformed under $M$. The surface of the ball should be understood as endpoints of a set of possible vectors. Under $M$, this surface is deformed to the green ellipse. In the standard basis, this ellipse is skewed by the rotation between the two bases. 
+
+
+\begin{bigidea}
+Let us revisit our pantheon of nice matrices that we presented in Section~\ref{sec:nice}. The gold medal (proportional to identity) matrices were too simple: they behave like numbers. The silver medal matrices are those matrices that are already in an eigenbasis. The bronze medal matrices are the kinds of matrices that you will most likely have to deal with ``in the field.'' These matrices that are diagonalizable by a rotation, but that are not yet in an eigenbasis. The meaning of these kinds of transformation is simply a rescaling along a set of orthogonal axes---with independent rescaling along each direction. 
+
+You can also start to imagine what a generic `trash' matrix does. If the matrix is non-invertible, it is some sort of projection. It throws out information. If the matrix is invertible but not diagonalizable by a rotation, then it means that it is not simply rescaling along a set of orthogonal directions. For example, it may be a rescaling along a set of non-orthogonal directions. 
+\end{bigidea}
+
+\begin{exercise}
+Trash matrices that are invertible but not diagonalizable by a rotation can usually still be diagonalized. You can look up the procedure, it is called a singular value decomposition. The matrix can be made diagonal not by a rotation $M_\text{trash}\to RM_\text{trash}R^\dag$, but by ``half rotation'' by two different rotation matrices: $M_\text{trash} \to SM_\text{trash} R^\dag,$ where $S \neq R$. One way to find these matrices is to diagonalize the Hermitian matrices $N=M^\dag M$ and $L = M M^\dag$. Show that $N$ and $M$ are indeed Hermitian and that they are diagonalized by $S$ and $R$ .
+\end{exercise}
 
 
 
@@ -4832,7 +4845,111 @@ When we give the electron states in the hydrogen atom funny names, those funny n
 
 \subsubsection*{Diagonalize all the matrices?}
 % commutator
-\flip{I am here}
+
+The procedure so far seems to reduce to the following observation: everything is good in an eigenbasis. Why don't we just diagonalize \emph{all the matrices} and work in some mega eigenbasis? Maybe we never have to worry about degenerate eigenvalues because there will always be enough diagonal matrices---like $M$ and $N$ in the previous subsection---to lift all the degeneracies and define a unique eigenbasis.
+
+This is not generally possible. The reason is that the rotation that diagonalizes one matrix is, in general, not the rotation that diagonalizes another. 
+
+\begin{exercise}\label{ex:spin:1:2:Sz:Sx}
+Here's a real-world example from quantum mechanics. Consider the spin of an electron. The spin can be measured along any axis. Let us consider the $z$- axis and the $x$-axis. The spin measurement is encoded in the eigenvalues of the following spin matrices:
+\begin{align}
+    \hat S_z &= \frac{\hbar}{2}
+    \begin{pmatrix}
+    1 & \\ 
+    & -1     
+    \end{pmatrix}
+    &
+    \hat S_x &= \frac{\hbar}{2}
+    \begin{pmatrix}
+     & 1\\ 
+    1 &    
+    \end{pmatrix} \ .
+\end{align}
+Please check that both of these matrices have eigenvalues $\pm \hbar/2$. The first matrix is already in an eigenbasis, while the second is not. Show that diagonalizing $\hat S_x$ will cause $\hat S_z$ to be not-diagonal.  
+
+\textbf{Comment}: in quantum mechanics, measurements are associated with Hermitian matrices. The eigenvalues of the Hermitian matrix  encodes the possible values that one may measure. Here we see that the spin of the electron is $\pm 1/2$ along some measurement axis. 
+\end{exercise}
+
+\begin{exercise}\label{ex:spin:1:2:Sz:Sx:prob}
+Vectors in quantum mechanics are possible states of a system. A state that is an eigenvector of a Hermitian matrix is one where there is no uncertainty in the value of a measurement. If a state is a linear combination of eigenstates, $\ket{\psi} = a \ket{\text{I}}+b\ket{\text{II}}$, then the probability of measuring a particular eigenvalue is the squared absolute value of its eigenvector coefficient. That is: given a state $\ket{\text{I}}$, the probability of measuring eigenvalue $\lambda_\text{I}$ is $|a|^2$. 
+
+We assume that the states are always normalized, so $|a|^2 + |b|^2 = 1$. In Example~\ref{ex:spin:1:2:Sz:Sx}, suppose you started with a state $\ket{\psi} = \ket{\lambda_z = +\hbar/2}$. That is, the eigenstate with $\hat S_z$ eigenvalue $\lambda_z = \hbar/2$. Write this in the eigenbasis of $\hat S_x$. Show that the state of \emph{definite} spin in the $z$-direction has \emph{maximally uncertain} spin in the $x$-direction. That means that the probabilities of measuring spin in the $x$-direction to be either $\pm\hbar/2$ is 50\%. 
+\end{exercise}
+
+
+Maybe that's fair enough. If every matrix could be diagonalized then we would never deal with non-diagonal matrices. But now we have a more pressing question. Suppose you have two different Hermitian matrices, $M$ and $N$. You know that they can both be diagonalized, but you do not know if they can be \emph{simultaneously} diagonalized. This is an critical question. There are two possibilities:
+\begin{enumerate}
+    \item The two matrices can be simultaneously diagonalized. They are different only because they have different eigenvalues. Then there is a rotation $R$ such that 
+    \begin{align}
+        M &= R \hat M R^\dag
+        &
+        N &= R \hat N R^\dag \ ,
+    \end{align}
+    where $\hat M$ and $\hat N$ are diagonal. The rotation $R^\dag$ is the transformation to go from the standard basis to the eigenbasis.
+    \item The two matrices cannot be simultaneously diagonalized. They may even have the same eigenvalues (in general they will not), but there is no basis where both $M$ and $N$ are diagonal. In other words:
+     \begin{align}
+        M &= R \hat M R^\dag
+        &
+        N &= S \hat N S^\dag 
+        &
+        S\neq R \ .
+    \end{align}
+\end{enumerate}
+You could simply diagonalize both matrices and see what happens. Unfortunately, as algorithmic as we have made the procedure of diagonalization---that is, finding the eigenvectors---it is still kind of a pain to do this to every single matrix we meet. Is there perhaps an easier way to see whether or not two matrices are simultaneously diagonalizable?
+
+\begin{example}
+We have a hint from an observation in Section~\ref{sec:nice}. If you have two diagonal matrices, $\hat M$ and $\hat N$, then obviously the two matrices are simultaneously diagonalizable. However, the multiplication of diagonal matrices reduces to the multiplication of the diagonal elements as numbers. This means that
+\begin{align}
+    \hat M \hat N &= \hat N \hat M
+    &\Rightarrow 
+    \left[\hat M, \hat N\right] = 0
+    \ .
+\end{align}
+Here we have used the definition of the \textbf{commutator}, $[A,B] = A,B$. We say that two matrices \textbf{commute} if their commutator vanishes. We have shown that diagonal matrices commute.
+\end{example}
+
+If you are already in the basis where two matrices are diagonal, then the question is moot. The answer to whether they are simultaneously diagonalizable is solved. The observation that $[\hat M,\hat N] =0 $ for simultaneously diagonalizable matrices holds for any pair of Hermitian matrices. Let us see why. Let us take our diagonal matrices and rotate them by some matrix $R$ to go to any other basis where they are non-diagonal but Hermitian. Then we have matrices
+\begin{align}
+    M &= R \hat M R^\dag
+    &
+    N &= R \hat N R^\dag \ .
+\end{align}
+We can write the diagonal matrices in terms of their rotated form and plug this into the commutator:
+\begin{align}
+    0=
+    \left[ R^\dag M R, R^\dag N R  \right] = 
+    R^\dag M R R^\dag N R
+    -
+    R^\dag N R R^\dag M R
+    =
+    R^\dag(MN - NM)R
+    = R^\dag \left[M,N\right] R \ .
+\end{align}
+Here we have used $RR^\dag =\one$. We can multiply both sides by $R$ from the left and $R^\dag$ on the right---or we may simply argue that rotating a matrix cannot cause it to vanish---to find that the commutator of the matrices vanishes:
+\begin{align}
+    \left[M,N\right] = 0 \ .
+\end{align}
+Critically, this is true in \emph{any} basis, whether or not $M$ and $N$ are diagonal in that basis. Further, you can show that this is true \emph{only} when $M$ and $N$ are simultaneously diagonalizable. 
+
+If $M$ and $N$ are not simultaneously diagonalizable, then we could \emph{try} to massage their commutator into a commutator of diagonal matrices:
+\begin{align}
+    \left[M,N\right] = 
+    \left[R\hat M R^\dag, S\hat N S^\dag\right]
+    =
+    R \hat M R^\dag S \hat N S^\dag
+    -
+    S \hat N S^\dag    R \hat M R^\dag  \ .
+\end{align}
+We see that $R^\dag S$ and $S^\dag R$ do not equal to $\one$ and so we cannot massage this into a form where we get $[\hat M, \hat N]$. 
+
+\begin{bigidea}
+Matrices are simultaneously diagonalizable if they all commute with one another, $[M,N] = 0$. When this is the case, there is a single eigenbasis where all the matrices are diagonal. If some of the matrices have degenerate eigenvalues, it is possible that other matrices can lift those degeneracies. In this way, it is convenient to label eigenvectors by their unique combination of eigenvalues with respect to the set of commuting matrices. 
+
+When matrices do not commute, they cannot be simultaneously diagonalized. In quantum mechanics, two observables that do not commute are observables that you cannot simultaneously measure. This is the algebraic manifestation of quantum uncertainty.
+\end{bigidea}
+
+
+
 
 
 % can you just diagonalize both matrices?
@@ -4841,6 +4958,7 @@ When we give the electron states in the hydrogen atom funny names, those funny n
 
 \section{Quantum Mechanics}
 % ``operator''
+\flip{Skipping typing this for the moment. I think this brief introduction to quantum should go before the eigenvalue section, see my hand written notes. It lets us appeal to the spin-1/2 system as an example.}
 
 \section{Function Space}
 % fourier
