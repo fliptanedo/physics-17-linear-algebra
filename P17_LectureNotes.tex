@@ -3361,6 +3361,104 @@ Here's a nice little aside. The isometries that we have met so far all have some
     \item The theory of symmetries with continuous parameters and its application to physical systems is called the representation theory of Lie groups. 
 \end{enumerate}
 
+\subsection{Discrete isometries}
+\label{sec:discrete:isometries}
+
+One of the notable features of rotations is that you can rotate by any continuous amount, $\theta$. You can rotate by $\theta=\pi/2$, or $\theta = \pi/2 + \varepsilon$ for, say, $\varepsilon = .0001$. Thus the rotation matrix parameterizes an infinite number of possible rotations. Because there is a continuous parameter for the amount by which one performs a rotation, we say that this is a continuous isometry. There are, however, often \emph{discrete} isometries where there is simply a handful of matrices under which the metric is invariant. In Euclidean two dimensional space, one such matrix is 
+\begin{align}
+    P = \begin{pmatrix}
+        1 & \\
+        & -1 
+    \end{pmatrix} \ .
+\end{align}
+Under $P$, the second component of a vector (in the standard basis) changes sign. Because the metric transforms with two factors of $P$---here we use $P^\dag = P$---it remains unchanged:
+\begin{align}
+    P^\text{T}gP = 
+    \begin{pmatrix}
+        1 & \\ 
+        & -1 
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & \\ 
+        & 1 
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & \\ 
+        & -1 
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        1 & \\ 
+        & 1 
+    \end{pmatrix} \ .
+\end{align}
+\begin{exercise}
+Suppose that the components of the metric in $\RR^2$ are not diagonal. That is, $g_{12} = g_{21}\neq 0$. Is $P$ an isometry of this metric space?
+\end{exercise}
+
+The total set of isometries is every combination of rotations and discrete transformations. We often say that this is a \textbf{group}. One may write a generic isometry as a product of rotations and discrete transformations. 
+\begin{example}
+The following transformation is a combination of a discrete transformation $P$ and a rotation:
+\begin{align}
+    \tilde R = PR =
+    \begin{pmatrix}
+        1 & \\ 
+        & 1 
+    \end{pmatrix}
+    \begin{pmatrix}
+        c & -s\\ 
+        s & \pp c
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        c & -s\\ 
+        -s & - c
+    \end{pmatrix} \ .
+    \label{eq:discrete:isometry:eg}
+\end{align}
+This matrix does \emph{not} look like a rotation. The diagonal elements differ by a sign, while the off-diagonal elements are the same. If we did not know about discrete isometries, we would have said that this matrix does not map one orthonormal basis to another. In fact, it does.
+\end{example}
+\begin{exercise}
+Compare the rotation-and-discrete transformation in \eqref{eq:discrete:isometry:eg} to a transformation that is simply a rotation. For concreteness, pick a rotation angle $\theta = \pi/4$ so that $c=s=1/\sqrt{2}$. Apply the rotations $R$ and $\tilde R$ to the standard basis. How do the ``rotated'' bases differ?
+\end{exercise}
+
+In three dimensions this notion shows up as \emph{parity}. Here are two ways to represent the parity transformation in three dimensions:
+\begin{align}
+    P &=
+    \begin{pmatrix}
+        -1 & & \\
+        & -1 & \\
+        & & -1
+    \end{pmatrix} 
+    &
+    P =
+    \begin{pmatrix}
+        1 & & \\
+        & 1 & \\
+        & & -1
+    \end{pmatrix}
+    \ .
+\end{align}
+The reason why there are different ways to represent this discrete symmetry is that the two are related by a rotation. 
+\begin{exercise}
+Describe---in words or drawing if that is simpler---the rotation that relates the two parity matrices above. It may help to think about what each representation of $P$ does to the standard basis vectors. 
+\end{exercise}
+
+You can tell that the two are related by a rotation if you think about all that ``right hand rule'' stuff you learned when you first did angular momentum in mechanics. The right hand rule enforced a certain \emph{orientation} of your basis vectors. The positive $x$, $y$, and $z$ directions are chosen to have a particular orientation: if you curl the fingers of your right hand from the $x$-axis to the $y$-axis, then your thumb is pointing in the $z$ direction. You can rotate your hand in any way, but this orientation stays the same. Similarly, if you are contrarian and decided to define your axes by a ``left hand rule,'' then (1) several of your angular momentum-related results are off by a minus sign, and (2) there is no way to rotate your left hand to make it match the orientation of your right hand. This notion is pervasive in nature in three spatial dimensions: fundamental particles have a spin that defines an orientation that is either left- or right-handed. Even protein can have a \emph{chirality} where identical sequences of amino acids may spiral in one direction or another---and biological life on earth can only use one orientation and not the other. 
+
+By manipulating objects (like your right hand) you have an intuitive sense of rotations in three-dimensions. What may be less obvious is that you also have a simple tool for understanding what a parity transformation does: look in the mirror. If you raise your right hand, then the image of you in the mirror raises their left hand. If you do physics with a right-handed coordinate system, then your mirror image will do physics in a left-handed coordinate system. You can bet that the image of you is composed of proteins with the opposite chirality and subatomic particles spinning in the opposite orientation. 
+\begin{exercise}
+Explain why your image in a mirror exchanges left and right but does not swap up and down.\footnote{This is a question that was posed in my freshman physics class. It was not the first time that I heard the question, but I was surprised that it is a mathematical question in the realm of physics. I have since come to appreciate the significant role that parity plays in many aspects of physics. I hope that soon you will as well.}
+\end{exercise}
+
+
+
+% orientation
+
+
+
+% mirror symmetry
+
 
 % Isometries form a group: 
 % g_{ij}R\aij{i}{k}R\aij{j}{\ell}v^k w^\ell
@@ -3397,6 +3495,7 @@ In our discussion so far, we have made use of a `colloquial' definition of the t
 \begin{align}
     \la A^\dag \vec{v}, \vec{w} \ra \equiv
     \la \vec{v} , A \vec{w} \ra \ .
+    \label{eq:adjoint}
 \end{align}
 \begin{example}
 By the symmetry of the metric we could have equivalently written
@@ -3522,6 +3621,7 @@ Recall that complex numbers may be written either in Cartesian form, $z = x+iy$ 
 Things become a bit more interesting when we complexify a metric space. We have to update our rules a bit. Previously we assumed that the metric is symmetric, $\langle v, w\rangle = \langle w, v\rangle$. This turns out to only be true for real spaces. When we have a complex vector space, the metric must satisfy symmetry with a complex conjugation:
 \begin{align}
     \la v, w \ra = \la w, v \ra^* \ .
+    \label{eq:complex:metric:star}
 \end{align}
 That is a little unusual. At least means that the norm (length squared) of a complex vector is real:
 \begin{align}
@@ -4049,6 +4149,46 @@ Confirm that $F_{\mu\nu} =g_{\mu \alpha}g_{\nu\beta} F^{\alpha\beta}$ with the (
 Find the components of $F'^{\mu\nu}$ under a boost along the $z$-direction. 
 \end{exercise}
 
+\subsection{Example: simultaneity}
+\label{eq:simultaneity}
+
+One of the key ideas in special relativity is that we sacrifice our notion of simultaneity for objects that are not observed at the same spacetime point. We may reuse our diagram in Fig.~\ref{fig:re:dilation}. Consider two different points on the $x'$ axis. These are simultaneous with respect to the primed observer: they both occur at $t'=9$. However, these two points  obviously do \emph{not} have the same $t$ coordinate to the unprimed observer. This observation helps clear up several apparent paradoxes that may show up in relativity. More importantly, it completely upends our notion of causality.
+
+One of the unwritten-but-understood laws of physics is that the cause precedes the effect. I have to drop my mug before I hear the sound of the ceramic shattering. This notion is imperiled if in some other reference frame someone else would have heard the shattering before they observe the mug being dropped. One deduction of this is that the laws of physics should be \emph{local} in spacetime. A consequence of this observation is that the laws of physics should be written with derivatives, as we will briefly discuss in Section~\ref{sec:locality}.
+
+\subsection{Example: discrete isometries}
+
+The Minkowski metric inherits the same parity isometry that we discussed in Sec~\ref{sec:discrete:isometries}. Its matrix form is
+\begin{align}
+    P = \begin{pmatrix}
+        1 & & &\\
+         & -1& &\\
+         & & -1 &\\
+         & & & -1
+    \end{pmatrix}\ .
+\end{align}
+There is a second discrete transformation called \textbf{time reversal}:
+\begin{align}
+    T = 
+    \begin{pmatrix}
+        -1 & & &\\
+        & 1 & &\\
+        &  & 1 &\\
+        &  & & 1
+    \end{pmatrix} \ .
+\end{align}
+This one sounds rather dramatic, doesn't it?\footnote{One of my mentors in graduate school once told the story that he was preparing a lecture on particle physics at the pub. When his friends asked him what the topic of the lecture would be, he said ``time reversal.'' The bar crowd suddenly grew silent until the bartender quietly asked: ``... we can do that?''} It should be clear that $T$ indeed reverses the direction of time. This, however, does not mean that time reversal is something we can do.\footnote{As I write this the video game \emph{The Legend of Zelda: Tears of the Kingdom} was recently released. Time reversal is a major part of the game's mechanic. Before this, there was the ground-breaking independent computer game \emph{Braid} that pioneered this mechanic. The latter has an additional connection to physics in that the story is largely understood to be a parable about the development of atomic weapons.} Our understanding of causality breaks if we allow time reversal. However, mathematically time reversal is a clear isometry of the Minkowski metric. 
+
+In fact, there is something `deep' to say that the classical laws of physics are time reversal invariant. If you run a video backwards, everything that happens obeys the laws of physics. The sign of the gravitational force may swap, but the dynamics of such an ``anti-gravity'' force law follows Newtonian mechanics. Entropy may decrease rather than increase, but there is no sense in which the microscopic transition from one configuration to the next would violate any laws of microphysics.\footnote{This is to say that the ``arrow of time'' from statistical mechanics is not a statement about microscopic interactions nor is it a statement about what is not \emph{possible}, only about what is increasingly \emph{improbable}.} Though, to be fair, we also do not know how to take a right-handed person and do a parity transformation on them to turn them left-handed. 
+
+
+In order to restrict to sensible isometries, we say that valid observers in special relativity are those that are related by isometries that are \emph{connected to the identity}. This means that one may write the isometry with respect to a continuous parameter and that for some value of that parameter, the isometry is simply the identity matrix. In this way, we restrict our physical isometries to those that maintain the direction of time. 
+
+% exp
+
+% CPT
+
+
 
 \section{Central Dogmas}
 
@@ -4093,6 +4233,7 @@ It also afforded us a notion of the \textbf{adjoint} of a matrix, $A^\dag$ which
     \la A \vec{v}, \vec{w} \ra 
     \equiv
     \la \vec{v}, A^\dag\vec{w} \ra  \ .
+    \label{eq:def:adjoint}
 \end{align}
 The adjoint may seem like a curiosity, except that it defines our notion of a \emph{nice} matrix. A \emph{nice} matrix is one that is self-adjoint: $A^\dag = A$. From the above definition, we show that the adjoint is equivalent to the Hermitian conjugate: 
 \begin{align}
@@ -4661,7 +4802,7 @@ What we see is that in the eigenbasis, $M$ simply \emph{rescales} the components
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=.6\textwidth]{figures/eigen_ball.pdf}
+    \includegraphics[width=.8\textwidth]{figures/eigen_ball.pdf}
     \caption{Eigenbasis directions are shown in red. The surface of the yellow ball represents all vectors of unit length. The green ellipse represents the deformation of this surface by acting on each of those vectors by $M$. We see that the eigenbasis components of these vectors are simply rescaled by the eigenvalues of $M$. Right: Same figure, but drawn relative to the standard basis.}
     \label{fig:eigenbal}
 \end{figure}
@@ -4949,6 +5090,240 @@ When matrices do not commute, they cannot be simultaneously diagonalized. In qua
 \end{bigidea}
 
 
+\subsection{Inverting Nice Matrices}
+\label{sec:inverting:nice:matrices}
+
+The power of all of this eigenstuff is that we can solve problems of the following form
+\begin{align}
+    M \ket{v} = \ket{s} \ ,
+    \label{eq:Mv:s}
+\end{align}
+where we are given a nice matrix $M$ and the output vector $\ket{s}$. We are asked to solve for $\ket{v}$. The solution is obviously $\ket{v} = M\inv \ket{s}$. Because $M$ is `nice,' we know it is invertible---after all, it is a Hermitian matrix with non-zero eigenvalues. For small and simple matrices, you can simply solve $M\inv M = \one$ component-by-component. For moderately difficult matrices you can plug this into a computer. However, we will soon concern ourselves with the problem of \emph{infinite dimensional} vector spaces. In this limit, the problem \eqref{eq:Mv:s} becomes a differential equation 
+\begin{align}
+    \mathcal O f(x) = s(x) \ ,
+    \label{eq:Of:s}
+\end{align}
+where $\mathcal O$ is a differential operator like $-(d/dx)^2$. The vector $\ket{v}$ is now written as a function $f$ and the discrete component index $i$ of $v^i$ has become a continuous argument $x$ in $f(x)$. You are familiar with these differential equations: they show up all the time in physics. 
+\begin{example}
+Newton's law of motion is
+\begin{align}
+    m\frac{d^2}{dt^2} \vec{x}(t) = -\nabla V[x] \ ,
+\end{align}
+where $V$ is the potential of the force. 
+\end{example}
+For this infinite-dimensional limit, the best way to solve \eqref{eq:Of:s} is to rotate into a basis of \emph{eigenfunctions} and use the fact that the action of $\mathcal O$ simplifies greatly in this basis.
+
+It is thus instructive to walk through the process of solving \eqref{eq:Mv:s} using a rotation to to the eigenbasis. It may seem silly that we do things this way for a $2\times 2$ matrix, but this example will make it clear how everything works. To this end, let us solve \eqref{eq:Mv:s} with the following values:
+\begin{align}
+    M &= 
+    \begin{pmatrix}
+        9 & -\sqrt{3}\\
+        -\sqrt{3} & 11
+    \end{pmatrix}
+    &
+    v^i &= 
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    &
+    s^i &=
+    \begin{pmatrix}
+        a \\ b
+    \end{pmatrix} \ .
+\end{align}
+We choose explicit numbers for the components of $M$ so that we can write out explicit eigenvalues and derive explicit eigenvectors. We would like to find the components $v^i$ in the standard basis, which we have labelled as $x$ and $y$. For the source, $s^i$, we simply assume some \emph{a priori} known values $a$ and $b$. In fact, our solution will depend linearly on $a$ and $b$ so that we will have solved the problem of inverting this matrix $M$ for \emph{any} source. 
+
+
+\paragraph{Characteristic equation} First we solve for the eigenvalues of $M$. The characteristic equation is
+\begin{align}
+    0=\det(M-\lambda \one) &= 
+    (9-\lambda)(11-\lambda) - 3
+    &
+    \lambda_{\text{I},\text{II}}&= 8,12 \ .
+\end{align}
+
+\paragraph{Eigenvectors} The eigenvectors come from solving $M\ket{A} = \lambda_A \ket{A}$ for $A=\text{I}, \text{II}$. The general form of this equation is
+\begin{align}
+    9q - \sqrt{3}s &= \lambda_A q
+    &
+    -\sqrt{3}q + 11 s &= \lambda_B s \ ,
+\end{align}
+where the standard basis components of $\ket{A}$ are $s$ and $q$. Of course, only one of these equations is sufficient to specify the relation between the two components of the eigenvector $\ket{A}$: the other is redundant.\footnote{Be sure you are clear \emph{why} the second equation has to be redundant. The eigenvalue equation is true even for $\ket{A}\to \alpha\ket{A}$, so it cannot determine the normalization of the eigenvectors.} This fixes the ``direction'' of the eigenvector. We find that the eigenvectors are proportional to 
+\begin{align}
+    \ket{\text{I}}
+    &\propto 
+    \begin{pmatrix}
+        \sqrt{3}\\ 1
+    \end{pmatrix}
+    &
+    \ket{\text{II}}
+    &\propto 
+    \begin{pmatrix}
+        1\\ -\sqrt{3}
+    \end{pmatrix} \ .
+\end{align}
+Since this is a two dimensional space, one could have simply used orthogonality to deduce $\ket{\text{II}}$ from $\ket{\text{I}}$. Normalizing the eigenvectors according to $\la A | A\ra = 1$ gives us
+\begin{align}
+    \ket{\text{I}}
+    &=
+    \frac{\sqrt{3}}{2} 
+    \ket{1}
+    + 
+    \frac{1}{2}
+    \ket{2}
+    &
+    \ket{\text{II}}
+    &=
+    \frac{1}{2}
+    \ket{1} 
+    - 
+    \frac{\sqrt{3}}{2}
+    \ket{2}
+    \ .
+    \label{eq:ex:greens:func:eig:in:std}
+\end{align}
+
+\paragraph{Rotating to the eigenbasis} Now that we have the components of the eigenbasis in terms of the standard basis, $\la i | A \ra$, we know all of the components of the rotation matrix between the two bases, as we saw in Section~\ref{sec:rotation:to:eigenbasis}. If you're like me, you always get confused about whether these components are the rotation from the standard basis to the eigenbasis, or from the eigenbasis to the standard basis. Do we arrange them as rows or as columns? It is worth taking a moment to sort that out without looking at Section~\ref{sec:rotation:to:eigenbasis}. For the sake of pedagogy, let us do this a bit more tediously but straightforwardly. Let us invert \eqref{eq:ex:greens:func:eig:in:std} to write the standard basis vectors in terms of the eigenbasis vectors.\footnote{This is, of course, a rotation.} By taking appropriate linear combinations, we find that
+\begin{align}
+    \ket{1}
+    &=
+    \frac{\sqrt{3}}{2} 
+    \ket{\text{I}}
+    + 
+    \frac{1}{2}
+    \ket{\text{II}}
+    &
+    \ket{2}
+    &=
+    \frac{1}{2}
+    \ket{\text{I}}
+    - 
+    \frac{\sqrt{3}}{2}
+    \ket{\text{II}}
+    \ .
+    \label{eq:ex:greens:func:std:in:eig}
+\end{align}
+You might object that \eqref{eq:ex:greens:func:std:in:eig} does not look like much of a rotation. You may recall that this is the form of a rotation with a discrete isometry, \eqref{eq:discrete:isometry:eg}. What has happened is that we have changed the relative orientation\footnote{I say this somewhat colloquially because the term `orientation' has a more formal meaning.} of the basis vectors. Or, in other words, maybe we should have chosen a different overall sign for one of the eigenvectors in \eqref{eq:ex:greens:func:eig:in:std}. No matter! We press forward.
+
+Inserting \eqref{eq:ex:greens:func:std:in:eig} into our expression for $\ket{v}$, we find the components of $\ket{v}$ in the eigenbasis:
+\begin{align}
+    \ket{v} &=
+    x\ket{1} + y\ket{2}
+    =
+    \frac{1}{2}\left(\sqrt{3}x+y\right)\ket{\text{I}}
+    +
+    \frac{1}{2}\left(x-\sqrt{3}y\right)\ket{\text{II}}
+    \equiv
+    x' \ket{\text{I}} + y' \ket{\text{II}} \ .
+\end{align}
+Similarly, the components of the source $\ket{s}$ are
+\begin{align}
+    \ket{s} &=
+    \frac{1}{2}\left(\sqrt{3}a+b\right)\ket{\text{I}}
+    +
+    \frac{1}{2}\left(a-\sqrt{3}b\right)\ket{\text{II}}
+    \equiv
+    a' \ket{\text{I}} + b' \ket{\text{II}} \ .
+    \label{eq:eigen:greens:eg:source:components:eig}
+\end{align}
+The primed variables are the components in the eigenbasis. Now that our kets are written as linear combinations of eigenvectors, the action of $M$ is straightforward. Further, the inverse is simply
+\begin{align}
+    M\inv = 
+    \begin{pmatrix}
+        1/\lambda_\text{I} &\\
+        & 1/\lambda_\text{II}
+    \end{pmatrix} \ .
+\end{align}
+This means that the equation $M\ket{v}=\ket{s}$ is
+\begin{align}
+    \begin{pmatrix}
+        \lambda_\text{I} & \\
+        & \lambda_\text{II}
+    \end{pmatrix}
+    \begin{pmatrix}
+        x' \\ y'
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        a' \\
+        b'
+    \end{pmatrix} \ ,
+\end{align}
+from which we straightforwardly deduce
+\begin{align}
+    x' &= \frac{a'}{\lambda_\text{I}}
+    &
+    y' &= \frac{b'}{\lambda_\text{II}} \ .
+\end{align}
+This formally solves the problem, though we should be courteous and state the result in the standard basis.\footnote{This is similar to the etiquette that you should re-rack your weights in the gym.}
+
+\paragraph{Rotating back to the standard basis} We have already written transformation back to the standard basis, \eqref{eq:ex:greens:func:eig:in:std}. It is straightforward to plug this into our solution in the eigenbasis. For the sake of pedagogy, let us try to write this a a rotation. We find that
+\begin{align}
+    \frac{1}{2}
+    \begin{pmatrix}
+        \sqrt{3} & 1\\
+        1 & -\sqrt{3}
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        x' \\ y'
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        a'/\lambda_{I}\\
+        b'/\lambda_{II}
+    \end{pmatrix} \ ,
+\end{align}
+where we have explicit expression for $a'$ and $b'$ in terms of the original source components $a$ and $b$ in \eqref{eq:eigen:greens:eg:source:components:eig}. We recall that this matrix is not a rotation, but rather a rotation and a discrete isometry. We may simplify the problem by multiplying both sides by the discrete isometry 
+\begin{align}
+    P = \begin{pmatrix}
+        1 & \\
+        & - 1
+    \end{pmatrix} 
+\end{align}
+to to ``undo'' the discrete isometry and recover a rotation matrix
+\begin{align}
+    \frac{1}{2}
+    \begin{pmatrix}
+        \sqrt{3} & 1\\
+        -1 & \sqrt{3}
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        \pp a'/\lambda_{I}\\
+        -b'/\lambda_{II}
+    \end{pmatrix} 
+    &
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    &=
+    \frac{1}{2}
+    \begin{pmatrix}
+        \sqrt{3} & -1\\
+        1 & \sqrt{3}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \pp a'/\lambda_{I}\\
+        -b'/\lambda_{II}
+    \end{pmatrix} \ ,
+\end{align}
+On the right-hand side we have used the fact that the inverse of a rotation is simply its transpose. 
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4962,6 +5337,1306 @@ When matrices do not commute, they cannot be simultaneously diagonalized. In qua
 
 \section{Function Space}
 % fourier
+\flip{I am here}
+
+
+\subsection{Functions as Vectors}
+
+Functions are vectors in a vector space that we call \emph{function space}\index{function space}. I am pretty sure that mathematicians do not call it that, but we use this terminology anyway.  This should be \emph{obviously} true. Consider two polynomial functions $f$ and $g$. Maybe
+\begin{align}
+  f(x) &= x^3  
+  &
+  g(x) &= x + 2 \ ,
+\end{align}
+though the precise forms do not matter. Clearly you can take a linear combination of the two and the result is also a polynomial function:
+\begin{align}
+  \alpha f(x) + \beta g(x) = \alpha x^3 + \beta x + 2\beta \ .
+\end{align}
+This is a totally valid function that we could call $(\alpha f + \beta g)(x)$. 
+
+In this example, it does not matter at all that the functions/vectors are themselves linear maps from $\RR \to \RR$.\footnote{This should sound familiar. The dual vector space $V^*$ of row vectors are simultaneously a ``vector space in itself'' and a space of functions from $V\to \RR$.} All that matters is that the function/vectors have components that add linearly when we take linear combinations. Of course, the components are components \emph{with respect to a basis}. Let us restrict to the class of polynomials up to degree $N$, so these are functions of the form
+\begin{align}
+    f(x) = a^0 + a^1 x + a^2 x^2 + \cdots + a^N x^N \ .
+\end{align}
+Okay, the indices are a little annoying. The components $a^N$ have an upper index because they are components of a vector. The monomials $x^n$ are actual powers of the variable $x$. Evidently, these $(N+1)$ monomials are our basis for polynomial space.\footnote{The vector space is $(N+1)$-dimensional because we include the constant, $x^0$.} 
+\begin{align}
+    \ket{i}=\bas{i} &= x^i
+    &
+    i \in \{0, 1, 2, \cdots, N\} \ .
+    \label{eq:polynomial:basis}
+\end{align}
+Note that we have not said anything about whether this basis is orthonormal or not---we have not yet defined a metric for this polynomial space. 
+
+It is clear that the an $N$-component column vector encodes the information of a function:
+\begin{align}
+    \ket{f} &= 
+    \begin{pmatrix}
+        a^0 \\ a^1 \\ a^2 \\ \vdots \\ a^N
+    \end{pmatrix} 
+    &
+\ket{f} &= 
+    \begin{pmatrix}
+        b^0 \\ b^1 \\ b^2 \\ \vdots \\ b^N
+    \end{pmatrix} 
+    \ .
+\end{align}
+Further, one may take linear combinations of these columns to encode linear combinations of functions:
+\begin{align}
+    \ket{\alpha f + \beta g}
+    &= 
+    \begin{pmatrix}
+        \alpha a^0 + \beta b^0 \\ \alpha a^1 + \beta b^1 
+        \\ \alpha a^2 + \beta b^2 \\ \vdots \\ 
+        \alpha a^N + \beta b^N
+    \end{pmatrix}  \ .
+\end{align}
+
+We can take $N$ to be as large as we want. In fact, if we go to $N\to \infty$, we can reproduce any function that admits a Taylor expansion. As physicists we will take this limit cavalierly. There are a few subtleties that show up that we will point out, but we will not let ourselves get bogged down in mathematical detail. Welcome to the world of infinite-dimensional vector spaces. We call these spaces \textbf{Hilbert spaces}.
+
+A judicious choice of basis for function space can make our lives much easier. This is a central theme of this course and justifies the beastiary of special functions that you meet in graduate school. Let us ignore the subtleties of defining a function space for now---we get to this soon enough. The following example gives a taste of what it means to work with functions as vectors.
+
+
+\begin{exercise}
+%https://math.stackexchange.com/questions/942263/really-advanced-techniques-of-integration-definite-or-indefinite/943212
+
+Here is a cute two-dimensional function space that gives us a shortcut to calculate a particular \emph{indefinite} integral.  Consider a two dimensional vector space spanned by the functions
+\begin{align}
+  \left|f_1\right\rangle
+  &= f_1(x) = 
+  e^{ax} \cos bx
+  &
+  \left|f_2\right\rangle
+  &=
+  f_2(x) = 
+  e^{ax} \sin bx \ ,
+\end{align}
+where $a$ and $b$ are constants. Forget orthonormality or boundary conditions for this problem. The derivative $d/dx$ is a linear operator that acts on this space. Write down the derivative as a $2\times 2$ matrix in the above basis, $D$.
+
+Invert $D$ in the usual way that you learned to invert $2\times 2$ matrices during your childhood\footnote{Stuck? Here's a life pro tip: \url{http://bfy.tw/KG2Z}}. Call this matrix $D^{-1}$. 
+
+Now stop and think: the inverse of a derivative is an indefinite integral\footnote{Ignore the constant term.}. Thus acting with $D^{-1}$ on the vector $|f_1\rangle$ should be understood as an integral of $f_1(x)$. Show that, indeed,
+\begin{align}
+  D^{-1} |f_1\rangle = \int dx\, e^{ax} \cos bx \ .
+\end{align}
+Feel free to use \emph{Mathematica} to do the indefinite integral on the right-hand side. Pat yourself on the back if you can do it without a computer.
+\end{exercise}
+
+
+\subsection{Histogram Space}
+\label{sec:histogramspace}
+
+Here is a funny vector space that we call \emph{histogram space}. The basis vectors are:
+
+\begin{center}
+\includegraphics[width=.45\textwidth]{figures/lec02_e1.pdf}
+\includegraphics[width=.45\textwidth]{figures/lec02_e2.pdf}\\
+\includegraphics[width=.45\textwidth]{figures/lec02_e3.pdf}
+\includegraphics[width=.45\textwidth]{figures/lec02_e4.pdf}
+\end{center}
+
+\noindent This is a basis for a histogram over unit bins from $x=0$ to $x=4$. A vector in this space is, for example:
+
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/lec02_hist.pdf}
+\end{center}
+
+\noindent We can perform a linear transformation $A$ on $\vec{v}$ which outputs another vector. Let us say it is this:
+\begin{center}
+\includegraphics[width=.8\textwidth]{figures/lec02_hist2.pdf}
+\end{center}
+
+\begin{exercise}
+From the image above, can you derive what $A$ is? 
+\end{exercise}
+
+\noindent The answer to the above exercise is \emph{no}. Please make sure you convince yourself why: there are many different transformations that convert to old histogram into the new histogram. The matrix $A$ is $4\times 4$ and thus has 16 entries that we need to define. The matrix equation $A\vec{v} = \vec{w}$ for known vectors $\vec{v}$ and $\vec{w}$ encodes only four equations.
+
+The power of this admittedly strange vector space is that we can think of these histograms as approximations of continuous functions:
+
+\begin{center}
+\includegraphics[width=.4\textwidth]{figures/lec02_histfun.pdf}
+\end{center}
+
+% Thus a vector in this approximate (discretized) \emph{function} space is 
+% \begin{align}
+%   \vec{f} = 
+%   \begin{pmatrix}
+%     f^1 \\
+%     f^2 \\
+%     \vdots\\
+%     f^N
+%   \end{pmatrix} \ .
+% \end{align}
+
+
+This discretized function space does not formally admit an $N\to \infty$ limit. The primary reason has to do with convergence, which I always thought was not the fun part of calculus. With the caveat that this space and this basis is really silly, we push forward to get some intuition for what an infinite-dimensional vector space looks like. 
+%% TO INCLUDE: why the historgram basis is dumb
+%% I had some good reference for this from P17
+%% ... perhaps Linear Algebra done right, or Appel or Cahill...
+%% ... the point was convergence.
+
+% In what way are polar coordinates an orthonormal basis? 
+
+\subsection{Derivatives as Linear Transformations}
+
+Our discretized function space allows us to define a forward derivative\footnote{One could have also defined a backward derivative where $(f')^i \sim f^{i}-f^{i-1}$ \ . Note that you \emph{cannot} try to make this symmetric by defining a `centered' derivative like $(f')^i \sim f^{i+1/2}-f^{i-1/2}$ because there's no such thing as a fractional index. If you tried to write $(f')^i\sim f^{i+1}-f^{i-1}$ you're making a worse approximation. If you're like me, the fact that there's some asymmetry in how we define the first derivative is deeply unsettling. There's something to this intuition!}:
+\begin{align}
+  \ket{f'} =
+  \frac{1}{\Delta x}
+  \begin{pmatrix}
+    f^2 - f^1 \\
+    f^3 - f^2 \\
+    \vdots
+    \\
+    f^{i+1}-f^i
+    \\
+    \vdots
+  \end{pmatrix} \ .
+\end{align}
+This is familiar if you have ever had to manually program a derivative into a computer program. Note that the right-hand side is a linear transformation of $\vec{f}$. In other words, we may write a matrix $D_+$ so that
+\begin{align}
+  \ket{f'} = D_+\ket{f} \ .
+\end{align}
+One problem is apparent: what happens at the `bottom’ of the vector? What is the last component of the derivative, $\vec{f'}^N$? Formally, this is
+\begin{align}
+  {(f')}^N = \frac{1}{\Delta x}(f^{N+1} - f^N) \,
+\end{align}
+but now we have no idea what $f^{N+1}$ is. That was never a component in our vector space. There is no $\vec{e}_{(N+1)}$ basis vector. 
+
+
+We could also define a backward derivative, $D_-$,
+\begin{align}
+  \ket{f'} =
+  D_- \ket{f}
+  =
+  \frac{1}{\Delta x}
+  \begin{pmatrix}
+    \vdots \\
+    f^2 - f^1 \\
+    \vdots
+    \\
+    f^{i}-f^{i-1}
+    \\
+    \vdots\\
+    f^{N}-f^{N-1}
+  \end{pmatrix} \ .
+\end{align}
+The question is now on the opposite boundary: what is the first component of $D_-\ket{f}$?
+
+
+This demonstrates and important lesson that we’ll need when we move more formally to function spaces:
+\begin{quote}
+\textbf{Boundary conditions are part of the definition of the function space}.   
+\end{quote}
+That was so important that I put the whole damn sentence in boldface and set it in the middle of the line. The significance of boundary conditions may be a bit surprising---but think of this as part of the definition of which functions we allow into our function space. 
+% 
+There are three nice choices for boundary conditions, which we illustrate in Fig.~\ref{fig:boundary:conditions}.
+
+%
+% \begin{example}
+% When one first learns about Fourier series with Dirichlet boundary conditions, one finds that the Fourier expansion \emph{only} contains sines. The solution to the wave equation in such a system is some function that is zero at each endpoint. So the function space relevant to the system is composed only of functions that are zero at each endpoint.
+% \end{example}
+
+% FIGURE SNIPPIT
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=.95\textwidth]{figures/BoundaryConditions.pdf}
+    \caption{Some of our favorite boundary conditions. These are not only physically motivated, but will be important for defining Hermitian differential operators.}
+    \label{fig:boundary:conditions}
+\end{figure}
+
+
+
+\paragraph{Dirichlet}
+The simplest option is a \textbf{Dirichlet boundary condition}. Here we assert that the function vanishes for all of the bins below $i=1$ and above $i=N$. This choice corresponds to the following definition of what happens to all functions outside the domain of the function space:
+\begin{align}
+  f^{i > N} = f^{i < 1} = 0 \ .
+\end{align}
+This solves the problem of the derivative on the last component of $D_+$ and the first component of $D_-$:
+\begin{align}
+  (f')^N_\text{+, Dir.} &= \frac{f^{N+1} - f^N}{\Delta x} 
+  = 
+  \frac{- f^N}{\Delta x}  
+  &
+ (f')^1_\text{-, Dir.} = \frac{f^{1} - f^0}{\Delta x} 
+  = 
+  \frac{f^1}{\Delta x}
+  \ .
+\end{align}
+\begin{example}
+With Dirichlet boundary conditions, the matrix expression for the forward/backward derivative $D_\pm$ is
+\begin{align}
+    \left(D_+\right)_\text{Dir.}
+    &=
+    \frac{1}{\Delta x}
+    \begin{pmatrix}
+        -1 & 1 & & &  \\
+        & -1 & 1 & &  \\
+        & & -1 & 1 &  \\
+        & & & \ddots & \ddots &  \\
+        & & & & -1 & \pp 1 \\
+        & & & & & -1 
+    \end{pmatrix}
+    \\
+    \left(D_-\right)_\text{Dir.}
+    &=
+    \frac{1}{\Delta x}
+    \begin{pmatrix}
+        \pp 1 & & & &  \\
+         -1 & 1 & &  \\
+        & -1 & 1 &  \\
+         & & \ddots & \ddots &  \\
+        & & & -1 &  1 
+    \end{pmatrix}
+\end{align}
+Observe that neither of these matrices is Hermitian in the conventional finite dimensional sense.
+\end{example}
+
+
+\paragraph{Neumann} Another choice for boundary conditions is that the function remains constant below $i=1$ and above $i=N$. This amounts to enforcing that the derivative vanishes at the boundaries. We call these \textbf{Neumann boundary conditions}:
+\begin{align}
+    f^{i<1} &\equiv f^i
+    &
+    f^{i>N} &\equiv f^N \ .
+\end{align}
+This implies that 
+\begin{align}
+  (f')^N_\text{+, Neu.} &= \frac{f^{N+1} - f^N}{\Delta x} 
+  = 
+  9
+  &
+ (f')^1_\text{-, Neu.} = \frac{f^{1} - f^0}{\Delta x} 
+  = 
+  0
+  \ .
+\end{align}
+\begin{example}
+With Neumann boundary conditions, the matrix expression for the forward/backward derivative $D_\pm$ is
+\begin{align}
+    \left(D_+\right)_\text{Neu.}
+    &=
+    \frac{1}{\Delta x}
+    \begin{pmatrix}
+        -1 & 1 & & &  \\
+        & -1 & 1 & &  \\
+        & & -1 & 1 &  \\
+        & & & \ddots & \ddots &  \\
+        & & & & -1 & \pp 1 \\
+        & & & & & 0 
+    \end{pmatrix}
+    \\
+    \left(D_-\right)_\text{Neu.}
+    &=
+    \frac{1}{\Delta x}
+    \begin{pmatrix}
+        \pp 0 & & & &  \\
+         -1 & 1 & &  \\
+        & -1 & 1 &  \\
+         & & \ddots & \ddots &  \\
+        & & & -1 &  1 
+    \end{pmatrix}
+\end{align}
+\end{example}
+
+
+\paragraph{Periodic} Alternatively, we could  impose \textbf{periodic boundary conditions}. This is the assumption that the boundary to the right of $i=N$ is equivalent to the boundary to the left of $i=1$. Periodic boundary conditions amount to wrapping the $x$-axis into a circle. Older folks sometimes call this \emph{Asteroids} boundary conditions:
+\begin{align}
+  f^{i} &= f^{i+ kN}
+  & k\in \mathbb{Z} \ .
+\end{align}
+This gives
+\begin{align}
+  (f')^N_\text{$+$, Per.} &= \frac{f^{N+1} - f^N}{\Delta x}
+  = 
+  \frac{f^1- f^N}{\Delta x}  
+  &
+ (f')^1_\text{$-$, Per.} &=\frac{f^{1} - f^0}{\Delta x} 
+ = \frac{f^{1} - f^N}{\Delta x} 
+  \ .
+\end{align}
+\begin{example}
+With Periodic boundary conditions, the matrix expression for the forward/backward derivative $D_\pm$ is
+\begin{align}
+    \left(D_+\right)_\text{Per.}
+    &=
+    \frac{1}{\Delta x}
+    \begin{pmatrix}
+        -1 & 1 & & &  \\
+        & -1 & 1 & &  \\
+        & & -1 & 1 &  \\
+        & & & \ddots & \ddots &  \\
+        & & & & -1 & \pp 1 \\
+        1 & & & & & -1 
+    \end{pmatrix}
+    \\
+    \left(D_-\right)_\text{Per.}
+    &=
+    \frac{1}{\Delta x}
+    \begin{pmatrix}
+        1 & & & &  -1\\
+         -1 & 1 & &  \\
+        & -1 & 1 &  \\
+         & & \ddots & \ddots &  \\
+        & & & -1 &  1 
+    \end{pmatrix}
+\end{align}
+Look at those funny non-zero elements in the far corners. 
+\end{example}
+% \begin{align}
+%   {(f')}^N = \frac{1}{\Delta x}(f^{N+1} - f^N) 
+%   = 
+%   \frac{1}{\Delta x}(f^{1} - f^N) 
+%   \ .
+% \end{align}
+ Periodic boundary conditions show up \emph{all} the time in physics. Sometimes they show up in obvious places, like the Brillouin zone of a crystal lattice. Other times they show up in not-so-obvious places like the boundary conditions of the known universe. %In addition to being crucial for a well-defined function space, the boundary conditions of a system establish its topology\footnote{I cannot over-emphasize the importance of topology in contemporary physics. Most of the physics you will learn in your first year graduate courses are intrinsically \emph{local} because the laws of physics are causal. Topological quantities are \emph{global}, they are integrals over an entire space. Because winding numbers (and their higher-dimensional cousins) are quantized, they are robust against perturbations. The number of holes in a donut is one, whether or not it's been slightly squished in the box.}.
+
+\begin{exercise}
+We don't know anything about the universe outside the Hubble radius. Why do you think it would be reasonable in a physical model to \emph{assume} that it has periodic boundary conditions? Hint: what would happen to the $x$-momentum of an asteroid in the classic arcade game \emph{Asteroids} if the game did not have periodic boundary conditions? 
+\end{exercise}
+
+\paragraph{Mixed boundary conditions} You may also impose a Dirichlet boundary condition on one boundary and a Neumann boundary condition on the other boundary. 
+\begin{exercise}
+Write out the matrix expressions for the forward and backward derivatives $D_\pm$ with mixed boundary conditions with a Dirichlet boundary at $i=0$ and a Neumann boundary at $i=N+1$.
+\end{exercise}
+
+\paragraph{Second derivative}
+The second derivative may be defined symmetrically:
+\begin{align}
+  (f'')^i = \frac{(f^{i+1} - f^i) - (f^i - f^{i-1})}{\Delta x^2} \ .
+\end{align}
+You may pontificate about the reason why the first derivative does have a symmetric discretization while the second derivative does. 
+\begin{example}
+We may write the second derivative in matrix form:
+\begin{align}
+    \begin{pmatrix}
+        \ddots & & & & 
+        \\
+        & 1 & -2 & 1 &  & 
+        \\
+        &  & 1 & -2 & 1 &  \\
+        &  &  & 1 & -2 & 1 \\
+        & & & & &  &\ddots
+    \end{pmatrix} \ .
+    \label{eq:second:derivative:matrix}
+\end{align}
+We omit writing zeros and remain agnostic about the boundary conditions which affect the first and last rows of the matrix. Observe that the second derivative matrix is Hermitian, whereas all of our first derivative matrices are not Hermitian.
+\end{example}
+Like the first derivative, one must impose boundary conditions on the second derivative operator. 
+
+\begin{bigidea}
+The choice of boundary conditions is part of the definition of the function space. Every differential operator in the function space must obey the same boundary conditions. 
+\end{bigidea}
+
+\begin{exercise}
+Write out the matrix form of the forward third derivative:
+\begin{align}
+    \left(D_+^3 f\right)^i = \frac{1}{\Delta x}\left[(D^2 f)^{i+1}-(D^2f)^i\right] \ .
+\end{align}
+Observe that the third derivative matrix populates elements further away from the diagonal. This is a manifestation of the non-locality of higher derivatives. In a Taylor expansion, higher derivative terms probe the behavior of function at successively further points, even though each term is evaluated at a specific point.
+\end{exercise}
+
+\begin{example}
+Do you remember the first time you saw how integration by parts worked? I still remember the first time someone showed me that $(fg)' = f'g + g'f$, so we thus have $f'g = (fg)' - g'f$. Integrate both sides over the argument and use the fundamental theorem of calculus to evaluate the definite integral over a total derivative. You can also prove this in `histogram space,' i.e.\ for finite differences. Let us do this the ponderous way to see how it works:
+\begin{align}
+    \sum_i\Delta x\, (D_+f)^i g^i
+    &= \sum_i \left(f^{i+1}-f^{i}\right)g^i
+    \\
+    &= \left(f^2 g^1 - f^1 g^1\right) 
+        + \left(f^3 g^2 - f^2 g^2\right) 
+        % + \left(f^4 g^2 - f^3 g^2\right) 
+        + \cdots
+        + \left(f^{N+1} g^N - f^N g^N\right) 
+    \\
+    &=  - f^1 g^1 
+        + \left(f^2 g^1 - f^2 g^2 \right) 
+        + \left(f^3 g^2 - f^3 g^3 \right) 
+        % + \left(f^4 g^2 - f^3 g^2\right) 
+        + \cdots
+        + f^{N+1} g^N
+    \\
+    &= f^{N+1} g^N -  f^1 g^1   -\sum_i f^i\left(g^{i-1} - g^i \right)
+    \\
+    &= f^{N+1} g^N -  f^1 g^1   -\Delta x\sum_i f^i (D_-g)^i \ ,
+\end{align}
+All we have done in the intermediates steps is regrouped pairs of terms that have the same $f^i$ coefficient. Observe that integrating by parts over the forward derivative on $f$ leaves the backward derivative on $g$. Also observe that we have recovered the usual boundary term. Because the inital integral is a forward derivative, the forward boundary is not symmetric. 
+\end{example}
+
+\begin{exercise} \label{ex:integrate:kinetic:term:by:parts}
+If $x(t)$ is the position of a particle of mass $m$, then its kinetic term is $m\dot x(t)/2$. One way to derive the equation of motion for a theory is to integrate this term by parts, see Section~\ref{eq:variational}. Let us see how this works. Rather than $\dot x^2$, let us consider $(D_+f)(D_-g)$. We write $f$ and $g$ to make it easier to keep track of terms, but for the specific case of the kinetic term we know $f=g=x(t)$. 
+
+The integral over time corresponds to a sum over the time slice (histogram) index $i$ of $f$ and $g$:
+\begin{align}
+    \int dt\, \dot x(t)^2 \to \sum_i \Delta x \, (D_+f)^i(D_-g)^i \ .
+\end{align}
+Show that this sum takes the form
+\begin{align}
+    \sum_i \Delta x \, (D_+f)^i(D_-g)^i 
+    = -\sum_i f^i (D^2 g)^i 
+    + f^{N+1}(g^N-g^{N-1})
+    - f^1(g^1 - g^0) \ .
+\end{align}
+I was sloppy with the limits of the sum above. What values does $i$ range over in that sum?
+% HINT:
+\acro{Partial answer:}
+Here's the pattern:
+\begin{align}
+    D_+fD_-g &= 
+    f^2g^2 - f^2g^0 - f^1 g^1 + f^1 g^0\\
+    &+ f^3 g^2 - f^3 g^1 - f^2 f^2 + f^2 g^1 \\
+    &+ f^4 g^3 - f^4 g^2 - f^3 g^3 + f^3 g^2 \\
+    &+ \cdots \\
+    & + f^{N+1} g^N - f^{N+1} g^{N-1} - f^N g^N + f^N g^{N-1}  \ .
+\end{align}
+\end{exercise}
+
+\subsection{Derivatives in other function space bases}
+\label{sec:derivatives}
+
+\flip{This section can be skipped on a first reading.}
+
+There are other ways to write a discrete basis of functions. Here is a natural one for functions that are up to second-order polynomials:
+\begin{align}
+  \vec{e}_{(0)} &= 1
+  &
+  \vec{e}_{(1)} &= x
+  &
+  \vec{e}_{(2)} &= x^2 \ .
+\end{align}
+Let’s sidestep questions about orthonormality for the moment. Clearly linear combinations of these basis functions can produce any quadratic function:
+\begin{align}
+  f(x) &= a x^2 + bx + c
+  & \Rightarrow&&
+  \vec{f} &=
+  \begin{pmatrix}
+     c \\ b \\ a
+   \end{pmatrix} \ . 
+\end{align}
+The derivative operator has an easy representation in this space:
+\begin{align}
+  D = 
+  \begin{pmatrix}
+    0 & 1 & 0   \\
+    0 & 0 & 2   \\
+    0 & 0 & 0   
+  \end{pmatrix} \ .
+\end{align}
+We can see that
+\begin{align}
+  D \vec{f}  &= 
+  \begin{pmatrix}
+     b \\
+     2 a \\
+     0
+  \end{pmatrix} 
+  &
+  D^2 \vec{f}  &= 
+  \begin{pmatrix}
+     2a \\
+     0 \\
+     0
+  \end{pmatrix} 
+  &
+  D^3 \vec{f}  &= 
+  0 \ .
+\end{align}
+The last line is, of course, the realization that the third-derivative of a quadratic function vanishes. Feel free to attach mathy words to this like \emph{kernel}.\footnote{Unfortunately `kernel' is also used when discussing probability distributions. To the best of my knowledge the two usages are completely independent.} One hint why this basis may be annoying is that the second derivative matrix is not Hermitian, unlike in \eqref{eq:second:derivative:matrix}.
+
+There are other bases that we may use for function space. A particularly nice one that we will use over and over is the Fourier basis, which we usually refer to as \emph{momentum space}. The basis vectors are things like sines, cosines, or oscillating exponentials. These do not vanish for any power of $D$.
+
+
+\subsection{Locality}
+\label{sec:locality}
+
+Notice that in the histogram basis, the derivative matrix $D$ is sparse: it is zero everywhere away from the diagonal. The only non-zero elements on the $i^\text{th}$ row are around the $(i\pm 1)^\text{th}$ column.  Higher powers of $D$ sample further away, but the non-zero elements are always clustered near the diagonal.
+
+This is simply a notion of \textbf{locality}. Remember the Taylor expansion:
+\begin{align}
+  f(x) = f(0) + f'(0) x + \frac{1}{2} f''(0)x^2 + \cdots \ .
+\end{align}
+If we think about the histogram as a discretization of a continuous function, then it is clear what the higher derivatives are doing. Given a function $f(x) = \vec{f}$, one might like to know about the function around some point $x_0$ corresponding to some index $i$. That is: $f^i = f(x_0)$. If you’d like to learn more about the function around that point, one can express the derivative at $x_0$. Thus $D\vec{f}$ says something about the slope, $D^2\vec{f}$ says something about the curvature, and so on. Because each successive power of $D$ samples terms further away from $f^i$, you can tell that these higher order terms are learning about the function further and further away from $x_0$. 
+
+Now think about the types of differential equations that you have encountered in physics. They often include one or two derivatives. You hardly ever see three, four, or more derivatives\footnote{With some thought, it may also be clear why spatial derivatives typically appear squared.}. There is a reason for this: at the scales that we can access experimentally, nature appears to be local. Our mathematical models of nature typically have locality built in\footnote{A recent counterexample ``A Jewel at the Heart of Quantum Physics,'' by Natalie Wolchover in \emph{Quanta Magazine} (2013).
+% https://www.quantamagazine.org/physicists-discover-geometry-underlying-particle-physics-20130917/
+}. Physics at one spacetime point should not depend on spacetime points that are far away. 
+
+We mentioned this in Section~\ref{eq:simultaneity} when we thought about special relativity. Recall the idea of causality---the idea that $A$ \emph{causes} $B$ therefore $A$ must have happened \emph{before} $B$. One of the key results in special relativity is that causality can be tricky if two events do not occur at the same spacetime point. More carefully, $A$ can only cause $B$ if there is a timelike separation of the appropriate sign.  If we want to build causal theories of nature, then the dynamics at $x_0$ should not rely on what is happening at $x_1$, a finite distance away.\footnote{This is different from saying that information cannot propagate from $x_0$ to $x_1$; such propagation could come from some causal excitation of the electromagnetic field traveling every infinitesimal distance between the two positions. This is reminiscent of the classical Zeno's paradox.}
+
+% \section{The Green's Function Problem in Function Space}
+
+% The Green's function can be defined by analogy to the finite-dimensional inverse transformation. The finite-dimensional linear system $A\vec v = \vec w$ can be solved by applying the inverse transformation $A^{-1}$ in the same way that the continuum (infinite-dimensional) system $\mathcal O \psi(x) = s(x)$ can be solved with the Green's function $G(x,y)$ of the operator $\mathcal O$:
+% \begin{align}
+%   v^i &= \sum_i 
+%   \mat{\left(A^{-1}\right)}{i}{j} w^j
+%   &\Rrightarrow
+%   &
+%   &
+%   \psi(x) &= \int  dy\, G(x,y) s(y) \ .
+%   \label{eq:def:of:function:space:Greens:function}
+% \end{align}
+% We've explicitly written out the sum over the dummy index $i$ to emphasize the analogy to the integration over the dummy variable $y$. The arguments of the functions play the role of `continuum indices.'
+
+
+The assumption that nature is local leads to physical \emph{dynamics} that are described in terms of derivatives. Newton's law is 
+\begin{align}
+    m \ddot{\vec{x}} (t) = -\nabla V \ .
+\end{align}
+On the left hand side is a second derivative in time. The right hand side is simply a function---nevermind that it is a spatial gradient of a potential. Most of our equations of motion are written in a differential form:
+\begin{align}
+    \mathcal O f(x) = s(x) \ ,
+\end{align}
+where $\mathcal O$ is a \textbf{differential operator} that is a matrix in function space built out of derivatives, $f(x)$ encodes something about the state of the system, and $s(x)$ is a source for the dynamics. For Newton's force law, $\mathcal O = (d/dt)^2$ and $s=-\nabla V/m$. The variable is often time since we care about the time evolution of a system and our dynamical laws tell us the `small change' in a state after a `small time evolution.' More generally, it can be a spacetime position coordinate.
+
+
+
+\subsection{Differential Operators}
+
+Linear transformations on function space are differential operators. In principle you can imagine linear transformations that are not differential operators, for example a finite translation. However, because our models of nature are typically \emph{local} and \emph{causal}, the linear transformations that we obtain from physical models are differential operators\footnote{This is not to say that finite transformations are somehow not permitted. The dynamics that govern our models of nature, however, only dictate how information is transmitted infinitesimally in space and time. Propagation forward in time by some finite interval is described by the exponentiation of infinitesimal forward time translations. This is, of course, why the time-translation operator in quantum mechanics is $e^{i\hat H t}$, where the Hamiltonian $H$ is described as a local function with perhaps one or two derivative operators.}. 
+
+Let's write a general differential operator as:
+\begin{align}
+  \mathcal O = 
+  p_0(x) 
+  + p_1(x) \frac{d}{dx}
+  + p_2(x) \left(\frac{d}{dx}\right)^2
+  + \cdots
+  \label{eq:differential:operator}
+\end{align}
+where the $p_i(x)$ are polynomials. Sometimes we will write this as $\mathcal O_x$ to make it clear that the argument of the polynomials is $x$ and the variable with which we are differentiating is $x$.  
+\begin{exercise}
+Explain why \eqref{eq:differential:operator} is a linear operator acting on function spaces.
+\end{exercise}
+\begin{exercise}
+A confused colleague argues to you that \eqref{eq:differential:operator} cannot possibly be `linear.' Just look at it, your colleague says: the functions $p_i(x)$ are polynomials---those aren't \emph{linear}! There are also powers of derivatives---how is that possibly linear? Explain to your colleague why the $p_i(x)$ does not have to be linear nor is one restricted to finite powers of derivatives for the operator $\mathcal O$ to be a linear operator acting on function space.
+\end{exercise}
+Technically \eqref{eq:differential:operator} is called a \textbf{formal operator} because we haven't specified the boundary conditions of the function space. Recall in our discretized `histogram space' in Section~\ref{sec:histogramspace} that we had to be careful about how to define the derivative acting on the boundaries of the space. A differential operator along with boundary conditions is called a \textbf{concrete operator}.
+
+\subsection{Inner Product}
+
+Let us return to finite-dimensional histogram space. As long as we are finite dimensional, this is a perfectly legitimate vector space. We would like to endow this vector space with a metric. Perhaps the Euclidan metric? As we will see shortly, it is useful to define a metric that is proportional to the Euclidean metric by $\Delta x$, the discretization size of our histogram space:
+\begin{align}
+    g_{ij} &=
+    \Delta x 
+    \begin{cases}
+    1 & \text{if } i=j \\
+    0 & \text{otherwise}
+    \end{cases}
+    \ .
+    \label{eq:metric:on:histogram:space}
+\end{align}
+This gives a definition for components with a lower index:
+\begin{align}
+    \bra{f} &= f_i\bra{i} & f_i &= \Delta x f^i \ .
+    \label{eqref:histogram:row:vec}
+\end{align}
+The factor of $\Delta x$ makes it seem like the `row vector' or bra $\bra{f}$ is something that is born to be integrated over. \emph{As long as $N$ is finite,} the dual basis $\bra{i}$ is defined as usual, $\la i | j \ra = \delta^i_j$. The inner product of two histograms is
+\begin{align}
+    \la f , h \ra = f^i h^j g_{ij} = f^i h_i \Delta_x = \sum_i f^i h^i \Delta x \ .
+\end{align}
+If we think of $f_i = f(x_i)$ and $h^i=h(x_i)$ then the above sum is simply the discretization of the integral
+\begin{align}
+    \la f , h \ra = \int dx\, f(x)h(x) \ .
+\end{align}
+For complex functions, we generalize this a bit to include a complex conjugate on the first argument:
+\begin{align}
+  \langle f,h\rangle 
+  =
+  \int dx\, f^*(x)h(x) \ .
+  \label{eq:L2:inner:product}
+\end{align}
+This is called the \acro{L2} inner product. Observe that this definition satisfies the metric condition for complex vector spaces \eqref{eq:complex:metric:star}, $\la f, h\ra = \la h, f \ra^* $.
+\begin{example}
+Wave functions in 1D quantum mechanics obey this norm. For an infinite domain, we typically restrict to square-integrable functions meaning that $|f|^2$ goes to zero fast enough at $\pm \infty$ so that the integral $\langle f, f\rangle$ is finite. 
+\end{example}
+Sometimes the inner product is defined with respect to a \textbf{weight} function $w(x)$:
+\begin{align}
+  \langle f,g\rangle_w 
+  =
+  \int dx\, w(x)\, f^*(x)g(x) \ .
+  \label{eq:weighted:inner:product}
+\end{align}
+There's nothing mysterious about inner products with weights. They typically boil down to the fact that one is not using Cartesian coordinates. We will assume unit weight until we go to higher spatial dimensions\footnote{My dissertation focused on theories of extra dimensions. I also noticed that my weight increased in my final year of graduate school as I spent most of my time writing about extra dimensions and eating cafe pastries.}.
+\begin{example}
+Have you met the Bessel functions? If not, you're in for a treat in your electrodynamics course. The Bessel functions satisfy a funny orthogonality relation with weight $w(x)\sim x$ because they show up as the radial part of a solution when using polar coordinates. When you separate variables, $d^2x = rdr\,d\theta$, we see that the measure over the radial coordinate $r$ carries a \emph{weight} $r$.
+\end{example}
+
+\subsection{Adjoint}
+
+This looks very promising. We have an inner product that can pave the way to taking the infinite dimensional limit of our histogram space. We can now make more precise statements about derivatives. We use the term \textbf{differential operator} (or simply operator) to mean some linear transformation built out of derivatives that act as matrices in function space. There are other `matrices'  that are not differential operators, but these tend to be \emph{nonlocal} and hence do not often show up in physical theories. We can now formalize the sense in which some differential operators are self-adjoint (Hermitian) and others are not. Recall that a self-adjoint operator satisfies \eqref{eq:adjoint}
+\begin{align}
+    \mathcal O^\dag &= \mathcal O
+    &
+    \text{where}&
+    &
+    \la \mathcal O^\dag f,h\ra \equiv \la f, \mathcal O h \ra \ .
+\end{align}
+Recall that we have to assume some boundary conditions for the space. 
+Writing this out with respect to our integral expression for the inner product:
+\begin{align}
+\int dx \, \left[\mathcal O^\dag f(x)\right]^*  h(x)
+&=
+  \int dx \, f(x)^* \left[\mathcal O h(x)\right]
+   \ .
+\end{align}
+The strategy is as follows: given an inner product (integral) over $f^*$ and $g$ where there is some stuff ($\mathcal O$) acting on $g$, can we re-write this as an integral with no stuff acting on $g$ and some \emph{other} stuff acting on $f^*$? If so, then the `other stuff' is the adjoint $\mathcal O^\dag$.
+
+\begin{example}
+What is the adjoint of the derivative operator, $\mathcal O = d/dx$? Assume an interval $x\in[a,b]$ and Dirichlet boundary conditions, $f(a)=f(b)=0$. There's a simple way to do this: integrate by parts.
+\begin{align}
+  \int dx \,  f(x) \left[\frac{d}{dx} g(x)\right]
+  =
+  - \int dx \, \left[\frac{d}{dx}f(x)\right]^* g(x)
+  +
+  \left[f^*(x)g(x)\right]^b_a \ 
+  =
+  \int dx \, \left[-\frac{d}{dx}f(x)\right]^* g(x)
+  \ . 
+\end{align}
+From this we deduce that
+\begin{align}
+  \left(\frac{d}{dx}\right)^\dag = -\frac{d}{dx} \ .
+\end{align}
+\end{example}
+
+% \begin{example}
+% Consider the vector space of functions defined over $-1 \leq x \leq 1$ with Dirichlet boundary conditions. The first derivative, $\mathcal O = d/dx$, is not Hermitian. We can show this using integration by parts and the \acro{L2} inner product \eqref{eq:L2:inner:product}:
+% \begin{align*}
+%     \left\la \frac{d}{dx} f , h \right\ra
+%     &= 
+%     \int_{-1}^1 dx\, f'(x) h(x)
+%     =
+%     \int_{-1}^1 dx\, \frac{d}{dx}\left[f(x)h(x)\right]
+%     - 
+%     \int_{-1}^1 dx \, f(x) h'(x)
+%     = 
+%     - \left\la f, \frac{d}{dx} h \right\ra \ .
+% \end{align*}
+% We have used the Dirichlet boundary conditions to remove the boundary term. Observe that $(d/dx)$ is \emph{almost} self-adjoint. If only it weren't for that damn minus sign. 
+% \end{example}
+
+
+We will be especially interested in \textbf{self-adjoint} (Hermitian) operators for which
+\begin{align}
+  \mathcal O^\dag = \mathcal O \ .
+\end{align}
+This is, as we mentioned for the finite-dimensional case, because self-adjoint operators are \emph{nice}: they have real eigenvalues and orthogonal eigenvectors. Since most physical values are real eigenvalues of some operator, one may expect that the differential operators that show up in physics are typically self-adjoint.
+\begin{exercise}
+We saw above that the derivative operator is not self-adjoint. Show that the complex differential operator $\mathcal O=i(d/dx)$ is self-adjoint. \emph{Hint: what is the momentum operator in quantum mechanics?}\footnote{\url{https://aapt.scitation.org/doi/abs/10.1119/1.9932}} 
+\end{exercise}
+
+
+\begin{example}
+Consider $\mathcal O = -(d/dx)^2$ defined on the domain $x\in [0,1]$ with the boundary conditions $f(0)=f(1)=0$. Is this operator self-adjoint? We want to check of $\langle f,\mathcal O g\rangle = \langle O f, g \rangle$. We have one trick: integration by parts. Let's see how this works.
+\begin{align}
+  \langle f, \mathcal O g\rangle &= - \int dx\, f^*(x)\frac{d^2}{dx^2} g(x) \ .
+\end{align}
+This is compared to
+\begin{align}
+  \langle \mathcal O f, g\rangle 
+  &= -\int^1_0 dx\, \left[ \frac{d^2f}{dx^2}\right]^*g(x) 
+  \\
+  &= 
+  -\left.
+    \left(\frac{df}{dx}\right)^*
+    g(x)
+    \right|^1_0
+  + \int^1_0 dx \, \left(\frac{df}{dx}\right)^* \frac{dg}{dx}
+  \\
+  &= \left.f^*(x) \frac{dg}{dx} \right|^1_0
+  - \int^1_0 dx \, f^*(x) \frac{d^2g}{dx^2}  
+  \\
+  &=
+  - \int^1_0 dx \, f^*(x) \frac{d^2g}{dx^2}
+  \ .
+\end{align}
+And so we see that indeed $(-d^2/dx^2)^\dag = -d^2/dx^2$.
+\end{example}
+\begin{exercise}
+In the previous example, what is the significance of the overall sign of the operator? \emph{Hint: the sign doesn't matter, it's because we typically think of $-\partial^2$ and its higher-dimensional derivatives as the square of the momentum operator.}
+\end{exercise}
+\begin{example}\label{ex:eigenfunction:fourier}
+The \textbf{eigenfunctions} $f_n$ of $-d^2/dx^2$ defined on $x\in [0,1]$ with Dirichlet boundary conditions are simply 
+\begin{align}
+  f_n(x) &= A_n \sin(n\pi x) 
+  &
+  \lambda_n = n^2\pi^2 \ ,
+  \label{eq:fourier:basis:unit:interval}
+\end{align}
+where $\lambda_n$ is the associated eigenvalue and $A_n$ is some normalization that. These eigenfunctions are orthonormal in the following sense:
+\begin{align}
+  \langle f_n, f_m\rangle = \int_0^1 dx\, \sin(n\pi x)\sin(m\pi x) = \frac{A_nA_m}{2} \delta_{nm} \ ,
+\end{align}
+from which we deduce that the normalization is $A_n = \sqrt{2}$. That's basically all there is to know about Fourier series.
+\end{example}
+\begin{exercise}
+What would change if we had instead assumed Neumann boundary conditions? What if we had assumed periodic boundary conditions? What about anti-periodic boundary conditions?
+\end{exercise}
+\begin{exercise}\label{exe:eigenfunction:fourier}
+A function $g(x)$ defined on an interval $x\in [0,1]$ with Dirichlet boundary conditions can be written with respect to the Fourier basis \eqref{eq:fourier:basis:unit:interval}. In ket notation, the $n^\text{th}$ component of $g$ with respect to this basis is
+\begin{align}
+  g^n = \langle f_n| g\rangle \ .
+\end{align}
+Confirm that this is precisely what you know from Fourier series. In other words, we can decompose $g(x)$ as
+\begin{align}
+  g(x) &= \sum_n \langle f_n| g\rangle f_n(x)  \ .
+\end{align}
+\end{exercise}
+
+
+
+
+
+% \begin{example}
+% Show that the  differential operator $\mathcal O=(d/dx)^2$ is self-adjoint. 
+% \end{example}
+
+
+With a clean definition of self-adjointness, we can now define `nice' differential operators are those operators that are self-adjoint. This is the function space equivalent of symmetric matrices in real, finite dimensional vector spaces and Hermitian matrices in complex, finite dimensional vector spaces. In the histogram basis we have some semblance of Hermiticity, but we saw that the $N\to\infty$ limit is a little tricky. $i(d/dx)$ is a self-adjoint operator in function space, but its discretization, the forward/backward derivative $D_\pm$, is not Hermitian because the two non-zero elements on each row are cannot be evenly spaced about the diagonal. 
+
+The following observations carry over from finite-dimensional vector space:
+\begin{enumerate}
+    \item The eigenvectors of a self-adjoint differential operator are orthogonal and may be chosen to be orthonormal.
+    \item The eigenvalues of a self-adjoint differential operator are real.
+\end{enumerate}
+The proof of these assertions are the same since they depend on general properties of the inner product. There is an additional feature: the eigenvalues are ordered. Function space is infinite in two senses: first the domain may be infinite, $x\in [-\infty, \infty]$. Second, the number of points in any finite interval is also infinite: $\Delta x \to 0$. Rather than having to discover an infinite number of eigen-stuff, we will often have \emph{one} eigenvalue equation with multiple enumerable solutions and whose eigenvalues are enumerated with respect to these solutions. 
+\begin{example}
+Consider the solution to the function space eigenvalue problem in Example~\eqref{ex:eigenfunction:fourier}. The eigenvalues are $\lambda_n=n^2\pi^2$ with corresponding eigenfunctions proportional to $\sin(n\pi x)$. The integer $n$ enumerates the solution and plays role of the index of the eigenbasis.
+\end{example}
+
+Finally, we remind ourselves that we have restricted our study to `matrices' in function space that are differential operators. It is entirely possible to conceive of a matrix that is not a differential operator. The discussion of locality in Section~\ref{sec:locality} motivates that \emph{physical} theories are local and hence the dynamical equations of motion are written with respect to differential operators. Similarly, matrices are usually uniform across all of space: this is because of the physical principle of translation invariance. The laws of physics in one location are the same laws as they are at another location in both space and time. This does not mean that the \emph{source} of a physical effect is uniform, only that the \emph{dynamics} are uniform. 
+
+At this point one should review Section~\ref{sec:inverting:nice:matrices}. The general form of an eigenfunction problem in physics is that we are given some \emph{equation of motion}
+\begin{align}
+    \mathcal O f(x) = s(x) 
+\end{align}
+that describes what happens to a \emph{state} $f(x)$---perhaps the position of a particle---under some \emph{dynamics} described by the differential operator $\mathcal O$ whose effects are\emph{sourced} by $s(x)$. If $\mathcal O$ is self-adjoint, then we can diagonalize it with respect to an eigenbasis and solve this problem trivially. Most of the named special functions that show up in physics are only name-worthy because they are eigenfunctions of differential operators that show up in physics.
+
+
+
+% not just derivatives
+
+% To do: parity
+% To do: the eigenvalue problem for inverting a matrix: the Green's function problem
+
+\subsection{Cracks in the scaffolding as we go to the continuum}
+
+It may be clear that something goes wrong as we formally pass from the histogram basis to a continuum basis. That is, when we take the $N\to \infty$ limit.\footnote{There are two $N\to \infty$ limits: the first one is the infinite number of points in any finite interval. The second is the infinite size of a space whose boundaries go to $\pm\infty$. }
+
+The notion of building up continuous functions $f(x)$ from the histogram basis above turns out to be problematic from the point of view of mathematical rigor. You can read more about the problems in Appel, \emph{Mathematics for Physicists} Chapter 9.1 (``Insufficiency of Vector Spaces''), or Hassani, \emph{Mathematical Physics}, Chapter 7 (``Hilbert Spaces''). As long as histogram space is finite dimensional, you can treat it as $\RR^N$ and even endow it with an inner product---say the Euclidean inner product. If you want to be fancy, at this level the metric space in the $N\to\infty$ limit is called a \emph{pre-Hilbert} space. 
+
+One problem that shows up is that the norm of a vector is now an infinitely long series. If we had not inserted the $\Delta x$ in our definition of the metric \eqref{eq:metric:on:histogram:space}, then the norm of a function in histogram space is
+\begin{align}
+    |f|^2 - \la f, f \ra = \sum_{i=1}^\infty (f^i)^2 \ .
+\end{align}
+How do you normalize a vector that has $f^i = 1$ for all values of $i$? Enforcing $|f|^2 = 1$ seems to imply that each $f^i \to 0$. This is very fishy. Fortunately, inserting the $\Delta x$ in the metric seems to help:
+
+\begin{align}
+    |f|^2 = \sum_{i=1}^\infty (f^i)^2 \Delta x \to \int dx\, |f(x)|^2 \ .
+    \label{eq:norm:in:function:space}
+\end{align}
+If the interval on which our function is defined has length $L = x_\text{max}- x_\text{min}$, then we may enforce that $\Delta x = L/N$ so that the discrete sum makes sense as $N\to\infty$. On the right-hand side we take the continuum limit. Functions for which the integral over $|f(x)|^2$ are well-defined\footnote{This means that they are non-zero and do not diverge.} are known as \emph{square integrable}, or \acro{L2}. 
+
+Let us now try to make sense of the basis bras and kets. We know from Section~\ref{sec:machine:to:make:row:vectors} that the inner product gives us a natural way to define bras from kets. In the finite dimensional limit, we had \eqref{eqref:histogram:row:vec} $\bra{f}$ with components $f_i\equiv \Delta x f^i$. The factor of $\Delta x \to dx$ makes it clear that the bras of function spare are \emph{distributions}: functions that are born to be integrated over.\footnote{In probability theory we write the probability distribution of a continuous variable to be $p(x)\,dx$. The interpretation is that the probability to find $x\in (a,b)$ is the integral $\int_a^b dx\, p(x)$. The value of $p(x)$ by itself does not mean anything: it is the probability that $x$ is \emph{exactly} some value, say $x=1.00000$ and not $x=1.00001$.} The inner product tells us that the bra $\bra{f}$ is
+\begin{align}
+    \bra{f} = \la f, \smallslot \ra = \int dx\, f(x)^* \smallslot \ .
+\end{align}
+Just feed it a function (ket) and perform the integral. We have left the limits of integration implicit, but we should remember that these are integrals over the domain of the function. The definition of this domain and the boundary conditions are part of the definition of the function space. 
+\begin{example}
+Let $ \bra{p}=\int_0^1 dx\, p(x)\smallslot$ be the probability function for some variable $x \in [0,1]$. The expectation value for some function $\ket{g}=g(x)$ is
+\begin{align}
+\la g\ra_p \equiv
+     \la p, g \ra = \int_0^1 dx\, p(x)\,g(x) \ .
+\end{align}
+\end{example}
+
+The histogram basis $\ket{x}$ satisfies
+\begin{align}
+    \la x | y \ra = \la x, y \ra = 0 \quad \text{if } x\neq y \ .
+\end{align}
+However, in the \emph{infinite dimensional} (continuum function) limit, we can no longer say that $\la x | y \ra = 1$ if $x=y$. This is a consequence of the unusual normalization we noticed in \eqref{eq:norm:in:function:space}. Let us assume that the domain of the function space is $x\in [0,N\Delta x]$. In the histogram basis where space is discretized, we may to define the basis functions as follows:
+\begin{align}
+    \ket{i} = 
+    e_i(x) \equiv 
+    \mathcal N
+    \begin{cases}
+    0 &\text{if } x< (i-1)\Delta x\\
+    1 &\text{if } (i-1)\Delta x \leq x \leq i\Delta x\\
+    0 &\text{if } \leq i\Delta x < x 
+    \end{cases}    \ .
+\end{align}
+What is the value of the normalization, $\mathcal N$? We would like $\la i,f\ra = f^i = f(x_i= i\Delta x)$. Given our normalization of the inner product, this means
+\begin{align}
+    \la i, f\ra = \int dx\, e_i(x)\, f(x) = \mathcal N \Delta x f(x_i) \ .
+    \label{eq:basis:normalization:of:function:space}
+\end{align}
+We have been a little sneaky: we have defined our histogram space as as a stepwise functions on a continuous space so that we could use the integral representation of the inner product. No matter. The result is that $\mathcal N = 1/\Delta x$. However, we want to take the $\Delta x \to 0$ limit, which means that the normalization $\mathcal N$ of the basis ket $\ket{i}$ blows up. Oh dear.
+
+
+
+
+% From Shankar p.58
+We can gain more insight on this by using the \textbf{completeness} relation. Earlier we called this \emph{multiplication by one}: $\one = \sum_i \ket{i}\bra{i}$. For a continuous function space this sum becomes an integral:
+\begin{align}
+    \int dx \, \ket{x}\bra{x} = \one \ .
+\end{align}
+where we have again left the integration limits implicit. If we act on a function with this representation of the identity, we have:
+\begin{align}
+    \ket{f} = \int dx\, \ket{x}\bra{x} f\ra  \ .
+\end{align}
+The significance becomes more clear if we apply $\bra{y}$ to both sides:
+\begin{align}
+    f(y) =  \la y | f \ra = \int dx\, \la y | x \ra \la x | f \ra 
+    = \int dx\, \la y | x \ra f(x) \ .
+\end{align}
+This tells us that whatever $\la y | x\ra$ is, it must be a distribution such that when it is integrated over $f$ it picks out the the value of $f$ at position $y$. Let us \emph{define} this object $\delta(x-y) \equiv \la y | x \ra$:
+\begin{align}
+    \la y | x \ra &\equiv \delta(x-y) 
+    &
+    \int dx\, \delta(x-y) f(x) &\equiv f(y) \ .
+\end{align}
+This object is called the Dirac $\delta$-function and is the function space analog of the Kronecker $\delta$. We have assumed that $\delta$-function only depends on the difference $|x-y|$. In principle it could have depended on $x$ and $y$ separately, but we know that it is only non-zero when $x=y$. Furthermore, the $\delta$-function is normalized:
+\begin{align}
+    \int dx\, \delta(x) = 1 \ ,
+ \end{align}
+ assuming that the integration region includes $x=0$. Note that $\delta(0)$ is divergent. It seems to be infinite, reflecting the $\Delta x\to 0$ limit that worried us below \eqref{eq:basis:normalization:of:function:space}.  This means that the $\delta$-function is not really an admissible ``function.'' It is not a basis vector. $\delta(x-y)$ is simply a way to make sense of the object $\la y | x\ra$. Because this object always shows up under an integral, we never have to worry about what it means at an individual point. In other words: if you ever have a $\delta$-function without a corresponding integral, you have almost certainly done something wrong. 
+
+ \begin{exercise}
+ How do you make sense of the derivative of a $\delta$-function? Hint: integrate by parts. 
+ \end{exercise}
+ 
+
+
+
+
+
+
+
+\begin{bigidea}
+The issue of a normalized basis in an infinite dimensional vector space is the difference between the Kronecker $\delta$ and the Dirac $\delta$-function. The Kronecker $\delta$ is always finite: it is zero most places, and one in a small window where two discrete indices match. The Dirac $\delta$-function is zero almost everywhere, except for a single point (vanishing width) where it is formally infinite.
+\end{bigidea}
+
+
+
+
+\subsection{Why histogram space is dumb}
+\label{sec:histogram:space:is:dumb}
+
+\flip{This section can be skipped on a first reading.}
+
+
+
+There is a more formal sense in which the $N\to\infty$ limit is challenging. This is the notion of convergence. Imagine a \emph{sequence} of vectors. This is just a list of vectors. Let us label these vectors as $\ket{v}_{(i)}$, where $i$ indexes vectors in the sequence. For example,
+% example from Appel Ch. 91
+\begin{align}
+    \ket{v}_{(1)} &=
+    \begin{pmatrix}
+        1 \\ 0 \\ 0 \\ \vdots \\ 0
+    \end{pmatrix}
+    &
+    \ket{v}_{(2)} &=
+    \begin{pmatrix}
+        1 \\ 2^{-1} \\ 0 \\ \vdots \\ 0
+    \end{pmatrix}
+    \ket{v}_{(3)} &=
+    \begin{pmatrix}
+        1 \\ 2^{-1} \\ 2^{-2} \\ \vdots \\ 0
+    \end{pmatrix} \ .
+    \label{eq:Appel:eg:cauchy:i}
+\end{align}
+We have chosen this sequence such it has a limiting form, $\ket{v}_{(\infty)}$
+\begin{align}
+    \ket{v}_{(\infty)} &=
+    \left.
+    \begin{pmatrix}
+        2^{-0} \\ 2^{-1} \\ 2^{-2} \\ \vdots \\ 2^{-N}
+    \end{pmatrix}
+    \right|_{N\to\infty} \ .
+    \label{eq:Appel:eg:cauchy:N}
+\end{align}
+We say that the sequence $\{|\ket{v}_{(i)}\}$ is a \textbf{Cauchy sequence} that limits to $\ket{v}_{(\infty)}$ if 
+\begin{align}
+    \lim_{i\to\infty} \ket{v}_{(i)} \to \ket{v}_{(\infty)} \ ,
+\end{align}
+by which we mean that the norm $|\ket{v}_{(i)}-\ket{v}_{(\infty)}|\to 0$.  The example sequence in \eqref{eq:Appel:eg:cauchy:i} has finite \emph{support}\footnote{Here the support of a vector means the non-zero elements.}, and so each element is normalizable. If we want to hold on to this notion of normalizabliity, then we may want to take our infinite-dimensional vector space and restrict to only those vectors with finite support. However, the vector $\ket{v}_{(\infty)}$ clearly does not have finite support. We say that the space of finite support vectors is not \textbf{complete} because there are Cauchy sequences that do not contain their limits.
+\begin{exercise}
+(From Appel, Section 9.1) Show that the sequence \eqref{eq:Appel:eg:cauchy:i} is a Cauchy sequence that converges to \eqref{eq:Appel:eg:cauchy:N}. As an intermediate step, show that
+\begin{align}
+    |\ket{v}_{(i)}-\ket{v}_{(\infty)}| = \sum_{j=i}^\infty \frac{1}{4^i}
+    = \left(\frac{4}{3}\right)\frac{1}{4^i} \to 0 \ .
+\end{align}
+In the penultimate step you can use the expression for a geometric series.
+\end{exercise}
+
+The observation here is that infinite-dimensional metric spaces are not always complete. When they are complete, the metric space is called a \textbf{Hilbert space}. The great thing about Hilbert spaces is that we can treat them as $N\to\infty$ limits of finite dimensional vector spaces. 
+
+
+% Another Example: Hassani Example 7.1.5 on p.217. Takes a sequence of continuous functions that limits to a discontinuous function. 
+
+
+
+% The problem in an infinite dimensional vector space is that one can take a convergent sequence of vectors whose limiting vector is not part of the vector space. This has to do with the definition of a norm of a vector with an infinite number of terms. Our histogram space is a vector space with a good inner product: this is called a \textbf{pre-Hilbert space}. An infinite dimensional vector space that \emph{does} contain all of its limits\footnote{Formally this means that any sequence of points that progressively become arbitrarily close to each other (a Cauchy sequence) converges to a point that is also in the space.} (it is complete) is called a \textbf{Hilbert space}.
+
+% \flip{To do: show why the histogram space fails the Cauchy sequence test.}
+
+
+
+
+\subsection{Legendre Polynomials: salvaging the polynomial basis}
+
+Consider functions on the domain $x\in[-1,1]$ with the standard function space inner product, \eqref{eq:L2:inner:product}. We now have a few reasons to think that the basis of monomials \eqref{eq:polynomial:basis} is silly. First, they do not obey an obviously meaningful boundary condition: the functions are $1$ at $x=1$  and $\pm 1$ at $x=-1$ depending on whether the index of the basis function is even or odd. It is also clear that linear combinations of these basis functions do not satisfy the same boundary conditions. Secondly, this basis behaves poorly under derivatives. Derivatives act as projection operators onto successively smaller subspaces. Finally, the monomials are not orthonormal in any meaningful sense. For example,  in the basis
+\begin{align}
+    \la n, m \ra  = \int_{-1}^1 dx\; x^{n+m} = \left.\frac{x^{n+m-1}}{n+m}\right|^{x=1}_{x=-1}
+    =
+    \begin{cases}
+    0 & \text{if } n+m-1 \text { is odd}
+    \\
+    \frac{2}{n+m} & \text{if } n+m-1 \text { is even} \ .
+    \end{cases}
+\end{align}
+
+The Legendre polynomials are a basis of polynomial functions on the domain $x\in[-1,1]$ with the standard function space inner product, \eqref{eq:L2:inner:product} that are at the very least orthogonal.\footnote{They have the feature that $(1-x^2)f(x)$ obeys Dirichlet boundary conditions.} The first few are listed here:
+\begin{align}
+    P_0(x) &= 1
+    &
+    P_1(x) &= x
+    &
+    P_2(x) &= \frac{1}{2}(3x^2-1)
+    &
+    P_3(x) &= \frac{1}{2}(5x^3-3x) \ .
+\end{align}
+\begin{exercise}
+Let $\ket{n}$ be the $n^\text{th}$ Legendre polynomial, $P_n(x)$.
+Confirm that $\la 2, 1 \ra = 0$. Show that $\la 2, 2 \ra$ is not zero, however it is also not one. Derive what the appropriate normalization needs to be imposed on the first four Legendre polynomials to make them orthonormal. 
+\end{exercise}
+\begin{exercise}
+Use the Gram--Schmidt procedure to derive $P_5(x)$, up to normalization. 
+\end{exercise}
+
+
+
+
+% \subsection{Dual Vectors}
+
+% What are the `dual functions' (dual vectors, bras) in function space? These are linear functions on act on functions and spit out numbers. These are integrals that are pre-loaded with some factors. Assuming unit weight:
+% \begin{align}
+%   \langle f | = \langle f, \qquad \rangle
+%   = 
+%   \int dx \, f^*(x) \left[\text{ insert ket here }\right] \ .
+% \end{align}
+
+
+
+
+
+\subsection{Completeness in Function Space}
+
+We rarely have much to say about the unit matrix in linear algebra. However, much like when we discussed units, we can squeeze a lot out of inserting the identity in our mathematical machinations. In order to help with translate this to function space, let's review how it works in finite dimensional vector spaces. The unit matrix is $\mathbbm{1}$ and may be written:
+\begin{align}
+  \mathbbm{1} = \sum_i |i\rangle\langle i| \ ,
+  \label{eq:unit:matrix}
+\end{align}
+where $|i\rangle$ and $\langle j|$ are basis (dual-)vectors. 
+\begin{exercise}
+Take a moment and convince yourself that \eqref{eq:unit:matrix} is true and obvious. It may be helpful to explicitly write out $|i\rangle \langle j|$ as a matrix. 
+\end{exercise}
+\begin{exercise}\label{ex:completeness:for:non:cartesian:basis}
+Suppose you have a two-dimensional Euclidean vector space. Show that \eqref{eq:unit:matrix} is true for the basis
+\begin{align}
+  |1 \rangle &= 
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+  1 \\ 1
+  \end{pmatrix}
+  &
+  |2 \rangle &= 
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+  1 \\ -1
+  \end{pmatrix}
+  \\
+  \langle 1 | &= 
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+  1 & 1
+  \end{pmatrix}
+  &
+  \langle 2 | &= 
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+  1 & -1
+  \end{pmatrix} \ .
+\end{align}
+\end{exercise}
+In fact, \eqref{eq:unit:matrix} defines what it means that a set of basis vectors is \textbf{complete}. You can write any vector $|v\rangle$ with respect to the basis $|i\rangle$---the components are simply
+\begin{align}
+  v^i = \langle i | v \rangle
+\end{align}
+so that 
+\begin{align}
+  |v\rangle = \sum_i |i\rangle \langle i | v \rangle \ ,
+  \label{eq:completeness:by:inserting:1}
+\end{align}
+which we recognize as nothing more than `multiplying by the identity.' 
+%
+
+What does completeness look like in function space?
+% \begin{framed}\noindent
+Let $e_{(n)}(x)$ be a set of basis functions. The basis is \textbf{complete} if
+\begin{align}
+  \sum_n \left[e_{(n)}(x)\right]^* e_{(n)}(y) = \delta(x-y) \ .
+  \label{eq:function:space:completeness}
+\end{align}
+% \end{framed}
+Compare this \emph{very carefully} with the completeness relation \eqref{eq:unit:matrix}. The sum over $i$ in the finite-dimensional case has been relabeled into a sum over $n$ in the function space---this is just my preference\footnote{I think this is because we will deal with complex functions and I want to avoid using $i$ as an index. But if we're being honest, it's just become a habit.}. The $\mathbbm{1}$ has been replaced by a Dirac $\delta$-function, $\delta(x-y)$. Let's confirm that this makes sense. The \emph{multiply by one} completeness relation \eqref{eq:completeness:by:inserting:1} in function space is
+\begin{align}
+  |g\rangle 
+  &= 
+  \sum_n |e_{(n)}\rangle\langle e_{(n)}| g\rangle
+  &
+  \langle e_{(n)}| g\rangle &=
+  \int dy \, [e_{(n)}(y)]^* g(y) \ .
+\end{align}
+We have deliberately changed the name of the integration variable to $y$ to avoid confusion; since this variable is integrated over it's simply a \emph{dummy variable} and it doesn't matter what we name it---the quantity $\langle e_{(n)}|g\rangle$ is independent of $y$ because $y$ is integrated over\footnote{By the way, this should ring a bell from our summation convention. When an upper and lower tensor index are contracted, the resulting object behaves as if it didn't have those indices: $\mat{A}{i}{j}v^j$ behaves as a vector with one upper index.}. Writing this out explicitly as functions:
+\begin{align}
+  g(x) &= \sum_n\left[\int dy\, e_{(n)}^*(y)g(y)\right] e_{(n)}(x) \ .
+  \label{eq:complenesss:function:space:in:action }
+\end{align}
+The factor in the square brackets is simply $\langle e_{(n)}| g\rangle$, which is just a \emph{number}---it has no functional dependence on $x$.
+If this seems unusual, please refer back to Example~\ref{ex:eigenfunction:fourier} and Exercise~\ref{exe:eigenfunction:fourier}. 
+
+By the way, you'll often hear people (perhaps even me) say that the Dirac $\delta$ function is not strictly an \emph{function} but rather a \textbf{distribution}---this means that it only makes sense when it is integrated over. As physicists we'll sometimes be sloppy and talk about physical quantities that could be Dirac $\delta$-functions. There is \emph{never} an appropriate, measurable physical quantity that is described by a $\delta(x)$. Anything with a $\delta(x)$ is an object that was meant to be integrated over. When you imagine that a point charge density is a $\delta$-function, this is only because you will eventually integrate over it to determine the total charge.  If you ever calculate a \emph{measurable} quantity to be $\delta(x)$ check your work. If you ever find $\delta(x)^2$, then go home, it's past your bed time.
+
+\begin{example}
+One can vaguely motivate the $\delta$-function as the unit matrix by appealing to the `histogram basis' of discretized function space. In an ordinary finite-dimensional vector space, unit matrix can be written as
+\begin{align}
+  \mathbbm{1} = |1\rangle\langle 1 | + |2\rangle\langle 2 | + \cdots
+  = \sum_{i,j}\delta_{i}^j|i\rangle\langle j| \ .
+\end{align}
+The Dirac $\delta$-function in histogram space is analogous to
+\begin{align}
+  \delta(x-x') &\to \delta_{x}^{x'}|x\rangle\langle x'| \ ,
+\end{align}
+where $x$ and $x'$ are discrete bins on the right-hand side. Thus for a discretized function $f = f(x_1)|x_1\rangle + f(x_2)|x_2\rangle + \cdots$, one has
+\begin{align}
+  \int dy\, \delta(x-y) f(y) = f(x) \longrightarrow \sum_j \delta_{x_j}^{x_i}|x_i\rangle\langle x_j| f\rangle  =  f(x_i) |x_i\rangle\ .
+\end{align}
+\end{example}
+
+\subsection{Orthonormality in Function Space}
+
+One should contrast the notion of completeness of a a basis this with that of \textbf{orthonormality} of the basis. Orthonormality is the statement that
+\begin{align}
+  \langle i | j \rangle = \delta^j_i \ .
+\end{align}
+Completeness has to do with the `outer product' $|i\rangle \langle i|$ while orthonormality has to do with the `inner product' $\langle i | i\rangle = \langle i, i\rangle$. The function space generalization of orthonormality is\footnote{If you're a purist, you'll note that $\delta_{nm}$ should really be written as $\delta^n_m$ because the dual basis vector has an upper index. While this may be true, I'm making the present notational choice because the object that we would call $\tilde{\vec{e}}^{(n)}$ really does contain $e_{(n)}^*(x)$, the complex conjugate of $e_{(n)}(x)$.}
+\begin{align}
+  \langle e_{(n)} | e_{(m)} \rangle = \int dx \, e_{(n)}^*(x) e_{(m)}(x) = \delta_{nm} \ .
+  \label{eq:function:orthonormality}
+\end{align}
+\begin{exercise}
+Why does \eqref{eq:function:orthonormality} have a Kronecker $\delta$ with discrete indices when \eqref{eq:function:space:completeness} has a Dirac $\delta$? Please make sure you can answer this; it establishes the conceptual foundation of the analogy between finite- and infinite-dimensional vector spaces.
+\end{exercise}
+For the completeness relation, we sum over the same eigenfunction label $n$ for a function and its conjugate evaluated at different continuous positions. For the orthonormality relation, we integrate over the positions of two different eigenfunction indices, $n$ and $m$. 
+
+Do not confuse the eigenfunction label with the index of a vector. If this is confusing, please refer back to Exercise~\ref{ex:completeness:for:non:cartesian:basis}. You may be stuck thinking about basis vectors in the Cartesian basis---this is the analog of thinking about basis functions in the `histogram basis' of Section~\ref{sec:histogramspace}. What we want to do is generalize to more convenient bases, like the eigenfunctions of differential operators (e.g.~the Fourier basis for $-d^2/dx^2$).
+
+\begin{example}
+In the case of a finite interval, say $x\in [0,1]$, the space of functions on this interval is continuous. In fact, we wrote a nice eigenbasis of $-d^2/dx^2$ on this space assuming Dirichlet boundary conditions. The basis consists of a discrete but infinite number of eigenfunctions. The discrete index, $n$, corresponded to the wave number (or momentum). The continuous `index,' $x$, corresponded to a position-space location. This index is continuous because there is a continuum of positions $x$ in the finite interval $[0,1]$. If we extended the interval to the infinite real line, $\mathbbm{R} = [-\infty, \infty]$, then the discrete spectrum of eigenfunctions---that is, the discrete separation of wave numbers---also becomes a continuum. Here the discrete spectrum of `particle in a box' states turns into a continuum of plane waves, $e^{ipx}$. 
+
+A sufficiently large box $[-L,L]$ is approximately the same as an infinite interval. Of course, `large $L$' is a dimensionful statement. What we really want to say is that if we are probing dynamics on a scale much smaller than $L$, then we should expect the discrete spectrum of states to be so close to each other that it is well approximated by the continuum of plane waves. 
+
+You can twist this around in the other direction and wonder if spacetime were not actually continuous but rather composed of discrete points with some spacing on the order of the Planck length. Our continuum formalism of general relativity should be valid as long as we do not ask questions about length scales comparable to the separation between discrete points. 
+\end{example}
+
+\subsection{Fourier Series}
+
+Recall that the \textbf{Fourier Series} is a basis of sinusoidal functions over a finite domain. One changes variables from position $x$ to momentum or wave-number $p$. For an interval from $x\in [0,1]$, the Fourier series a function $f(x)$ with Dirichlet boundary conditions is:
+\begin{align}
+  f(x) &= \sqrt{\frac{2}{L}} 
+  \sum_{p \in \mathbb{Z}}  
+  \tilde f_p \sin(\pi p x/L) \ .
+\end{align}
+The eigenfunctions $e_p(x)=\sqrt{2/L}\sin(\pi p x/L)$ satisfy the boundary conditions and are normalized so that $\langle e_p,e_p\rangle = 1$. The data of the function $f(x)$ is encoded in an infinite number of coefficients, $\tilde f_p$.
+
+Fourier transforms are a basis of sinusodial functions---conventionally written as complex exponentials---over an \emph{infinite} domain. Our conventions for Fourier transforms are summarized in Appendix~\ref{app:Fourier}. 
+
+In statistics and machine learning, this is related to the idea of a \textbf{kernel}\index{kernel}. Kernels are the `heart' of an integral transformation that takes a function $f(x)$ to a transformed function $\tilde f(p)$ by
+\begin{align}
+  f(x) \to \tilde f(p) \equiv \int dp\, f(x) K(x,p) 
+\end{align}
+with the appropriate limits of integration. Observe that the transformed function $\tilde f$ is formally a function of a different variable. 
+
+\begin{exercise}
+What is the kernel of the Fourier transform using our conventions?
+\end{exercise}
+
+\subsection{The Variational Principle}
+\label{eq:variational}
+
+One of the fundamental principles in physics is the \textbf{principle of least action}. This is the statement that classically, the trajectory of a system is governed by the minimum of a functional called the action, $S$. A functional is a ``function of functions.'' So suppose we care about the position of a particle $\vec{x}(t)$ in some potential. The position is itself a function of time, and the action is a function of $\vec{x}(t)$. You may be more familiar with the action as the time integral of the Lagrangian,
+\begin{align}
+    S = \int dt\, L[\vec{x}, \dot{\vec{x}}] \ ,
+\end{align}
+where we use the standard convention where we treat the position and velocity as independent variables in phase space. In quantum mechanics, this same object appears as a weight for possible trajectories.\footnote{I recommend looking up Feynman's phasor description of the sum over histories to see how the action in quantum mechanics leads to the principle of least action in classical mechanics.}
+
+\paragraph{The usual method}
+Perhaps you are familiar from analytical mechanics that we can `vary' the Lagrangian to derive the equation of motion. For example, the standard treatment goes something like this. The Lagrangian of a classical particle is the kinetic minus the potential energy,
+\begin{align}
+    L = \frac{m}{2} \dot{\vec{x}}^2 - V[\vec{x}] \ .
+\end{align}
+When we treat $\vec{x}$ and $\dot{\vec{x}}$ as independent variables, the infinitesimal change (variation) of the action $S$ with with respect to infinitesimal perturbations $\delta\vec{x}$ and $\delta\dot{\vec{x}}$ is
+\begin{align}
+    \delta S =
+    \int dt \,
+    \left[
+    \frac{\partial L}{\partial \vec{x}} \delta\vec{x}
+    +
+    \frac{\partial L}{\partial \dot{\vec{x}}}\delta\dot{\vec{x}}
+    \right] \ .
+\end{align}
+Now we `remember' that $\dot{\vec{x}}$ is actually the time derivative of $\vec{x}(t)$. This means we can integrate the second term by parts to remove the time derivative in the $\delta\dot{\vec{x}}$. What we're really saying here is that there is \emph{one} variation we're doing: the function $\vec{x}(t)$. So if the path changes by $\vec{x}\to\vec{x}+\delta\vec{x}$, then the time derivative of the path changes by
+\begin{align}
+    \dot{\vec{x}} 
+    \to \dot{\vec{x}} 
+    + \frac{d}{dt}(\delta\vec{x}) 
+    \equiv \dot{\vec{x}} + \delta\dot{\vec{x}} \ . 
+\end{align}
+We assume some boundary conditions---the position of the particle at some initial and some final times---so that the boundary terms in the integration by parts vanishes. We are thus left with (suppressing the limits of integration)
+\begin{align}
+    \delta S = \int dt\, 
+    \left[
+    \frac{\partial L}{\partial \vec{x}}
+    - 
+    \frac{d}{dt}
+    \frac{\partial L}{\partial \dot{\vec{x}}} 
+    \right]\delta\vec{x} \ .
+\end{align}
+Because this is try for any variation $\delta\vec{x}$ about a path $\vec{x}(t)$ that minimizes $S$, we find that the equatino of motion is 
+\begin{align}
+    \frac{\partial L}{\partial \vec{x}}
+    - 
+    \frac{d}{dt}
+    \frac{\partial L}{\partial \dot{\vec{x}}}  = 0 \ .
+\end{align}
+For the single particle Lagrangian above, this indeed gives
+\begin{align}
+    m\ddot{\vec{x}} = V'[\vec{x}] \ .
+\end{align}
+
+\paragraph{The path integral perspective} Our discretized function space---for all of its flaws---is helpful here for an alternative picture of the equation of motion that is often invoked in field theory. Let us treat everything as `histogram space.' For simplicity, let us stick to one spatial dimension, leaving the generalization as an exercise. We would like to determine what is the function, $\ket{x}=x(t)$ that minimizes $S[x]$. We may write $S$ as a sum:
+\begin{align}
+    S &= \sum_i \Delta t \, L[x^i, \dot x^i] 
+    &
+    \ket{x} &= x^i \ket{i}
+    &
+    \ket{\dot{x}} &= \dot{x}^i \ket{i} \ ,
+\end{align}
+where we are in a `histogram basis' in time slices. The basis ket $\ket{i}$ is a unit `histogram' at time $t=t_0 + i\Delta t$ for some initial time $t_0$. Further, we know that 
+\begin{align}
+    \ket{\dot{x}} = D\ket{x} \ ,
+\end{align}
+where $D$ is the matrix representation of the time derivative, $d/dt$.\footnote{In principle we should specify the forward or the backward derivative, $D_\pm$. We should also remember that $D^2 = D_\mp D_\pm$. However, everything that we say here is applicable to the continuum limit, so if you are a stickler for formalism, you can treat these steps as an analogy to the continuous case.} To be explicit, let us assume a harmonic oscillator potential. The Lagrangian is a local function of time. We can write it---somewhat awkwardly---as an object with an index:
+\begin{align}
+    L^i &= \frac{m}{2}\dot{x}^i\dot{x}^i - V^i
+    &
+    V^i &= \frac{k}{2} x^ix^i \ ,
+\end{align}
+where we understand that there is no sum over $i$. Recalling that our historgram space metric is proportional to $\Delta t$, it is in fact more straightforward to directly write the quadratic part of the action:
+\begin{align}
+    S 
+    % \frac{m}{2} g_{ij}\dot{x}^i\dot{x}^j - \frac{k}{2} g_{ij} x^ix^i
+    =
+    \frac{m}{2} g_{ij}(Dx)^i(Dx)^j - \frac{k}{2} g_{ij} x^ix^i
+     \ .
+    \label{eq:HO:action:discretized}
+\end{align}
+We will see that the \emph{quadratic} part of the action gives a linear equation of motion. This means that higher-order terms (e.g.\ trilinear terms like $(x^i)^3$) must be treated separately.\footnote{Often we treat these as a small correction to the quadratic action. This amounts to saying that everything is a perturbation on a harmonic oscillator. The perturbations can be treated systematically using a technique called Feynman diagrams.}
+\begin{exercise}
+Confirm that \eqref{eq:HO:action:discretized} is the discretization of the action for a simple harmonic oscillator. For example, show that in the continuum limit you recover the simple harmonic oscillator action. 
+\end{exercise}
+Recalling Exercise~\ref{ex:integrate:kinetic:term:by:parts}, we may integrate the derivative term by parts to obtain
+\begin{align}
+    S = 
+    -
+    \frac{m}{2} g_{ij}x^i (D^2x)^j 
+    - \frac{k}{2} g_{ij} x^ix^i
+    \equiv
+    -\frac{q}{w}x^i Q_{ij} x^j
+    \ ,
+    \label{eq:HO:action:discretized:integrated}
+\end{align}
+where we have defined the `quadratic term' operator
+\begin{align}
+    Q_{ij} = 
+    m\, g_{ik}(D^2)\aij{k}{j} 
+    + 
+    k\, g_{ij} 
+    = Q_{ji} \ .
+    \label{eq:Qij}
+\end{align}
+\begin{exercise}
+Confirm that $Q_{ij}$ is symmetric, $Q_{ij} = Q_{ji}$. 
+\end{exercise}
+\begin{exercise}
+What is the \emph{support} of \eqref{eq:Qij}? That is, what is the condition on $i$ and $j$ to find a non-zero $Q_{ij}$?
+\end{exercise}
+
+The principle of least action posits that the classical trajectory $x(t)$---encoded in the discretized $x^i$ coefficients---is the configuration that extremizes $S$. To do this, we vary each $x^i$ independently. This is what the functional variation $\delta x(t)$ means in the continuous limit. The extremization corresponds to the $N$ equations
+\begin{align}
+    \frac{dS}{dx^1} &= 0
+    &
+    \frac{dS}{dx^2} &= 0
+    &
+    \cdots&
+    &
+    \frac{dS}{dx^N} &= 0 \ .
+\end{align}
+where relevant, these are subject to the boundary conditions. 
+% 
+Of course, the $x^i$ are not independent: we know that the kinetic term relates the displacement at time $i$ to the neighboring displacements at time $i\pm 1$.
+% 
+Rather than solving each of these one by one, we can solve the equation for a generic $x^i$:
+\begin{align}
+    -\frac{dS}{dx^i} &= 
+    \frac{d}{dx^i}
+    \left[
+    \frac{1}{2} Q_{ii}(x^i)^2 + \sum_{j\neq i} \frac{1}{2}\left(Q_{ij} x^ix^j + Q_{ji}x^jx^i + \right) 
+    \right] \\
+    &= 
+    Q_{ii}x^i+ \sum_{j\neq i} Q_{ij}x^j \ .
+\end{align}
+where there is no sum over repeated $i$ indices and we have explicitly written the sum over $j\neq i$. In the last term we have used $Q_{ij} = Q_{ji}$. Expanding this expression gives
+\begin{align}
+    0=
+    -\frac{dS}{dx^i}
+    =
+    -2\frac{m}{\Delta t^2} x^i + k x^i 
+    + \frac{m}{\Delta t^2}x^{i+1} 
+    + \frac{m}{\Delta t^2}x^{i-1}
+    = 
+    g_{ij}\left[m(D^2x)^j + k x^j\right] \ .
+\end{align}
+This gives us the discretized equation of motion:
+\begin{align}
+    (D^2x)^j = - k x^j \ ,
+\end{align}
+which we recognize is the discretized Hooke's law $m\ddot{x} = -k x$.
+
+What is significant about this approach is that we never invoked the standard Euler--Lagrange trick of first treating $x$ and $\dot{x}$ as independent variables and then `remembering' that they are related by a time derivative when it was convenient. We took a more direct path where we independently varied each piece of the path in time, $x^i$, while treating a differential operator $Q_{ij}$ as a matrix. We noticed that the $x^i$ are \emph{coupled} by the kinetic term, which tells us that wiggles in $x^i$ will affect the variation of $x^{i+\pm 1}$. In quantum mechanics, this approach is known as the path integral formulation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
